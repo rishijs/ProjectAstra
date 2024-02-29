@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://di3vy3rawef35"]
+[gd_scene load_steps=2 format=3 uid="uid://di3vy3rawef35"]
 
 [ext_resource type="Script" path="res://interface/main_menu.gd" id="1_rx518"]
-[ext_resource type="Theme" uid="uid://lrvuwqkgvays" path="res://themes/default_theme.tres" id="1_xmk75"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_rx518")
@@ -23,7 +22,6 @@ offset_left = -0.320023
 offset_top = 0.0799942
 offset_right = -0.184082
 offset_bottom = 0.071991
-theme = ExtResource("1_xmk75")
 theme_override_font_sizes/font_size = 100
 text = "ABERRATION JAM"
 horizontal_alignment = 1
@@ -36,7 +34,6 @@ anchor_right = 0.6
 anchor_bottom = 0.711
 offset_top = 0.159973
 offset_bottom = 0.0799866
-theme = ExtResource("1_xmk75")
 text = "PLAY"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

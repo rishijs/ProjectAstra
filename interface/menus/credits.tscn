@@ -1,6 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqea3gsc2ru71"]
-
-[ext_resource type="Theme" uid="uid://lrvuwqkgvays" path="res://themes/default_theme.tres" id="1_vieh7"]
+[gd_scene format=3 uid="uid://cqea3gsc2ru71"]
 
 [node name="Credits" type="CanvasLayer"]
 
@@ -10,7 +8,7 @@ anchor_right = 0.999
 anchor_bottom = 0.997
 offset_right = 0.279907
 offset_bottom = 0.159973
-color = Color(0.211765, 0, 0.65098, 1)
+color = Color(0.054902, 0, 0.235294, 1)
 
 [node name="CreditsTitle" type="Label" parent="."]
 anchors_preset = -1
@@ -22,7 +20,6 @@ offset_left = 0.511993
 offset_top = -7.92801
 offset_right = -0.512085
 offset_bottom = -0.160004
-theme = ExtResource("1_vieh7")
 theme_override_font_sizes/font_size = 100
 text = "CREDITS"
 horizontal_alignment = 1
