@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://vdwjc4mgeixp"]
+
+[ext_resource type="FontFile" uid="uid://q6iklx4vdam0" path="res://themes/fonts/blkchcry/BLKCHCRY.TTF" id="1_jjrfx"]
+
+[resource]
+Label/fonts/font = ExtResource("1_jjrfx")

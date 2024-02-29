@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://di3vy3rawef35"]
+[gd_scene load_steps=4 format=3 uid="uid://di3vy3rawef35"]
 
 [ext_resource type="Script" path="res://interface/main_menu.gd" id="1_rx518"]
+[ext_resource type="Theme" uid="uid://w4e54hwttyej" path="res://themes/prototheme.tres" id="2_7txc0"]
+[ext_resource type="Theme" uid="uid://bpeg6inp31l8g" path="res://themes/deftheme.tres" id="3_vt6my"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_rx518")
@@ -14,15 +16,16 @@ color = Color(0, 0, 0, 1)
 
 [node name="MainTitle" type="Label" parent="."]
 anchors_preset = -1
-anchor_left = 0.169
+anchor_left = 0.115
 anchor_top = 0.111
-anchor_right = 0.826
-anchor_bottom = 0.307
-offset_left = -0.320023
-offset_top = 0.0799942
-offset_right = -0.184082
-offset_bottom = 0.071991
-theme_override_font_sizes/font_size = 100
+anchor_right = 0.91
+anchor_bottom = 0.254
+offset_left = 0.199997
+offset_top = 3.12
+offset_right = -7.20007
+offset_bottom = -33.32
+theme = ExtResource("2_7txc0")
+theme_override_font_sizes/font_size = 150
 text = "ABERRATION JAM"
 horizontal_alignment = 1
 
@@ -34,6 +37,7 @@ anchor_right = 0.6
 anchor_bottom = 0.711
 offset_top = 0.159973
 offset_bottom = 0.0799866
+theme = ExtResource("3_vt6my")
 text = "PLAY"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
