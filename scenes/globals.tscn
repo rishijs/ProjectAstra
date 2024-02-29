@@ -3,4 +3,7 @@
 [ext_resource type="Script" path="res://scenes/globals.gd" id="1_ljpdp"]
 
 [node name="Globals" type="Node"]
+process_mode = 3
 script = ExtResource("1_ljpdp")
+
+[node name="Timer" type="Timer" parent="."]
