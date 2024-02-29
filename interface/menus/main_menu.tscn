@@ -25,7 +25,7 @@ offset_right = -0.184082
 offset_bottom = 0.071991
 theme = ExtResource("1_xmk75")
 theme_override_font_sizes/font_size = 100
-text = "UNTITLED GAME"
+text = "ABERRATION JAM"
 horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="."]
