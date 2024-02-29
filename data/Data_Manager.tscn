@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ci2aejst3jki7"]
+
+[ext_resource type="Script" path="res://data/process_data.gd" id="1_3xsrp"]
+
+[node name="DataManager" type="Node"]
+script = ExtResource("1_3xsrp")

@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://di3vy3rawef35"]
+
+[ext_resource type="Script" path="res://interface/main_menu.gd" id="1_rx518"]
+[ext_resource type="Theme" uid="uid://lrvuwqkgvays" path="res://themes/default_theme.tres" id="1_xmk75"]
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_rx518")
+
+[node name="MainBG" type="ColorRect" parent="."]
+anchors_preset = -1
+anchor_right = 0.999
+anchor_bottom = 1.0
+offset_right = 0.151855
+color = Color(0, 0, 0, 1)
+
+[node name="MainTitle" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.169
+anchor_top = 0.111
+anchor_right = 0.826
+anchor_bottom = 0.307
+offset_left = -0.320023
+offset_top = 0.0799942
+offset_right = -0.184082
+offset_bottom = 0.071991
+theme = ExtResource("1_xmk75")
+theme_override_font_sizes/font_size = 100
+text = "UNTITLED GAME"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.622
+anchor_right = 0.6
+anchor_bottom = 0.711
+offset_top = 0.159973
+offset_bottom = 0.0799866
+theme = ExtResource("1_xmk75")
+text = "PLAY"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfpdqsiywdxk2"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_bugxd"]
+ground_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Sky" id="Sky_ya2kb"]
+sky_material = SubResource("PhysicalSkyMaterial_bugxd")
+
+[sub_resource type="Environment" id="Environment_oct65"]
+background_mode = 2
+sky = SubResource("Sky_ya2kb")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tedrn"]
+
+[node name="Devscene" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_oct65")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.939693, 0.34202, 0, -0.34202, -0.939693, 0, 2.78388, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.77293, 0, 0, 0, 1, 0, 0, 0, 7.34625, 0, 0, 0)
+mesh = SubResource("PlaneMesh_tedrn")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.913155, 0.407613, 0, -0.407613, 0.913155, 0, 7.85334, 12.1947)

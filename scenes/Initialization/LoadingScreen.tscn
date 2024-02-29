@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://cd0jbh4metflb"]
+
+[ext_resource type="Script" path="res://scenes/Initialization/LoadingScreen.gd" id="1_ioi8n"]
+[ext_resource type="Theme" uid="uid://lrvuwqkgvays" path="res://themes/default_theme.tres" id="2_ug1m2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bixdh"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o8l12"]
+bg_color = Color(0.219608, 0.027451, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="LoadingScreen" type="CanvasLayer"]
+process_mode = 3
+layer = 20
+script = ExtResource("1_ioi8n")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Control"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.244
+anchor_top = 0.356
+anchor_right = 0.75
+anchor_bottom = 0.533
+offset_left = 7.67999
+offset_top = -0.320007
+offset_right = -6.10352e-05
+offset_bottom = -4.76004
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="Title" type="Label" parent="Control/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_ug1m2")
+text = "Loading..."
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Control/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme = ExtResource("2_ug1m2")
+theme_override_styles/background = SubResource("StyleBoxFlat_bixdh")
+theme_override_styles/fill = SubResource("StyleBoxFlat_o8l12")
+max_value = 1.0
+value = 0.1
+
+[node name="LoadingTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="LoadingTimer" to="." method="_on_loading_timer_timeout"]

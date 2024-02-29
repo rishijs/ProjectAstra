@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://brp0f5m041sho"]
+
+[ext_resource type="Script" path="res://scenes/Initialization/InitApp.gd" id="1_mo468"]
+
+[node name="InitApp" type="Node"]
+script = ExtResource("1_mo468")
+_loading_screen = "res://scenes/Initialization/LoadingScreen.tscn"
+_next_scene = "res://scenes/Initialization/Opening.tscn"
