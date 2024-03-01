@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://bem6hb2552we7"]
+
+[ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_xq0ff"]
+[ext_resource type="PackedScene" uid="uid://c3jmdc5fokq36" path="res://scenes/enemies/healthbar.tscn" id="2_jluc0"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qw5vv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_amx0k"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g66ns"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_efpjp"]
+viewport_path = NodePath("HealthSprite/Healthbar")
+
+[node name="StillEnemy" type="CharacterBody3D" groups=["Enemy"]]
+script = ExtResource("1_xq0ff")
+type = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_qw5vv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_amx0k")
+mesh = SubResource("CapsuleMesh_g66ns")
+
+[node name="HealthSprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1.72328, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_efpjp")
+
+[node name="Healthbar" type="SubViewport" parent="HealthSprite"]
+transparent_bg = true
+render_target_update_mode = 4
+
+[node name="Healthbar" parent="HealthSprite/Healthbar" node_paths=PackedStringArray("owner_ref") instance=ExtResource("2_jluc0")]
+owner_ref = NodePath("../../..")

@@ -5,11 +5,14 @@ extends CharacterBody3D
 @export var camera_third_person:Camera3D
 @export var weapon:Node3D
 
-var min_pitch = 30
-var max_pitch = 30
+var min_pitch = 50
+var max_pitch = 50
 
 var speed = 5.0
+var base_speed = 5.0
 var jump_velocity = 4.5
+var movement_boost = 5
+var movement_ability = false
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -17,23 +20,30 @@ func _ready():
 	pass
 
 func _input(event):
-	#rotate based on mouse
 	if Input.is_action_just_pressed("primary_fire"):
 		weapon.fire()
-		
+	
+	#rotate based on mouse
 	if event is InputEventMouseMotion and is_instance_valid(camera_first_person):
 		var mouse_sensitivity = Globals.player_preferences["mouse_sensitivity"]
 		if not is_on_floor():
 			mouse_sensitivity *= 0.9
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		camera_first_person.rotate_x(-event.relative.y * mouse_sensitivity)
-		#camera_first_person.rotation.x = clampf(camera_first_person.rotation.x, -deg_to_rad(min_pitch), deg_to_rad(max_pitch))
+		camera_first_person.rotation.x = clampf(camera_first_person.rotation.x, -deg_to_rad(min_pitch), deg_to_rad(max_pitch))
 
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	
+	if Input.is_action_pressed("movement_ability"):
+		speed = lerp(base_speed, base_speed * movement_boost, 1)
+		movement_ability = true
+	else:
+		speed = base_speed
+		movement_ability = false
+		
+	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
 
 	var input_dir = Input.get_vector("left", "right", "up", "down")

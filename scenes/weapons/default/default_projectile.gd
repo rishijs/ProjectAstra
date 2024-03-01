@@ -13,5 +13,7 @@ func _on_self_destruct_timeout():
 	sdestruct()
 
 func _on_body_entered(body):
+	if body.is_in_group("Enemy"):
+		damage_enemy(body)
 	if body != player_ref:
 		sdestruct()

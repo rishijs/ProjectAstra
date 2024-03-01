@@ -16,12 +16,12 @@ emission_energy_multiplier = 5.0
 script = ExtResource("1_leep1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_4033a")
 mesh = SubResource("BoxMesh_e8k0x")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 shape = SubResource("BoxShape3D_baci1")
 
 [node name="SelfDestruct" type="Timer" parent="."]

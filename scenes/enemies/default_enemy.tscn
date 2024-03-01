@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://b22xbt8obic88"]
+
+[ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_chum1"]
+[ext_resource type="PackedScene" uid="uid://c3jmdc5fokq36" path="res://scenes/enemies/healthbar.tscn" id="3_dwh8x"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2fxp5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_do8s6"]
+albedo_color = Color(1, 0, 0.00784314, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ja81l"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_o2pfw"]
+viewport_path = NodePath("HealthSprite/Healthbar")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1k71u"]
+size = Vector3(32.3009, 1, 32.8627)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l86tl"]
+size = Vector3(79.8625, 1, 80.4659)
+
+[node name="DefaultEnemy" type="CharacterBody3D" groups=["Enemy"]]
+script = ExtResource("1_chum1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_2fxp5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_do8s6")
+mesh = SubResource("CapsuleMesh_ja81l")
+
+[node name="HealthSprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1.72328, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_o2pfw")
+
+[node name="Healthbar" type="SubViewport" parent="HealthSprite"]
+transparent_bg = true
+render_target_update_mode = 4
+
+[node name="Healthbar" parent="HealthSprite/Healthbar" node_paths=PackedStringArray("owner_ref") instance=ExtResource("3_dwh8x")]
+owner_ref = NodePath("../../..")
+
+[node name="Detection" type="Area3D" parent="."]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Detection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.236389, 0, -0.152451)
+shape = SubResource("BoxShape3D_1k71u")
+
+[node name="Range" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Range"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.116333, 0, -0.354919)
+shape = SubResource("BoxShape3D_l86tl")
+
+[connection signal="body_entered" from="Detection" to="." method="_on_detection_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]
