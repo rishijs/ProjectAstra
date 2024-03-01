@@ -3,12 +3,12 @@
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_bugxd"]
 ground_color = Color(1, 1, 1, 1)
 
-[sub_resource type="Sky" id="Sky_ya2kb"]
+[sub_resource type="Sky" id="Sky_mro0p"]
 sky_material = SubResource("PhysicalSkyMaterial_bugxd")
 
 [sub_resource type="Environment" id="Environment_oct65"]
 background_mode = 2
-sky = SubResource("Sky_ya2kb")
+sky = SubResource("Sky_mro0p")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_tedrn"]
 

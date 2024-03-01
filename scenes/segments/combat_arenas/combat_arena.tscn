@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://j5bi0t7faf7i"]
+
+[ext_resource type="Script" path="res://scenes/segments/combat_arenas/combat_arena.gd" id="1_rvjsu"]
+
+[node name="CombatArena" type="Node3D"]
+script = ExtResource("1_rvjsu")

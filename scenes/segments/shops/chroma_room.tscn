@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7p24v38kr0cx"]
+
+[ext_resource type="Script" path="res://scenes/segments/shops/chroma_room.gd" id="1_e411e"]
+
+[node name="ChromaRoom" type="Node3D"]
+script = ExtResource("1_e411e")

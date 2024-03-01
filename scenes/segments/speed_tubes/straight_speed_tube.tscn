@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://vop33tckuf4s"]
+
+[ext_resource type="Script" path="res://scenes/segments/speed_tubes/speed_tube.gd" id="1_fqrc5"]
+
+[node name="StraightSpeedTube" type="Node3D"]
+script = ExtResource("1_fqrc5")

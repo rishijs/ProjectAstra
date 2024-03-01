@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cd0jbh4metflb"]
 
 [ext_resource type="Script" path="res://scenes/Initialization/LoadingScreen.gd" id="1_ioi8n"]
-[ext_resource type="Theme" uid="uid://lrvuwqkgvays" path="res://themes/default_theme.tres" id="2_ug1m2"]
+[ext_resource type="Theme" uid="uid://bpeg6inp31l8g" path="res://themes/deftheme.tres" id="2_ug1m2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bixdh"]
 bg_color = Color(0, 0, 0, 1)
@@ -9,10 +9,10 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.8, 0, 0, 1)
+border_color = Color(0.8, 0, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o8l12"]
-bg_color = Color(0.219608, 0.027451, 0, 1)
+bg_color = Color(0.219608, 0.027451, 0.611765, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -57,6 +57,7 @@ theme_override_constants/separation = 50
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_ug1m2")
+theme_override_font_sizes/font_size = 50
 text = "Loading..."
 horizontal_alignment = 1
 

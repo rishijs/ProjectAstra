@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://bpeg6inp31l8g"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://bpeg6inp31l8g"]
 
 [ext_resource type="FontFile" uid="uid://dex6qd5t25rm3" path="res://themes/fonts/Kode_Mono/KodeMono-VariableFont_wght.ttf" id="1_3rki4"]
 
@@ -71,6 +71,30 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rgyhf"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3whf5"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 1, 1, 0.4)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
 [resource]
 Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
 Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
@@ -96,3 +120,10 @@ Button/styles/hover = SubResource("StyleBoxFlat_3sn6j")
 Button/styles/normal = SubResource("StyleBoxFlat_2uk7b")
 Button/styles/pressed = SubResource("StyleBoxFlat_gip47")
 Label/fonts/font = ExtResource("1_3rki4")
+ProgressBar/colors/font_color = Color(0.95, 0.95, 0.95, 1)
+ProgressBar/colors/font_outline_color = Color(1, 1, 1, 1)
+ProgressBar/constants/outline_size = 0
+ProgressBar/font_sizes/font_size = 16
+ProgressBar/fonts/font = ExtResource("1_3rki4")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_rgyhf")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_3whf5")

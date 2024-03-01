@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmekjtv82mx01"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_w2nvs"]
+[ext_resource type="PackedScene" uid="uid://dua03xn6siql3" path="res://scenes/weapons/default/default_weapon.tscn" id="2_yu1b8"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_we17l"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wtlei"]
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera_first_person", "camera_third_person", "weapon") groups=["Player"]]
+script = ExtResource("1_w2nvs")
+camera_first_person = NodePath("FirstPerson")
+camera_third_person = NodePath("ThirdPerson")
+weapon = NodePath("WeaponSocket/DefaultWeapon")
+
+[node name="FirstPerson" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.722767, -0.349107)
+current = true
+
+[node name="ThirdPerson" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.922208, 0.386695, 0, -0.386695, 0.922208, 0, 0, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="ThirdPerson"]
+spring_length = 200.0
+
+[node name="PlaceholderMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_we17l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_wtlei")
+
+[node name="WeaponSocket" type="Marker3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.322376, 0.451655, -0.431199)
+
+[node name="DefaultWeapon" parent="WeaponSocket" instance=ExtResource("2_yu1b8")]

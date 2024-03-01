@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct3ob0tj0fjyj"]
+
+[ext_resource type="Script" path="res://interface/hud/player_interface.gd" id="1_uecec"]
+[ext_resource type="Theme" uid="uid://bpeg6inp31l8g" path="res://themes/deftheme.tres" id="2_5top5"]
+
+[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("fps_text", "time_text") groups=["Interface"]]
+script = ExtResource("1_uecec")
+fps_text = NodePath("info/VBoxContainer/fps")
+time_text = NodePath("info/VBoxContainer/time")
+
+[node name="info" type="MarginContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.867
+anchor_top = 0.022
+anchor_right = 0.983
+anchor_bottom = 0.104
+offset_left = -0.640137
+offset_top = 0.239998
+offset_right = 0.639893
+offset_bottom = -0.32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="info"]
+layout_mode = 2
+
+[node name="fps" type="Label" parent="info/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_5top5")
+theme_override_font_sizes/font_size = 30
+text = "X FPS"
+horizontal_alignment = 2
+
+[node name="time" type="Label" parent="info/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_5top5")
+theme_override_font_sizes/font_size = 30
+text = "00:00"
+horizontal_alignment = 2
+
+[node name="Update" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="Update" to="." method="_on_update_timeout"]

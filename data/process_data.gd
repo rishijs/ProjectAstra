@@ -10,7 +10,7 @@ var all_data = {}
 }
 var weapon_identifier = "weapons"
 enum weapon_attributes {NAME,CHROMA,ARCHETYPE,DAMAGE,MAGAZINE,
-FIRE_RATE,CRITICAL_CHANCE,CRITICAL_DAMAGE,DAMAGE_ID,ABERRATION_OBJECTIVE,
+FIRE_RATE,PROJECTILE_SPEED,CRITICAL_CHANCE,CRITICAL_DAMAGE,DAMAGE_ID,ABERRATION_OBJECTIVE,
 ABERRATION_TIME,ABERRATION_MOVEMENT}
 var aberration_identifier = "aberrations"
 enum aberration_attributes {NAME,FLAT_BONUS,MULTIPLIED_BONUS,ID,DESCRIPTION}
@@ -50,7 +50,7 @@ func csv_to_dict(filepath,delimiter = ','):
 
 #easier way to get data without worrying about retyping the same line over and over again
 #manually defined name, row name, col name
-func get_weapon_attribute(item,attribute:weapon_attributes):
+func get_weapon_attr(item,attribute:weapon_attributes):
 	if item is int:
 		if len(all_data[weapon_identifier].keys()) > item:
 			item = all_data[weapon_identifier].keys()[item]
@@ -68,6 +68,8 @@ func get_weapon_attribute(item,attribute:weapon_attributes):
 				return all_data[weapon_identifier][item]["magazine"]
 			weapon_attributes.FIRE_RATE:
 				return all_data[weapon_identifier][item]["fire rate"]
+			weapon_attributes.PROJECTILE_SPEED:
+				return all_data[weapon_identifier][item]["projectile speed"]
 			weapon_attributes.CRITICAL_CHANCE:
 				return all_data[weapon_identifier][item]["critical chance"]
 			weapon_attributes.CRITICAL_DAMAGE:
@@ -85,7 +87,7 @@ func get_weapon_attribute(item,attribute:weapon_attributes):
 	else:
 		printerr("weapon data not found")
 
-func get_aberration_attribute(item,attribute:aberration_attributes):
+func get_aberration_attr(item,attribute:aberration_attributes):
 	if item is int:
 		if len(all_data[aberration_identifier].keys()) > item:
 			item = all_data[aberration_identifier].keys()[item]
@@ -106,7 +108,7 @@ func get_aberration_attribute(item,attribute:aberration_attributes):
 	else:
 		printerr("aberration data not found")
 		
-func get_enemy_attribute(item,attribute:enemy_attributes):
+func get_enemy_attr(item,attribute:enemy_attributes):
 	if item is int:
 		if len(all_data[enemy_identifier].keys()) > item:
 			item = all_data[enemy_identifier].keys()[item]

@@ -17,9 +17,13 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-DataManager="*res://data/Data_Manager.tscn"
+Data="*res://data/Data_Manager.tscn"
 Globals="*res://scenes/globals.tscn"
 SceneLoader="*res://scenes/Initialization/autoloader.tscn"
+
+[debug]
+
+gdscript/warnings/integer_division=0
 
 [display]
 

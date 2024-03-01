@@ -1,7 +1,7 @@
 extends Node
 
 var player_preferences = {
-	"mouse sensitivity" = 0.01
+	"mouse_sensitivity" = 0.005
 }
 
 var in_game = false
@@ -10,7 +10,7 @@ var is_paused = false
 var time_elapsed = 0
 var time_string = "00:00"
 
-func _input(event):
+func _input(_event):
 	if Input.is_action_just_pressed("pause") and in_game:
 		if get_tree().paused:
 			get_tree().paused = false
