@@ -3,7 +3,8 @@
 [ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_xq0ff"]
 [ext_resource type="PackedScene" uid="uid://c3jmdc5fokq36" path="res://scenes/enemies/healthbar.tscn" id="2_jluc0"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qw5vv"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_b7sn8"]
+size = Vector3(1, 1.78314, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_amx0k"]
 albedo_color = Color(1, 0, 0, 1)
@@ -18,7 +19,8 @@ script = ExtResource("1_xq0ff")
 type = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_qw5vv")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.126862, 0)
+shape = SubResource("BoxShape3D_b7sn8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_amx0k")

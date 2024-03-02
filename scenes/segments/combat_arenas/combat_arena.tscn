@@ -1,6 +1,242 @@
-[gd_scene load_steps=2 format=3 uid="uid://j5bi0t7faf7i"]
+[gd_scene load_steps=7 format=3 uid="uid://j5bi0t7faf7i"]
 
 [ext_resource type="Script" path="res://scenes/segments/combat_arenas/combat_arena.gd" id="1_rvjsu"]
+[ext_resource type="PackedScene" uid="uid://b402k2bhdes07" path="res://scenes/enemies/spawner.tscn" id="2_e4jgt"]
 
-[node name="CombatArena" type="Node3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6cs6w"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1p48k"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_a6c52"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wl1ib"]
+size = Vector3(29.475, 33.3887, 3.86438)
+
+[node name="CombatArena" type="Node3D" node_paths=PackedStringArray("connection_start", "connection_end", "spawners")]
 script = ExtResource("1_rvjsu")
+connection_start = NodePath("connection1")
+connection_end = [NodePath("connection2"), NodePath("connection3"), NodePath("connection4")]
+spawners = [NodePath("Spawner"), NodePath("Spawner2")]
+
+[node name="enlarge" type="Node3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, 0, 0, -58.069)
+
+[node name="Bot" type="MeshInstance3D" parent="enlarge"]
+transform = Transform3D(79.5146, 0, 0, 0, 1, 0, 0, 0, 77.9376, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_6cs6w")
+mesh = SubResource("BoxMesh_1p48k")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="enlarge/Bot"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enlarge/Bot/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_a6c52")
+
+[node name="Top" type="MeshInstance3D" parent="enlarge"]
+transform = Transform3D(79.5146, 0, 0, 0, 1, 0, 0, 0, 77.9376, 0, 27.7188, 0)
+material_override = SubResource("StandardMaterial3D_6cs6w")
+mesh = SubResource("BoxMesh_1p48k")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="enlarge/Top"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enlarge/Top/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_a6c52")
+
+[node name="Side4" type="MeshInstance3D" parent="enlarge"]
+transform = Transform3D(-1.35938e-06, -1, 1.43874e-06, 0, -4.37114e-08, -32.9146, 31.099, -4.37114e-08, 6.28895e-14, -40.1222, 12.3555, 23.5112)
+material_override = SubResource("StandardMaterial3D_6cs6w")
+mesh = SubResource("BoxMesh_1p48k")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="enlarge/Side4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enlarge/Side4/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_a6c52")
+
+[node name="Side5" type="MeshInstance3D" parent="enlarge"]
+transform = Transform3D(-1.35938e-06, -1, 1.43874e-06, 0, -4.37114e-08, -32.9146, 31.099, -4.37114e-08, 6.28895e-14, -40.1222, 12.3555, -23.9669)
+material_override = SubResource("StandardMaterial3D_6cs6w")
+mesh = SubResource("BoxMesh_1p48k")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="enlarge/Side5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enlarge/Side5/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_a6c52")
+
+[node name="Side8" type="MeshInstance3D" parent="enlarge"]
+transform = Transform3D(31.099, 0, 0, 0, -4.37114e-08, -32.9146, 0, 1, -1.43874e-06, -26.3279, 12.3555, 39.2147)
+material_override = SubResource("StandardMaterial3D_6cs6w")
+mesh = SubResource("BoxMesh_1p48k")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="enlarge/Side8"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enlarge/Side8/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_a6c52")
+
+[node name="Side9" type="MeshInstance3D" parent="enlarge"]
+transform = Transform3D(31.099, 0, 0, 0, -4.37114e-08, -32.9146, 0, 1, -1.43874e-06, 23.4651, 12.3555, 39.2147)
+material_override = SubResource("StandardMaterial3D_6cs6w")
+mesh = SubResource("BoxMesh_1p48k")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="enlarge/Side9"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enlarge/Side9/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_a6c52")
+
+[node name="Side10" type="MeshInstance3D" parent="enlarge"]
+transform = Transform3D(31.099, 0, 0, 0, -4.37114e-08, -32.9146, 0, 1, -1.43874e-06, -26.3279, 12.3555, -38.6311)
+material_override = SubResource("StandardMaterial3D_6cs6w")
+mesh = SubResource("BoxMesh_1p48k")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="enlarge/Side10"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enlarge/Side10/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_a6c52")
+
+[node name="Side11" type="MeshInstance3D" parent="enlarge"]
+transform = Transform3D(31.099, 0, 0, 0, -4.37114e-08, -32.9146, 0, 1, -1.43874e-06, 23.4651, 12.3555, -38.6311)
+material_override = SubResource("StandardMaterial3D_6cs6w")
+mesh = SubResource("BoxMesh_1p48k")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="enlarge/Side11"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enlarge/Side11/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_a6c52")
+
+[node name="Side6" type="MeshInstance3D" parent="enlarge"]
+transform = Transform3D(-1.35938e-06, -1, 1.43874e-06, 0, -4.37114e-08, -32.9146, 31.099, -4.37114e-08, 6.28895e-14, 39.1577, 12.3555, 23.5112)
+material_override = SubResource("StandardMaterial3D_6cs6w")
+mesh = SubResource("BoxMesh_1p48k")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="enlarge/Side6"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enlarge/Side6/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_a6c52")
+
+[node name="Side7" type="MeshInstance3D" parent="enlarge"]
+transform = Transform3D(-1.35938e-06, -1, 1.43874e-06, 0, -4.37114e-08, -32.9146, 31.099, -4.37114e-08, 6.28895e-14, 39.1577, 12.3555, -23.9669)
+material_override = SubResource("StandardMaterial3D_6cs6w")
+mesh = SubResource("BoxMesh_1p48k")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="enlarge/Side7"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enlarge/Side7/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_a6c52")
+
+[node name="connection1" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.33047, 0, -0.566509)
+
+[node name="connection2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -115.175)
+
+[node name="connection3" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57.762, 0, -58.0687)
+
+[node name="connection4" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.6177, 0, -58.0687)
+
+[node name="SegmentEntry" type="Area3D" parent="."]
+
+[node name="D" type="CollisionShape3D" parent="SegmentEntry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.29916, 12.3409, -0.27655)
+shape = SubResource("BoxShape3D_wl1ib")
+
+[node name="U" type="CollisionShape3D" parent="SegmentEntry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.29916, 12.3409, -115.573)
+shape = SubResource("BoxShape3D_wl1ib")
+
+[node name="L" type="CollisionShape3D" parent="SegmentEntry"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -59.807, 12.3409, -58.6466)
+shape = SubResource("BoxShape3D_wl1ib")
+
+[node name="R" type="CollisionShape3D" parent="SegmentEntry"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 59.1782, 12.3409, -58.6466)
+shape = SubResource("BoxShape3D_wl1ib")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.44747, -53.8571)
+light_energy = 5.0
+omni_range = 100.0
+
+[node name="Spawner" parent="." node_paths=PackedStringArray("spawn_points") instance=ExtResource("2_e4jgt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -58.9528)
+spawn_points = [NodePath("Marker3D"), NodePath("Marker3D2"), NodePath("Marker3D3"), NodePath("Marker3D4"), NodePath("Marker3D5"), NodePath("Marker3D6"), NodePath("Marker3D7"), NodePath("Marker3D8"), NodePath("Marker3D9"), NodePath("Marker3D10")]
+spawn_chance = 0.75
+
+[node name="Marker3D" type="Marker3D" parent="Spawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.7929, 1.62255, -26.5873)
+
+[node name="Marker3D2" type="Marker3D" parent="Spawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.0659, 1.62255, 5.52634)
+
+[node name="Marker3D3" type="Marker3D" parent="Spawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.9013, 1.62255, -5.0089)
+
+[node name="Marker3D4" type="Marker3D" parent="Spawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.6071, 1.62255, -21.4456)
+
+[node name="Marker3D5" type="Marker3D" parent="Spawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.644, 1.62255, 20.8322)
+
+[node name="Marker3D6" type="Marker3D" parent="Spawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.0303, 1.62255, 27.3008)
+
+[node name="Marker3D7" type="Marker3D" parent="Spawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5373, 1.62255, 34.0459)
+
+[node name="Marker3D8" type="Marker3D" parent="Spawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.2817, 1.62255, 27.6406)
+
+[node name="Marker3D9" type="Marker3D" parent="Spawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.2924, 1.62255, 20.5235)
+
+[node name="Marker3D10" type="Marker3D" parent="Spawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.3983, 1.62255, -4.55451)
+
+[node name="Spawner2" parent="." node_paths=PackedStringArray("spawn_points") instance=ExtResource("2_e4jgt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -58.9528)
+spawn_points = [NodePath("Marker3D"), NodePath("Marker3D2"), NodePath("Marker3D3"), NodePath("Marker3D4"), NodePath("Marker3D5"), NodePath("Marker3D6"), NodePath("Marker3D7"), NodePath("Marker3D8"), NodePath("Marker3D9"), NodePath("Marker3D10")]
+type = 0
+spawn_chance = 0.75
+
+[node name="Marker3D" type="Marker3D" parent="Spawner2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.9708, 1.82296, -11.3318)
+
+[node name="Marker3D2" type="Marker3D" parent="Spawner2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.69317, 1.82296, -32.7846)
+
+[node name="Marker3D3" type="Marker3D" parent="Spawner2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.5438, 1.82296, -25.3078)
+
+[node name="Marker3D4" type="Marker3D" parent="Spawner2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.69317, 1.82296, 30.7914)
+
+[node name="Marker3D5" type="Marker3D" parent="Spawner2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.0402, 1.82296, 8.47052)
+
+[node name="Marker3D6" type="Marker3D" parent="Spawner2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.1054, 1.82296, 15.814)
+
+[node name="Marker3D7" type="Marker3D" parent="Spawner2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09757, 1.82296, 15.814)
+
+[node name="Marker3D8" type="Marker3D" parent="Spawner2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.92875, 1.82296, 21.5316)
+
+[node name="Marker3D9" type="Marker3D" parent="Spawner2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.92875, 1.82296, 39.418)
+
+[node name="Marker3D10" type="Marker3D" parent="Spawner2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.92875, 1.82296, 4.35342)
+
+[connection signal="body_entered" from="SegmentEntry" to="." method="_on_segment_entry_body_entered"]

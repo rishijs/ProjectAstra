@@ -32,7 +32,8 @@ func die():
 
 func _physics_process(_delta):
 	if threat_detected:
-		velocity = position.direction_to(player_ref.position) * speed
+		#transform = player_ref.transform
+		velocity = global_position.direction_to(player_ref.global_position) * speed
 		move_and_slide()
 
 

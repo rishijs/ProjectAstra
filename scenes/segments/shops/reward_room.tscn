@@ -1,43 +1,31 @@
-[gd_scene load_steps=11 format=3 uid="uid://c7p24v38kr0cx"]
+[gd_scene load_steps=8 format=3 uid="uid://c5ochb08ujj85"]
 
-[ext_resource type="Script" path="res://scenes/segments/shops/chroma_room.gd" id="1_e411e"]
-[ext_resource type="PackedScene" uid="uid://b402k2bhdes07" path="res://scenes/enemies/spawner.tscn" id="2_qd1v8"]
+[ext_resource type="Script" path="res://scenes/segments/shops/reward_room.gd" id="1_33wov"]
+[ext_resource type="FontFile" uid="uid://dav7xcpojrqsr" path="res://themes/fonts/alpha-prota-font/AlphaProta-Wy7VE.ttf" id="2_lyyd3"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sf0q6"]
-albedo_color = Color(0.223529, 0.223529, 0.223529, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_56gf8"]
+albedo_color = Color(1, 0.580392, 0.188235, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_hk1jk"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_i7nt0"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qqdvx"]
-albedo_color = Color(1, 0, 0.0823529, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3c6st"]
-albedo_color = Color(0, 0.498039, 1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uhf1o"]
-albedo_color = Color(0.756863, 0.756863, 0.756863, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kdrvf"]
-albedo_color = Color(0, 1, 0.34902, 1)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_ujf7h"]
 size = Vector3(16.796, 28.257, 2.39868)
 
-[node name="ChromaRoom" type="Node3D" node_paths=PackedStringArray("connection_start", "connection_end", "spawners")]
-script = ExtResource("1_e411e")
-connection_start = NodePath("connection1")
-connection_end = [NodePath("connection2")]
-spawners = [NodePath("Spawner")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_mok4n"]
+size = Vector3(64.0172, 15.0538, 48.5188)
+
+[node name="RewardRoom" type="Node3D"]
+script = ExtResource("1_33wov")
 
 [node name="scale" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.31919, 0, -39.7981)
 
 [node name="Bot" type="MeshInstance3D" parent="scale"]
 transform = Transform3D(79.5146, 0, 0, 0, 1, 0, 0, 0, 77.9376, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_sf0q6")
+material_override = SubResource("StandardMaterial3D_56gf8")
 mesh = SubResource("BoxMesh_hk1jk")
 skeleton = NodePath("../..")
 
@@ -48,7 +36,7 @@ shape = SubResource("ConcavePolygonShape3D_i7nt0")
 
 [node name="Top" type="MeshInstance3D" parent="scale"]
 transform = Transform3D(79.5146, 0, 0, 0, 1, 0, 0, 0, 77.9376, 0, 27.7188, 0)
-material_override = SubResource("StandardMaterial3D_sf0q6")
+material_override = SubResource("StandardMaterial3D_56gf8")
 mesh = SubResource("BoxMesh_hk1jk")
 skeleton = NodePath("../..")
 
@@ -59,7 +47,7 @@ shape = SubResource("ConcavePolygonShape3D_i7nt0")
 
 [node name="Side1" type="MeshInstance3D" parent="scale"]
 transform = Transform3D(79.5146, 0, 0, 0, -4.37114e-08, -32.9146, 0, 1, -1.43874e-06, 0, 12.3555, 39.4142)
-material_override = SubResource("StandardMaterial3D_qqdvx")
+material_override = SubResource("StandardMaterial3D_56gf8")
 mesh = SubResource("BoxMesh_hk1jk")
 skeleton = NodePath("../..")
 
@@ -70,7 +58,7 @@ shape = SubResource("ConcavePolygonShape3D_i7nt0")
 
 [node name="Side2" type="MeshInstance3D" parent="scale"]
 transform = Transform3D(79.5146, 0, 0, 0, -4.37114e-08, -32.9146, 0, 1, -1.43874e-06, 0, 12.3555, -39.3528)
-material_override = SubResource("StandardMaterial3D_3c6st")
+material_override = SubResource("StandardMaterial3D_56gf8")
 mesh = SubResource("BoxMesh_hk1jk")
 skeleton = NodePath("../..")
 
@@ -80,8 +68,8 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_i7nt0")
 
 [node name="Side4" type="MeshInstance3D" parent="scale"]
-transform = Transform3D(-1.35938e-06, -1, 1.43874e-06, 0, -4.37114e-08, -32.9146, 31.099, -4.37114e-08, 6.28895e-14, -40.1222, 12.3555, 23.5112)
-material_override = SubResource("StandardMaterial3D_uhf1o")
+transform = Transform3D(-3.75462e-06, -1, 1.43874e-06, 0, -4.37114e-08, -32.9146, 85.8957, -4.37114e-08, 6.28895e-14, -40.1222, 12.3555, 0.788445)
+material_override = SubResource("StandardMaterial3D_56gf8")
 mesh = SubResource("BoxMesh_hk1jk")
 skeleton = NodePath("../..")
 
@@ -90,20 +78,9 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="scale/Side4/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_i7nt0")
 
-[node name="Side5" type="MeshInstance3D" parent="scale"]
-transform = Transform3D(-1.35938e-06, -1, 1.43874e-06, 0, -4.37114e-08, -32.9146, 31.099, -4.37114e-08, 6.28895e-14, -40.1222, 12.3555, -23.9669)
-material_override = SubResource("StandardMaterial3D_uhf1o")
-mesh = SubResource("BoxMesh_hk1jk")
-skeleton = NodePath("../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="scale/Side5"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="scale/Side5/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_i7nt0")
-
 [node name="Side6" type="MeshInstance3D" parent="scale"]
 transform = Transform3D(-1.35938e-06, -1, 1.43874e-06, 0, -4.37114e-08, -32.9146, 31.099, -4.37114e-08, 6.28895e-14, 39.1577, 12.3555, 23.5112)
-material_override = SubResource("StandardMaterial3D_kdrvf")
+material_override = SubResource("StandardMaterial3D_56gf8")
 mesh = SubResource("BoxMesh_hk1jk")
 skeleton = NodePath("../..")
 
@@ -114,7 +91,7 @@ shape = SubResource("ConcavePolygonShape3D_i7nt0")
 
 [node name="Side7" type="MeshInstance3D" parent="scale"]
 transform = Transform3D(-1.35938e-06, -1, 1.43874e-06, 0, -4.37114e-08, -32.9146, 31.099, -4.37114e-08, 6.28895e-14, 39.1577, 12.3555, -23.9669)
-material_override = SubResource("StandardMaterial3D_kdrvf")
+material_override = SubResource("StandardMaterial3D_56gf8")
 mesh = SubResource("BoxMesh_hk1jk")
 skeleton = NodePath("../..")
 
@@ -135,30 +112,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05017, 0, -77.5182)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25626, 13.6285, -0.699341)
 shape = SubResource("BoxShape3D_ujf7h")
 
-[node name="U" type="CollisionShape3D" parent="SegmentEntry"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25626, 13.6285, -78.3206)
-shape = SubResource("BoxShape3D_ujf7h")
+[node name="Victory" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -42.9262)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Victory"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.41473, 7.02692, 3.75102)
+shape = SubResource("BoxShape3D_mok4n")
+
+[node name="helpers1" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.02177, -46.9212)
+modulate = Color(1, 0.709804, 0.211765, 1)
+text = "TRIAL COMPLETE"
+font = ExtResource("2_lyyd3")
+font_size = 1500
+
+[node name="helpers2" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.0501223, 0.998743, 0, -0.998743, 0.0501223, 0, 0.696419, -30.0759)
+modulate = Color(1, 0.709804, 0.211765, 1)
+text = "WALK HERE"
+font = ExtResource("2_lyyd3")
+font_size = 1500
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.29133, -38.9825)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.69439, -38.9825)
 light_energy = 5.0
 omni_range = 50.0
 
-[node name="Spawner" parent="." node_paths=PackedStringArray("spawn_points") instance=ExtResource("2_qd1v8")]
-spawn_points = [NodePath("Marker3D"), NodePath("Marker3D2"), NodePath("Marker3D3"), NodePath("Marker3D4")]
-type = 0
-spawn_chance = 0.5
-
-[node name="Marker3D" type="Marker3D" parent="Spawner"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5983, 1.63862, -12.3382)
-
-[node name="Marker3D2" type="Marker3D" parent="Spawner"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.1739, 2.14334, -10.874)
-
-[node name="Marker3D3" type="Marker3D" parent="Spawner"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.013, 2.1986, -68.28)
-
-[node name="Marker3D4" type="Marker3D" parent="Spawner"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.4007, 2.26001, -61.4623)
-
 [connection signal="body_entered" from="SegmentEntry" to="." method="_on_segment_entry_body_entered"]
+[connection signal="body_entered" from="Victory" to="." method="_on_victory_body_entered"]

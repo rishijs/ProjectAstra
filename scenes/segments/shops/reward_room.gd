@@ -1,17 +1,20 @@
 extends "res://scenes/segments/segment.gd"
 
-@export_category("connections")
-@export var connection_start:Marker3D
-@export var connection_end:Array[Marker3D]
 
 func _ready():
-	super()
+	pass
 
 
 func _process(delta):
-	super(delta)
+	pass
 
 
 func _on_segment_entry_body_entered(body):
 	if body == player_ref:
 		segment_manager_ref.player_segment_index = id
+
+
+func _on_victory_body_entered(body):
+	if body == player_ref:
+		SceneLoader.load_scene("res://interface/menus/main_menu.tscn", true)
+		SceneLoader.change_scene_to_loading_screen()

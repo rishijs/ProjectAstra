@@ -10,5 +10,5 @@ func _process(delta):
 
 
 func _on_button_pressed():
-	SceneLoader.load_scene("res://levels/prototyping_scene.tscn", true)
+	SceneLoader.load_scene("res://levels/devlvl.tscn", true)
 	SceneLoader.change_scene_to_loading_screen()

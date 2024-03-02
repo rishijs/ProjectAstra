@@ -1,2 +1,2 @@
 weapon,chroma,archetype,damage,magazine,reload speed,fire rate,recoil amount,recoil time,accuracy,max spread,jitter,projectile speed,headshot multiplier,critical chance,critical damage,max range,falloff range,falloff multiplier,damage id,objective,stable time,movement skill id
-default,grey,auto,20,30,1,0.2,0.1,0.2,100,1,0.01,30,1.5,0,0,0,0,1,0,none,25,0
+default,grey,auto,20,30,1,0.2,0.1,0.2,100,1,0.01,50,1.5,0,0,0,0,1,0,none,25,0

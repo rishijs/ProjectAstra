@@ -1,4 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfpdqsiywdxk2"]
+[gd_scene load_steps=11 format=3 uid="uid://bfpdqsiywdxk2"]
+
+[ext_resource type="PackedScene" uid="uid://dmekjtv82mx01" path="res://scenes/player/player.tscn" id="1_d3ahk"]
+[ext_resource type="PackedScene" uid="uid://b2o2aff6fhv6p" path="res://scenes/managers/game_manager.tscn" id="2_xhhs8"]
+[ext_resource type="PackedScene" uid="uid://b4knqnk5uufoi" path="res://scenes/managers/projectile_manager.tscn" id="3_grs1v"]
+[ext_resource type="PackedScene" uid="uid://d10vtkts7c47q" path="res://scenes/managers/segment_manager.tscn" id="4_1gok0"]
+[ext_resource type="PackedScene" uid="uid://cfud5pl460nck" path="res://scenes/managers/spawn_manager.tscn" id="5_or2hb"]
+[ext_resource type="PackedScene" uid="uid://bmfq1jcyg084c" path="res://scenes/segments/plane.tscn" id="6_18yso"]
+[ext_resource type="PackedScene" uid="uid://ct3ob0tj0fjyj" path="res://interface/hud/player_interface.tscn" id="7_dslur"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_bugxd"]
 ground_color = Color(1, 1, 1, 1)
@@ -10,8 +18,6 @@ sky_material = SubResource("PhysicalSkyMaterial_bugxd")
 background_mode = 2
 sky = SubResource("Sky_mro0p")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_tedrn"]
-
 [node name="Devscene" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -20,9 +26,25 @@ environment = SubResource("Environment_oct65")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.939693, 0.34202, 0, -0.34202, -0.939693, 0, 2.78388, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(6.77293, 0, 0, 0, 1, 0, 0, 0, 7.34625, 0, 0, 0)
-mesh = SubResource("PlaneMesh_tedrn")
+[node name="Player" parent="." instance=ExtResource("1_d3ahk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.77322, 5.47368)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.913155, 0.407613, 0, -0.407613, 0.913155, 0, 7.85334, 12.1947)
+[node name="GameManager" parent="." instance=ExtResource("2_xhhs8")]
+
+[node name="ProjectileManager" parent="." instance=ExtResource("3_grs1v")]
+
+[node name="SegmentManager" parent="." node_paths=PackedStringArray("start") instance=ExtResource("4_1gok0")]
+start = NodePath("Start")
+
+[node name="Plane" parent="SegmentManager" instance=ExtResource("6_18yso")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.756766, 0)
+
+[node name="Start" type="Marker3D" parent="SegmentManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0173793, 0.2353, -13.1166)
+
+[node name="End" type="Marker3D" parent="SegmentManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -127.933)
+
+[node name="SpawnManager" parent="." instance=ExtResource("5_or2hb")]
+
+[node name="Interface" parent="." instance=ExtResource("7_dslur")]
