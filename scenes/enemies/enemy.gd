@@ -19,14 +19,18 @@ func _ready():
 
 
 func _process(_delta):
+	pass
+
+func on_hit(damage):
+	health -= damage
 	health = clampf(health,0,max_health)
 	if health == 0:
 		die()
-
+	
 func die():
 	call_deferred("queue_free")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if threat_detected:
 		velocity = position.direction_to(player_ref.position) * speed
 		move_and_slide()
