@@ -144,4 +144,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.4366, 0, -102.091)
 connection_start = NodePath("../StraightSpeedTube3/connection1")
 connection_end = [NodePath("../StraightSpeedTube3/connection2")]
 
+[node name="start" type="Node3D" parent="SegmentManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.9204, 0, 83.3722)
+
+[node name="StraightSpeedTube" parent="SegmentManager/start" instance=ExtResource("6_roblo")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="StraightSpeedTube2" parent="SegmentManager/start" node_paths=PackedStringArray("connection_start", "connection_end", "spawners") instance=ExtResource("6_roblo")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -37.6644, 0, 0)
+connection_start = NodePath("../StraightSpeedTube/connection1")
+connection_end = [NodePath("../StraightSpeedTube/connection2")]
+spawners = [NodePath("../StraightSpeedTube/Spawner")]
+
+[node name="StraightSpeedTube3" parent="SegmentManager/start" node_paths=PackedStringArray("connection_start", "connection_end", "spawners") instance=ExtResource("6_roblo")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -74.9874, 0, 0)
+connection_start = NodePath("../StraightSpeedTube/connection1")
+connection_end = [NodePath("../StraightSpeedTube/connection2")]
+spawners = [NodePath("../StraightSpeedTube/Spawner")]
+
+[node name="StraightSpeedTube4" parent="SegmentManager/start" node_paths=PackedStringArray("connection_start", "connection_end", "spawners") instance=ExtResource("6_roblo")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -121.982, 0, -45.8787)
+connection_start = NodePath("../StraightSpeedTube/connection1")
+connection_end = [NodePath("../StraightSpeedTube/connection2")]
+spawners = [NodePath("../StraightSpeedTube/Spawner")]
+
+[node name="CurvedSpeedTube" parent="SegmentManager/start" instance=ExtResource("10_4qe5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -121.907, 0, -9.01229)
+
+[node name="StraightSpeedTube5" parent="SegmentManager/start" instance=ExtResource("6_roblo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -122.224, 0, -45.0696)
+
 [node name="Interface" parent="." instance=ExtResource("2_cbhra")]

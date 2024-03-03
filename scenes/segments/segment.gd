@@ -5,7 +5,14 @@ extends Node
 
 @export var spawners:Array[Node3D]
 
+@export_category("pivots")
+@export var up : Marker3D
+@export var left : Marker3D
+@export var down : Marker3D
+@export var right : Marker3D
+
 var id:int
+var type:int
 
 func _ready():
 	pass
