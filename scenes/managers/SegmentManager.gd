@@ -11,7 +11,6 @@ extends Node3D
 @export var max_curved_per_chunk = 3
 @export var initial_chunks = 2
 @export var max_chunks = 5
-@export var segment_spawn_threshold = 3
 @export var segment_deletion_threshold = 5
 
 var segments = []
