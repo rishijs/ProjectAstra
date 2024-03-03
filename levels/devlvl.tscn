@@ -35,6 +35,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.44317, -2.2402)
 
 [node name="SegmentManager" parent="." node_paths=PackedStringArray("start") instance=ExtResource("4_1gok0")]
 start = NodePath("Start")
+min_speed_tubes_per_chunk = 50
+max_speed_tubes_per_chunk = 50
+max_curved_per_chunk = 10
+max_vertical_per_chunk = 10
 
 [node name="Plane" parent="SegmentManager" instance=ExtResource("6_18yso")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.756766, 0)

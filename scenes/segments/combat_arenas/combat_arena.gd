@@ -15,9 +15,10 @@ func _process(delta):
 func _on_segment_entry_body_entered(body):
 	if body == player_ref:
 		segment_manager_ref.player_segment_index = id
+		segment_manager_ref.player_depth = depth
 
 
 func _on_segment_door_body_entered(body):
 	if body == player_ref:
-		segment_manager_ref.new_chunk.emit(randi_range(3,4))
+		segment_manager_ref.new_chunk.emit()
 		door.queue_free()

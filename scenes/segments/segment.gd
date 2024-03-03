@@ -14,6 +14,7 @@ extends Node
 
 var id:int
 var type:int
+var depth:int
 
 func _ready():
 	pass
