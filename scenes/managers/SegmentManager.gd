@@ -6,10 +6,13 @@ extends Node3D
 @export_category("procedural_generation_params")
 @export var enable = true
 @export var initial_straight_speed_tubes = 5
-@export var min_speed_tubes_per_chunk = 3
+@export var min_speed_tubes_per_chunk = 5
 @export var max_speed_tubes_per_chunk = 10
-@export var initial_chunks = 1
-@export var max_segments = 20
+@export var max_curved_per_chunk = 3
+@export var initial_chunks = 2
+@export var max_chunks = 5
+@export var segment_spawn_threshold = 3
+@export var segment_deletion_threshold = 5
 
 var segments = []
 var player_segment_index = 0
@@ -17,6 +20,7 @@ var segment_index = -1
 var segment_rotation = 0
 var reward_room_spawned = false
 var segments_this_chunk = 0
+var num_chunks = 0
 
 enum segment_types{PLANE,CURVED_TUBE,STRAIGHT_TUBE,ARENA,CHROMA,REWARD}
 enum dir{UP,LEFT,DOWN,RIGHT}
@@ -35,17 +39,18 @@ func _ready():
 			new_chunk.emit(segment_types.ARENA)
 
 func _process(_delta):
-	#spawn_next_chunk()
-	pass
+	destroy_past_chunks()
 
-func spawn_next_chunk():
-	if enable and segment_index!= -1 and player_segment_index == segment_index - segments_this_chunk:
-		#if not max segments
-		new_chunk.emit(segment_types.ARENA)
-		#elif not reward_room_spawned:
-		#	reward_room_spawned = true
-		#	enable = false
-		#	new_chunk.emit(segment_types.REWARD)
+func destroy_past_chunks():
+	for segment in segments:
+		if segment.id + segment_deletion_threshold < player_segment_index:
+			segments.erase(segment)
+			segment.destruct()
+			segment_index -= 1
+			player_segment_index -= 1
+			for i in range(segments.size()):
+				segments[i].id = i
+
 
 func get_current_segment_start_position() -> Vector3:
 	if segment_index == -1:
@@ -64,24 +69,28 @@ func adjust_to_ideal_position(segment,index,dir):
 	match dir:
 		0:
 			segment.global_position.z = segment.up.global_position.z
+			segment.global_position.x = segment.up.global_position.x
 			segment.global_rotation.y = segment.up.global_rotation.y
 		1:
+			segment.global_position.z = segment.left.global_position.z
 			segment.global_position.x = segment.left.global_position.x
 			segment.global_rotation.y = segment.left.global_rotation.y
 		2:
 			segment.global_position.z = segment.down.global_position.z
+			segment.global_position.x = segment.down.global_position.x
 			segment.global_rotation.y = segment.down.global_rotation.y
 		3:
+			segment.global_position.z = segment.right.global_position.z
 			segment.global_position.x = segment.right.global_position.x
 			segment.global_rotation.y = segment.right.global_rotation.y
 		
-func add_y_rotation(angle):
-	
-	segment_rotation += angle
-	if segment_rotation < 0:
-		segment_rotation += 360
-	if segment_rotation >= 360:
-		segment_rotation -= 360
+func add_y_rotation(value,angle):
+	value += angle
+	if value < 0:
+		value += 360
+	if value >= 360:
+		value -= 360
+	return value
 	
 func create_segment(type:segment_types):
 	var curr_segment
@@ -90,7 +99,7 @@ func create_segment(type:segment_types):
 			curr_segment = plane.instantiate()
 		segment_types.CURVED_TUBE:
 			curr_segment = curved_tube.instantiate()
-			add_y_rotation(90)
+			segment_rotation = add_y_rotation(segment_rotation,90)
 		segment_types.STRAIGHT_TUBE:
 			curr_segment = straight_tube.instantiate()
 		segment_types.ARENA:
@@ -104,12 +113,6 @@ func create_segment(type:segment_types):
 		curr_segment.id = segment_index+1
 		add_child(curr_segment)
 		adjust_to_ideal_position(curr_segment,0,(segment_rotation/90)%4)
-		print(segment_rotation," ",(segment_rotation/90)%4)
-		#if segment_index != -1:
-			#curr_segment.transform.basis = segments[segment_index].transform.basis
-			#curr_segment.rotate_y(segment_rotation)
-		#if type == segment_types.CURVED_TUBE:
-			#add_y_rotation(90)
 		segments.append(curr_segment)
 		segment_index += 1
 			
@@ -121,7 +124,11 @@ func get_segment_types(n,min = 1,max = 2):
 		
 	var types = []
 	for i in range(n):
-		types.append(randi_range(min,max))
+		var type = randi_range(min,max)
+		if type == 1 and types.count(1) < max_curved_per_chunk:
+			types.append(type)
+		else:
+			types.append(2)
 	
 	types[0] = 2
 	for i in range(n-2):
@@ -132,26 +139,45 @@ func get_segment_types(n,min = 1,max = 2):
 			types[i+2] = 2
 	
 	return types
-	
+
 func spawn_new_segments(with_type:segment_types = segment_types.ARENA):
-	#speed tubes
-	var num_speed_tubes = randi_range(min_speed_tubes_per_chunk,max_speed_tubes_per_chunk)
-	var segment_types_to_spawn = get_segment_types(num_speed_tubes,1,2)
-	for i in range(num_speed_tubes):
-		match segment_types_to_spawn[i]:
-			segment_types.CURVED_TUBE:
-				create_segment(1)
-			segment_types.STRAIGHT_TUBE:
-				create_segment(2)
-	#specific one
-	#match with_type:
-	#	segment_types.ARENA:
-	#		create_segment(3)
-	#	segment_types.CHROMA:
-	#		create_segment(4)
-	#	segment_types.REWARD:
-	#		create_segment(5)
-	#segments_this_chunk = num_speed_tubes + 1
+	#first chunk
+	if num_chunks == 0:
+		for i in range(initial_straight_speed_tubes):
+			create_segment(2)
+		num_chunks += 1
+	
+	#reward chunk
+	elif num_chunks == max_chunks:
+		var num_speed_tubes = randi_range(min_speed_tubes_per_chunk,max_speed_tubes_per_chunk)
+		var segment_types_to_spawn = get_segment_types(num_speed_tubes,1,2)
+		for i in range(num_speed_tubes):
+			match segment_types_to_spawn[i]:
+				segment_types.CURVED_TUBE:
+					create_segment(1)
+				segment_types.STRAIGHT_TUBE:
+					create_segment(2)
+		create_segment(5)
+		segments_this_chunk = num_speed_tubes + 1
+		num_chunks += 1
+	
+	#other
+	elif num_chunks < max_chunks:
+		var num_speed_tubes = randi_range(min_speed_tubes_per_chunk,max_speed_tubes_per_chunk)
+		var segment_types_to_spawn = get_segment_types(num_speed_tubes,1,2)
+		for i in range(num_speed_tubes):
+			match segment_types_to_spawn[i]:
+				segment_types.CURVED_TUBE:
+					create_segment(1)
+				segment_types.STRAIGHT_TUBE:
+					create_segment(2)
+		match with_type:
+			segment_types.ARENA:
+				create_segment(3)
+			segment_types.CHROMA:
+				create_segment(4)
+		segments_this_chunk = num_speed_tubes + 1
+		num_chunks += 1
 
 func _on_new_chunk(type):
 	spawn_new_segments(type)

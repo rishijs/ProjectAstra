@@ -92,6 +92,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 17.3339)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="connection1"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+visible = false
 material_override = SubResource("StandardMaterial3D_asjek")
 mesh = SubResource("BoxMesh_psmur")
 
@@ -100,6 +101,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -17.4066)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="connection2"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+visible = false
 material_override = SubResource("StandardMaterial3D_ee2l2")
 mesh = SubResource("BoxMesh_psmur")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c7p24v38kr0cx"]
+[gd_scene load_steps=12 format=3 uid="uid://c7p24v38kr0cx"]
 
 [ext_resource type="Script" path="res://scenes/segments/shops/chroma_room.gd" id="1_e411e"]
 [ext_resource type="PackedScene" uid="uid://b402k2bhdes07" path="res://scenes/enemies/spawner.tscn" id="2_qd1v8"]
@@ -26,14 +26,22 @@ albedo_color = Color(0, 1, 0.34902, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ujf7h"]
 size = Vector3(16.796, 28.257, 2.39868)
 
-[node name="ChromaRoom" type="Node3D" node_paths=PackedStringArray("connection_start", "connection_end", "spawners")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_350hi"]
+size = Vector3(14.1333, 27.7267, 25.1655)
+
+[node name="ChromaRoom" type="Node3D" node_paths=PackedStringArray("connection_start", "connection_end", "door", "spawners", "up", "left", "down", "right")]
 script = ExtResource("1_e411e")
 connection_start = NodePath("connection1")
 connection_end = [NodePath("connection2")]
+door = NodePath("SegmentDoor")
 spawners = [NodePath("Spawner")]
+up = NodePath("UpLoc")
+left = NodePath("LeftLoc")
+down = NodePath("DownLoc")
+right = NodePath("RightLoc")
 
 [node name="scale" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.31919, 0, -39.7981)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="Bot" type="MeshInstance3D" parent="scale"]
 transform = Transform3D(79.5146, 0, 0, 0, 1, 0, 0, 0, 77.9376, 0, 0, 0)
@@ -124,12 +132,13 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_i7nt0")
 
 [node name="connection1" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79989, 0, -0.643074)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79989, 0, 38.8352)
 
 [node name="connection2" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05017, 0, -77.5182)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05017, 0, -39.1064)
 
 [node name="SegmentEntry" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 38.8723)
 
 [node name="D" type="CollisionShape3D" parent="SegmentEntry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25626, 13.6285, -0.699341)
@@ -150,15 +159,34 @@ type = 0
 spawn_chance = 0.5
 
 [node name="Marker3D" type="Marker3D" parent="Spawner"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5983, 1.63862, -12.3382)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5983, 1.63862, 33.06)
 
 [node name="Marker3D2" type="Marker3D" parent="Spawner"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.1739, 2.14334, -10.874)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.1739, 2.14334, 34.5242)
 
 [node name="Marker3D3" type="Marker3D" parent="Spawner"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.013, 2.1986, -68.28)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.013, 2.1986, -22.8818)
 
 [node name="Marker3D4" type="Marker3D" parent="Spawner"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.4007, 2.26001, -61.4623)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.4007, 2.26001, -16.0641)
+
+[node name="UpLoc" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -43)
+
+[node name="LeftLoc" type="Marker3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -43, 0, 0)
+
+[node name="DownLoc" type="Marker3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 43)
+
+[node name="RightLoc" type="Marker3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 43, 0, 0)
+
+[node name="SegmentDoor" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SegmentDoor"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.64117, 13.3633, -32.4493)
+shape = SubResource("BoxShape3D_350hi")
 
 [connection signal="body_entered" from="SegmentEntry" to="." method="_on_segment_entry_body_entered"]
+[connection signal="body_entered" from="SegmentDoor" to="." method="_on_segment_door_body_entered"]
