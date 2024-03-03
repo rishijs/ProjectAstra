@@ -22,7 +22,7 @@ var segments_this_chunk = 0
 var num_chunks = 0
 
 enum segment_types{PLANE,CURVED_TUBE,STRAIGHT_TUBE,ARENA,CHROMA,REWARD}
-enum dir{UP,LEFT,DOWN,RIGHT}
+enum seg_dir{UP,LEFT,DOWN,RIGHT}
 var plane = preload("res://scenes/segments/plane.tscn")
 var curved_tube = preload("res://scenes/segments/speed_tubes/curved_speed_tube.tscn")
 var straight_tube = preload("res://scenes/segments/speed_tubes/straight_speed_tube.tscn")
@@ -115,7 +115,7 @@ func create_segment(type:segment_types):
 		segments.append(curr_segment)
 		segment_index += 1
 			
-func get_segment_types(n,min = 1,max = 2):
+func get_segment_types(n,min_type = 1,max_type = 2):
 	#even number of curved tubes cannot be together, odd is fine 
 	#index of curved tube is 1
 	if n == 0:
@@ -123,7 +123,7 @@ func get_segment_types(n,min = 1,max = 2):
 		
 	var types = []
 	for i in range(n):
-		var type = randi_range(min,max)
+		var type = randi_range(min_type,max_type)
 		if type == 1 and types.count(1) < max_curved_per_chunk:
 			types.append(type)
 		else:
@@ -143,7 +143,7 @@ func spawn_new_segments(with_type:segment_types = segment_types.ARENA):
 	#first chunk
 	if num_chunks == 0:
 		for i in range(initial_straight_speed_tubes):
-			create_segment(2)
+			create_segment(segment_types.STRAIGHT_TUBE)
 		num_chunks += 1
 	
 	#reward chunk
@@ -151,12 +151,8 @@ func spawn_new_segments(with_type:segment_types = segment_types.ARENA):
 		var num_speed_tubes = randi_range(min_speed_tubes_per_chunk,max_speed_tubes_per_chunk)
 		var segment_types_to_spawn = get_segment_types(num_speed_tubes,1,2)
 		for i in range(num_speed_tubes):
-			match segment_types_to_spawn[i]:
-				segment_types.CURVED_TUBE:
-					create_segment(1)
-				segment_types.STRAIGHT_TUBE:
-					create_segment(2)
-		create_segment(5)
+			create_segment(segment_types_to_spawn[i])
+		create_segment(segment_types.REWARD)
 		segments_this_chunk = num_speed_tubes + 1
 		num_chunks += 1
 	
@@ -165,16 +161,8 @@ func spawn_new_segments(with_type:segment_types = segment_types.ARENA):
 		var num_speed_tubes = randi_range(min_speed_tubes_per_chunk,max_speed_tubes_per_chunk)
 		var segment_types_to_spawn = get_segment_types(num_speed_tubes,1,2)
 		for i in range(num_speed_tubes):
-			match segment_types_to_spawn[i]:
-				segment_types.CURVED_TUBE:
-					create_segment(1)
-				segment_types.STRAIGHT_TUBE:
-					create_segment(2)
-		match with_type:
-			segment_types.ARENA:
-				create_segment(3)
-			segment_types.CHROMA:
-				create_segment(4)
+			create_segment(segment_types_to_spawn[i])
+		create_segment(with_type)
 		segments_this_chunk = num_speed_tubes + 1
 		num_chunks += 1
 
