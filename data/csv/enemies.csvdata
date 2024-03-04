@@ -1,2 +1,3 @@
 enemy,health,damage,id
 default,100,10,0
+still,200,0,1

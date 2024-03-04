@@ -6,7 +6,33 @@ var all_data = {}
 @export var csv_files:Dictionary = {
 	"weapons":"res://data/csv/weapons.csvdata",
 	"aberrations":"res://data/csv/aberrations.csvdata",
+	"chromas":"res://data/csv/chromas.csvdata",
 	"enemies":"res://data/csv/enemies.csvdata"
+}
+
+var wcls= csv_files.keys()[0]
+var ccls = csv_files.keys()[1]
+var abcls = csv_files.keys()[2]
+var encls = csv_files.keys()[3]
+
+enum wattr{
+	CHROMA,ARCHETYPE,DAMAGE,MAGAZINE,RELOAD_SPEED,FIRE_RATE,RECOIL_AMOUNT,RECOIL_TIME,
+	ACCURACY,MAX_SPREAD,JITTER,PROJECTILE_SPEED,HEADSHOT_MULTIPLIER,CRITICAL_CHANCE,
+	CRITICAL_DAMAGE,MAX_RANGE,FALLOFF_RANGE,FALLOFF_MULTIPLIER,DAMAGE_ID
+}
+enum cattr{
+	OBJECTIVE_ID,OBJECTIVE_DESCRIPTION,OBJECTIVE_BASE,OBJECTIVE_SCALING,STABLE_TIME,
+	MOVEMENT_SKILL_ID
+}
+enum abattr{
+	FLAT_BONUS,MULTIPLIED_BONUS,ID,DESCRIPTION
+}
+enum enattr{
+	HEALTH,DAMAGE,ID
+}
+
+enum chromas{
+	GREY,IGNEOUS,ARC,NATURA,CHRONO
 }
 
 func _ready():
@@ -39,6 +65,18 @@ func csv_to_dict(filepath,delimiter = ','):
 				else:
 					data[row[0]][headers[j]] = row[j]
 		return data
-		
-func _process(_delta):
-	pass
+
+#classifier,item name (ie. weapon name),attribute name (ie. fire rate)
+#alternative way of getting data
+func get_attr(cls,item_name,attribute):
+	if item_name is int:
+		item_name = all_data[cls].keys()[item_name]
+	if item_name in all_data[cls]:
+		var attribute_name = all_data[cls][item_name].keys()[attribute]
+		if attribute_name in all_data[cls][item_name]:
+			return all_data[cls][item_name][attribute_name]
+		else:
+			printerr("attribute not found: ",attribute_name)
+	else:
+		printerr("weapon not found: ",item_name)
+

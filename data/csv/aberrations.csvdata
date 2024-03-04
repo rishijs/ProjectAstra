@@ -1,2 +1,4 @@
 aberration,flat bonus,multiplied bonus,id,description
 default,0,0,0,does nothing
+damage amp,10,0,1,increases weapon damage
+accuracy reduction,0,0.9,2,reduces weapon accuracy
