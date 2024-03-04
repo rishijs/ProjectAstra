@@ -17,6 +17,12 @@ var movement_boost = 4
 var inertia_slow = 0.1
 var movement_ability = false
 
+var enemies_defeated = 0
+var arena_ref
+
+var aberration_close = false
+var aberration_warning = false
+
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():

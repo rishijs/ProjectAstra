@@ -8,9 +8,10 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wtlei"]
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera_first_person", "camera_third_person", "weapon", "weapon_socket", "target") groups=["Player"]]
+collision_layer = 17
 script = ExtResource("1_w2nvs")
 camera_first_person = NodePath("FirstPerson")
-camera_third_person = NodePath("ThirdPerson")
+camera_third_person = NodePath("MuzzleCam")
 weapon = NodePath("WeaponSocket/DefaultWeapon")
 weapon_socket = NodePath("WeaponSocket")
 target = NodePath("WeaponSocket/DefaultWeapon/Target")
@@ -19,11 +20,9 @@ target = NodePath("WeaponSocket/DefaultWeapon/Target")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.722767, -0.349107)
 current = true
 
-[node name="ThirdPerson" type="Camera3D" parent="."]
+[node name="MuzzleCam" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.922208, 0.386695, 0, -0.386695, 0.922208, 0, 0, 0)
-
-[node name="SpringArm3D" type="SpringArm3D" parent="ThirdPerson"]
-spring_length = 200.0
+visible = false
 
 [node name="PlaceholderMesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_we17l")

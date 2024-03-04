@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://00ho5uvvwmg0"]
+[gd_scene load_steps=10 format=3 uid="uid://ddx36hw5s7tvi"]
 
-[ext_resource type="Script" path="res://scenes/segments/speed_tubes/speed_tube.gd" id="1_o4std"]
+[ext_resource type="Script" path="res://scenes/segments/speed_tubes/speed_tube.gd" id="1_c1m81"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aiim8"]
 albedo_color = Color(0.0235294, 0.0235294, 0.0235294, 1)
@@ -16,11 +16,6 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_fh2ex"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vk4m7"]
-albedo_color = Color(0, 1, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_tccw2"]
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ydqb7"]
 albedo_color = Color(1, 0.054902, 0, 1)
 
@@ -29,19 +24,18 @@ albedo_color = Color(1, 0.054902, 0, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_1hl78"]
 size = Vector3(16.364, 10.9063, 1)
 
-[node name="CurvedSpeedTube" type="Node3D" node_paths=PackedStringArray("connection_start", "connection_end", "up", "left", "down", "right")]
-script = ExtResource("1_o4std")
-connection_start = NodePath("connection1")
+[node name="CurvedSpeedTube" type="Node3D" node_paths=PackedStringArray("connection_end", "up", "left", "down", "right")]
+script = ExtResource("1_c1m81")
 connection_end = [NodePath("connection2")]
-up = NodePath("Left")
-left = NodePath("Down")
-down = NodePath("Right")
-right = NodePath("Up")
+up = NodePath("Right")
+left = NodePath("Up")
+down = NodePath("Left")
+right = NodePath("Down")
 
 [node name="s1" type="Node3D" parent="."]
 
 [node name="Bot" type="MeshInstance3D" parent="s1"]
-transform = Transform3D(39.067, 0, 2.98023e-08, 0, 1, 0, -5.96046e-08, 0, 18.1626, 12.2273, 0, 0.106084)
+transform = Transform3D(39.067, 0, 2.98023e-08, 0, 1, 0, -5.96046e-08, 0, 18.1626, -10.9141, 0, 0.106084)
 material_override = SubResource("StandardMaterial3D_aiim8")
 mesh = SubResource("BoxMesh_vlcev")
 skeleton = NodePath("../..")
@@ -52,7 +46,7 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_2doeq")
 
 [node name="Bot3" type="MeshInstance3D" parent="s1"]
-transform = Transform3D(39.067, 0, 2.98023e-08, 0, 1, 0, -5.96046e-08, 0, 18.1626, 12.2273, 9.65358, 0.106082)
+transform = Transform3D(39.067, 0, 2.98023e-08, 0, 1, 0, -5.96046e-08, 0, 18.1626, -10.9141, 9.65358, 0.106082)
 material_override = SubResource("StandardMaterial3D_aiim8")
 mesh = SubResource("BoxMesh_vlcev")
 skeleton = NodePath("../..")
@@ -85,7 +79,7 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_2doeq")
 
 [node name="Left" type="MeshInstance3D" parent="s1"]
-transform = Transform3D(-4.55387e-07, -1.01068, 1.78814e-07, 10.418, -4.41781e-08, 0, 0, 3.72529e-09, 38.0447, -8.14322, 5.14386, -10.6179)
+transform = Transform3D(-4.55387e-07, -1.01068, 9.65516e-08, 10.418, -4.41781e-08, 0, 0, 3.72529e-09, 20.5424, -9.41944, 5.14386, -19.3253)
 material_override = SubResource("StandardMaterial3D_aiim8")
 mesh = SubResource("BoxMesh_vlcev")
 skeleton = NodePath("../..")
@@ -96,7 +90,7 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_plvp4")
 
 [node name="Left2" type="MeshInstance3D" parent="s1"]
-transform = Transform3D(-4.55387e-07, -1.0024, -5.96046e-08, 10.418, -4.38163e-08, 0, 0, 7.45058e-09, 20.4522, 8.33791, 5.14386, -19.5926)
+transform = Transform3D(-4.55387e-07, -1.0024, -1.12378e-07, 10.418, -4.38163e-08, 0, 0, 7.45058e-09, 38.5603, 8.33791, 5.14386, -10.2532)
 material_override = SubResource("StandardMaterial3D_aiim8")
 mesh = SubResource("BoxMesh_vlcev")
 skeleton = NodePath("../..")
@@ -107,7 +101,7 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_plvp4")
 
 [node name="Right" type="MeshInstance3D" parent="s1"]
-transform = Transform3D(2.4869e-14, 4.28408e-08, -39.697, 10.6523, -4.43685e-08, 0, -4.65627e-07, -1.01503, -1.60933e-06, 11.6361, 5.07111, 8.55667)
+transform = Transform3D(2.4869e-14, 4.28408e-08, -39.697, 10.6523, -4.43685e-08, 0, -4.65627e-07, -1.01503, -1.60933e-06, -11.5053, 5.07111, 8.55667)
 material_override = SubResource("StandardMaterial3D_aiim8")
 mesh = SubResource("BoxMesh_vlcev")
 skeleton = NodePath("../..")
@@ -118,7 +112,7 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_fh2ex")
 
 [node name="Right2" type="MeshInstance3D" parent="s1"]
-transform = Transform3D(2.75335e-14, 4.65661e-08, -22.8111, 10.6523, -4.40764e-08, 0, -4.65627e-07, -1.00835, -8.9407e-07, 20.1464, 5.07111, -9.04873)
+transform = Transform3D(2.75335e-14, 4.65661e-08, -22.8111, 10.6523, -4.40764e-08, 0, -4.65627e-07, -1.00835, -8.9407e-07, -19.674, 5.07111, -9.04873)
 material_override = SubResource("StandardMaterial3D_aiim8")
 mesh = SubResource("BoxMesh_vlcev")
 skeleton = NodePath("../..")
@@ -128,17 +122,9 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="s1/Right2/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_fh2ex")
 
-[node name="connection1" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.702445, 0, -27.6783)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="connection1"]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
-visible = false
-material_override = SubResource("StandardMaterial3D_vk4m7")
-mesh = SubResource("BoxMesh_tccw2")
-
 [node name="connection2" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.4433, -0.0727663, 0.873409)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.5888, -0.0727663, 0.873409)
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="connection2"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -161,7 +147,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -30, 0
 [node name="SegmentEntry" type="Area3D" parent="."]
 
 [node name="E" type="CollisionShape3D" parent="SegmentEntry"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 31.2013, 4.95313, -0.360403)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -29.4514, 4.95313, -0.360403)
 shape = SubResource("BoxShape3D_1hl78")
 
 [node name="S" type="CollisionShape3D" parent="SegmentEntry"]

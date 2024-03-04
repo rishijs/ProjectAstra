@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://j5bi0t7faf7i"]
+[gd_scene load_steps=11 format=3 uid="uid://j5bi0t7faf7i"]
 
 [ext_resource type="Script" path="res://scenes/segments/combat_arenas/combat_arena.gd" id="1_rvjsu"]
 [ext_resource type="PackedScene" uid="uid://b402k2bhdes07" path="res://scenes/enemies/spawner.tscn" id="2_e4jgt"]
+[ext_resource type="FontFile" uid="uid://dex6qd5t25rm3" path="res://themes/fonts/Kode_Mono/KodeMono-VariableFont_wght.ttf" id="3_h6c40"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6cs6w"]
 albedo_color = Color(1, 0, 0, 1)
@@ -14,14 +15,21 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 [sub_resource type="BoxShape3D" id="BoxShape3D_wl1ib"]
 size = Vector3(29.475, 33.3887, 3.86438)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_db3jd"]
+size = Vector3(30.1664, 28.2791, 2.43411)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d0jtd"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_yx3tu"]
 size = Vector3(23.1252, 27.7267, 53.7748)
 
-[node name="CombatArena" type="Node3D" node_paths=PackedStringArray("connection_start", "connection_end", "door", "spawners", "up", "left", "down", "right")]
+[node name="CombatArena" type="Node3D" node_paths=PackedStringArray("connection_end", "doorE", "doorC", "doorL", "doorR", "spawners", "up", "left", "down", "right")]
 script = ExtResource("1_rvjsu")
-connection_start = NodePath("connection1")
 connection_end = [NodePath("connection2"), NodePath("connection3"), NodePath("connection4")]
-door = NodePath("SegmentDoor")
+doorE = NodePath("DoorE")
+doorC = NodePath("DoorC")
+doorL = NodePath("DoorL")
+doorR = NodePath("DoorR")
 spawners = [NodePath("Spawner"), NodePath("Spawner2")]
 up = NodePath("UpLoc")
 left = NodePath("LeftLoc")
@@ -141,9 +149,6 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="enlarge/Side7/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_a6c52")
 
-[node name="connection1" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.33047, 0, 56.6955)
-
 [node name="connection2" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -56.838)
 
@@ -157,7 +162,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.6177, 0, 0.626812)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 57.9872)
 
 [node name="D" type="CollisionShape3D" parent="SegmentEntry"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.29916, 12.3409, -0.27655)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.29916, 12.3409, -2.52106)
 shape = SubResource("BoxShape3D_wl1ib")
 
 [node name="U" type="CollisionShape3D" parent="SegmentEntry"]
@@ -258,19 +263,104 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 
 [node name="RightLoc" type="Marker3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 60, 0, 0)
 
-[node name="SegmentDoor" type="Area3D" parent="."]
+[node name="DoorE" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 59.3929)
+visible = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SegmentDoor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.3133, 13.3633, -0.434509)
-shape = SubResource("BoxShape3D_yx3tu")
+[node name="EntryDoorCol" type="CollisionShape3D" parent="DoorE"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.87241, 13.6396, -0.355625)
+shape = SubResource("BoxShape3D_db3jd")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="SegmentDoor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.4697, 13.3633, 0.203732)
-shape = SubResource("BoxShape3D_yx3tu")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DoorE"]
+transform = Transform3D(29.2032, 0, 0, 0, 29.9668, 0, 0, 0, 1, -2.37957, 12.4889, 0)
+mesh = SubResource("BoxMesh_d0jtd")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="SegmentDoor"]
+[node name="DoorC" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -57.7437)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorC"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.87241, 13.6396, 0.0493889)
+shape = SubResource("BoxShape3D_db3jd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DoorC"]
+transform = Transform3D(29.2032, 0, 0, 0, 29.9668, 0, 0, 0, 1, -2.37957, 12.4889, 0)
+mesh = SubResource("BoxMesh_d0jtd")
+
+[node name="SegmentDoorC" type="Area3D" parent="DoorC"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 57.7437)
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="DoorC/SegmentDoorC"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.3492, 13.3633, -46.0687)
 shape = SubResource("BoxShape3D_yx3tu")
 
+[node name="CL" type="Label3D" parent="DoorC/SegmentDoorC"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.86576, -53.6836)
+visible = false
+modulate = Color(1, 0.482353, 0.501961, 1)
+text = "KEEP DIFFICULTY"
+font = ExtResource("3_h6c40")
+font_size = 500
+
+[node name="DoorL" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -59.9173, 0, -3.15121)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorL"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.87241, 13.6396, 0.0493889)
+shape = SubResource("BoxShape3D_db3jd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DoorL"]
+transform = Transform3D(29.2032, 0, 0, 0, 29.9668, 0, 0, 0, 1, -2.37957, 12.4889, 0)
+mesh = SubResource("BoxMesh_d0jtd")
+
+[node name="SegmentDoorL" type="Area3D" parent="DoorL"]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.15121, 0, 59.9173)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorL/SegmentDoorL"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.3133, 13.3633, -0.434509)
+shape = SubResource("BoxShape3D_yx3tu")
+
+[node name="LL" type="Label3D" parent="DoorL/SegmentDoorL"]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -53.6933, 1.80772, 0)
+visible = false
+modulate = Color(1, 0.482353, 0.501961, 1)
+text = "DIFFICULTY REDUCTION"
+font = ExtResource("3_h6c40")
+font_size = 500
+
+[node name="DoorR" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 59.0992, 0, -3.15121)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorR"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.87241, 13.6396, 0.0493889)
+shape = SubResource("BoxShape3D_db3jd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DoorR"]
+transform = Transform3D(29.2032, 0, 0, 0, 29.9668, 0, 0, 0, 1, -2.37957, 12.4889, 0)
+mesh = SubResource("BoxMesh_d0jtd")
+
+[node name="SegmentDoorR" type="Area3D" parent="DoorR"]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.1512, 0, -59.0992)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="DoorR/SegmentDoorR"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.4697, 13.3633, 0.203732)
+shape = SubResource("BoxShape3D_yx3tu")
+
+[node name="RL" type="Label3D" parent="DoorR/SegmentDoorR"]
+unique_name_in_owner = true
+transform = Transform3D(-0.0420674, 0, -0.999115, 0, 1, 0, 0.999115, 0, -0.0420674, 55.9564, 1.58905, 0)
+visible = false
+modulate = Color(1, 0.482353, 0.501961, 1)
+text = "DIFFICULTY INCREASE"
+font = ExtResource("3_h6c40")
+font_size = 500
+
 [connection signal="body_entered" from="SegmentEntry" to="." method="_on_segment_entry_body_entered"]
-[connection signal="body_entered" from="SegmentDoor" to="." method="_on_segment_door_body_entered"]
+[connection signal="body_entered" from="DoorC/SegmentDoorC" to="." method="_on_segment_door_c_body_entered"]
+[connection signal="body_entered" from="DoorL/SegmentDoorL" to="." method="_on_segment_door_l_body_entered"]
+[connection signal="body_entered" from="DoorR/SegmentDoorR" to="." method="_on_segment_door_r_body_entered"]

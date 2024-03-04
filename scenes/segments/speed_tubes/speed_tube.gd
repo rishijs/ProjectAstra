@@ -1,7 +1,6 @@
 extends "res://scenes/segments/segment.gd"
 
 @export_category("connections")
-@export var connection_start:Marker3D
 @export var connection_end:Array[Marker3D]
 
 func _ready():

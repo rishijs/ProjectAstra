@@ -28,6 +28,10 @@ func on_hit(damage):
 		die()
 	
 func die():
+	if is_instance_valid(player_ref.arena_ref):
+		if player_ref.arena_ref.defeats_required > 0:
+			player_ref.arena_ref.defeats_required -= 1
+	player_ref.enemies_defeated += 1
 	call_deferred("queue_free")
 
 func _physics_process(_delta):
