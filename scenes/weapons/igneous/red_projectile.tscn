@@ -3,8 +3,7 @@
 [ext_resource type="Script" path="res://scenes/weapons/igneous/red_projectile.gd" id="1_qf76e"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k0v0k"]
-albedo_color = Color(0, 0, 0, 1)
-emission_enabled = true
+albedo_color = Color(0.513726, 0, 0, 1)
 emission = Color(0.266667, 0.0588235, 0, 1)
 emission_energy_multiplier = 5.0
 

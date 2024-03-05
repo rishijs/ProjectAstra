@@ -33,7 +33,8 @@ func _process(delta):
 		weapon_inactive()
 
 func weapon_load():
-	weapon_state= States.READY
+	if weapon_state == States.INACTIVE:
+		weapon_state= States.READY
 
 func weapon_inactive():
 	weapon_state= States.INACTIVE
@@ -50,10 +51,10 @@ func muzzle_flash():
 	pass
 
 func camera_shake():
-	#offset.y = camera_shake_noise.get_noise_3d(camera_shake_noise.seed*2,camera_shake_time_left,randf()) 
-	#offset.z = camera_shake_noise.get_noise_3d(camera_shake_noise.seed*3,camera_shake_time_left,randf())
-	#player_ref.camera_first_person.rotation.y += offset.y * camera_shake_amp
-	pass
+	offset.y = camera_shake_noise.get_noise_3d(camera_shake_noise.seed*2,camera_shake_time_left,randf()) 
+	offset.z = camera_shake_noise.get_noise_3d(camera_shake_noise.seed*3,randf(),randf())
+	player_ref.camera_first_person.rotation.y = clampf(offset.y,0,camera_shake_amp)
+	player_ref.camera_first_person.rotation.z = clampf(offset.z,0,camera_shake_amp)
 	
 func add_recoil(time,angle):
 	player_ref.weapons[player_ref.active_weapon_index].rotate_z(angle)

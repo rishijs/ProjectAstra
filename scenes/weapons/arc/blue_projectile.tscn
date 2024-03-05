@@ -2,11 +2,8 @@
 
 [ext_resource type="Script" path="res://scenes/weapons/arc/blue_projectile.gd" id="1_mi5ad"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fd1vv"]
-albedo_color = Color(0, 0, 0, 1)
-emission_enabled = true
-emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 5.0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ub8dp"]
+albedo_color = Color(0.129412, 0.545098, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_5asj2"]
 
@@ -16,12 +13,12 @@ emission_energy_multiplier = 5.0
 script = ExtResource("1_mi5ad")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_fd1vv")
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ub8dp")
 mesh = SubResource("BoxMesh_5asj2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 shape = SubResource("BoxShape3D_vffgn")
 
 [node name="SelfDestruct" type="Timer" parent="."]

@@ -49,3 +49,14 @@ func sdestruct():
 	
 func _physics_process(delta):
 	global_position += velocity * delta
+
+func regular_hit(body):
+	if body.is_in_group("Enemy"):
+		damage_enemy(body,false)
+	if body != player_ref:
+		sdestruct()
+
+func headshot_hit(area):
+	if area.is_in_group("HeadshotCol"):
+		damage_enemy(area.owner,true)
+		headshot = true

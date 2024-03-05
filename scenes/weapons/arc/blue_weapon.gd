@@ -13,7 +13,9 @@ func fire():
 
 func shooting_pattern():
 	if is_instance_valid(target_loc):
-		fire_once()
+		#12 rounds per shot
+		for i in range(12):
+			fire_once()
 		prepare_next_shot()
 
 func prepare_next_shot():
