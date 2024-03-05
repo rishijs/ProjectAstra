@@ -1,6 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0f32l103vmht"]
+[gd_scene load_steps=5 format=3 uid="uid://d0f32l103vmht"]
 
 [ext_resource type="Script" path="res://scenes/weapons/chrono/white_projectile.gd" id="1_xk8hy"]
 
-[node name="ChronoProjectile" type="Node3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ng8f2"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 5.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_nxfb6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l2ixp"]
+
+[node name="ChronoProjectile" type="Area3D"]
 script = ExtResource("1_xk8hy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ng8f2")
+mesh = SubResource("BoxMesh_nxfb6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+shape = SubResource("BoxShape3D_l2ixp")
+
+[node name="SelfDestruct" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="SelfDestruct" to="." method="_on_self_destruct_timeout"]

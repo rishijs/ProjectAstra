@@ -1,6 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmg4pdd2cxg0q"]
+[gd_scene load_steps=5 format=3 uid="uid://dmg4pdd2cxg0q"]
 
 [ext_resource type="Script" path="res://scenes/weapons/arc/blue_projectile.gd" id="1_mi5ad"]
 
-[node name="ArcProjectile" type="Node3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fd1vv"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 5.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_5asj2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vffgn"]
+
+[node name="ArcProjectile" type="Area3D"]
 script = ExtResource("1_mi5ad")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_fd1vv")
+mesh = SubResource("BoxMesh_5asj2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+shape = SubResource("BoxShape3D_vffgn")
+
+[node name="SelfDestruct" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="SelfDestruct" to="." method="_on_self_destruct_timeout"]

@@ -3,7 +3,7 @@ extends "res://scenes/weapons/weapon.gd"
 func _ready():
 	super()
 	projectile = preload("res://scenes/weapons/default/default_projectile.tscn")
-	initialize_weapon(Data.all_data[Data.wcls].keys()[Data.chromas.GREY])
+	initialize_weapon(Data.all_data[Data.wcls].keys()[Data.chromas.IGNEOUS])
 
 func _process(delta):
 	super(delta)
