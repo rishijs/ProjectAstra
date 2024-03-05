@@ -21,5 +21,5 @@ func prepare_next_shot():
 	weapon_state = States.PREPARING
 	await get_tree().create_timer(weapon_stats[Data.wattr.FIRE_RATE],false).timeout
 	weapon_state = States.READY
-	if Input.is_action_pressed("primary_fire"):
+	if Input.is_action_pressed("primary_fire") and player_ref.active_weapon_index == Data.chromas.NATURA:
 		shooting_pattern()

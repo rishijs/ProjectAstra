@@ -3,12 +3,13 @@
 [ext_resource type="Script" path="res://interface/hud/player_interface.gd" id="1_uecec"]
 [ext_resource type="Theme" uid="uid://bpeg6inp31l8g" path="res://themes/deftheme.tres" id="2_5top5"]
 
-[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("fps_text", "time_text", "segment_time_text", "segment_id_text", "magazine_text", "health_text", "movement_text") groups=["Interface"]]
+[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("fps_text", "time_text", "segment_time_text", "objective_text", "segment_id_text", "magazine_text", "health_text", "movement_text") groups=["Interface"]]
 script = ExtResource("1_uecec")
 fps_text = NodePath("game_info/VBoxContainer/fps")
 time_text = NodePath("game_info/VBoxContainer/time")
-segment_time_text = NodePath("segment_info/VBoxContainer/segment_time_left")
-segment_id_text = NodePath("segment_info/VBoxContainer/segment_id")
+segment_time_text = NodePath("objective_info/VBoxContainer/segment_time_left")
+objective_text = NodePath("objective_info/VBoxContainer/defeats_required")
+segment_id_text = NodePath("objective_info/VBoxContainer/segment_id")
 magazine_text = NodePath("player_info/VBoxContainer/magazine")
 health_text = NodePath("player_info/VBoxContainer/health")
 movement_text = NodePath("player_info/VBoxContainer/movement")
@@ -41,7 +42,7 @@ theme_override_font_sizes/font_size = 30
 text = "00:00"
 horizontal_alignment = 2
 
-[node name="segment_info" type="MarginContainer" parent="."]
+[node name="objective_info" type="MarginContainer" parent="."]
 anchors_preset = -1
 anchor_left = 0.037
 anchor_top = 0.022
@@ -52,16 +53,23 @@ offset_top = 8.24
 offset_right = 0.319977
 offset_bottom = -8.52
 
-[node name="VBoxContainer" type="VBoxContainer" parent="segment_info"]
+[node name="VBoxContainer" type="VBoxContainer" parent="objective_info"]
 layout_mode = 2
 
-[node name="segment_time_left" type="Label" parent="segment_info/VBoxContainer"]
+[node name="segment_time_left" type="Label" parent="objective_info/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_5top5")
 theme_override_font_sizes/font_size = 30
 text = "0 SECONDS"
 
-[node name="segment_id" type="Label" parent="segment_info/VBoxContainer"]
+[node name="defeats_required" type="Label" parent="objective_info/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_5top5")
+theme_override_font_sizes/font_size = 30
+text = "0 ELIMS TILL CHROMA SWAP"
+
+[node name="segment_id" type="Label" parent="objective_info/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("2_5top5")
 theme_override_font_sizes/font_size = 30
@@ -124,12 +132,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -7.0
-offset_top = -7.0
-offset_right = 7.0
-offset_bottom = 7.0
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.678431, 0, 0, 1)
 
 [connection signal="timeout" from="Update" to="." method="_on_update_timeout"]

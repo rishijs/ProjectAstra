@@ -21,7 +21,12 @@ var max_health = 100
 var health = 100
 var enemies_defeated = 0
 var arena_ref
-var active_weapon_index = 1
+var active_weapon_index = 0
+
+var base_defeats_till_chroma_swap = 2
+var defeats_till_chroma_swap = 2
+var num_swaps = 0
+var objective_scaling = 1
 
 var aberration_close = false
 var aberration_warning = false
@@ -29,9 +34,10 @@ var aberration_warning = false
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 signal hit
+signal enemy_defeated
 
 func _ready():
-	pass
+	swap_weapons(active_weapon_index)
 
 func _input(event):
 	if Input.is_action_just_pressed("debug_swap"):
@@ -104,3 +110,20 @@ func _on_hit(damage):
 	if health == 0:
 		SceneLoader.load_scene("res://interface/menus/main_menu.tscn", true)
 		SceneLoader.change_scene_to_loading_screen()
+
+func get_next_weapon():
+	active_weapon_index += 1
+	if active_weapon_index == weapons.size():
+		active_weapon_index = 0
+	num_swaps += 1
+	defeats_till_chroma_swap = base_defeats_till_chroma_swap+num_swaps*objective_scaling
+			
+func _on_enemy_defeated():
+	if is_instance_valid(arena_ref):
+		if arena_ref.defeats_required > 0:
+			arena_ref.defeats_required -= 1
+	enemies_defeated += 1
+	defeats_till_chroma_swap = clampi(defeats_till_chroma_swap - 1,0,base_defeats_till_chroma_swap+num_swaps*objective_scaling)
+	if defeats_till_chroma_swap == 0:
+		get_next_weapon()
+		swap_weapons(active_weapon_index)

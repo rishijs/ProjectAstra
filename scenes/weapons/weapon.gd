@@ -47,6 +47,7 @@ func initialize_weapon(weapon):
 	for attr in range(len(Data.all_data[Data.wcls][weapon].keys())):
 		weapon_stats.append(Data.get_attr(Data.wcls,weapon,attr))
 	initialized = true
+	global_rotation = player_ref.weapon_socket.global_rotation
 
 func muzzle_flash():
 	pass
@@ -65,7 +66,8 @@ func add_recoil(time,angle):
 	camera_shake_time_left = time
 	camera_shake()
 	await get_tree().create_timer(time,true).timeout
-	player_ref.weapons[player_ref.active_weapon_index].rotate_z(-angle)
+	rotate_z(-angle)
+	global_rotation = player_ref.weapon_socket.global_rotation
 		
 func fire():
 	if is_instance_valid(projectiles_ref) and is_instance_valid(muzzle):

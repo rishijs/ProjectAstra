@@ -7,6 +7,7 @@ extends CanvasLayer
 @export var fps_text:Label
 @export var time_text:Label
 @export var segment_time_text:Label
+@export var objective_text:Label
 @export var segment_id_text:Label
 @export var magazine_text:Label
 @export var health_text:Label
@@ -26,13 +27,14 @@ func _on_update_timeout():
 	
 	var segment_time_left = segment_manager_ref.segments[segment_manager_ref.player_segment_index].timer
 	if segment_manager_ref.player_segment_index == -1:
-		segment_time_text.text = "ENTER THE SIMULATION"
+		segment_time_text.hide()
 	elif segment_time_left >= 99:
-		segment_time_text.text = "100+ SECONDS TILL SEGMENT DISINTEGRATION"
+		segment_time_text.hide()
 	elif segment_time_left != null:
 		segment_time_text.text = "%d SECONDS TILL SEGMENT DISINTEGRATION" % segment_time_left
 	else:
 		segment_time_text.text = "N/A"
 	segment_id_text.text = "ID: %d" % segment_manager_ref.player_segment_index
+	objective_text.text = "%d ELIM(S) TILL CHROMA SWAP" % player_ref.defeats_till_chroma_swap
 	
 	health_text.text = "%d Health" % player_ref.health

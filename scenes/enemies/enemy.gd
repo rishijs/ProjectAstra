@@ -8,6 +8,8 @@ var health
 var speed
 var damage
 
+var pending_die
+
 func _ready():
 	pass
 
@@ -18,14 +20,12 @@ func _process(_delta):
 func on_hit(incoming_damage):
 	health -= incoming_damage
 	health = clampf(health,0,max_health)
-	if health == 0:
+	if health == 0 and not pending_die:
+		pending_die = true
 		die()
 	
 func die():
-	if is_instance_valid(player_ref.arena_ref):
-		if player_ref.arena_ref.defeats_required > 0:
-			player_ref.arena_ref.defeats_required -= 1
-	player_ref.enemies_defeated += 1
+	player_ref.enemy_defeated.emit()
 	call_deferred("queue_free")
 
 func _physics_process(_delta):
