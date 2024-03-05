@@ -1,9 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://c303uuqhd3v6p"]
+[gd_scene load_steps=18 format=3 uid="uid://c303uuqhd3v6p"]
 
 [ext_resource type="PackedScene" uid="uid://dmekjtv82mx01" path="res://scenes/player/player.tscn" id="1_bkx3k"]
 [ext_resource type="PackedScene" uid="uid://ct3ob0tj0fjyj" path="res://interface/hud/player_interface.tscn" id="2_cbhra"]
 [ext_resource type="PackedScene" uid="uid://b2o2aff6fhv6p" path="res://scenes/managers/game_manager.tscn" id="2_gl78g"]
-[ext_resource type="PackedScene" uid="uid://famrshdxx5m3" path="res://scenes/managers/projectiles.tscn" id="2_r3smb"]
 [ext_resource type="PackedScene" uid="uid://cfud5pl460nck" path="res://scenes/managers/spawn_manager.tscn" id="3_qdfq4"]
 [ext_resource type="PackedScene" uid="uid://vop33tckuf4s" path="res://scenes/segments/speed_tubes/straight_speed_tube.tscn" id="6_roblo"]
 [ext_resource type="PackedScene" uid="uid://bem6hb2552we7" path="res://scenes/enemies/still/still_enemy.tscn" id="7_qwgas"]
@@ -41,8 +40,6 @@ transform = Transform3D(1, 0, 0, 0, -0.939693, 0.34202, 0, -0.34202, -0.939693, 
 
 [node name="Player" parent="." instance=ExtResource("1_bkx3k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.911258, 0)
-
-[node name="Projectiles" parent="." instance=ExtResource("2_r3smb")]
 
 [node name="GameManager" parent="." instance=ExtResource("2_gl78g")]
 

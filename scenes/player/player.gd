@@ -14,9 +14,10 @@ var speed = 10.0
 var base_speed = 10.0
 var jump_velocity = 4.5
 var movement_boost = 4
-var inertia_slow = 0.1
 var movement_ability = false
 
+var max_health = 100
+var health = 100
 var enemies_defeated = 0
 var arena_ref
 
@@ -24,6 +25,8 @@ var aberration_close = false
 var aberration_warning = false
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+
+signal hit
 
 func _ready():
 	pass
@@ -71,3 +74,10 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, speed)
 
 	move_and_slide()
+
+
+func _on_hit(damage):
+	health = clampf(health-damage,0,max_health)
+	if health == 0:
+		SceneLoader.load_scene("res://interface/menus/main_menu.tscn", true)
+		SceneLoader.change_scene_to_loading_screen()

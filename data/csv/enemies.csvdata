@@ -1,3 +1,4 @@
-enemy,health,damage,id
-default,100,10,0
-still,200,0,1
+enemy,health,damage,speed,id
+default,100,10,5,0
+still,200,0,0,1
+watcher,500,100,2,2

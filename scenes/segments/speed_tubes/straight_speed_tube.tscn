@@ -29,13 +29,14 @@ albedo_color = Color(0, 1, 0, 1)
 albedo_color = Color(1, 0.054902, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ir1hn"]
-size = Vector3(16.364, 10.9063, 1)
+size = Vector3(16.364, 10.9063, 1.41699)
 
-[node name="StraightSpeedTube" type="Node3D" node_paths=PackedStringArray("connection_start", "connection_end", "spawners", "up", "left", "down", "right")]
+[node name="StraightSpeedTube" type="Node3D" node_paths=PackedStringArray("connection_end", "spawners", "timer_node", "up", "left", "down", "right")]
 script = ExtResource("1_fqrc5")
-connection_start = NodePath("connection1")
 connection_end = [NodePath("connection2")]
 spawners = [NodePath("Spawner")]
+timer_node = NodePath("LifetimeS")
+time_multiplier = 1.0
 up = NodePath("UpLoc")
 left = NodePath("LeftLoc")
 down = NodePath("DownLoc")
@@ -105,14 +106,14 @@ visible = false
 material_override = SubResource("StandardMaterial3D_ee2l2")
 mesh = SubResource("BoxMesh_psmur")
 
-[node name="SegmentEntry" type="Area3D" parent="."]
+[node name="SegmentEntryS" type="Area3D" parent="."]
 
-[node name="D" type="CollisionShape3D" parent="SegmentEntry"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.118042, 4.95313, 18.7284)
+[node name="D" type="CollisionShape3D" parent="SegmentEntryS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.118042, 4.95313, 14.8232)
 shape = SubResource("BoxShape3D_ir1hn")
 
-[node name="U" type="CollisionShape3D" parent="SegmentEntry"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.118042, 4.95313, -18.676)
+[node name="U" type="CollisionShape3D" parent="SegmentEntryS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.118042, 4.95313, -15.311)
 shape = SubResource("BoxShape3D_ir1hn")
 
 [node name="Spawner" parent="." node_paths=PackedStringArray("spawn_points") instance=ExtResource("2_cv17i")]
@@ -171,4 +172,8 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 
 [node name="RightLoc" type="Marker3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 19, 0, 0)
 
-[connection signal="body_entered" from="SegmentEntry" to="." method="_on_segment_entry_body_entered"]
+[node name="LifetimeS" type="Timer" parent="."]
+
+[connection signal="body_entered" from="SegmentEntryS" to="." method="_on_segment_entry_body_entered"]
+[connection signal="body_entered" from="SegmentEntryS" to="." method="_on_segment_entry_s_body_entered"]
+[connection signal="timeout" from="LifetimeS" to="." method="_on_lifetime_s_timeout"]

@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://bfpdqsiywdxk2"]
 
 [ext_resource type="PackedScene" uid="uid://dmekjtv82mx01" path="res://scenes/player/player.tscn" id="1_d3ahk"]
+[ext_resource type="PackedScene" uid="uid://famrshdxx5m3" path="res://scenes/managers/projectiles.tscn" id="2_re3rw"]
 [ext_resource type="PackedScene" uid="uid://b2o2aff6fhv6p" path="res://scenes/managers/game_manager.tscn" id="2_xhhs8"]
-[ext_resource type="PackedScene" uid="uid://b4knqnk5uufoi" path="res://scenes/managers/projectile_manager.tscn" id="3_grs1v"]
 [ext_resource type="PackedScene" uid="uid://d10vtkts7c47q" path="res://scenes/managers/segment_manager.tscn" id="4_1gok0"]
 [ext_resource type="PackedScene" uid="uid://cfud5pl460nck" path="res://scenes/managers/spawn_manager.tscn" id="5_or2hb"]
 [ext_resource type="PackedScene" uid="uid://bmfq1jcyg084c" path="res://scenes/segments/plane.tscn" id="6_18yso"]
@@ -29,9 +29,9 @@ transform = Transform3D(1, 0, 0, 0, -0.939693, 0.34202, 0, -0.34202, -0.939693, 
 [node name="Player" parent="." instance=ExtResource("1_d3ahk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.70323, -2.2402)
 
-[node name="GameManager" parent="." instance=ExtResource("2_xhhs8")]
+[node name="Projectiles" parent="." instance=ExtResource("2_re3rw")]
 
-[node name="ProjectileManager" parent="." instance=ExtResource("3_grs1v")]
+[node name="GameManager" parent="." instance=ExtResource("2_xhhs8")]
 
 [node name="SegmentManager" parent="." node_paths=PackedStringArray("start") instance=ExtResource("4_1gok0")]
 start = NodePath("Start")

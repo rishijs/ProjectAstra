@@ -2,27 +2,21 @@ extends CharacterBody3D
 
 @onready var player_ref = get_tree().get_first_node_in_group("Player")
 
-enum enemy_type{DEFAULT,STILL}
-@export var type : enemy_type
-
 var threat_detected = false
-var max_health = 100
-var health = 100
-var speed = 0
+var max_health
+var health
+var speed
+var damage
 
 func _ready():
-	match type:
-		enemy_type.DEFAULT:
-			speed = 5
-		enemy_type.STILL:
-			speed = 0
+	pass
 
 
 func _process(_delta):
 	pass
 
-func on_hit(damage):
-	health -= damage
+func on_hit(incoming_damage):
+	health -= incoming_damage
 	health = clampf(health,0,max_health)
 	if health == 0:
 		die()
@@ -40,6 +34,8 @@ func _physics_process(_delta):
 		velocity = global_position.direction_to(player_ref.global_position) * speed
 		move_and_slide()
 
+func hit_player():
+	player_ref.hit.emit(damage)
 
 func _on_detection_body_entered(body):
 	if body == player_ref:

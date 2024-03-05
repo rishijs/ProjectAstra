@@ -24,9 +24,11 @@ albedo_color = Color(1, 0.054902, 0, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_1hl78"]
 size = Vector3(16.364, 10.9063, 1)
 
-[node name="CurvedSpeedTube" type="Node3D" node_paths=PackedStringArray("connection_end", "up", "left", "down", "right")]
+[node name="CurvedSpeedTube" type="Node3D" node_paths=PackedStringArray("connection_end", "timer_node", "up", "left", "down", "right")]
 script = ExtResource("1_c1m81")
 connection_end = [NodePath("connection2")]
+timer_node = NodePath("LifetimeCL")
+time_multiplier = 1.0
 up = NodePath("Right")
 left = NodePath("Up")
 down = NodePath("Left")
@@ -144,14 +146,18 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 
 [node name="Right" type="Marker3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -30, 0, 0)
 
-[node name="SegmentEntry" type="Area3D" parent="."]
+[node name="SegmentEntryCL" type="Area3D" parent="."]
 
-[node name="E" type="CollisionShape3D" parent="SegmentEntry"]
+[node name="E" type="CollisionShape3D" parent="SegmentEntryCL"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -29.4514, 4.95313, -0.360403)
 shape = SubResource("BoxShape3D_1hl78")
 
-[node name="S" type="CollisionShape3D" parent="SegmentEntry"]
+[node name="S" type="CollisionShape3D" parent="SegmentEntryCL"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.118042, 4.95313, -29.1433)
 shape = SubResource("BoxShape3D_1hl78")
 
-[connection signal="body_entered" from="SegmentEntry" to="." method="_on_segment_entry_body_entered"]
+[node name="LifetimeCL" type="Timer" parent="."]
+
+[connection signal="body_entered" from="SegmentEntryCL" to="." method="_on_segment_entry_body_entered"]
+[connection signal="body_entered" from="SegmentEntryCL" to="." method="_on_segment_entry_cl_body_entered"]
+[connection signal="timeout" from="LifetimeCL" to="." method="_on_lifetime_cl_timeout"]

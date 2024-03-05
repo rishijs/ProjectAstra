@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwewt4iay0fxe"]
+
+[ext_resource type="Script" path="res://scenes/weapons/igneous/red_weapon.gd" id="1_ivayt"]
+
+[node name="Red_weapon" type="Node3D"]
+script = ExtResource("1_ivayt")

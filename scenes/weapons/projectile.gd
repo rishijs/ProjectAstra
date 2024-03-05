@@ -17,7 +17,7 @@ func apply_jitter():
 	self.transform = self.transform.rotated_local(Vector3.RIGHT, randf_range(-weapon_stats[Data.wattr.JITTER], weapon_stats[Data.wattr.JITTER]))
 	
 func aim_shot():
-	var max_inaccuracy =  weapon_stats[Data.wattr.MAX_SPREAD] * (100-weapon_stats[Data.wattr.ACCURACY])/100.0
+	var max_inaccuracy = weapon_stats[Data.wattr.MAX_SPREAD] * (100-weapon_stats[Data.wattr.ACCURACY])/100.0
 	var offsetx = randf_range(-max_inaccuracy,max_inaccuracy)
 	var offsety = randf_range(-max_inaccuracy,max_inaccuracy)
 	var offsetz = randf_range(-max_inaccuracy,max_inaccuracy)

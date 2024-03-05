@@ -17,8 +17,10 @@ size = Vector3(16.796, 28.257, 2.39868)
 [sub_resource type="BoxShape3D" id="BoxShape3D_mok4n"]
 size = Vector3(64.0172, 15.0538, 48.5188)
 
-[node name="RewardRoom" type="Node3D" node_paths=PackedStringArray("up", "left", "down", "right")]
+[node name="RewardRoom" type="Node3D" node_paths=PackedStringArray("timer_node", "up", "left", "down", "right")]
 script = ExtResource("1_33wov")
+timer_node = NodePath("Lifetime")
+time_multiplier = 10.0
 up = NodePath("UpLoc")
 left = NodePath("LeftLoc")
 down = NodePath("DownLoc")
@@ -155,5 +157,8 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 
 [node name="RightLoc" type="Marker3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 40, 0, 0)
 
+[node name="Lifetime" type="Timer" parent="."]
+
 [connection signal="body_entered" from="SegmentEntry" to="." method="_on_segment_entry_body_entered"]
 [connection signal="body_entered" from="Victory" to="." method="_on_victory_body_entered"]
+[connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]

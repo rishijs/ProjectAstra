@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0f32l103vmht"]
+
+[ext_resource type="Script" path="res://scenes/weapons/chrono/white_projectile.gd" id="1_xk8hy"]
+
+[node name="ChronoProjectile" type="Node3D"]
+script = ExtResource("1_xk8hy")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://b22xbt8obic88"]
 
-[ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_chum1"]
-[ext_resource type="PackedScene" uid="uid://c3jmdc5fokq36" path="res://scenes/enemies/healthbar.tscn" id="3_dwh8x"]
+[ext_resource type="Script" path="res://scenes/enemies/default/default_enemy.gd" id="1_6vpib"]
+[ext_resource type="PackedScene" uid="uid://c3jmdc5fokq36" path="res://scenes/enemies/healthbar.tscn" id="2_jt134"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tjxhr"]
 size = Vector3(1, 1.81497, 1)
@@ -21,7 +21,7 @@ size = Vector3(32.3009, 1, 32.8627)
 size = Vector3(79.8625, 1, 80.4659)
 
 [node name="DefaultEnemy" type="CharacterBody3D" groups=["Enemy"]]
-script = ExtResource("1_chum1")
+script = ExtResource("1_6vpib")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.102402, 0)
@@ -40,7 +40,7 @@ texture = SubResource("ViewportTexture_o2pfw")
 transparent_bg = true
 render_target_update_mode = 4
 
-[node name="Healthbar" parent="HealthSprite/Healthbar" node_paths=PackedStringArray("owner_ref") instance=ExtResource("3_dwh8x")]
+[node name="Healthbar" parent="HealthSprite/Healthbar" node_paths=PackedStringArray("owner_ref") instance=ExtResource("2_jt134")]
 owner_ref = NodePath("../../..")
 
 [node name="Detection" type="Area3D" parent="."]

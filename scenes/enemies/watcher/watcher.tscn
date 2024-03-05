@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cynm73wdgh227"]
 
-[ext_resource type="Script" path="res://scenes/enemies/aberration.gd" id="1_68pfi"]
+[ext_resource type="Script" path="res://scenes/enemies/watcher/watcher.gd" id="1_23yyb"]
 
 [sub_resource type="Gradient" id="Gradient_41ah6"]
 offsets = PackedFloat32Array(0, 0.967532, 1)
@@ -25,7 +25,7 @@ size = Vector3(34.4225, 33.4625, 3.96797)
 collision_layer = 16
 collision_mask = 16
 motion_mode = 1
-script = ExtResource("1_68pfi")
+script = ExtResource("1_23yyb")
 
 [node name="Sprite" type="Sprite3D" parent="."]
 transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)

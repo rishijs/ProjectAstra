@@ -6,12 +6,32 @@ extends "res://scenes/segments/segment.gd"
 func _ready():
 	super()
 
-
 func _process(delta):
 	super(delta)
 
-
-func _on_segment_entry_body_entered(body):
+func _on_segment_entry_cr_body_entered(body):
 	if body == player_ref:
-		segment_manager_ref.player_segment_index = id
-		segment_manager_ref.player_depth = depth
+		update_on_entry()	
+func _on_lifetime_cr_timeout():
+	on_timer_timeout()
+
+
+func _on_segment_entry_s_body_entered(body):
+	if body == player_ref:
+		update_on_entry()
+func _on_lifetime_s_timeout():
+	on_timer_timeout()
+
+
+func _on_segment_entry_cl_body_entered(body):
+	if body == player_ref:
+		update_on_entry()
+func _on_lifetime_cl_timeout():
+	on_timer_timeout()
+
+
+func _on_segment_entry_v_body_entered(body):
+	if body == player_ref:
+		update_on_entry()
+func _on_lifetime_v_timeout():
+	on_timer_timeout()

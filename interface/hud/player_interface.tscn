@@ -3,12 +3,17 @@
 [ext_resource type="Script" path="res://interface/hud/player_interface.gd" id="1_uecec"]
 [ext_resource type="Theme" uid="uid://bpeg6inp31l8g" path="res://themes/deftheme.tres" id="2_5top5"]
 
-[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("fps_text", "time_text") groups=["Interface"]]
+[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("fps_text", "time_text", "segment_time_text", "segment_id_text", "magazine_text", "health_text", "movement_text") groups=["Interface"]]
 script = ExtResource("1_uecec")
-fps_text = NodePath("info/VBoxContainer/fps")
-time_text = NodePath("info/VBoxContainer/time")
+fps_text = NodePath("game_info/VBoxContainer/fps")
+time_text = NodePath("game_info/VBoxContainer/time")
+segment_time_text = NodePath("segment_info/VBoxContainer/segment_time_left")
+segment_id_text = NodePath("segment_info/VBoxContainer/segment_id")
+magazine_text = NodePath("player_info/VBoxContainer/magazine")
+health_text = NodePath("player_info/VBoxContainer/health")
+movement_text = NodePath("player_info/VBoxContainer/movement")
 
-[node name="info" type="MarginContainer" parent="."]
+[node name="game_info" type="MarginContainer" parent="."]
 anchors_preset = -1
 anchor_left = 0.867
 anchor_top = 0.022
@@ -19,22 +24,81 @@ offset_top = 0.239998
 offset_right = 0.639893
 offset_bottom = -0.32
 
-[node name="VBoxContainer" type="VBoxContainer" parent="info"]
+[node name="VBoxContainer" type="VBoxContainer" parent="game_info"]
 layout_mode = 2
 
-[node name="fps" type="Label" parent="info/VBoxContainer"]
+[node name="fps" type="Label" parent="game_info/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_5top5")
 theme_override_font_sizes/font_size = 30
 text = "X FPS"
 horizontal_alignment = 2
 
-[node name="time" type="Label" parent="info/VBoxContainer"]
+[node name="time" type="Label" parent="game_info/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_5top5")
 theme_override_font_sizes/font_size = 30
 text = "00:00"
 horizontal_alignment = 2
+
+[node name="segment_info" type="MarginContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.037
+anchor_top = 0.022
+anchor_right = 0.154
+anchor_bottom = 0.119
+offset_left = 0.959999
+offset_top = 8.24
+offset_right = 0.319977
+offset_bottom = -8.52
+
+[node name="VBoxContainer" type="VBoxContainer" parent="segment_info"]
+layout_mode = 2
+
+[node name="segment_time_left" type="Label" parent="segment_info/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_5top5")
+theme_override_font_sizes/font_size = 30
+text = "0 SECONDS"
+
+[node name="segment_id" type="Label" parent="segment_info/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_5top5")
+theme_override_font_sizes/font_size = 30
+text = "ID: X"
+
+[node name="player_info" type="MarginContainer" parent="."]
+visible = false
+anchors_preset = -1
+anchor_left = 0.037
+anchor_top = 0.852
+anchor_right = 0.158
+anchor_bottom = 0.978
+offset_left = 0.959999
+offset_top = 7.83997
+offset_right = -7.36002
+offset_bottom = -40.24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="player_info"]
+layout_mode = 2
+
+[node name="magazine" type="Label" parent="player_info/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_5top5")
+theme_override_font_sizes/font_size = 30
+text = "MAGAZINE"
+
+[node name="health" type="Label" parent="player_info/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_5top5")
+theme_override_font_sizes/font_size = 30
+text = "HEALTH"
+
+[node name="movement" type="Label" parent="player_info/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_5top5")
+theme_override_font_sizes/font_size = 30
+text = "MOVEMENT"
 
 [node name="Update" type="Timer" parent="."]
 wait_time = 0.1

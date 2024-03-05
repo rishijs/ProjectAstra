@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bem6hb2552we7"]
 
-[ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_xq0ff"]
+[ext_resource type="Script" path="res://scenes/enemies/still/still_enemy.gd" id="1_aqlcs"]
 [ext_resource type="PackedScene" uid="uid://c3jmdc5fokq36" path="res://scenes/enemies/healthbar.tscn" id="2_jluc0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b7sn8"]
@@ -15,8 +15,7 @@ albedo_color = Color(1, 0, 0, 1)
 viewport_path = NodePath("HealthSprite/Healthbar")
 
 [node name="StillEnemy" type="CharacterBody3D" groups=["Enemy"]]
-script = ExtResource("1_xq0ff")
-type = 1
+script = ExtResource("1_aqlcs")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.126862, 0)

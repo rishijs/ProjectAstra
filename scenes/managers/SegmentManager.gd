@@ -12,13 +12,13 @@ extends Node3D
 @export var max_vertical_per_chunk = 2
 @export var initial_chunks = 2
 @export var max_chunks = 5
-@export var segment_deletion_threshold = 5
 @export var player_starting_depth = 10
 @export var depth_variance = 0.75
+@export var segment_lifetime = 20
 @export var ignore_limits = false
 
 @export var segments : Array[Node3D]
-var player_segment_index = 0
+var player_segment_index = -1
 var segment_index = -1
 var segment_rotation = 0
 var reward_room_spawned = false
@@ -26,6 +26,7 @@ var segments_this_chunk = 0
 var num_chunks = 0
 var player_depth = player_starting_depth
 var depth = player_starting_depth
+var segment_deletion_threshold = 5
 
 enum segment_types{PLANE,CURVED_TUBE,STRAIGHT_TUBE,VERTICAL_TUBE,ARENA,CHROMA,REWARD,MISC}
 enum curved_tube_variants{RIGHT,LEFT}
@@ -52,17 +53,32 @@ func _ready():
 			new_chunk.emit(segment_types.ARENA)
 
 func _process(_delta):
-	destroy_past_chunks()
+	#no longer needed
+	#destroy_past_segments()
+	pass
 
-func destroy_past_chunks():
+func destroy_past_segments():
 	for segment in segments:
 		if segment.id + segment_deletion_threshold < player_segment_index:
 			segments.erase(segment)
 			segment.destruct()
-			segment_index -= 1
-			player_segment_index -= 1
+			segment_index = clampi(segment_index - 1,0,segments.size())
+			player_segment_index = clampi(player_segment_index - 1,0,segments.size())
 			for i in range(segments.size()):
 				segments[i].id = i
+
+func destroy_behind_segment(at_index):
+	if segments.size() > at_index:
+		for i in range(at_index,0,-1):
+			var segment_to_delete = segments[i]
+			segments.erase(segment_to_delete)
+			segment_to_delete.destruct()
+			segment_index = clampi(segment_index - 1,0,segments.size())
+			player_segment_index = clampi(player_segment_index - 1,0,segments.size())
+			for j in range(segments.size()):
+				segments[j].id = j
+	else:
+		printerr("Segment index not found: ",at_index)
 	
 func get_current_segment_end_position(index) -> Vector3:
 	if segment_index == -1:
@@ -125,6 +141,10 @@ func create_segment(type:segment_types,end_index):
 	if curr_segment!=null:
 		curr_segment.type = type
 		curr_segment.id = segment_index+1
+		if num_chunks == 0:
+			curr_segment.timer = segment_lifetime * 99
+		else:
+			curr_segment.timer = segment_lifetime
 		add_child(curr_segment)
 		adjust_to_ideal_position(curr_segment,end_index,(segment_rotation/90)%4)
 		segments.append(curr_segment)

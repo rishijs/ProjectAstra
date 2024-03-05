@@ -1,18 +1,21 @@
-extends CharacterBody3D
+extends "res://scenes/enemies/enemy.gd"
 
-@onready var player_ref = get_tree().get_first_node_in_group("Player")
-@export var speed = 10
-@export var ramp_interval = 1
-@export var ramp = 0.5
+var ramp_interval = 1
+var ramp = 0.5
 
 func _ready():
 	%Ramp.wait_time = ramp_interval
+	max_health = 500
+	health = 500
+	speed = 2
 	
+	#watcher spawned warning extra logic required to decide if anomaly is spawned
+
+func hit_player():
+	super()
 	
-func _physics_process(_delta):
-	if is_instance_valid(player_ref):
-		velocity = global_position.direction_to(player_ref.global_position) * speed
-	move_and_slide()
+func _physics_process(delta):
+	super(delta)
 
 
 func _on_close_body_entered(body):
@@ -37,8 +40,7 @@ func _on_warning_body_exited(body):
 
 func _on_kill_body_entered(body):
 	if body == player_ref:
-		SceneLoader.load_scene("res://interface/menus/main_menu.tscn", true)
-		SceneLoader.change_scene_to_loading_screen()
+		hit_player()
 
 
 func _on_ramp_timeout():

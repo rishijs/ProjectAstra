@@ -34,11 +34,13 @@ albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_mjvqf"]
 
-[node name="ChromaRoom" type="Node3D" node_paths=PackedStringArray("connection_end", "door", "spawners", "up", "left", "down", "right")]
+[node name="ChromaRoom" type="Node3D" node_paths=PackedStringArray("connection_end", "door", "spawners", "timer_node", "up", "left", "down", "right")]
 script = ExtResource("1_e411e")
 connection_end = [NodePath("connection2")]
 door = NodePath("SegmentDoor")
 spawners = [NodePath("Spawner")]
+timer_node = NodePath("Lifetime")
+time_multiplier = 2.0
 up = NodePath("UpLoc")
 left = NodePath("LeftLoc")
 down = NodePath("DownLoc")
@@ -194,5 +196,8 @@ transform = Transform3D(17.4219, 0, 0, 0, 27.5026, 0, 0, 0, 1, 0, 13.3347, -39.4
 material_override = SubResource("StandardMaterial3D_qqnsa")
 mesh = SubResource("BoxMesh_mjvqf")
 
+[node name="Lifetime" type="Timer" parent="."]
+
 [connection signal="body_entered" from="SegmentEntry" to="." method="_on_segment_entry_body_entered"]
 [connection signal="body_entered" from="SegmentDoor" to="." method="_on_segment_door_body_entered"]
+[connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]

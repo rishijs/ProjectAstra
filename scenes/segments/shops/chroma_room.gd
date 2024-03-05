@@ -10,11 +10,15 @@ func _ready():
 func _process(delta):
 	super(delta)
 
+func on_timer_timeout():
+	super()
 
+func update_on_entry():
+	super()
+	
 func _on_segment_entry_body_entered(body):
 	if body == player_ref:
-		segment_manager_ref.player_segment_index = id
-		segment_manager_ref.player_depth = depth
+		update_on_entry()
 
 
 func _on_segment_door_body_entered(body):
@@ -23,3 +27,7 @@ func _on_segment_door_body_entered(body):
 			segment_manager_ref.new_chunk.emit()
 		door.queue_free()
 		
+
+
+func _on_lifetime_timeout():
+	on_timer_timeout()

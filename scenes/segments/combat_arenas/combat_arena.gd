@@ -15,7 +15,12 @@ func _ready():
 	super()
 	init_arena()
 
+func on_timer_timeout():
+	super()
 
+func update_on_entry():
+	super()
+	
 func _process(delta):
 	super(delta)
 	unlock_arena()
@@ -23,8 +28,8 @@ func _process(delta):
 
 func _on_segment_entry_body_entered(body):
 	if body == player_ref:
-		segment_manager_ref.player_segment_index = id
-		segment_manager_ref.player_depth = depth
+		update_on_entry()
+		timer_node.start()
 		if defeats_required > 0:
 			lock_arena()
 
@@ -72,3 +77,7 @@ func _on_segment_door_c_body_entered(body):
 		if segment_manager_ref.enable:
 			segment_manager_ref.new_chunk.emit(segment_manager_ref.segment_types.MISC,0,1)
 		doorC.call_deferred("queue_free")
+
+
+func _on_lifetime_timeout():
+	on_timer_timeout()

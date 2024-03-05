@@ -37,3 +37,5 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.3223
 
 [node name="Target" type="Marker3D" parent="WeaponSocket/DefaultWeapon"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 15, 0, -0.882025)
+
+[connection signal="hit" from="." to="." method="_on_hit"]

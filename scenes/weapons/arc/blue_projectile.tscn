@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmg4pdd2cxg0q"]
+
+[ext_resource type="Script" path="res://scenes/weapons/arc/blue_projectile.gd" id="1_mi5ad"]
+
+[node name="ArcProjectile" type="Node3D"]
+script = ExtResource("1_mi5ad")

@@ -23,7 +23,7 @@ size = Vector3(30.1664, 28.2791, 2.43411)
 [sub_resource type="BoxShape3D" id="BoxShape3D_yx3tu"]
 size = Vector3(23.1252, 27.7267, 53.7748)
 
-[node name="CombatArena" type="Node3D" node_paths=PackedStringArray("connection_end", "doorE", "doorC", "doorL", "doorR", "spawners", "up", "left", "down", "right")]
+[node name="CombatArena" type="Node3D" node_paths=PackedStringArray("connection_end", "doorE", "doorC", "doorL", "doorR", "spawners", "timer_node", "up", "left", "down", "right")]
 script = ExtResource("1_rvjsu")
 connection_end = [NodePath("connection2"), NodePath("connection3"), NodePath("connection4")]
 doorE = NodePath("DoorE")
@@ -31,6 +31,8 @@ doorC = NodePath("DoorC")
 doorL = NodePath("DoorL")
 doorR = NodePath("DoorR")
 spawners = [NodePath("Spawner"), NodePath("Spawner2")]
+timer_node = NodePath("Lifetime")
+time_multiplier = 2.0
 up = NodePath("UpLoc")
 left = NodePath("LeftLoc")
 down = NodePath("DownLoc")
@@ -360,7 +362,10 @@ text = "DIFFICULTY INCREASE"
 font = ExtResource("3_h6c40")
 font_size = 500
 
+[node name="Lifetime" type="Timer" parent="."]
+
 [connection signal="body_entered" from="SegmentEntry" to="." method="_on_segment_entry_body_entered"]
 [connection signal="body_entered" from="DoorC/SegmentDoorC" to="." method="_on_segment_door_c_body_entered"]
 [connection signal="body_entered" from="DoorL/SegmentDoorL" to="." method="_on_segment_door_l_body_entered"]
 [connection signal="body_entered" from="DoorR/SegmentDoorR" to="." method="_on_segment_door_r_body_entered"]
+[connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]
