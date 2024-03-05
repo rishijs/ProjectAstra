@@ -23,6 +23,8 @@ func update_on_entry():
 	
 func _process(delta):
 	super(delta)
+	if locked:
+		%EntryDoorCol.disabled = false
 	unlock_arena()
 
 
@@ -40,7 +42,6 @@ func init_arena():
 func lock_arena():
 	locked = true
 	doorE.show()
-	%EntryDoorCol.disabled = false
 	player_ref.arena_ref = self
 
 func unlock_arena():

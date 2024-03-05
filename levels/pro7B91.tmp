@@ -1,0 +1,105 @@
+[gd_scene load_steps=19 format=3 uid="uid://c303uuqhd3v6p"]
+
+[ext_resource type="PackedScene" uid="uid://dmekjtv82mx01" path="res://scenes/player/player.tscn" id="1_bkx3k"]
+[ext_resource type="PackedScene" uid="uid://ct3ob0tj0fjyj" path="res://interface/hud/player_interface.tscn" id="2_cbhra"]
+[ext_resource type="PackedScene" uid="uid://b2o2aff6fhv6p" path="res://scenes/managers/game_manager.tscn" id="2_gl78g"]
+[ext_resource type="PackedScene" uid="uid://famrshdxx5m3" path="res://scenes/managers/projectiles.tscn" id="2_r3smb"]
+[ext_resource type="PackedScene" uid="uid://cfud5pl460nck" path="res://scenes/managers/spawn_manager.tscn" id="3_qdfq4"]
+[ext_resource type="PackedScene" uid="uid://vop33tckuf4s" path="res://scenes/segments/speed_tubes/straight_speed_tube.tscn" id="6_roblo"]
+[ext_resource type="PackedScene" uid="uid://bem6hb2552we7" path="res://scenes/enemies/still/still_enemy.tscn" id="7_qwgas"]
+[ext_resource type="PackedScene" uid="uid://b22xbt8obic88" path="res://scenes/enemies/default/default_enemy.tscn" id="8_n5m2b"]
+[ext_resource type="PackedScene" uid="uid://d10vtkts7c47q" path="res://scenes/managers/segment_manager.tscn" id="9_ick4p"]
+[ext_resource type="PackedScene" uid="uid://00ho5uvvwmg0" path="res://scenes/segments/speed_tubes/curved_speed_tube_right.tscn" id="10_4qe5c"]
+[ext_resource type="PackedScene" uid="uid://j5bi0t7faf7i" path="res://scenes/segments/combat_arenas/combat_arena.tscn" id="10_wk3pg"]
+[ext_resource type="PackedScene" uid="uid://c7p24v38kr0cx" path="res://scenes/segments/shops/chroma_room.tscn" id="11_apw4o"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_048s0"]
+ground_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Sky" id="Sky_ya2kb"]
+sky_material = SubResource("PhysicalSkyMaterial_048s0")
+
+[sub_resource type="Environment" id="Environment_umuij"]
+background_mode = 2
+sky = SubResource("Sky_ya2kb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_srclj"]
+albedo_color = Color(0.247059, 0.247059, 0.247059, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mwum5"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_3ecnk"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[node name="PrototypingScene" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_umuij")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.939693, 0.34202, 0, -0.34202, -0.939693, 0, 2.78388, 0)
+
+[node name="Player" parent="." instance=ExtResource("1_bkx3k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.81626, 8.25452)
+
+[node name="Projectiles" parent="." instance=ExtResource("2_r3smb")]
+
+[node name="GameManager" parent="." instance=ExtResource("2_gl78g")]
+
+[node name="SpawnManager" parent="." instance=ExtResource("3_qdfq4")]
+
+[node name="StillEnemy" parent="SpawnManager" instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.36938, 1.63686, 20.7857)
+
+[node name="DefaultEnemy4" parent="SpawnManager" instance=ExtResource("8_n5m2b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.85275, 1.86882, -427.932)
+
+[node name="SegmentManager" parent="." node_paths=PackedStringArray("segments") instance=ExtResource("9_ick4p")]
+enable = false
+segments = [NodePath("CombatArena")]
+
+[node name="Start" type="Node3D" parent="SegmentManager"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0.767091, 41.4395)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SegmentManager/Start"]
+transform = Transform3D(5.02148, 0, 0, 0, 1, 0, 0, 0, 4.95077, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_srclj")
+mesh = SubResource("PlaneMesh_mwum5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SegmentManager/Start/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SegmentManager/Start/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_3ecnk")
+
+[node name="End" type="Node3D" parent="SegmentManager"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0.611094, -434.093)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SegmentManager/End"]
+transform = Transform3D(5.02148, 0, 0, 0, 1, 0, 0, 0, 4.95077, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_srclj")
+mesh = SubResource("PlaneMesh_mwum5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SegmentManager/End/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SegmentManager/End/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_3ecnk")
+
+[node name="CombatArena" parent="SegmentManager" instance=ExtResource("10_wk3pg")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 109.291, 0, 43.9219)
+
+[node name="ChromaRoom" parent="SegmentManager" instance=ExtResource("11_apw4o")]
+transform = Transform3D(0.0409339, 0, 0.999162, 0, 1, 0, -0.999162, 0, 0.0409339, -86.7856, 0, 0.684246)
+
+[node name="StraightSpeedTube3" parent="SegmentManager" instance=ExtResource("6_roblo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.4366, 0, -26.8955)
+
+[node name="start" type="Node3D" parent="SegmentManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.9204, 0, 83.3722)
+
+[node name="StraightSpeedTube" parent="SegmentManager/start" instance=ExtResource("6_roblo")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -18.6586, 0, -8.1698)
+
+[node name="CurvedSpeedTube" parent="SegmentManager/start" instance=ExtResource("10_4qe5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -69.1582, 0, -8.28167)
+
+[node name="Interface" parent="." instance=ExtResource("2_cbhra")]

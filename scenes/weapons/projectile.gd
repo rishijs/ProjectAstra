@@ -6,7 +6,6 @@ var velocity = Vector3.ZERO
 var weapon_stats = []
 var weapon
 var target
-var headshot = false
 
 signal hit(damage,headshot)
 
@@ -37,7 +36,8 @@ func _process(_delta):
 
 func damage_enemy(enemy,headshot):
 	if enemy.has_method("on_hit"):
-		hit.connect(enemy.on_hit)
+		if not hit.is_connected(enemy.on_hit):
+			hit.connect(enemy.on_hit)
 		if headshot:
 			hit.emit(weapon_stats[Data.wattr.DAMAGE]*weapon_stats[Data.wattr.HEADSHOT_MULTIPLIER])
 		else:
@@ -59,4 +59,3 @@ func regular_hit(body):
 func headshot_hit(area):
 	if area.is_in_group("HeadshotCol"):
 		damage_enemy(area.owner,true)
-		headshot = true

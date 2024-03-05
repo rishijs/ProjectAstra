@@ -9,8 +9,9 @@ noise_type = 3
 
 [sub_resource type="BoxMesh" id="BoxMesh_dg1rx"]
 
-[node name="WhiteWeapon" type="Node3D"]
+[node name="WhiteWeapon" type="Node3D" node_paths=PackedStringArray("muzzles")]
 script = ExtResource("1_nrb5t")
+muzzles = [NodePath("muzzle"), NodePath("muzzleL"), NodePath("muzzleR")]
 camera_shake_noise = SubResource("FastNoiseLite_3gyij")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -20,7 +21,15 @@ mesh = SubResource("BoxMesh_dg1rx")
 
 [node name="muzzle" type="Marker3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.915552, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.915552, 0.153071, 0)
+
+[node name="muzzleL" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.915552, -0.101553, -0.289248)
+
+[node name="muzzleR" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.915552, -0.101553, 0.236575)
 
 [node name="Target" type="Marker3D" parent="."]
 unique_name_in_owner = true

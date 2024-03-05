@@ -15,9 +15,9 @@ var target_loc
 var weapon_stats = []
 var initialized = false
 var weapon_name
-var charged = true
+var charge_time = 0
 
-enum States{READY, PREPARING, RELOADING, INACTIVE};
+enum States{READY, PREPARING, RELOADING, CHARGING, INACTIVE};
 var weapon_state= States.INACTIVE
 
 func _ready():
@@ -70,8 +70,7 @@ func add_recoil(time,angle):
 func fire():
 	if is_instance_valid(projectiles_ref) and is_instance_valid(muzzle):
 		if weapon_state == States.READY and initialized:
-			if charged:
-				shooting_pattern()
+			shooting_pattern()
 	else:
 		printerr("references not set")
 
@@ -93,3 +92,4 @@ func prepare_next_shot():
 	weapon_state = States.PREPARING
 	await get_tree().create_timer(weapon_stats[Data.wattr.FIRE_RATE],false).timeout
 	weapon_state = States.READY
+	

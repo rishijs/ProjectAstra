@@ -11,17 +11,18 @@ emission_energy_multiplier = 5.0
 [sub_resource type="BoxMesh" id="BoxMesh_nxfb6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_l2ixp"]
+size = Vector3(1, 1, 11.6679)
 
 [node name="ChronoProjectile" type="Area3D"]
 script = ExtResource("1_xk8hy")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+transform = Transform3D(0.155454, 0, 0, 0, 0.0742649, 0, 0, 0, 4.62826, 0.0271619, 0, -0.0276783)
 material_override = SubResource("StandardMaterial3D_ng8f2")
 mesh = SubResource("BoxMesh_nxfb6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -0.0271619, 0, -0.0266551)
 shape = SubResource("BoxShape3D_l2ixp")
 
 [node name="SelfDestruct" type="Timer" parent="."]
