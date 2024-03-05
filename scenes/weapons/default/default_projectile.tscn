@@ -11,6 +11,7 @@ emission_energy_multiplier = 5.0
 [sub_resource type="BoxMesh" id="BoxMesh_e8k0x"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_baci1"]
+size = Vector3(1.14136, 1.16223, 1.03369)
 
 [node name="DefaultProjectile" type="Area3D"]
 script = ExtResource("1_leep1")
@@ -21,12 +22,13 @@ material_override = SubResource("StandardMaterial3D_4033a")
 mesh = SubResource("BoxMesh_e8k0x")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -0.0202637, -0.0105225, -0.00673828)
 shape = SubResource("BoxShape3D_baci1")
 
 [node name="SelfDestruct" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="SelfDestruct" to="." method="_on_self_destruct_timeout"]

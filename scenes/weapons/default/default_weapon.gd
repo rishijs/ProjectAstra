@@ -12,13 +12,9 @@ func fire():
 	super()
 
 func shooting_pattern():
-	var this_projectile = projectile.instantiate()
-	if player_ref.movement_ability:
-		weapon_stats[Data.wattr.PROJECTILE_SPEED] = Data.get_attr(Data.wcls,weapon_name,Data.wattr.PROJECTILE_SPEED)
-	this_projectile.weapon_stats = weapon_stats
-	projectiles_ref.add_child(this_projectile)
-	this_projectile.global_position = muzzle.global_position
-	prepare_next_shot()
-
+	if is_instance_valid(target_loc):
+		fire_once()
+		prepare_next_shot()
+		
 func prepare_next_shot():
 	super()

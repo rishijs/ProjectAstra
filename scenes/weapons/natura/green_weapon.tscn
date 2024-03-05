@@ -1,6 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://dx0devx4y12pb"]
+[gd_scene load_steps=5 format=3 uid="uid://dx0devx4y12pb"]
 
 [ext_resource type="Script" path="res://scenes/weapons/natura/green_weapon.gd" id="1_cwpc8"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_suk1p"]
+noise_type = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ah88w"]
+albedo_color = Color(0, 1, 0.254902, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lmojo"]
+
 [node name="GreenWeapon" type="Node3D"]
 script = ExtResource("1_cwpc8")
+camera_shake_noise = SubResource("FastNoiseLite_suk1p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.1, 0, 0, 0, 0.261, 0, 0, 0, 0.376, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ah88w")
+mesh = SubResource("BoxMesh_lmojo")
+
+[node name="muzzle" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.915552, 0, 0)
+
+[node name="Target" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 15, 0, -0.882025)

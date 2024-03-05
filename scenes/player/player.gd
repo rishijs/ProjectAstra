@@ -3,9 +3,8 @@ extends CharacterBody3D
 @export_category("refs")
 @export var camera_first_person:Camera3D
 @export var camera_third_person:Camera3D
-@export var weapon:Node3D
+@export var weapons:Array[Node3D]
 @export var weapon_socket:Marker3D
-@export var target:Marker3D
 
 var min_pitch = 50
 var max_pitch = 50
@@ -14,12 +13,15 @@ var speed = 10.0
 var base_speed = 10.0
 var jump_velocity = 4.5
 var movement_boost = 4
+var speed_penalty_base = 0.4
+var speed_penalty = 0.4
 var movement_ability = false
 
 var max_health = 100
 var health = 100
 var enemies_defeated = 0
 var arena_ref
+var active_weapon_index = 1
 
 var aberration_close = false
 var aberration_warning = false
@@ -32,8 +34,16 @@ func _ready():
 	pass
 
 func _input(event):
+	if Input.is_action_just_pressed("debug_swap"):
+		active_weapon_index += 1
+		if active_weapon_index == weapons.size():
+			active_weapon_index = 0
+		swap_weapons(active_weapon_index)
+		
 	if Input.is_action_just_pressed("primary_fire"):
-		weapon.fire()
+		weapons[active_weapon_index].fire()
+	else:
+		printerr("active weapon not found")
 	
 	#rotate based on mouse
 	if event is InputEventMouseMotion and is_instance_valid(camera_first_person):
@@ -49,12 +59,18 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	
+	if Input.is_action_pressed("primary_fire"):
+		speed_penalty = speed_penalty_base
+	else:
+		speed_penalty = 1
+		
 	if Input.is_action_pressed("movement_ability"):
-		speed = base_speed * movement_boost
+		speed = base_speed * movement_boost * speed_penalty
 		movement_ability = true
 	else:
-		speed = base_speed
+		speed = base_speed * speed_penalty
 		movement_ability = false
+	
 		
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
@@ -75,6 +91,13 @@ func _physics_process(delta):
 
 	move_and_slide()
 
+func swap_weapons(weapon_index):
+	for weapon in weapons:
+		weapon.hide()
+		weapon.current_weapon = false
+
+	weapons[weapon_index].show()
+	weapons[weapon_index].current_weapon = true
 
 func _on_hit(damage):
 	health = clampf(health-damage,0,max_health)

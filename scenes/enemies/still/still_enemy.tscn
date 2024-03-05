@@ -1,10 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bem6hb2552we7"]
+[gd_scene load_steps=8 format=3 uid="uid://bem6hb2552we7"]
 
 [ext_resource type="Script" path="res://scenes/enemies/still/still_enemy.gd" id="1_aqlcs"]
 [ext_resource type="PackedScene" uid="uid://c3jmdc5fokq36" path="res://scenes/enemies/healthbar.tscn" id="2_jluc0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b7sn8"]
-size = Vector3(1, 1.78314, 1)
+size = Vector3(1, 1.18173, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_amx0k"]
 albedo_color = Color(1, 0, 0, 1)
@@ -14,11 +14,14 @@ albedo_color = Color(1, 0, 0, 1)
 [sub_resource type="ViewportTexture" id="ViewportTexture_efpjp"]
 viewport_path = NodePath("HealthSprite/Healthbar")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_8mxt5"]
+size = Vector3(1.18506, 0.765625, 1.15894)
+
 [node name="StillEnemy" type="CharacterBody3D" groups=["Enemy"]]
 script = ExtResource("1_aqlcs")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.126862, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.173842, 0)
 shape = SubResource("BoxShape3D_b7sn8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -36,3 +39,9 @@ render_target_update_mode = 4
 
 [node name="Healthbar" parent="HealthSprite/Healthbar" node_paths=PackedStringArray("owner_ref") instance=ExtResource("2_jluc0")]
 owner_ref = NodePath("../../..")
+
+[node name="Headshot" type="Area3D" parent="." groups=["HeadshotCol"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Headshot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0289097, 0.822269, 0.0395088)
+shape = SubResource("BoxShape3D_8mxt5")

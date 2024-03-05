@@ -5,8 +5,10 @@ extends Area3D
 var velocity = Vector3.ZERO
 var weapon_stats = []
 var weapon
+var target
+var headshot = false
 
-signal hit(damage)
+signal hit(damage,headshot)
 
 func _ready():
 	aim_shot()
@@ -22,9 +24,9 @@ func aim_shot():
 	var offsety = randf_range(-max_inaccuracy,max_inaccuracy)
 	var offsetz = randf_range(-max_inaccuracy,max_inaccuracy)
 	
-	var new_target = Vector3(player_ref.target.global_position.x+offsetx,
-							player_ref.target.global_position.y+offsety,
-							player_ref.target.global_position.z+offsetz)
+	var new_target = Vector3(target.global_position.x+offsetx,
+							target.global_position.y+offsety,
+							target.global_position.z+offsetz)
 							
 	look_at(new_target)
 	transform = player_ref.transform
@@ -33,10 +35,13 @@ func aim_shot():
 func _process(_delta):
 	pass
 
-func damage_enemy(enemy):
+func damage_enemy(enemy,headshot):
 	if enemy.has_method("on_hit"):
 		hit.connect(enemy.on_hit)
-		hit.emit(weapon_stats[Data.wattr.DAMAGE])
+		if headshot:
+			hit.emit(weapon_stats[Data.wattr.DAMAGE]*weapon_stats[Data.wattr.HEADSHOT_MULTIPLIER])
+		else:
+			hit.emit(weapon_stats[Data.wattr.DAMAGE])
 		sdestruct()
 	
 func sdestruct():

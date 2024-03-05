@@ -1,6 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8o1d0oyq22xi"]
+[gd_scene load_steps=5 format=3 uid="uid://c8o1d0oyq22xi"]
 
 [ext_resource type="Script" path="res://scenes/weapons/chrono/white_weapon.gd" id="1_nrb5t"]
 
-[node name="ChronoWeapon" type="Node3D"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3gyij"]
+noise_type = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_687p7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_dg1rx"]
+
+[node name="WhiteWeapon" type="Node3D"]
 script = ExtResource("1_nrb5t")
+camera_shake_noise = SubResource("FastNoiseLite_3gyij")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.1, 0, 0, 0, 0.261, 0, 0, 0, 0.376, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_687p7")
+mesh = SubResource("BoxMesh_dg1rx")
+
+[node name="muzzle" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.915552, 0, 0)
+
+[node name="Target" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 15, 0, -0.882025)
