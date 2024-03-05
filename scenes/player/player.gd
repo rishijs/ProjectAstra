@@ -14,7 +14,7 @@ var base_speed = 10.0
 var jump_velocity = 4.5
 var movement_boost = 4
 var speed_penalty_base = 0.2
-var speed_penalty = 0.2
+var speed_penalty = 1
 var movement_ability = false
 
 var max_health = 100

@@ -2,7 +2,7 @@ extends "res://scenes/weapons/weapon.gd"
 
 func _ready():
 	super()
-	projectile = preload("res://scenes/weapons/default/default_projectile.tscn")
+	projectile = preload("res://scenes/weapons/arc/blue_projectile.tscn")
 	initialize_weapon(Data.all_data[Data.wcls].keys()[Data.chromas.ARC])
 
 func _process(delta):
@@ -13,8 +13,7 @@ func fire():
 
 func shooting_pattern():
 	if is_instance_valid(target_loc):
-		#12 rounds per shot
-		for i in range(12):
+		for i in range(weapon_stats[Data.wattr.NUM_PROJECTILES]):
 			fire_once()
 		prepare_next_shot()
 

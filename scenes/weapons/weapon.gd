@@ -15,6 +15,7 @@ var target_loc
 var weapon_stats = []
 var initialized = false
 var weapon_name
+var charged = true
 
 enum States{READY, PREPARING, RELOADING, INACTIVE};
 var weapon_state= States.INACTIVE
@@ -52,7 +53,7 @@ func muzzle_flash():
 
 func camera_shake():
 	offset.y = camera_shake_noise.get_noise_3d(camera_shake_noise.seed*2,camera_shake_time_left,randf()) 
-	offset.z = camera_shake_noise.get_noise_3d(camera_shake_noise.seed*3,randf(),randf())
+	offset.z = camera_shake_noise.get_noise_3d(camera_shake_noise.seed*3,camera_shake_time_left,randf())
 	player_ref.camera_first_person.rotation.y = clampf(offset.y,0,camera_shake_amp)
 	player_ref.camera_first_person.rotation.z = clampf(offset.z,0,camera_shake_amp)
 	
@@ -62,16 +63,15 @@ func add_recoil(time,angle):
 	player_ref.weapon_socket.rotation.z = player_ref.camera_first_person.rotation.x
 	camera_shake_amp = weapon_stats[Data.wattr.RECOIL_AMOUNT]+1
 	camera_shake_time_left = time
-	var initialz = player_ref.camera_first_person.global_rotation.z
 	camera_shake()
 	await get_tree().create_timer(time,true).timeout
 	player_ref.weapons[player_ref.active_weapon_index].rotate_z(-angle)
-	#player_ref.camera_first_person.rotate_x(-angle/100)
 		
 func fire():
 	if is_instance_valid(projectiles_ref) and is_instance_valid(muzzle):
 		if weapon_state == States.READY and initialized:
-			shooting_pattern()
+			if charged:
+				shooting_pattern()
 	else:
 		printerr("references not set")
 
