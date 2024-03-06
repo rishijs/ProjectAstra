@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://dskj3u1eecllq"]
+
+[ext_resource type="Theme" uid="uid://bpeg6inp31l8g" path="res://themes/deftheme.tres" id="1_12kjq"]
+[ext_resource type="Script" path="res://interface/damage_numbers/damage_number_2d.gd" id="1_h7ilg"]
+
+[sub_resource type="Gradient" id="Gradient_qss7s"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3wstw"]
+gradient = SubResource("Gradient_qss7s")
+
+[node name="DamageNumber2d" type="CanvasLayer"]
+script = ExtResource("1_h7ilg")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -13.0
+offset_right = 52.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="icon" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = SubResource("GradientTexture1D_3wstw")
+expand_mode = 1
+
+[node name="dmg" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_12kjq")
+text = "XXX"

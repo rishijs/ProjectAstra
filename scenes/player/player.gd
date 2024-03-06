@@ -118,6 +118,10 @@ func _on_hit(damage):
 		SceneLoader.load_scene("res://interface/menus/main_menu.tscn", true)
 		SceneLoader.change_scene_to_loading_screen()
 
+func aberrate_weapon():
+	#random buffs or debuffs on objective/defeat progress
+	pass
+	
 func get_next_weapon():
 	active_weapon_index += 1
 	if active_weapon_index == weapons.size():
@@ -134,3 +138,5 @@ func _on_enemy_defeated():
 	if defeats_till_chroma_swap == 0:
 		get_next_weapon()
 		swap_weapons(active_weapon_index)
+	else:
+		aberrate_weapon()

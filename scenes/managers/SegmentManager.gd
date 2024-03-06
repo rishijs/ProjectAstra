@@ -208,7 +208,12 @@ func spawn_new_segments(with_type:segment_types = segment_types.ARENA, with_inde
 		segments_this_chunk = num_speed_tubes + 1
 		num_chunks += 1
 
+func spawn_anomaly():
+	#powerful monster called the watcher as a virus
+	pass
+	
 func _on_new_chunk(chunk_type = segment_types.MISC, at_index = 0, reduced_verticals = 1.0):
+	spawn_anomaly()
 	match chunk_type:
 		segment_types.ARENA:
 			spawn_new_segments(segment_types.ARENA,at_index,reduced_verticals)

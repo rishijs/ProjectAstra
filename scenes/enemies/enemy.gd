@@ -13,7 +13,6 @@ var pending_die
 func _ready():
 	pass
 
-
 func _process(_delta):
 	pass
 
