@@ -19,13 +19,16 @@ func _process(delta):
 
 func fire():
 	if is_instance_valid(projectiles_ref) and is_instance_valid(muzzle):
-		if weapon_state == States.READY and initialized:
+		if weapon_state == States.READY and initialized and magazine >= weapon_stats[Data.wattr.NUM_PROJECTILES]:
 			weapon_state = States.CHARGING
 			charge_time = weapon_stats[Data.wattr.CHARGE_DURATION]
+		else:
+			reload()
 	else:
 		printerr("references not set")
 
 func shooting_pattern():
+	super()
 	if is_instance_valid(target_loc):
 		for m in range(weapon_stats[Data.wattr.NUM_PROJECTILES]):
 			if m < muzzles.size():

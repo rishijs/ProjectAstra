@@ -6,31 +6,19 @@ var all_data = {}
 var csv_files:Dictionary = {
 	"weapons":"res://data/csv/weapons.csvdata",
 	"aberrations":"res://data/csv/aberrations.csvdata",
-	"chromas":"res://data/csv/chromas.csvdata",
-	"enemies":"res://data/csv/enemies.csvdata"
 }
 
 var wcls= csv_files.keys()[0]
-var ccls = csv_files.keys()[1]
 var abcls = csv_files.keys()[2]
-var encls = csv_files.keys()[3]
 
 enum wattr{
 	CHROMA,ARCHETYPE,DAMAGE,MAGAZINE,NUM_PROJECTILES,RELOAD_SPEED,FIRE_RATE,CHARGE_DURATION,RECOIL_AMOUNT,
 	RECOIL_TIME,MAX_RECOIL,ACCURACY,MAX_SPREAD,JITTER,PROJECTILE_SPEED,HEADSHOT_MULTIPLIER,
-	CRITICAL_CHANCE,CRITICAL_DAMAGE,MAX_RANGE,FALLOFF_RANGE,FALLOFF_MULTIPLIER,DAMAGE_ID
-}
-enum cattr{
-	OBJECTIVE_ID,OBJECTIVE_DESCRIPTION,OBJECTIVE_BASE,OBJECTIVE_SCALING,STABLE_TIME,
-	MOVEMENT_SKILL_ID
+	CRITICAL_CHANCE,CRITICAL_DAMAGE,DAMAGE_ID
 }
 enum abattr{
 	FLAT_BONUS,MULTIPLIED_BONUS,ID,DESCRIPTION
 }
-enum enattr{
-	HEALTH,DAMAGE,SPEED,ID
-}
-
 enum chromas{
 	GREY,IGNEOUS,ARC,NATURA,CHRONO
 }

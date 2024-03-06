@@ -16,6 +16,7 @@ var weapon_stats = []
 var initialized = false
 var weapon_name
 var charge_time = 0
+var magazine
 
 enum States{READY, PREPARING, RELOADING, CHARGING, INACTIVE};
 var weapon_state= States.INACTIVE
@@ -32,6 +33,9 @@ func _process(delta):
 		weapon_load()
 	else:
 		weapon_inactive()
+	
+	if magazine == 0 and weapon_state!=States.RELOADING:
+		reload()
 
 func weapon_load():
 	if weapon_state == States.INACTIVE:
@@ -42,10 +46,10 @@ func weapon_inactive():
 
 func initialize_weapon(weapon):
 	#weapon stats for mutability
-	camera_shake_noise.seed = randi()
 	weapon_name = weapon
 	for attr in range(len(Data.all_data[Data.wcls][weapon].keys())):
 		weapon_stats.append(Data.get_attr(Data.wcls,weapon,attr))
+	magazine = weapon_stats[Data.wattr.MAGAZINE]
 	initialized = true
 	global_rotation = player_ref.weapon_socket.global_rotation
 
@@ -56,7 +60,7 @@ func camera_shake():
 	offset.y = camera_shake_noise.get_noise_3d(camera_shake_noise.seed*2,camera_shake_time_left,randf()) 
 	offset.z = camera_shake_noise.get_noise_3d(camera_shake_noise.seed*3,camera_shake_time_left,randf())
 	player_ref.camera_first_person.rotation.y = clampf(offset.y,0,camera_shake_amp)
-	player_ref.camera_first_person.rotation.z = clampf(offset.z,0,camera_shake_amp)
+	player_ref.camera_first_person.rotation.z = clampf(offset.z,0,camera_shake_amp/10)
 	
 func add_recoil(time,angle):
 	player_ref.weapons[player_ref.active_weapon_index].rotate_z(angle)
@@ -67,18 +71,24 @@ func add_recoil(time,angle):
 	camera_shake()
 	await get_tree().create_timer(time,true).timeout
 	rotate_z(-angle)
-	global_rotation = player_ref.weapon_socket.global_rotation
+	rotation = Vector3.ZERO
 		
 func fire():
 	if is_instance_valid(projectiles_ref) and is_instance_valid(muzzle):
-		if weapon_state == States.READY and initialized:
+		if weapon_state == States.READY and initialized and magazine >= weapon_stats[Data.wattr.NUM_PROJECTILES]:
 			shooting_pattern()
 	else:
 		printerr("references not set")
 
 func shooting_pattern():
-	pass
+	magazine -= weapon_stats[Data.wattr.NUM_PROJECTILES]
 
+func reload():
+	weapon_state = States.RELOADING
+	await get_tree().create_timer(weapon_stats[Data.wattr.RELOAD_SPEED],false).timeout
+	weapon_state = States.READY
+	magazine = weapon_stats[Data.wattr.MAGAZINE]
+	
 func fire_once():
 	var this_projectile = projectile.instantiate()
 	if player_ref.movement_ability:
@@ -91,7 +101,9 @@ func fire_once():
 	
 func prepare_next_shot():
 	add_recoil(weapon_stats[Data.wattr.RECOIL_TIME],weapon_stats[Data.wattr.RECOIL_AMOUNT])
-	weapon_state = States.PREPARING
-	await get_tree().create_timer(weapon_stats[Data.wattr.FIRE_RATE],false).timeout
-	weapon_state = States.READY
+	if weapon_state != States.RELOADING:
+		weapon_state = States.PREPARING
+		await get_tree().create_timer(weapon_stats[Data.wattr.FIRE_RATE],false).timeout
+		if weapon_state != States.RELOADING:
+			weapon_state = States.READY
 	

@@ -12,7 +12,7 @@ var max_pitch = 50
 var speed = 10.0
 var base_speed = 10.0
 var jump_velocity = 4.5
-var movement_boost = 4
+var movement_boost = 2
 var speed_penalty_base = 0.2
 var speed_penalty = 1
 var movement_ability = false
@@ -45,9 +45,17 @@ func _input(event):
 		if active_weapon_index == weapons.size():
 			active_weapon_index = 0
 		swap_weapons(active_weapon_index)
-		
+	
 	if Input.is_action_just_pressed("primary_fire"):
 		weapons[active_weapon_index].fire()
+	else:
+		printerr("active weapon not found")
+	
+	if Input.is_action_just_pressed("reload"):
+		if weapons[active_weapon_index].weapon_state != weapons[active_weapon_index].States.RELOADING:
+			weapons[active_weapon_index].reload()
+			if active_weapon_index == Data.chromas.ARC:
+				weapons[active_weapon_index].cancel_reload = false
 	else:
 		printerr("active weapon not found")
 	
@@ -69,13 +77,6 @@ func _physics_process(delta):
 		speed_penalty = speed_penalty_base
 	else:
 		speed_penalty = 1
-		
-	if Input.is_action_pressed("movement_ability"):
-		speed = base_speed * movement_boost * speed_penalty
-		movement_ability = true
-	else:
-		speed = base_speed * speed_penalty
-		movement_ability = false
 	
 		
 	if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -89,11 +90,17 @@ func _physics_process(delta):
 		direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		
 	if direction:
-		velocity.x = direction.x * speed
-		velocity.z = direction.z * speed
+		if Input.is_action_pressed("movement_ability"):
+			movement_ability = true
+			velocity.x = direction.x * speed * movement_boost
+			velocity.z = direction.z * speed * movement_boost
+		else:
+			velocity.x = direction.x * speed
+			velocity.z = direction.z * speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
+		movement_ability = false
 
 	move_and_slide()
 

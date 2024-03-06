@@ -12,6 +12,7 @@ func fire():
 	super()
 
 func shooting_pattern():
+	super()
 	if is_instance_valid(target_loc):
 		fire_once()
 		prepare_next_shot()

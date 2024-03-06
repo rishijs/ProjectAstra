@@ -23,6 +23,8 @@ weapon_socket = NodePath("WeaponSocket")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.722767, -0.349107)
 current = true
 
+[node name="SpringArm3D" type="SpringArm3D" parent="FirstPerson"]
+
 [node name="MuzzleCam" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.922208, 0.386695, 0, -0.386695, 0.922208, 0, 0, 0)
 visible = false

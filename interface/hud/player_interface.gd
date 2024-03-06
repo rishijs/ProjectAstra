@@ -10,8 +10,7 @@ extends CanvasLayer
 @export var objective_text:Label
 @export var segment_id_text:Label
 @export var magazine_text:Label
-@export var health_text:Label
-@export var movement_text:Label
+@export var reloading_text:Label
 
 func _ready():
 	pass
@@ -37,4 +36,12 @@ func _on_update_timeout():
 	segment_id_text.text = "ID: %d" % segment_manager_ref.player_segment_index
 	objective_text.text = "%d ELIM(S) TILL CHROMA SWAP" % player_ref.defeats_till_chroma_swap
 	
-	health_text.text = "%d Health" % player_ref.health
+	if player_ref.weapons[player_ref.active_weapon_index].magazine != null:
+		magazine_text.text = "%d" % player_ref.weapons[player_ref.active_weapon_index].magazine
+	else:
+		magazine_text.hide()
+	
+	if player_ref.weapons[player_ref.active_weapon_index].weapon_state == player_ref.weapons[player_ref.active_weapon_index].States.RELOADING:
+		reloading_text.show()
+	else:
+		reloading_text.hide()

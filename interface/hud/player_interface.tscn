@@ -3,16 +3,15 @@
 [ext_resource type="Script" path="res://interface/hud/player_interface.gd" id="1_uecec"]
 [ext_resource type="Theme" uid="uid://bpeg6inp31l8g" path="res://themes/deftheme.tres" id="2_5top5"]
 
-[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("fps_text", "time_text", "segment_time_text", "objective_text", "segment_id_text", "magazine_text", "health_text", "movement_text") groups=["Interface"]]
+[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("fps_text", "time_text", "segment_time_text", "objective_text", "segment_id_text", "magazine_text", "reloading_text") groups=["Interface"]]
 script = ExtResource("1_uecec")
 fps_text = NodePath("game_info/VBoxContainer/fps")
 time_text = NodePath("game_info/VBoxContainer/time")
 segment_time_text = NodePath("objective_info/VBoxContainer/segment_time_left")
 objective_text = NodePath("objective_info/VBoxContainer/defeats_required")
 segment_id_text = NodePath("objective_info/VBoxContainer/segment_id")
-magazine_text = NodePath("player_info/VBoxContainer/magazine")
-health_text = NodePath("player_info/VBoxContainer/health")
-movement_text = NodePath("player_info/VBoxContainer/movement")
+magazine_text = NodePath("weapon_info/VBoxContainer/magazine")
+reloading_text = NodePath("weapon_info/VBoxContainer/reloading")
 
 [node name="game_info" type="MarginContainer" parent="."]
 anchors_preset = -1
@@ -75,38 +74,34 @@ theme = ExtResource("2_5top5")
 theme_override_font_sizes/font_size = 30
 text = "ID: X"
 
-[node name="player_info" type="MarginContainer" parent="."]
-visible = false
+[node name="weapon_info" type="MarginContainer" parent="."]
 anchors_preset = -1
 anchor_left = 0.037
-anchor_top = 0.852
-anchor_right = 0.158
+anchor_top = 0.778
+anchor_right = 0.237
 anchor_bottom = 0.978
 offset_left = 0.959999
-offset_top = 7.83997
-offset_right = -7.36002
-offset_bottom = -40.24
+offset_top = -0.240051
+offset_right = -7.04004
+offset_bottom = -0.23999
 
-[node name="VBoxContainer" type="VBoxContainer" parent="player_info"]
+[node name="VBoxContainer" type="VBoxContainer" parent="weapon_info"]
 layout_mode = 2
 
-[node name="magazine" type="Label" parent="player_info/VBoxContainer"]
+[node name="magazine" type="Label" parent="weapon_info/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_5top5")
+theme_override_font_sizes/font_size = 100
+text = "XXX"
+horizontal_alignment = 1
+
+[node name="reloading" type="Label" parent="weapon_info/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("2_5top5")
 theme_override_font_sizes/font_size = 30
-text = "MAGAZINE"
-
-[node name="health" type="Label" parent="player_info/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("2_5top5")
-theme_override_font_sizes/font_size = 30
-text = "HEALTH"
-
-[node name="movement" type="Label" parent="player_info/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("2_5top5")
-theme_override_font_sizes/font_size = 30
-text = "MOVEMENT"
+text = "RELOADING"
+horizontal_alignment = 1
 
 [node name="Update" type="Timer" parent="."]
 wait_time = 0.1
