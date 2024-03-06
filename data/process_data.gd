@@ -9,7 +9,7 @@ var csv_files:Dictionary = {
 }
 
 var wcls= csv_files.keys()[0]
-var abcls = csv_files.keys()[2]
+var abcls = csv_files.keys()[1]
 
 enum wattr{
 	CHROMA,ARCHETYPE,DAMAGE,MAGAZINE,NUM_PROJECTILES,RELOAD_SPEED,FIRE_RATE,CHARGE_DURATION,RECOIL_AMOUNT,

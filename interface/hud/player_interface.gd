@@ -11,6 +11,7 @@ extends CanvasLayer
 @export var segment_id_text:Label
 @export var magazine_text:Label
 @export var reloading_text:Label
+@export var swaps_text:Label
 
 func _ready():
 	pass
@@ -45,3 +46,5 @@ func _on_update_timeout():
 		reloading_text.show()
 	else:
 		reloading_text.hide()
+	
+	swaps_text.text = "SCORE: %d" % player_ref.num_swaps

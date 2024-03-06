@@ -36,12 +36,16 @@ func _process(_delta):
 
 func damage_enemy(enemy,headshot):
 	if enemy.has_method("on_hit"):
+		var damage = weapon_stats[Data.wattr.DAMAGE]
+		var crit = randf_range(1,100)
+		if crit < weapon_stats[Data.wattr.CRITICAL_CHANCE]:
+			damage *= weapon_stats[Data.wattr.CRITICAL_DAMAGE]
 		if not hit.is_connected(enemy.on_hit):
 			hit.connect(enemy.on_hit)
 		if headshot:
-			hit.emit(weapon_stats[Data.wattr.DAMAGE]*weapon_stats[Data.wattr.HEADSHOT_MULTIPLIER])
+			hit.emit(damage*weapon_stats[Data.wattr.HEADSHOT_MULTIPLIER])
 		else:
-			hit.emit(weapon_stats[Data.wattr.DAMAGE])
+			hit.emit(damage)
 		sdestruct()
 	
 func sdestruct():

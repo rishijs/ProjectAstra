@@ -22,7 +22,7 @@ func fire():
 		if weapon_state == States.READY and initialized and magazine >= weapon_stats[Data.wattr.NUM_PROJECTILES]:
 			weapon_state = States.CHARGING
 			charge_time = weapon_stats[Data.wattr.CHARGE_DURATION]
-		else:
+		elif weapon_state != States.CHARGING:
 			reload()
 	else:
 		printerr("references not set")

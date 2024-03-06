@@ -18,7 +18,6 @@ func fire():
 		if initialized and magazine >= weapon_stats[Data.wattr.NUM_PROJECTILES]:
 			shooting_pattern()
 			cancel_reload = true
-			%Reload.stop()
 	else:
 		printerr("references not set")
 
