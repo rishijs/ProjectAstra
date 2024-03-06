@@ -1,27 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://do5trn567tr7r"]
+[gd_scene load_steps=3 format=3 uid="uid://do5trn567tr7r"]
 
 [ext_resource type="Script" path="res://interface/damage_numbers/damage_number_3d.gd" id="1_2ia42"]
-[ext_resource type="PackedScene" uid="uid://dskj3u1eecllq" path="res://interface/damage_numbers/damage_number_2d.tscn" id="1_qmjv2"]
+[ext_resource type="FontFile" uid="uid://dex6qd5t25rm3" path="res://themes/fonts/Kode_Mono/KodeMono-VariableFont_wght.ttf" id="3_hn7c7"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_73haw"]
-viewport_path = NodePath("Sprite3D/SubViewport")
-
-[node name="DamageNumber" type="Node3D" node_paths=PackedStringArray("damage_number_2d")]
+[node name="DamageNumber" type="Node3D" node_paths=PackedStringArray("damage_number")]
 script = ExtResource("1_2ia42")
-damage_number_2d = NodePath("Sprite3D/SubViewport/DamageNumber2d")
+damage_number = NodePath("dmg")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-billboard = 1
-texture = SubResource("ViewportTexture_73haw")
-
-[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
-transparent_bg = true
-render_target_update_mode = 4
-
-[node name="DamageNumber2d" parent="Sprite3D/SubViewport" instance=ExtResource("1_qmjv2")]
+[node name="dmg" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+text = "XXX"
+font = ExtResource("3_hn7c7")
+font_size = 50
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
 one_shot = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

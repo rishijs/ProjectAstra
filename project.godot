@@ -104,6 +104,14 @@ reload={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="default"
+3d_physics/layer_2="enemy detection of player"
+3d_physics/layer_3="player detection of enemy"
+3d_physics/layer_4="projectile_layer"
+3d_physics/layer_5="watcher detection of player"
+
 [physics]
 
 3d/physics_engine="JoltPhysics3D"

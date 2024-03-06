@@ -24,6 +24,8 @@ size = Vector3(79.8625, 1, 80.4659)
 size = Vector3(1.19049, 0.725098, 1.21486)
 
 [node name="DefaultEnemy" type="CharacterBody3D" groups=["Enemy"]]
+collision_layer = 13
+collision_mask = 10
 script = ExtResource("1_6vpib")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -47,18 +49,24 @@ render_target_update_mode = 4
 owner_ref = NodePath("../../..")
 
 [node name="Detection" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Detection"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.236389, 0, -0.152451)
 shape = SubResource("BoxShape3D_1k71u")
 
 [node name="Range" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Range"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.116333, 0, -0.354919)
 shape = SubResource("BoxShape3D_l86tl")
 
 [node name="Headshot" type="Area3D" parent="." groups=["HeadshotCol"]]
+collision_layer = 12
+collision_mask = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Headshot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00462914, 0.802005, -0.00340462)

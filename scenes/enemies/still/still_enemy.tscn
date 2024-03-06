@@ -18,6 +18,8 @@ viewport_path = NodePath("HealthSprite/Healthbar")
 size = Vector3(1.18506, 0.765625, 1.15894)
 
 [node name="StillEnemy" type="CharacterBody3D" groups=["Enemy"]]
+collision_layer = 13
+collision_mask = 10
 script = ExtResource("1_aqlcs")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -41,6 +43,8 @@ render_target_update_mode = 4
 owner_ref = NodePath("../../..")
 
 [node name="Headshot" type="Area3D" parent="." groups=["HeadshotCol"]]
+collision_layer = 8
+collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Headshot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0289097, 0.822269, 0.0395088)

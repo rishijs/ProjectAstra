@@ -1,16 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://c303uuqhd3v6p"]
+[gd_scene load_steps=16 format=3 uid="uid://c303uuqhd3v6p"]
 
 [ext_resource type="PackedScene" uid="uid://dmekjtv82mx01" path="res://scenes/player/player.tscn" id="1_bkx3k"]
 [ext_resource type="PackedScene" uid="uid://ct3ob0tj0fjyj" path="res://interface/hud/player_interface.tscn" id="2_cbhra"]
 [ext_resource type="PackedScene" uid="uid://b2o2aff6fhv6p" path="res://scenes/managers/game_manager.tscn" id="2_gl78g"]
 [ext_resource type="PackedScene" uid="uid://famrshdxx5m3" path="res://scenes/managers/projectiles.tscn" id="2_r3smb"]
-[ext_resource type="PackedScene" uid="uid://cfud5pl460nck" path="res://scenes/managers/spawn_manager.tscn" id="3_qdfq4"]
 [ext_resource type="PackedScene" uid="uid://vop33tckuf4s" path="res://scenes/segments/speed_tubes/straight_speed_tube.tscn" id="6_roblo"]
 [ext_resource type="PackedScene" uid="uid://bem6hb2552we7" path="res://scenes/enemies/still/still_enemy.tscn" id="7_qwgas"]
 [ext_resource type="PackedScene" uid="uid://b22xbt8obic88" path="res://scenes/enemies/default/default_enemy.tscn" id="8_n5m2b"]
-[ext_resource type="PackedScene" uid="uid://d10vtkts7c47q" path="res://scenes/managers/segment_manager.tscn" id="9_ick4p"]
 [ext_resource type="PackedScene" uid="uid://00ho5uvvwmg0" path="res://scenes/segments/speed_tubes/curved_speed_tube_right.tscn" id="10_4qe5c"]
-[ext_resource type="PackedScene" uid="uid://j5bi0t7faf7i" path="res://scenes/segments/combat_arenas/combat_arena.tscn" id="10_wk3pg"]
 [ext_resource type="PackedScene" uid="uid://c7p24v38kr0cx" path="res://scenes/segments/shops/chroma_room.tscn" id="11_apw4o"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_048s0"]
@@ -40,111 +37,102 @@ environment = SubResource("Environment_umuij")
 transform = Transform3D(1, 0, 0, 0, -0.939693, 0.34202, 0, -0.34202, -0.939693, 0, 2.78388, 0)
 
 [node name="Player" parent="." instance=ExtResource("1_bkx3k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.81626, -408.696)
+transform = Transform3D(0.116983, 0, -0.993134, 0, 1, 0, 0.993134, 0, 0.116983, 51.5754, 1.81626, 57.7413)
 
 [node name="Projectiles" parent="." instance=ExtResource("2_r3smb")]
 
 [node name="GameManager" parent="." instance=ExtResource("2_gl78g")]
 
-[node name="SpawnManager" parent="." instance=ExtResource("3_qdfq4")]
-
-[node name="StillEnemy" parent="SpawnManager" instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.36938, 1.63686, 20.7857)
-
-[node name="DefaultEnemy4" parent="SpawnManager" instance=ExtResource("8_n5m2b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.85275, 1.86882, -427.932)
-
-[node name="StillEnemy2" parent="SpawnManager" instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.83492, -401.9)
-
-[node name="StillEnemy3" parent="SpawnManager" instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.7654, 1.83492, -401.9)
-
-[node name="StillEnemy4" parent="SpawnManager" instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5985, 1.83492, -401.9)
-
-[node name="StillEnemy5" parent="SpawnManager" instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5985, 1.83492, -421.276)
-
-[node name="StillEnemy8" parent="SpawnManager" instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.2011, 1.83492, -406.158)
-
-[node name="StillEnemy9" parent="SpawnManager" instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.2011, 1.83492, -422.008)
-
-[node name="StillEnemy11" parent="SpawnManager" instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.7694, 1.83492, -422.008)
-
-[node name="StillEnemy12" parent="SpawnManager" instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.9517, 1.83492, -422.008)
-
-[node name="StillEnemy13" parent="SpawnManager" instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.9517, 1.83492, -397.421)
-
-[node name="StillEnemy14" parent="SpawnManager" instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.77063, 1.83492, -463.268)
-
-[node name="StillEnemy15" parent="SpawnManager" instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.6001, 1.83492, -448.791)
-
-[node name="StillEnemy16" parent="SpawnManager" instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.901, 1.83492, -458.913)
-
-[node name="StillEnemy18" parent="SpawnManager" instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.5627, 1.83492, -436.656)
-
-[node name="StillEnemy19" parent="SpawnManager" instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.7184, 1.592, -459.669)
-
-[node name="StillEnemy10" parent="SpawnManager" instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.2011, 1.83492, -455.652)
-
-[node name="SegmentManager" parent="." node_paths=PackedStringArray("segments") instance=ExtResource("9_ick4p")]
-enable = false
-segments = [NodePath("CombatArena")]
-
-[node name="Start" type="Node3D" parent="SegmentManager"]
+[node name="Start" type="Node3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0.767091, 41.4395)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SegmentManager/Start"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Start"]
 transform = Transform3D(5.02148, 0, 0, 0, 1, 0, 0, 0, 4.95077, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_srclj")
 mesh = SubResource("PlaneMesh_mwum5")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="SegmentManager/Start/MeshInstance3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Start/MeshInstance3D"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SegmentManager/Start/MeshInstance3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Start/MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_3ecnk")
 
-[node name="End" type="Node3D" parent="SegmentManager"]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0.611094, -434.093)
+[node name="End" type="Node3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 98.744, 0.611094, 41.9845)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SegmentManager/End"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="End"]
 transform = Transform3D(5.02148, 0, 0, 0, 1, 0, 0, 0, 4.95077, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_srclj")
 mesh = SubResource("PlaneMesh_mwum5")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="SegmentManager/End/MeshInstance3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="End/MeshInstance3D"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SegmentManager/End/MeshInstance3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="End/MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_3ecnk")
 
-[node name="CombatArena" parent="SegmentManager" instance=ExtResource("10_wk3pg")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 109.291, 0, 43.9219)
-
-[node name="ChromaRoom" parent="SegmentManager" instance=ExtResource("11_apw4o")]
+[node name="ChromaRoom" parent="." instance=ExtResource("11_apw4o")]
 transform = Transform3D(0.0409339, 0, 0.999162, 0, 1, 0, -0.999162, 0, 0.0409339, -86.7856, 0, 0.684246)
 
-[node name="StraightSpeedTube3" parent="SegmentManager" instance=ExtResource("6_roblo")]
+[node name="StraightSpeedTube3" parent="." instance=ExtResource("6_roblo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.4366, 0, -26.8955)
 
-[node name="start" type="Node3D" parent="SegmentManager"]
+[node name="start" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.9204, 0, 83.3722)
 
-[node name="StraightSpeedTube" parent="SegmentManager/start" instance=ExtResource("6_roblo")]
+[node name="StraightSpeedTube" parent="start" instance=ExtResource("6_roblo")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -18.6586, 0, -8.1698)
 
-[node name="CurvedSpeedTube" parent="SegmentManager/start" instance=ExtResource("10_4qe5c")]
+[node name="CurvedSpeedTube" parent="start" instance=ExtResource("10_4qe5c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -69.1582, 0, -8.28167)
 
 [node name="Interface" parent="." instance=ExtResource("2_cbhra")]
+
+[node name="StillEnemy" parent="." instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.4569, 1.72254, 39.2161)
+
+[node name="StillEnemy2" parent="." instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.4569, 1.72254, 51.0923)
+
+[node name="StillEnemy3" parent="." instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.0254, 1.72254, 51.0923)
+
+[node name="StillEnemy4" parent="." instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.0254, 1.72254, 30.3953)
+
+[node name="StillEnemy5" parent="." instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.0367, 1.72254, 37.3257)
+
+[node name="StillEnemy6" parent="." instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.0367, 1.72254, 56.0715)
+
+[node name="StillEnemy7" parent="." instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.0367, 1.72254, 72.4782)
+
+[node name="StillEnemy8" parent="." instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.3724, 1.72254, 72.4782)
+
+[node name="StillEnemy9" parent="." instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120.132, 1.72254, 72.4782)
+
+[node name="StillEnemy10" parent="." instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120.132, 1.72254, 48.8155)
+
+[node name="StillEnemy11" parent="." instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120.132, 1.72254, 21.5557)
+
+[node name="StillEnemy12" parent="." instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120.132, 1.72254, 12.9849)
+
+[node name="StillEnemy13" parent="." instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96.5011, 1.72254, 12.9849)
+
+[node name="StillEnemy14" parent="." instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96.5011, 1.72254, 37.361)
+
+[node name="StillEnemy15" parent="." instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.314, 1.72254, 21.343)
+
+[node name="DefaultEnemy" parent="." instance=ExtResource("8_n5m2b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.6288, 1.43447, 68.7071)
+
+[node name="DefaultEnemy2" parent="." instance=ExtResource("8_n5m2b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79.2971, 1.43447, 65.1679)

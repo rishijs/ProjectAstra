@@ -25,18 +25,19 @@ func _on_update_timeout():
 	fps_text.text = "%d FPS" % Engine.get_frames_per_second()
 	time_text.text = "%s" % Globals.time_string
 	
-	var segment_time_left = segment_manager_ref.segments[segment_manager_ref.player_segment_index].timer
-	if segment_manager_ref.player_segment_index == -1:
-		segment_time_text.hide()
-	elif segment_time_left >= 99:
-		segment_time_text.hide()
-	elif segment_time_left != null:
-		segment_time_text.text = "%d SECONDS TILL SEGMENT DISINTEGRATION" % segment_time_left
-	else:
-		segment_time_text.text = "N/A"
-	segment_id_text.text = "ID: %d" % segment_manager_ref.player_segment_index
-	objective_text.text = "%d ELIM(S) TILL CHROMA SWAP" % player_ref.defeats_till_chroma_swap
+	if is_instance_valid(segment_manager_ref):
+		var segment_time_left = segment_manager_ref.segments[segment_manager_ref.player_segment_index].timer
+		if segment_manager_ref.player_segment_index == -1:
+			segment_time_text.hide()
+		elif segment_time_left >= 99:
+			segment_time_text.hide()
+		elif segment_time_left != null:
+			segment_time_text.text = "%d SECONDS TILL SEGMENT DISINTEGRATION" % segment_time_left
+		else:
+			segment_time_text.text = "N/A"
+		segment_id_text.text = "ID: %d" % segment_manager_ref.player_segment_index
 	
+	objective_text.text = "%d ELIM(S) TILL CHROMA SWAP" % player_ref.defeats_till_chroma_swap
 	if player_ref.weapons[player_ref.active_weapon_index].magazine != null:
 		magazine_text.text = "%d" % player_ref.weapons[player_ref.active_weapon_index].magazine
 	else:

@@ -15,6 +15,8 @@ signal hit(damage,headshot,hit_loc)
 func _ready():
 	aim_shot()
 	apply_jitter()
+	await get_tree().create_timer(3,false).timeout
+	call_deferred("queue_free")
 
 func apply_jitter():
 	self.transform = self.transform.rotated_local(Vector3.UP, randf_range(-weapon_stats[Data.wattr.JITTER], weapon_stats[Data.wattr.JITTER]))

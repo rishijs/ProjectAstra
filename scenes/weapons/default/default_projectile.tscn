@@ -11,6 +11,8 @@ albedo_color = Color(0, 0, 0, 1)
 size = Vector3(1.2063, 0.342454, 0.521118)
 
 [node name="DefaultProjectile" type="Area3D"]
+collision_layer = 8
+collision_mask = 8
 script = ExtResource("1_leep1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

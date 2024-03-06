@@ -12,7 +12,8 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wtlei"]
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera_first_person", "camera_third_person", "weapons", "weapon_socket") groups=["Player"]]
-collision_layer = 17
+collision_layer = 19
+collision_mask = 5
 script = ExtResource("1_w2nvs")
 camera_first_person = NodePath("FirstPerson")
 camera_third_person = NodePath("MuzzleCam")
