@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmekjtv82mx01"]
+[gd_scene load_steps=8 format=3 uid="uid://dmekjtv82mx01"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_w2nvs"]
-[ext_resource type="PackedScene" uid="uid://dua03xn6siql3" path="res://scenes/weapons/default/default_weapon.tscn" id="2_yu1b8"]
 [ext_resource type="PackedScene" uid="uid://cwewt4iay0fxe" path="res://scenes/weapons/igneous/red_weapon.tscn" id="3_np643"]
 [ext_resource type="PackedScene" uid="uid://dx0devx4y12pb" path="res://scenes/weapons/natura/green_weapon.tscn" id="4_txoey"]
 [ext_resource type="PackedScene" uid="uid://dkd4j8sp1pr6h" path="res://scenes/weapons/arc/blue_weapon.tscn" id="5_a8ke1"]
@@ -17,7 +16,7 @@ collision_mask = 5
 script = ExtResource("1_w2nvs")
 camera_first_person = NodePath("FirstPerson")
 camera_third_person = NodePath("MuzzleCam")
-weapons = [NodePath("WeaponSocket/DefaultWeapon"), NodePath("WeaponSocket/Red_weapon"), NodePath("WeaponSocket/BlueWeapon"), NodePath("WeaponSocket/GreenWeapon"), NodePath("WeaponSocket/WhiteWeapon")]
+weapons = [NodePath("WeaponSocket/Red_weapon"), NodePath("WeaponSocket/BlueWeapon"), NodePath("WeaponSocket/GreenWeapon"), NodePath("WeaponSocket/WhiteWeapon")]
 weapon_socket = NodePath("WeaponSocket")
 
 [node name="FirstPerson" type="Camera3D" parent="."]
@@ -38,8 +37,6 @@ shape = SubResource("CapsuleShape3D_wtlei")
 
 [node name="WeaponSocket" type="Marker3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.322376, 0.451655, -0.431199)
-
-[node name="DefaultWeapon" parent="WeaponSocket" instance=ExtResource("2_yu1b8")]
 
 [node name="Red_weapon" parent="WeaponSocket" instance=ExtResource("3_np643")]
 visible = false
