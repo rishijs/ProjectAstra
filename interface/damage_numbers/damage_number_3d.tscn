@@ -11,7 +11,6 @@ script = ExtResource("1_2ia42")
 damage_number_2d = NodePath("Sprite3D/SubViewport/DamageNumber2d")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 billboard = 1
 texture = SubResource("ViewportTexture_73haw")
 

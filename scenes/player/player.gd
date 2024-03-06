@@ -48,16 +48,12 @@ func _input(event):
 	
 	if Input.is_action_just_pressed("primary_fire"):
 		weapons[active_weapon_index].fire()
-	else:
-		printerr("active weapon not found")
 	
 	if Input.is_action_just_pressed("reload"):
 		if weapons[active_weapon_index].weapon_state != weapons[active_weapon_index].States.RELOADING:
 			weapons[active_weapon_index].reload()
 			if active_weapon_index == Data.chromas.ARC:
 				weapons[active_weapon_index].cancel_reload = false
-	else:
-		printerr("active weapon not found")
 	
 	#rotate based on mouse
 	if event is InputEventMouseMotion and is_instance_valid(camera_first_person):

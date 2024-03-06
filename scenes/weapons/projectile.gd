@@ -8,8 +8,9 @@ var velocity = Vector3.ZERO
 var weapon_stats = []
 var weapon
 var target
+var hit_success = false
 
-signal hit(damage,headshot)
+signal hit(damage,headshot,hit_loc)
 
 func _ready():
 	aim_shot()
@@ -43,8 +44,9 @@ func create_damage_number(damage,crit,headshot,pos):
 	dn.headshot = headshot
 	projectiles_ref.add_child(dn)
 	dn.global_position = pos
+	dn.move_to_player_loc()
 	
-func damage_enemy(enemy,headshot):
+func damage_enemy(enemy,headshot,hit_loc):
 	if enemy.has_method("on_hit"):
 		var damage = weapon_stats[Data.wattr.DAMAGE]
 		var crit = randf_range(1,100)
@@ -56,10 +58,10 @@ func damage_enemy(enemy,headshot):
 			hit.connect(enemy.on_hit)
 		if headshot:
 			hit.emit(damage*weapon_stats[Data.wattr.HEADSHOT_MULTIPLIER])
-			create_damage_number(damage*weapon_stats[Data.wattr.HEADSHOT_MULTIPLIER],is_crit,true,enemy.global_position)
+			create_damage_number(damage*weapon_stats[Data.wattr.HEADSHOT_MULTIPLIER],is_crit,true,hit_loc)
 		else:
 			hit.emit(damage)
-			create_damage_number(damage,is_crit,false,enemy.global_position)
+			create_damage_number(damage,is_crit,false,hit_loc)
 		sdestruct()
 	
 func sdestruct():
@@ -69,11 +71,13 @@ func _physics_process(delta):
 	global_position += velocity * delta
 
 func regular_hit(body):
-	if body.is_in_group("Enemy"):
-		damage_enemy(body,false)
+	if body.is_in_group("Enemy") and not hit_success:
+		damage_enemy(body,false,global_position)
+		hit_success = true
 	if body != player_ref:
 		sdestruct()
 
 func headshot_hit(area):
-	if area.is_in_group("HeadshotCol"):
-		damage_enemy(area.owner,true)
+	if area.is_in_group("HeadshotCol") and not hit_success:
+		damage_enemy(area.owner,true,global_position)
+		hit_success = true

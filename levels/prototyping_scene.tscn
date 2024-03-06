@@ -40,7 +40,7 @@ environment = SubResource("Environment_umuij")
 transform = Transform3D(1, 0, 0, 0, -0.939693, 0.34202, 0, -0.34202, -0.939693, 0, 2.78388, 0)
 
 [node name="Player" parent="." instance=ExtResource("1_bkx3k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.81626, 8.25452)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.81626, -408.696)
 
 [node name="Projectiles" parent="." instance=ExtResource("2_r3smb")]
 
@@ -53,6 +53,51 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.36938, 1.63686, 20.7857)
 
 [node name="DefaultEnemy4" parent="SpawnManager" instance=ExtResource("8_n5m2b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.85275, 1.86882, -427.932)
+
+[node name="StillEnemy2" parent="SpawnManager" instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.83492, -401.9)
+
+[node name="StillEnemy3" parent="SpawnManager" instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.7654, 1.83492, -401.9)
+
+[node name="StillEnemy4" parent="SpawnManager" instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5985, 1.83492, -401.9)
+
+[node name="StillEnemy5" parent="SpawnManager" instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5985, 1.83492, -421.276)
+
+[node name="StillEnemy8" parent="SpawnManager" instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.2011, 1.83492, -406.158)
+
+[node name="StillEnemy9" parent="SpawnManager" instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.2011, 1.83492, -422.008)
+
+[node name="StillEnemy11" parent="SpawnManager" instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.7694, 1.83492, -422.008)
+
+[node name="StillEnemy12" parent="SpawnManager" instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.9517, 1.83492, -422.008)
+
+[node name="StillEnemy13" parent="SpawnManager" instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.9517, 1.83492, -397.421)
+
+[node name="StillEnemy14" parent="SpawnManager" instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.77063, 1.83492, -463.268)
+
+[node name="StillEnemy15" parent="SpawnManager" instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.6001, 1.83492, -448.791)
+
+[node name="StillEnemy16" parent="SpawnManager" instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.901, 1.83492, -458.913)
+
+[node name="StillEnemy18" parent="SpawnManager" instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.5627, 1.83492, -436.656)
+
+[node name="StillEnemy19" parent="SpawnManager" instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.7184, 1.592, -459.669)
+
+[node name="StillEnemy10" parent="SpawnManager" instance=ExtResource("7_qwgas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.2011, 1.83492, -455.652)
 
 [node name="SegmentManager" parent="." node_paths=PackedStringArray("segments") instance=ExtResource("9_ick4p")]
 enable = false
