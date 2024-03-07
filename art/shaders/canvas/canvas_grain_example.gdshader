@@ -2,7 +2,7 @@ shader_type canvas_item;
 
 uniform float pixel = 1.0;
 uniform sampler2D pallete;
-uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
 
 const float bit = 6.0;
 const mat4 bayer = mat4(

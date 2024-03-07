@@ -1,14 +1,19 @@
-[gd_scene load_steps=16 format=3 uid="uid://c303uuqhd3v6p"]
+[gd_scene load_steps=28 format=3 uid="uid://c303uuqhd3v6p"]
 
 [ext_resource type="PackedScene" uid="uid://dmekjtv82mx01" path="res://scenes/player/player.tscn" id="1_bkx3k"]
+[ext_resource type="Shader" path="res://art/shaders/canvas/grain.gdshader" id="1_elwp7"]
 [ext_resource type="PackedScene" uid="uid://ct3ob0tj0fjyj" path="res://interface/hud/player_interface.tscn" id="2_cbhra"]
 [ext_resource type="PackedScene" uid="uid://b2o2aff6fhv6p" path="res://scenes/managers/game_manager.tscn" id="2_gl78g"]
+[ext_resource type="Shader" path="res://art/shaders/canvas/chromatic.gdshader" id="2_n7my2"]
 [ext_resource type="PackedScene" uid="uid://famrshdxx5m3" path="res://scenes/managers/projectiles.tscn" id="2_r3smb"]
+[ext_resource type="Shader" path="res://art/shaders/canvas/shading.gdshader" id="3_ihbrf"]
 [ext_resource type="PackedScene" uid="uid://vop33tckuf4s" path="res://scenes/segments/speed_tubes/straight_speed_tube.tscn" id="6_roblo"]
 [ext_resource type="PackedScene" uid="uid://bem6hb2552we7" path="res://scenes/enemies/still/still_enemy.tscn" id="7_qwgas"]
 [ext_resource type="PackedScene" uid="uid://b22xbt8obic88" path="res://scenes/enemies/default/default_enemy.tscn" id="8_n5m2b"]
 [ext_resource type="PackedScene" uid="uid://00ho5uvvwmg0" path="res://scenes/segments/speed_tubes/curved_speed_tube_right.tscn" id="10_4qe5c"]
+[ext_resource type="Shader" path="res://art/shaders/canvas/canvas_grain_example.gdshader" id="10_duopx"]
 [ext_resource type="PackedScene" uid="uid://c7p24v38kr0cx" path="res://scenes/segments/shops/chroma_room.tscn" id="11_apw4o"]
+[ext_resource type="Shader" path="res://art/shaders/spatial/highlight.gdshader" id="14_txloy"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_048s0"]
 ground_color = Color(1, 1, 1, 1)
@@ -20,6 +25,22 @@ sky_material = SubResource("PhysicalSkyMaterial_048s0")
 background_mode = 2
 sky = SubResource("Sky_ya2kb")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d8kw6"]
+render_priority = 0
+shader = ExtResource("1_elwp7")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qa3ym"]
+render_priority = 0
+shader = ExtResource("2_n7my2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_exrm6"]
+render_priority = 0
+shader = ExtResource("3_ihbrf")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oarqq"]
+shader = ExtResource("10_duopx")
+shader_parameter/pixel = 1.695
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_srclj"]
 albedo_color = Color(0.247059, 0.247059, 0.247059, 1)
 
@@ -28,10 +49,61 @@ albedo_color = Color(0.247059, 0.247059, 0.247059, 1)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_3ecnk"]
 data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iqo1u"]
+render_priority = 0
+shader = ExtResource("14_txloy")
+shader_parameter/stripes = 0.1
+shader_parameter/speed = 1.0
+shader_parameter/interval = 1.0
+shader_parameter/color = Color(1, 1, 1, 0.662745)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2mo66"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_tp1ly"]
+
 [node name="PrototypingScene" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_umuij")
+
+[node name="PostProcess" type="CanvasLayer" parent="."]
+
+[node name="grain" type="ColorRect" parent="PostProcess"]
+visible = false
+material = SubResource("ShaderMaterial_d8kw6")
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.996
+offset_right = 2.0
+offset_bottom = 0.319946
+
+[node name="chromatic" type="ColorRect" parent="PostProcess"]
+visible = false
+material = SubResource("ShaderMaterial_qa3ym")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="shading" type="ColorRect" parent="PostProcess"]
+material = SubResource("ShaderMaterial_exrm6")
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.998
+offset_bottom = 0.159912
+
+[node name="Grain" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Grain"]
+material = SubResource("ShaderMaterial_oarqq")
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.999
+offset_right = -1.0
+offset_bottom = 0.0799561
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.939693, 0.34202, 0, -0.34202, -0.939693, 0, 2.78388, 0)
@@ -136,3 +208,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.6288, 1.43447, 68.7071)
 
 [node name="DefaultEnemy2" parent="." instance=ExtResource("8_n5m2b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79.2971, 1.43447, 65.1679)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25183, 8.4509)
+material_override = SubResource("ShaderMaterial_iqo1u")
+material_overlay = SubResource("StandardMaterial3D_2mo66")
+mesh = SubResource("BoxMesh_tp1ly")

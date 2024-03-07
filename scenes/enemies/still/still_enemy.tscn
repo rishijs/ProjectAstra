@@ -1,13 +1,24 @@
-[gd_scene load_steps=8 format=3 uid="uid://bem6hb2552we7"]
+[gd_scene load_steps=11 format=3 uid="uid://bem6hb2552we7"]
 
 [ext_resource type="Script" path="res://scenes/enemies/still/still_enemy.gd" id="1_aqlcs"]
+[ext_resource type="Shader" path="res://art/shaders/spatial/outline.gdshader" id="2_7sej5"]
 [ext_resource type="PackedScene" uid="uid://c3jmdc5fokq36" path="res://scenes/enemies/healthbar.tscn" id="2_jluc0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b7sn8"]
 size = Vector3(1, 1.18173, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_amx0k"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f7efx"]
 albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7onrw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4v3dq"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_7onrw")
+shader = ExtResource("2_7sej5")
+shader_parameter/solid = true
+shader_parameter/strength = 1.0
+shader_parameter/color = Color(0, 0, 0, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_g66ns"]
 
@@ -27,7 +38,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.173842, 0)
 shape = SubResource("BoxShape3D_b7sn8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_amx0k")
+material_override = SubResource("StandardMaterial3D_f7efx")
+material_overlay = SubResource("ShaderMaterial_4v3dq")
 mesh = SubResource("CapsuleMesh_g66ns")
 
 [node name="HealthSprite" type="Sprite3D" parent="."]
