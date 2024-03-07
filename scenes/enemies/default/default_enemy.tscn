@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://b22xbt8obic88"]
 
 [ext_resource type="Script" path="res://scenes/enemies/default/default_enemy.gd" id="1_6vpib"]
-[ext_resource type="Shader" path="res://art/shaders/spatial/outline.gdshader" id="2_fqgb7"]
+[ext_resource type="Shader" path="res://art/shaders/spatial/outline.gdshader" id="2_hho3l"]
 [ext_resource type="PackedScene" uid="uid://c3jmdc5fokq36" path="res://scenes/enemies/healthbar.tscn" id="2_jt134"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tjxhr"]
@@ -12,7 +12,7 @@ albedo_color = Color(1, 0.113725, 0.231373, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_or3s5"]
 render_priority = 0
-shader = ExtResource("2_fqgb7")
+shader = ExtResource("2_hho3l")
 shader_parameter/solid = true
 shader_parameter/strength = 1.0
 shader_parameter/color = Color(0, 0, 0, 1)

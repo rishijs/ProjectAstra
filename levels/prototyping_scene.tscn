@@ -1,6 +1,7 @@
-[gd_scene load_steps=28 format=3 uid="uid://c303uuqhd3v6p"]
+[gd_scene load_steps=29 format=3 uid="uid://c303uuqhd3v6p"]
 
 [ext_resource type="PackedScene" uid="uid://dmekjtv82mx01" path="res://scenes/player/player.tscn" id="1_bkx3k"]
+[ext_resource type="Script" path="res://levels/PostProcess.gd" id="1_cjw8j"]
 [ext_resource type="Shader" path="res://art/shaders/canvas/grain.gdshader" id="1_elwp7"]
 [ext_resource type="PackedScene" uid="uid://ct3ob0tj0fjyj" path="res://interface/hud/player_interface.tscn" id="2_cbhra"]
 [ext_resource type="PackedScene" uid="uid://b2o2aff6fhv6p" path="res://scenes/managers/game_manager.tscn" id="2_gl78g"]
@@ -25,21 +26,22 @@ sky_material = SubResource("PhysicalSkyMaterial_048s0")
 background_mode = 2
 sky = SubResource("Sky_ya2kb")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_d8kw6"]
-render_priority = 0
-shader = ExtResource("1_elwp7")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qa3ym"]
-render_priority = 0
-shader = ExtResource("2_n7my2")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_exrm6"]
-render_priority = 0
-shader = ExtResource("3_ihbrf")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oarqq"]
 shader = ExtResource("10_duopx")
 shader_parameter/pixel = 1.695
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d8kw6"]
+shader = ExtResource("1_elwp7")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qa3ym"]
+shader = ExtResource("2_n7my2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_exrm6"]
+shader = ExtResource("3_ihbrf")
+shader_parameter/blue_color = Color(0.0117647, 0, 0.54902, 0.592157)
+shader_parameter/noise_speed = 0.01
+shader_parameter/noise_strength = 0.001
+shader_parameter/type = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_srclj"]
 albedo_color = Color(0.247059, 0.247059, 0.247059, 1)
@@ -66,7 +68,26 @@ shader_parameter/color = Color(1, 1, 1, 0.662745)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_umuij")
 
-[node name="PostProcess" type="CanvasLayer" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.939693, 0.34202, 0, -0.34202, -0.939693, 0, 2.78388, 0)
+light_energy = 5.0
+
+[node name="Grain" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Grain"]
+material = SubResource("ShaderMaterial_oarqq")
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.999
+offset_right = -1.0
+offset_bottom = 0.0799561
+
+[node name="PostProcess" type="CanvasLayer" parent="." node_paths=PackedStringArray("grain", "chromatic", "shading") groups=["PostProcess"]]
+script = ExtResource("1_cjw8j")
+grain = NodePath("grain")
+chromatic = NodePath("chromatic")
+shading = NodePath("shading")
 
 [node name="grain" type="ColorRect" parent="PostProcess"]
 visible = false
@@ -88,28 +109,16 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="shading" type="ColorRect" parent="PostProcess"]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_exrm6")
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.998
 offset_bottom = 0.159912
-
-[node name="Grain" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="ColorRect" type="ColorRect" parent="Grain"]
-material = SubResource("ShaderMaterial_oarqq")
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.999
-offset_right = -1.0
-offset_bottom = 0.0799561
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.939693, 0.34202, 0, -0.34202, -0.939693, 0, 2.78388, 0)
+color = Color(1, 1, 1, 0.882353)
 
 [node name="Player" parent="." instance=ExtResource("1_bkx3k")]
-transform = Transform3D(0.116983, 0, -0.993134, 0, 1, 0, 0.993134, 0, 0.116983, 51.5754, 1.81626, 57.7413)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.69412, 16.3421)
 
 [node name="Projectiles" parent="." instance=ExtResource("2_r3smb")]
 
@@ -214,3 +223,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25183, 8.4509)
 material_override = SubResource("ShaderMaterial_iqo1u")
 material_overlay = SubResource("StandardMaterial3D_2mo66")
 mesh = SubResource("BoxMesh_tp1ly")
+
+[connection signal="weapon_swapped" from="PostProcess" to="PostProcess" method="_on_weapon_swapped"]

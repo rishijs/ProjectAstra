@@ -1,12 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwewt4iay0fxe"]
+[gd_scene load_steps=7 format=3 uid="uid://cwewt4iay0fxe"]
 
 [ext_resource type="Script" path="res://scenes/weapons/igneous/red_weapon.gd" id="1_ivayt"]
+[ext_resource type="Shader" path="res://art/shaders/spatial/outline.gdshader" id="2_bb4gi"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4fefk"]
 noise_type = 3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4gwth"]
 albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iq5ff"]
+render_priority = 0
+shader = ExtResource("2_bb4gi")
+shader_parameter/solid = false
+shader_parameter/strength = 1.0
+shader_parameter/color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_d7www"]
 
@@ -17,6 +25,7 @@ camera_shake_noise = SubResource("FastNoiseLite_4fefk")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.1, 0, 0, 0, 0.261, 0, 0, 0, 0.376, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_4gwth")
+material_overlay = SubResource("ShaderMaterial_iq5ff")
 mesh = SubResource("BoxMesh_d7www")
 
 [node name="muzzle" type="Marker3D" parent="."]

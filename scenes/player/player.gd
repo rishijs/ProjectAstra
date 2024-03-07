@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+@onready var post_process = get_tree().get_first_node_in_group("PostProcess");
+
 @export_category("refs")
 @export var camera_first_person:Camera3D
 @export var camera_third_person:Camera3D
@@ -104,9 +106,12 @@ func swap_weapons(weapon_index):
 	for weapon in weapons:
 		weapon.hide()
 		weapon.current_weapon = false
-
-	weapons[weapon_index].show()
-	weapons[weapon_index].current_weapon = true
+	
+	if weapons.size() > weapon_index:
+		weapons[weapon_index].show()
+		weapons[weapon_index].current_weapon = true
+	
+		post_process.weapon_swapped.emit(weapon_index)
 
 func _on_hit(damage):
 	health = clampf(health-damage,0,max_health)

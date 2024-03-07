@@ -1,12 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://dkd4j8sp1pr6h"]
+[gd_scene load_steps=7 format=3 uid="uid://dkd4j8sp1pr6h"]
 
 [ext_resource type="Script" path="res://scenes/weapons/arc/blue_weapon.gd" id="1_radbx"]
+[ext_resource type="Shader" path="res://art/shaders/spatial/outline.gdshader" id="2_kmevy"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_uxtsa"]
 noise_type = 3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l2mge"]
 albedo_color = Color(0, 0.278431, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ni38p"]
+render_priority = 0
+shader = ExtResource("2_kmevy")
+shader_parameter/solid = false
+shader_parameter/strength = 1.0
+shader_parameter/color = Color(1, 1, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_agrfw"]
 
@@ -17,6 +25,7 @@ camera_shake_noise = SubResource("FastNoiseLite_uxtsa")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.1, 0, 0, 0, 0.261, 0, 0, 0, 0.376, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_l2mge")
+material_overlay = SubResource("ShaderMaterial_ni38p")
 mesh = SubResource("BoxMesh_agrfw")
 
 [node name="muzzle" type="Marker3D" parent="."]

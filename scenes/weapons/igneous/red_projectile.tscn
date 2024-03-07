@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://2u8wc4jvco2b"]
+[gd_scene load_steps=6 format=3 uid="uid://2u8wc4jvco2b"]
 
 [ext_resource type="Script" path="res://scenes/weapons/igneous/red_projectile.gd" id="1_qf76e"]
 
@@ -6,6 +6,8 @@
 albedo_color = Color(0.513726, 0, 0, 1)
 emission = Color(0.266667, 0.0588235, 0, 1)
 emission_energy_multiplier = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8u8up"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_kd5ax"]
 
@@ -20,6 +22,7 @@ script = ExtResource("1_qf76e")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-3.13839e-09, 0, 1.22022, 0, 0.0726718, 0, -0.0717979, 0, -5.33375e-08, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_k0v0k")
+material_overlay = SubResource("ShaderMaterial_8u8up")
 mesh = SubResource("BoxMesh_kd5ax")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

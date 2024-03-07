@@ -1,11 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8o1d0oyq22xi"]
+[gd_scene load_steps=7 format=3 uid="uid://c8o1d0oyq22xi"]
 
 [ext_resource type="Script" path="res://scenes/weapons/chrono/white_weapon.gd" id="1_nrb5t"]
+[ext_resource type="Shader" path="res://art/shaders/spatial/outline.gdshader" id="2_bstpd"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_3gyij"]
 noise_type = 3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_687p7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_alhfl"]
+render_priority = 0
+shader = ExtResource("2_bstpd")
+shader_parameter/solid = false
+shader_parameter/strength = 1.0
+shader_parameter/color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_dg1rx"]
 
@@ -17,6 +25,7 @@ camera_shake_noise = SubResource("FastNoiseLite_3gyij")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.1, 0, 0, 0, 0.261, 0, 0, 0, 0.376, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_687p7")
+material_overlay = SubResource("ShaderMaterial_alhfl")
 mesh = SubResource("BoxMesh_dg1rx")
 
 [node name="muzzle" type="Marker3D" parent="."]

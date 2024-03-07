@@ -45,10 +45,10 @@ func update():
 		damage_number.modulate = colors[randi_range(0,2)]
 		damage_number.font_size = 75
 	elif headshot:
-		damage_number.modulate = Color.RED
+		#damage_number.modulate = Color.RED
 		damage_number.font_size = 60
 	elif crit:
-		damage_number.modulate = Color.GOLDENROD
+		#damage_number.modulate = Color.GOLDENROD
 		damage_number.font_size = 60
 
 

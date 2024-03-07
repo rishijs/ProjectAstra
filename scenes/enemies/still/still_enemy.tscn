@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://bem6hb2552we7"]
 
 [ext_resource type="Script" path="res://scenes/enemies/still/still_enemy.gd" id="1_aqlcs"]
-[ext_resource type="Shader" path="res://art/shaders/spatial/outline.gdshader" id="2_7sej5"]
+[ext_resource type="Shader" path="res://art/shaders/spatial/outline.gdshader" id="2_3c63j"]
 [ext_resource type="PackedScene" uid="uid://c3jmdc5fokq36" path="res://scenes/enemies/healthbar.tscn" id="2_jluc0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b7sn8"]
@@ -15,7 +15,7 @@ albedo_color = Color(1, 0, 0, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4v3dq"]
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_7onrw")
-shader = ExtResource("2_7sej5")
+shader = ExtResource("2_3c63j")
 shader_parameter/solid = true
 shader_parameter/strength = 1.0
 shader_parameter/color = Color(0, 0, 0, 1)

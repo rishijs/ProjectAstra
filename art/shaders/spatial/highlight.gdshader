@@ -1,7 +1,7 @@
 shader_type spatial;
 render_mode unshaded;
 
-uniform float stripes : hint_range(0.0, 5.0) = 0.1;
+uniform float stripes : hint_range(0.0, 5.0) = 1;
 uniform float speed : hint_range(0.1, 5.0) = 1;
 uniform float interval : hint_range(0.1, 5.0) = 1;
 uniform vec4 color : source_color = vec4(1,1,1,1);
