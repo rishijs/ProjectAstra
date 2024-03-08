@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5n4i8y1qv70u"]
+
+[ext_resource type="Script" path="res://art/vfx/particles.gd" id="1_ic5c0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8wyj5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_f3vdq"]
+material = SubResource("StandardMaterial3D_8wyj5")
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="ChromaticParticles" type="Node3D"]
+script = ExtResource("1_ic5c0")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.968108, 0)
+mesh = SubResource("BoxMesh_f3vdq")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -34,6 +34,7 @@ var aberration_close = false
 var aberration_warning = false
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var chroma_particles = preload("res://art/vfx/chromatic_particles.tscn")
 
 signal hit
 signal enemy_defeated
@@ -67,6 +68,9 @@ func _input(event):
 		camera_first_person.rotation.x = clampf(camera_first_person.rotation.x, -deg_to_rad(min_pitch), deg_to_rad(max_pitch))
 		weapon_socket.rotation.z = camera_first_person.rotation.x
 
+func _process(_delta):
+	pass
+				
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -110,8 +114,14 @@ func swap_weapons(weapon_index):
 	if weapons.size() > weapon_index:
 		weapons[weapon_index].show()
 		weapons[weapon_index].current_weapon = true
-	
+		weapons[weapon_index].refill()
 		post_process.weapon_swapped.emit(weapon_index)
+	
+	if num_swaps > 1:
+		pass
+		#var particles = chroma_particles.instantiate()
+		#get_tree().get_first_node_in_group("GameManager").add_child(particles)
+		#particles.global_position = weapon_socket.global_position
 
 func _on_hit(damage):
 	health = clampf(health-damage,0,max_health)

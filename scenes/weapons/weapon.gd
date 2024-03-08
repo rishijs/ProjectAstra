@@ -2,6 +2,8 @@ extends Node3D
 
 @onready var player_ref = get_tree().get_first_node_in_group("Player")
 @onready var projectiles_ref = get_tree().get_first_node_in_group("Projectiles")
+@onready var post_process = get_tree().get_first_node_in_group("PostProcess");
+
 @export var current_weapon = false
 @export var camera_shake_noise : FastNoiseLite
 
@@ -39,6 +41,7 @@ func _process(delta):
 
 func weapon_load():
 	if weapon_state == States.INACTIVE:
+		await get_tree().create_timer(0.5,false).timeout
 		weapon_state= States.READY
 
 func weapon_inactive():
@@ -83,6 +86,9 @@ func fire():
 func shooting_pattern():
 	magazine -= weapon_stats[Data.wattr.NUM_PROJECTILES]
 
+func refill():
+	magazine = weapon_stats[Data.wattr.MAGAZINE]
+	
 func reload():
 	weapon_state = States.RELOADING
 	await get_tree().create_timer(weapon_stats[Data.wattr.RELOAD_SPEED],false).timeout
