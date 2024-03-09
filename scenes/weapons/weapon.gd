@@ -107,9 +107,8 @@ func fire_once():
 	
 func prepare_next_shot():
 	add_recoil(weapon_stats[Data.wattr.RECOIL_TIME],weapon_stats[Data.wattr.RECOIL_AMOUNT])
-	if weapon_state != States.RELOADING:
-		weapon_state = States.PREPARING
-		await get_tree().create_timer(weapon_stats[Data.wattr.FIRE_RATE],false).timeout
-		if weapon_state != States.RELOADING:
-			weapon_state = States.READY
+	weapon_state = States.PREPARING
+	await get_tree().create_timer(weapon_stats[Data.wattr.FIRE_RATE],false).timeout
+	if weapon_state != States.RELOADING and weapon_state != States.CHARGING:
+		weapon_state = States.READY
 	
