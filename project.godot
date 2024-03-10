@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="AberrationJam"
+config/name="FellShift"
 run/main_scene="res://scenes/Initialization/InitApp.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -115,7 +115,6 @@ reload={
 [physics]
 
 3d/physics_engine="JoltPhysics3D"
-3d/default_gravity=19.6
 
 [rendering]
 

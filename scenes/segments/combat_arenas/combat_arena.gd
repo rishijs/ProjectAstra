@@ -29,7 +29,7 @@ func _process(delta):
 
 
 func _on_segment_entry_body_entered(body):
-	if body == player_ref:
+	if body == player_ref and not inactive_segment:
 		update_on_entry()
 		timer_node.start()
 		if defeats_required > 0:
@@ -49,15 +49,15 @@ func unlock_arena():
 		doorE.queue_free()
 		player_ref.arena_ref = null
 		locked = false
-		%CL.show()
-		%LL.show()
-		%RL.show()
+		#%CL.show()
+		#%LL.show()
+		#%RL.show()
 
 
 func _on_segment_door_r_body_entered(body):
 	#higher diff right
 	if body == player_ref and defeats_required == 0:
-		segment_manager_ref.segment_rotation = segment_manager_ref.add_y_rotation(segment_manager_ref.segment_rotation,-90)
+		#segment_manager_ref.segment_rotation = segment_manager_ref.add_y_rotation(segment_manager_ref.segment_rotation,-90)
 		if segment_manager_ref.enable:
 			segment_manager_ref.new_chunk.emit(segment_manager_ref.segment_types.MISC,2,1+segment_manager_ref.depth_variance)
 		doorR.call_deferred("queue_free")
@@ -66,9 +66,9 @@ func _on_segment_door_r_body_entered(body):
 func _on_segment_door_l_body_entered(body):
 	#lower diff left
 	if body == player_ref and defeats_required == 0:
-		segment_manager_ref.segment_rotation = segment_manager_ref.add_y_rotation(segment_manager_ref.segment_rotation,90)
+		#segment_manager_ref.segment_rotation = segment_manager_ref.add_y_rotation(segment_manager_ref.segment_rotation,90)
 		if segment_manager_ref.enable:
-			segment_manager_ref.new_chunk.emit(segment_manager_ref.segment_types.MISC,1,clampf(1-segment_manager_ref.depth_variance,0.1,1))
+			segment_manager_ref.new_chunk.emit(segment_manager_ref.segment_types.MISC,0,clampf(1-segment_manager_ref.depth_variance,0.1,1))
 		doorL.call_deferred("queue_free")
 
 
@@ -76,7 +76,7 @@ func _on_segment_door_c_body_entered(body):
 	#same diff middle
 	if body == player_ref and defeats_required == 0:
 		if segment_manager_ref.enable:
-			segment_manager_ref.new_chunk.emit(segment_manager_ref.segment_types.MISC,0,1)
+			segment_manager_ref.new_chunk.emit(segment_manager_ref.segment_types.MISC,1,1)
 		doorC.call_deferred("queue_free")
 
 

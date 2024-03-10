@@ -97,8 +97,7 @@ func reload():
 	
 func fire_once():
 	var this_projectile = projectile.instantiate()
-	if player_ref.movement_ability:
-		weapon_stats[Data.wattr.PROJECTILE_SPEED] = Data.get_attr(Data.wcls,weapon_name,Data.wattr.PROJECTILE_SPEED)
+	weapon_stats[Data.wattr.PROJECTILE_SPEED] = player_ref.speed + Data.get_attr(Data.wcls,weapon_name,Data.wattr.PROJECTILE_SPEED)
 	this_projectile.weapon_stats = weapon_stats
 	this_projectile.target = target_loc
 	projectiles_ref.add_child(this_projectile)

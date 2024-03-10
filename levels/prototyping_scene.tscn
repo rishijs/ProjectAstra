@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c303uuqhd3v6p"]
+[gd_scene load_steps=31 format=3 uid="uid://c303uuqhd3v6p"]
 
 [ext_resource type="PackedScene" uid="uid://dmekjtv82mx01" path="res://scenes/player/player.tscn" id="1_bkx3k"]
 [ext_resource type="Script" path="res://levels/PostProcess.gd" id="1_cjw8j"]
@@ -10,10 +10,13 @@
 [ext_resource type="Shader" path="res://art/shaders/canvas/shading.gdshader" id="3_ihbrf"]
 [ext_resource type="Shader" path="res://art/shaders/canvas/wireframe_canvas.gdshader" id="6_1ag2l"]
 [ext_resource type="PackedScene" uid="uid://vop33tckuf4s" path="res://scenes/segments/speed_tubes/straight_speed_tube.tscn" id="6_roblo"]
-[ext_resource type="PackedScene" uid="uid://bem6hb2552we7" path="res://scenes/enemies/still/still_enemy.tscn" id="7_qwgas"]
-[ext_resource type="PackedScene" uid="uid://b22xbt8obic88" path="res://scenes/enemies/default/default_enemy.tscn" id="8_n5m2b"]
 [ext_resource type="PackedScene" uid="uid://00ho5uvvwmg0" path="res://scenes/segments/speed_tubes/curved_speed_tube_right.tscn" id="10_4qe5c"]
+[ext_resource type="PackedScene" uid="uid://ddx36hw5s7tvi" path="res://scenes/segments/speed_tubes/curved_speed_tube_left.tscn" id="10_y4ioh"]
 [ext_resource type="PackedScene" uid="uid://c7p24v38kr0cx" path="res://scenes/segments/shops/chroma_room.tscn" id="11_apw4o"]
+[ext_resource type="PackedScene" uid="uid://cwkthj0jpi03d" path="res://scenes/segments/speed_tubes/vertical_speed_tube.tscn" id="12_gaolu"]
+[ext_resource type="PackedScene" uid="uid://j5bi0t7faf7i" path="res://scenes/segments/combat_arenas/combat_arena.tscn" id="13_vrl6p"]
+[ext_resource type="PackedScene" uid="uid://c5ochb08ujj85" path="res://scenes/segments/shops/reward_room.tscn" id="14_8ycdc"]
+[ext_resource type="PackedScene" uid="uid://dtgsthe6bseic" path="res://scenes/segments/origin/fellshift_start.tscn" id="16_ws3dr"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_048s0"]
 ground_color = Color(1, 1, 1, 1)
@@ -40,7 +43,7 @@ shader_parameter/colors = 4.0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_hbv10"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_m20u0"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_u82uc"]
 seamless = true
 seamless_blend_skirt = 0.676
 noise = SubResource("FastNoiseLite_hbv10")
@@ -55,7 +58,7 @@ shader_parameter/noise_speed = 0.1
 shader_parameter/noise_strength = 0.281
 shader_parameter/radial_dist = 0.6
 shader_parameter/intensity = 0.5
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_m20u0")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_u82uc")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_exrm6"]
 shader = ExtResource("3_ihbrf")
@@ -98,6 +101,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="dither" type="ColorRect" parent="PostProcess"]
+visible = false
 material = SubResource("ShaderMaterial_wkn2x")
 anchors_preset = -1
 anchor_right = 1.0
@@ -123,14 +127,47 @@ offset_bottom = 0.159912
 color = Color(1, 1, 1, 0.196078)
 
 [node name="Player" parent="." instance=ExtResource("1_bkx3k")]
-transform = Transform3D(-0.17002, 0, 0.985441, 0, 1, 0, -0.985441, 0, -0.17002, 52.828, 1.69412, 16.3421)
+transform = Transform3D(0.017801, 0, -0.999842, 0, 1, 0, 0.999842, 0, 0.017801, -161.759, 1.69412, 16.3421)
 
 [node name="Projectiles" parent="." instance=ExtResource("2_r3smb")]
 
 [node name="GameManager" parent="." instance=ExtResource("2_gl78g")]
 
+[node name="proto" type="Node3D" parent="."]
+
+[node name="CurvedSpeedTube" parent="proto" instance=ExtResource("10_y4ioh")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 32.128, -9.53674e-07, -46.8181)
+inactive_segment = true
+
+[node name="CurvedSpeedRightTube" parent="proto" instance=ExtResource("10_4qe5c")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 60.0877, 0.767086, -44.9873)
+inactive_segment = true
+
+[node name="VerticalSpeedTube" parent="proto" instance=ExtResource("12_gaolu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 126.084, 2.80643, -34.3801)
+inactive_segment = true
+
+[node name="CombatArena" parent="proto" instance=ExtResource("13_vrl6p")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 173.548, -0.743425, 45.318)
+inactive_segment = true
+
+[node name="RewardRoom" parent="proto" instance=ExtResource("14_8ycdc")]
+transform = Transform3D(-0.998907, 0, -0.0467403, 0, 1, 0, 0.0467403, 0, -0.998907, 52.748, -2.07952, 196.862)
+inactive_segment = true
+
+[node name="ChromaRoom" parent="proto" instance=ExtResource("11_apw4o")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -86.7856, 0, 116.842)
+inactive_segment = true
+
+[node name="StraightSpeedTube3" parent="proto" instance=ExtResource("6_roblo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.4537, 0, -60.8937)
+inactive_segment = true
+
+[node name="FellshiftOrigin" parent="proto" instance=ExtResource("16_ws3dr")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -175.11, 0, 18.1371)
+
 [node name="Start" type="Node3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0.767091, 41.4395)
+transform = Transform3D(39.0462, 0, 0, 0, 10, 0, 0, 0, 13.4393, 54.4102, 0.767091, 41.4395)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Start"]
 transform = Transform3D(5.02148, 0, 0, 0, 1, 0, 0, 0, 4.95077, 0, 0, 0)
@@ -143,86 +180,6 @@ mesh = SubResource("PlaneMesh_mwum5")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Start/MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_3ecnk")
 
-[node name="End" type="Node3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 98.744, 0.611094, 41.9845)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="End"]
-transform = Transform3D(5.02148, 0, 0, 0, 1, 0, 0, 0, 4.95077, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_srclj")
-material_overlay = SubResource("ShaderMaterial_8chb4")
-mesh = SubResource("PlaneMesh_mwum5")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="End/MeshInstance3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="End/MeshInstance3D/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_3ecnk")
-
-[node name="ChromaRoom" parent="." instance=ExtResource("11_apw4o")]
-transform = Transform3D(0.0409339, 0, 0.999162, 0, 1, 0, -0.999162, 0, 0.0409339, -86.7856, 0, 0.684246)
-
-[node name="StraightSpeedTube3" parent="." instance=ExtResource("6_roblo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.4366, 0, -26.8955)
-
-[node name="start" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.9204, 0, 83.3722)
-
-[node name="StraightSpeedTube" parent="start" instance=ExtResource("6_roblo")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -18.6586, 0, -8.1698)
-
-[node name="CurvedSpeedTube" parent="start" instance=ExtResource("10_4qe5c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -69.1582, 0, -8.28167)
-
 [node name="Interface" parent="." instance=ExtResource("2_cbhra")]
-
-[node name="StillEnemy" parent="." instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.4569, 1.72254, 39.2161)
-
-[node name="StillEnemy2" parent="." instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.4569, 1.72254, 51.0923)
-
-[node name="StillEnemy3" parent="." instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.0254, 1.72254, 51.0923)
-
-[node name="StillEnemy4" parent="." instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.0254, 1.72254, 30.3953)
-
-[node name="StillEnemy5" parent="." instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.0367, 1.72254, 37.3257)
-
-[node name="StillEnemy6" parent="." instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.0367, 1.72254, 56.0715)
-
-[node name="StillEnemy7" parent="." instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.0367, 1.72254, 72.4782)
-
-[node name="StillEnemy8" parent="." instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.3724, 1.72254, 72.4782)
-
-[node name="StillEnemy9" parent="." instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120.132, 1.72254, 72.4782)
-
-[node name="StillEnemy10" parent="." instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120.132, 1.72254, 48.8155)
-
-[node name="StillEnemy11" parent="." instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120.132, 1.72254, 21.5557)
-
-[node name="StillEnemy12" parent="." instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120.132, 1.72254, 12.9849)
-
-[node name="StillEnemy13" parent="." instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96.5011, 1.72254, 12.9849)
-
-[node name="StillEnemy14" parent="." instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96.5011, 1.72254, 37.361)
-
-[node name="StillEnemy15" parent="." instance=ExtResource("7_qwgas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.314, 1.72254, 21.343)
-
-[node name="DefaultEnemy" parent="." instance=ExtResource("8_n5m2b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.6288, 1.43447, 68.7071)
-
-[node name="DefaultEnemy2" parent="." instance=ExtResource("8_n5m2b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79.2971, 1.43447, 65.1679)
 
 [connection signal="weapon_swapped" from="PostProcess" to="PostProcess" method="_on_weapon_swapped"]

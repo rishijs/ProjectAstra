@@ -11,10 +11,10 @@ extends CharacterBody3D
 var min_pitch = 50
 var max_pitch = 50
 
-var speed = 10.0
-var base_speed = 10.0
+var speed = 20.0
+var base_speed = 20.0
 var jump_velocity = 4.5
-var movement_boost = 2
+var movement_boost = 5
 var speed_penalty_base = 0.2
 var speed_penalty = 1
 var movement_ability = false
@@ -94,9 +94,12 @@ func _physics_process(delta):
 	if direction:
 		if Input.is_action_pressed("movement_ability"):
 			movement_ability = true
-			velocity.x = direction.x * speed * movement_boost
-			velocity.z = direction.z * speed * movement_boost
+			speed = base_speed * movement_boost
+			velocity.x = direction.x * speed
+			velocity.z = direction.z * speed
+			
 		else:
+			speed = base_speed
 			velocity.x = direction.x * speed
 			velocity.z = direction.z * speed
 	else:

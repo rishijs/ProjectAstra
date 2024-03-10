@@ -4,6 +4,9 @@ extends Node
 @onready var spawn_manager_ref = get_tree().get_first_node_in_group("SpawnManager")
 @onready var player_ref = get_tree().get_first_node_in_group("Player")
 
+
+@export var inactive_segment:bool = false
+
 @export var spawners:Array[Node3D]
 @export var timer_node : Timer
 @export var time_multiplier : float
@@ -29,9 +32,10 @@ func destruct():
 	call_deferred("queue_free")
 
 func update_on_entry():
-	segment_manager_ref.player_segment_index = id
-	segment_manager_ref.player_depth = depth
-	timer_node.start()
+	if not inactive_segment:
+		segment_manager_ref.player_segment_index = id
+		segment_manager_ref.player_depth = depth
+		timer_node.start()
 		
 func _process(_delta):
 	pass

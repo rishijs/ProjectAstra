@@ -1,0 +1,87 @@
+[gd_scene load_steps=12 format=3 uid="uid://dvx3d1o8qi1p5"]
+
+[ext_resource type="Script" path="res://levels/PostProcess.gd" id="1_cmlq7"]
+[ext_resource type="Shader" path="res://art/shaders/canvas/chromatic.gdshader" id="2_i8a26"]
+[ext_resource type="Shader" path="res://art/shaders/canvas/dither.gdshader" id="3_j0etd"]
+[ext_resource type="Shader" path="res://art/shaders/canvas/wireframe_canvas.gdshader" id="4_c73f6"]
+[ext_resource type="Shader" path="res://art/shaders/canvas/shading.gdshader" id="5_3xn0d"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qa3ym"]
+shader = ExtResource("2_i8a26")
+shader_parameter/red_displacement = Vector2(5, 5)
+shader_parameter/green_displacement = Vector2(3, 3)
+shader_parameter/blue_displacement = Vector2(1, 1)
+shader_parameter/noise_speed = 0.1
+shader_parameter/noise_strength = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wkn2x"]
+shader = ExtResource("3_j0etd")
+shader_parameter/spread = 1.0
+shader_parameter/colors = 4.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hbv10"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_m20u0"]
+seamless = true
+seamless_blend_skirt = 0.676
+noise = SubResource("FastNoiseLite_hbv10")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lyuv0"]
+shader = ExtResource("4_c73f6")
+shader_parameter/grid_size = 100
+shader_parameter/grid_thickness = 5
+shader_parameter/speed = 100.0
+shader_parameter/color = Color(0, 0, 0, 0.392157)
+shader_parameter/noise_speed = 0.1
+shader_parameter/noise_strength = 0.281
+shader_parameter/radial_dist = 0.6
+shader_parameter/intensity = 0.5
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_m20u0")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_exrm6"]
+shader = ExtResource("5_3xn0d")
+shader_parameter/type = 0
+
+[node name="PostProcess" type="CanvasLayer" node_paths=PackedStringArray("grain", "chromatic", "shading", "grid") groups=["PostProcess"]]
+script = ExtResource("1_cmlq7")
+grain = NodePath("")
+chromatic = NodePath("")
+shading = NodePath("")
+grid = NodePath("")
+
+[node name="chromatic" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_qa3ym")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="dither" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_wkn2x")
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.996
+offset_right = 2.0
+offset_bottom = 0.319946
+
+[node name="grid" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_lyuv0")
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.004
+offset_right = 2.0
+offset_bottom = -0.320068
+
+[node name="shading" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_exrm6")
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.998
+offset_bottom = 0.159912
+color = Color(1, 1, 1, 0.196078)
+
+[connection signal="weapon_swapped" from="." to="." method="_on_weapon_swapped"]

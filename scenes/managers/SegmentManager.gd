@@ -141,7 +141,7 @@ func create_segment(type:segment_types,end_index):
 	if curr_segment!=null:
 		curr_segment.type = type
 		curr_segment.id = segment_index+1
-		if num_chunks == 0:
+		if num_chunks == 0 or type == segment_types.REWARD:
 			curr_segment.timer = segment_lifetime * 99
 		else:
 			curr_segment.timer = segment_lifetime

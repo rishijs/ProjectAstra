@@ -22,7 +22,7 @@ func _on_segment_entry_body_entered(body):
 
 
 func _on_segment_door_body_entered(body):
-	if body == player_ref:
+	if body == player_ref and not inactive_segment:
 		if segment_manager_ref.enable:
 			segment_manager_ref.new_chunk.emit()
 		door.queue_free()

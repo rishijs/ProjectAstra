@@ -26,4 +26,4 @@ func _on_victory_body_entered(body):
 
 
 func _on_lifetime_timeout():
-	on_timer_timeout()
+	pass
