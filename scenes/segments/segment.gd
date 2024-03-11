@@ -36,6 +36,11 @@ func update_on_entry():
 		segment_manager_ref.player_segment_index = id
 		segment_manager_ref.player_depth = depth
 		timer_node.start()
+		player_ref.can_use_movement_ability = true
+
+func update_on_exit():
+	if not inactive_segment:
+		segment_manager_ref.player_segment_index = id+1
 		
 func _process(_delta):
 	pass

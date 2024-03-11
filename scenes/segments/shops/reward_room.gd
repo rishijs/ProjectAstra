@@ -17,6 +17,7 @@ func update_on_entry():
 func _on_segment_entry_body_entered(body):
 	if body == player_ref:
 		update_on_entry()
+		player_ref.can_use_movement_ability = false
 
 
 func _on_victory_body_entered(body):

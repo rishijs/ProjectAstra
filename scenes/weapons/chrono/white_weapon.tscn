@@ -1,7 +1,6 @@
-[gd_scene load_steps=31 format=3 uid="uid://c8o1d0oyq22xi"]
+[gd_scene load_steps=27 format=3 uid="uid://c8o1d0oyq22xi"]
 
 [ext_resource type="Script" path="res://scenes/weapons/chrono/white_weapon.gd" id="1_nrb5t"]
-[ext_resource type="Shader" path="res://art/shaders/spatial/outline.gdshader" id="2_bstpd"]
 [ext_resource type="Texture2D" uid="uid://dcun2jpiqj7tp" path="res://art/game/weapons/chronos/white/normal/chronos_white_normal_chronos_weapon_white_base.png" id="3_qnr55"]
 [ext_resource type="Texture2D" uid="uid://bvdoxgor4rs1d" path="res://art/game/weapons/chronos/white/normal/chronos_white_normal_chronos_weapon_white_metal-chronos_weapon_white_rough.png" id="4_k520r"]
 [ext_resource type="Texture2D" uid="uid://dphdveqxp1gdi" path="res://art/game/weapons/chronos/white/normal/chronos_white_normal_chronos_weapon_white_nor.png" id="5_hws8k"]
@@ -10,17 +9,6 @@
 noise_type = 3
 seed = 1
 frequency = 0.03
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_687p7"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_alhfl"]
-render_priority = 0
-shader = ExtResource("2_bstpd")
-shader_parameter/solid = false
-shader_parameter/strength = 1.0
-shader_parameter/color = Color(0, 0, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_dg1rx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jmehx"]
 resource_name = "Material.001"
@@ -365,77 +353,87 @@ script = ExtResource("1_nrb5t")
 muzzles = [NodePath("muzzle"), NodePath("muzzleL"), NodePath("muzzleR")]
 camera_shake_noise = SubResource("FastNoiseLite_3gyij")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.1, 0, 0, 0, 0.261, 0, 0, 0, 0.376, 0, 0, 0)
-visible = false
-material_override = SubResource("StandardMaterial3D_687p7")
-material_overlay = SubResource("ShaderMaterial_alhfl")
-mesh = SubResource("BoxMesh_dg1rx")
-
 [node name="chronos_white_normal" type="Node3D" parent="."]
-transform = Transform3D(-2.18557e-09, 0, 0.05, 0, 0.05, 0, -0.05, 0, -2.18557e-09, 0, -0.139666, 0)
+transform = Transform3D(-2.18557e-09, 0, 0.05, 0, 0.05, 0, -0.05, 0, -2.18557e-09, 0.211253, 0, 0)
 
 [node name="stock" type="MeshInstance3D" parent="chronos_white_normal"]
+layers = 2
 mesh = SubResource("ArrayMesh_5c6sw")
 skeleton = NodePath("")
 
 [node name="toptracer" type="MeshInstance3D" parent="chronos_white_normal"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.22933, 2.05968)
+layers = 2
 mesh = SubResource("ArrayMesh_0aral")
 skeleton = NodePath("")
 
 [node name="bottracer" type="MeshInstance3D" parent="chronos_white_normal"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.53128, 4.74358)
+layers = 2
 mesh = SubResource("ArrayMesh_06pnw")
 skeleton = NodePath("")
 
 [node name="laser" type="MeshInstance3D" parent="chronos_white_normal"]
 transform = Transform3D(0.5, 0, 0, 0, 0, -0.5, 0, 7, 0, 0, 3.47141, 8.90894)
+layers = 2
 mesh = SubResource("ArrayMesh_7hj4n")
 skeleton = NodePath("")
 
 [node name="core" type="MeshInstance3D" parent="chronos_white_normal"]
 transform = Transform3D(1.3, 0, 0, 0, 0, -1.3, 0, 1, 0, 0, 3.46897, 2.04575)
+layers = 2
 mesh = SubResource("ArrayMesh_3sp62")
 skeleton = NodePath("")
 
 [node name="body" type="MeshInstance3D" parent="chronos_white_normal"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.05414, 2.08517)
+layers = 2
 mesh = SubResource("ArrayMesh_ip487")
 skeleton = NodePath("")
 
 [node name="L1" type="MeshInstance3D" parent="chronos_white_normal"]
 transform = Transform3D(1, 0, 0, 0, 0.361968, 0, 0, 0, 1, 0, 7.47727, 10.6354)
+layers = 2
 mesh = SubResource("ArrayMesh_jlide")
 skeleton = NodePath("")
 
 [node name="L3" type="MeshInstance3D" parent="chronos_white_normal"]
 transform = Transform3D(1, 0, 0, 0, 0.361968, 0, 0, 0, 1, 1.53644, 7.47727, 10.6354)
+layers = 2
 mesh = SubResource("ArrayMesh_1fnar")
 skeleton = NodePath("")
 
 [node name="L2" type="MeshInstance3D" parent="chronos_white_normal"]
 transform = Transform3D(1, 0, 0, 0, 0.361968, 0, 0, 0, 1, 0.794739, 7.47727, 10.6354)
+layers = 2
 mesh = SubResource("ArrayMesh_nc40a")
 skeleton = NodePath("")
 
 [node name="energy" type="MeshInstance3D" parent="chronos_white_normal"]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.194097, 3.51886, -0.192818)
+layers = 2
 mesh = SubResource("ArrayMesh_jfeak")
 skeleton = NodePath("")
 
 [node name="muzzle" type="Marker3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6796, -0.018525, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.816104, 0.168758, 0.00784873)
 
 [node name="muzzleL" type="Marker3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6843, -0.018078, -0.11356)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.820804, 0.169205, -0.105711)
 
 [node name="muzzleR" type="Marker3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.68577, -0.0180779, 0.115079)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.822274, 0.169205, 0.122928)
 
 [node name="Target" type="Marker3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 15, 0, -0.882025)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.631781, 0, 0)
+layers = 2
+light_energy = 10.0
+light_cull_mask = 4294966274
+omni_range = 0.75

@@ -11,8 +11,7 @@ shader = ExtResource("2_i8a26")
 shader_parameter/red_displacement = Vector2(5, 5)
 shader_parameter/green_displacement = Vector2(3, 3)
 shader_parameter/blue_displacement = Vector2(1, 1)
-shader_parameter/noise_speed = 0.1
-shader_parameter/noise_strength = 0.01
+shader_parameter/magnitude = 2.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wkn2x"]
 shader = ExtResource("3_j0etd")
@@ -31,23 +30,24 @@ shader = ExtResource("4_c73f6")
 shader_parameter/grid_size = 100
 shader_parameter/grid_thickness = 5
 shader_parameter/speed = 100.0
-shader_parameter/color = Color(0, 0, 0, 0.392157)
+shader_parameter/color = Color(0, 0.129412, 0, 1)
 shader_parameter/noise_speed = 0.1
 shader_parameter/noise_strength = 0.281
 shader_parameter/radial_dist = 0.6
-shader_parameter/intensity = 0.5
+shader_parameter/intensity = 1.0
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_m20u0")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_exrm6"]
 shader = ExtResource("5_3xn0d")
 shader_parameter/type = 0
 
-[node name="PostProcess" type="CanvasLayer" node_paths=PackedStringArray("grain", "chromatic", "shading", "grid") groups=["PostProcess"]]
+[node name="PostProcess" type="CanvasLayer" node_paths=PackedStringArray("dither", "chromatic", "shading", "grid", "sharpen") groups=["PostProcess"]]
 script = ExtResource("1_cmlq7")
-grain = NodePath("")
-chromatic = NodePath("")
-shading = NodePath("")
-grid = NodePath("")
+dither = NodePath("dither")
+chromatic = NodePath("chromatic")
+shading = NodePath("shading")
+grid = NodePath("grid")
+sharpen = NodePath("sharpen")
 
 [node name="chromatic" type="ColorRect" parent="."]
 visible = false
@@ -83,5 +83,20 @@ anchor_right = 1.0
 anchor_bottom = 0.998
 offset_bottom = 0.159912
 color = Color(1, 1, 1, 0.196078)
+
+[node name="sharpen" type="ColorRect" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="outlines" type="ColorRect" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="grain" type="ColorRect" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
 
 [connection signal="weapon_swapped" from="." to="." method="_on_weapon_swapped"]

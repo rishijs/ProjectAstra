@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsge26dyrpdao"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w6mlb"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_g8g5p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fsuby"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.882353, 0.666667, 0.454902, 1)
+emission_energy_multiplier = 1.55
+
+[sub_resource type="BoxMesh" id="BoxMesh_d8ast"]
+
+[node name="DefaultLightLarge" type="Node3D"]
+
+[node name="handle" type="MeshInstance3D" parent="."]
+transform = Transform3D(-9.5039e-09, -1, 0, 0.217424, -4.37114e-08, 0, 0, 0, 5.7415, -0.0014174, 0.765864, 0)
+material_override = SubResource("StandardMaterial3D_w6mlb")
+mesh = SubResource("BoxMesh_g8g5p")
+
+[node name="light" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.210299, 0, 0, 0, 5.7415, 0, 0.549706, -0.0317837)
+material_override = SubResource("StandardMaterial3D_fsuby")
+mesh = SubResource("BoxMesh_d8ast")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.281358, 0)
+light_color = Color(0.882353, 0.666667, 0.454902, 1)
+light_energy = 100.0
+spot_range = 50.0
+spot_angle = 70.45

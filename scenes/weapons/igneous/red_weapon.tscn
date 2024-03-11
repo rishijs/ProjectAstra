@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cwewt4iay0fxe"]
+[gd_scene load_steps=27 format=3 uid="uid://cwewt4iay0fxe"]
 
 [ext_resource type="Script" path="res://scenes/weapons/igneous/red_weapon.gd" id="1_ivayt"]
 [ext_resource type="Shader" path="res://art/shaders/spatial/outline.gdshader" id="2_bb4gi"]
@@ -54,13 +54,6 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_uiufu")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2gkrw"]
-render_priority = 0
-shader = ExtResource("2_bb4gi")
-shader_parameter/solid = false
-shader_parameter/strength = 4.0
-shader_parameter/color = Color(0.866667, 0, 0, 1)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_r0e7w"]
 _surfaces = [{
@@ -313,44 +306,50 @@ camera_shake_noise = SubResource("FastNoiseLite_4fefk")
 transform = Transform3D(-8.74228e-10, 0, -0.02, 0, 0.02, 0, 0.02, 0, -8.74228e-10, 0.585636, -0.113746, -0.0504544)
 
 [node name="rail" type="MeshInstance3D" parent="igneous_weapon_revamp"]
-transform = Transform3D(1.5, 3.05311e-16, -4.61853e-14, 0, 0.575508, 0.0238928, 4.9738e-14, -0.0101089, 1.36024, 2.40917, 13.0078, 25.0984)
+transform = Transform3D(1.5, 3.33067e-16, 0, 0, 0.999981, 0.0240723, 2.84217e-14, -0.0175649, 1.37045, 2.40917, 11.6799, 25.0984)
+layers = 2
 mesh = SubResource("ArrayMesh_bpxqx")
 skeleton = NodePath("")
 
 [node name="body" type="MeshInstance3D" parent="igneous_weapon_revamp"]
-transform = Transform3D(2, 0, -1.06581e-14, 0, 1, 0, 7.10543e-15, 0, 0.99, 2.10283, -2.86875, 11.8901)
-material_overlay = SubResource("ShaderMaterial_2gkrw")
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 0.99, 2.10283, -2.86875, 11.8901)
+layers = 2
 mesh = SubResource("ArrayMesh_o1ijk")
 skeleton = NodePath("")
 
 [node name="accelerator" type="MeshInstance3D" parent="igneous_weapon_revamp"]
-transform = Transform3D(2.5, 0, -3.55271e-15, 0, 1, 0, 2.84217e-14, 0, 1, 2.40304, 4.15097, -11.8905)
-material_overlay = SubResource("ShaderMaterial_2gkrw")
+transform = Transform3D(2.5, 0, 0, 0, 1, 0, 0, 0, 1, 2.40304, 4.15097, -11.8905)
+layers = 2
 mesh = SubResource("ArrayMesh_x708x")
 skeleton = NodePath("")
 
 [node name="secondary_muzzle" type="MeshInstance3D" parent="igneous_weapon_revamp"]
-transform = Transform3D(1.2, -3.55271e-15, 0, 0, 0, -1, 7.10543e-15, 1, 0, 4.69717, 8.48626, -24.1649)
+transform = Transform3D(1.2, 0, 0, 0, 0, -1, 0, 1, 0, 4.69717, 8.48626, -24.1649)
+layers = 2
 mesh = SubResource("ArrayMesh_glwwj")
 skeleton = NodePath("")
 
 [node name="muzzle" type="MeshInstance3D" parent="igneous_weapon_revamp"]
 transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1, 2.32151, 9.78806, -32.0136)
+layers = 2
 mesh = SubResource("ArrayMesh_5eta7")
 skeleton = NodePath("")
 
 [node name="Clip" type="MeshInstance3D" parent="igneous_weapon_revamp"]
 transform = Transform3D(0, 0, -6, -9.76791, 0.642579, 0, 2.14193, 2.93037, 0, 2.17181, 1.35074, 16.5547)
+layers = 2
 mesh = SubResource("ArrayMesh_8wd3e")
 skeleton = NodePath("")
 
 [node name="trigger" type="MeshInstance3D" parent="igneous_weapon_revamp"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.87419, 2.25275, 26.608)
+layers = 2
 mesh = SubResource("ArrayMesh_xtlgy")
 skeleton = NodePath("")
 
 [node name="stock" type="MeshInstance3D" parent="igneous_weapon_revamp"]
 transform = Transform3D(1.4, 0, -3.55271e-15, 0, 1, 0, 4.26326e-14, 0, 1, 2.18658, -0.0933604, 31.485)
+layers = 2
 material_override = SubResource("StandardMaterial3D_vuv72")
 mesh = SubResource("ArrayMesh_rwsrk")
 skeleton = NodePath("")
@@ -362,3 +361,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29175, 0.118617, 0)
 [node name="Target" type="Marker3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 15, 0, -0.882025)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.82937, 0, 0)
+light_color = Color(1, 0.0745098, 0.0117647, 1)
+light_energy = 10.0
+light_cull_mask = 4294966274
+omni_range = 0.7

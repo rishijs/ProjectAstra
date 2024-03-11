@@ -4,6 +4,8 @@ extends CharacterBody3D
 var death_particles = preload("res://art/vfx/death_particles.tscn")
 
 var threat_detected = false
+var is_training
+var trainer_ref
 var max_health
 var health
 var speed
@@ -29,6 +31,8 @@ func die():
 	var particles = death_particles.instantiate()
 	get_tree().get_first_node_in_group("GameManager").add_child(particles)
 	particles.global_position = global_position
+	if is_training:
+		trainer_ref.empty = true
 	call_deferred("queue_free")
 
 func _physics_process(_delta):

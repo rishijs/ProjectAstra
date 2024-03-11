@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://376kd4annb1i"]
+
+[ext_resource type="Script" path="res://art/game/props_elements/training_sim.gd" id="1_watlw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f4tfp"]
+albedo_color = Color(0.0862745, 0.0862745, 0.0862745, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6wr8v"]
+
+[node name="TrainingSim" type="Node3D" node_paths=PackedStringArray("marker")]
+script = ExtResource("1_watlw")
+enemy = 1
+marker = NodePath("Marker3D")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4328, 0)
+
+[node name="platform" type="MeshInstance3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 0.6, 0, 0, 0, 3, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_f4tfp")
+mesh = SubResource("BoxMesh_6wr8v")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

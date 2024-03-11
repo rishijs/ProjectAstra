@@ -1,8 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://cwkthj0jpi03d"]
+[gd_scene load_steps=24 format=3 uid="uid://cwkthj0jpi03d"]
 
 [ext_resource type="Script" path="res://scenes/segments/speed_tubes/speed_tube.gd" id="1_i2uee"]
 [ext_resource type="Texture2D" uid="uid://b5wbdwqlue478" path="res://art/game/segment/vertical/vertical_tube_vertical_side_walls_base.png" id="2_q308n"]
 [ext_resource type="Texture2D" uid="uid://4bfjhrfetksd" path="res://art/game/segment/vertical/vertical_tube_vertical_side_walls_metal-vertical_side_walls_rough.png" id="3_5rff1"]
+[ext_resource type="PackedScene" uid="uid://yiq35pq4u730" path="res://art/game/props_elements/lights/torch_light.tscn" id="4_3o8vb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xf2xu"]
 resource_name = "Material"
@@ -283,7 +284,7 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_1to8e")
 
 [node name="connection2" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.083, -85.7, -4.897)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.083, -85.7, -6.57066)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="connection2"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -297,15 +298,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0834875, -17.5775, 1.42217)
 [node name="D" type="CollisionShape3D" parent="SegmentEntryV"]
 transform = Transform3D(1, 0, 0, 0, 0.00434591, 0.999991, 0, -0.999991, 0.00434591, 0.118042, 14.9634, -0.307931)
 shape = SubResource("BoxShape3D_ir1hn")
-
-[node name="U" type="CollisionShape3D" parent="SegmentEntryV"]
-transform = Transform3D(1, 0, 0, 0, 0.00434591, 0.999991, 0, -0.999991, 0.00434591, 0.284269, -51.5568, -0.00445239)
-shape = SubResource("BoxShape3D_ir1hn")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.32958, 1.42217)
-light_energy = 5.0
-omni_range = 50.0
 
 [node name="UpLoc" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
@@ -321,10 +313,25 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.5, 0
 
 [node name="LifetimeV" type="Timer" parent="."]
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -58.0014, 1.42217)
-omni_range = 20.0
+[node name="SegmentExitV" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0834875, -17.5775, 1.42217)
+
+[node name="U" type="CollisionShape3D" parent="SegmentExitV"]
+transform = Transform3D(1, 0, 0, 0, 0.00434591, 0.999991, 0, -0.999991, 0.00434591, 0.284269, -51.5568, -0.00445235)
+shape = SubResource("BoxShape3D_ir1hn")
+
+[node name="Torch" parent="." instance=ExtResource("4_3o8vb")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.216637, 5.73093, -4.60777)
+
+[node name="Torch2" parent="." instance=ExtResource("4_3o8vb")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.216637, -12.7302, -4.60777)
+
+[node name="Torch3" parent="." instance=ExtResource("4_3o8vb")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.216637, -45.4915, -4.60777)
+
+[node name="Torch4" parent="." instance=ExtResource("4_3o8vb")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.216637, -69.6676, -4.60777)
 
 [connection signal="body_entered" from="SegmentEntryV" to="." method="_on_segment_entry_v_body_entered"]
-[connection signal="body_exited" from="SegmentEntryV" to="." method="_on_segment_entry_v_body_exited"]
 [connection signal="timeout" from="LifetimeV" to="." method="_on_lifetime_v_timeout"]
+[connection signal="body_entered" from="SegmentExitV" to="." method="_on_segment_exit_v_body_entered"]

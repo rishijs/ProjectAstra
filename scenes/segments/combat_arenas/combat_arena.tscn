@@ -1,10 +1,11 @@
-[gd_scene load_steps=30 format=3 uid="uid://j5bi0t7faf7i"]
+[gd_scene load_steps=32 format=3 uid="uid://j5bi0t7faf7i"]
 
 [ext_resource type="Script" path="res://scenes/segments/combat_arenas/combat_arena.gd" id="1_rvjsu"]
 [ext_resource type="Texture2D" uid="uid://dyr3042awh81w" path="res://art/game/segment/arena/arena_room_arena_base.png" id="2_kyfnh"]
 [ext_resource type="Texture2D" uid="uid://d2kho1r5yjrgp" path="res://art/game/segment/arena/arena_room_arena_metal-arena_rough.png" id="3_ga6mf"]
 [ext_resource type="PackedScene" uid="uid://drwxdx7ko3l1e" path="res://art/game/props_elements/door.glb" id="3_tn8mj"]
 [ext_resource type="PackedScene" uid="uid://bem6hb2552we7" path="res://scenes/enemies/still/still_enemy.tscn" id="3_xq8a2"]
+[ext_resource type="PackedScene" uid="uid://yiq35pq4u730" path="res://art/game/props_elements/lights/torch_light.tscn" id="6_s2tgh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0r6ga"]
 resource_name = "Material"
@@ -373,6 +374,9 @@ size = Vector3(20.566, 17.4506, 2.43411)
 [sub_resource type="BoxShape3D" id="BoxShape3D_wcsna"]
 size = Vector3(20.566, 17.4506, 2.43411)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_0k7m4"]
+size = Vector3(3.98804, 30.4951, 82.9574)
+
 [node name="CombatArena" type="Node3D" node_paths=PackedStringArray("connection_end", "doorE", "doorC", "doorL", "doorR", "timer_node", "up", "left", "down", "right")]
 script = ExtResource("1_rvjsu")
 connection_end = [NodePath("connectionl"), NodePath("connectionc"), NodePath("connectionr")]
@@ -478,11 +482,6 @@ shape = SubResource("BoxShape3D_wl1ib")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.1786, 9.06418, -103.843)
 shape = SubResource("BoxShape3D_3x5mg")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.32522, 0)
-light_energy = 5.0
-omni_range = 100.0
-
 [node name="UpLoc" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -41)
 
@@ -493,7 +492,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -38, 0
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 38)
 
 [node name="RightLoc" type="Marker3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -41, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 41, 0, 0)
 
 [node name="DoorE" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.15479, 1.38713, 37.3169)
@@ -564,6 +563,74 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 21.038
 
 [node name="StillEnemy" parent="." instance=ExtResource("3_xq8a2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.99684, 3.20382, -1.90119)
+
+[node name="Torches" type="Node3D" parent="."]
+
+[node name="Torch" parent="Torches" instance=ExtResource("6_s2tgh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.3682, 24.3813, 11.518)
+light_range = 120.0
+light_radius = 80.0
+
+[node name="Torch2" parent="Torches" instance=ExtResource("6_s2tgh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.3682, 24.3813, 0.644541)
+light_range = 120.0
+light_radius = 80.0
+
+[node name="Torch3" parent="Torches" instance=ExtResource("6_s2tgh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.3682, 24.3813, -10.7565)
+light_range = 120.0
+light_radius = 80.0
+
+[node name="Torch4" parent="Torches" instance=ExtResource("6_s2tgh")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 40.3572, 24.3813, 11.518)
+light_range = 120.0
+light_radius = 80.0
+
+[node name="Torch5" parent="Torches" instance=ExtResource("6_s2tgh")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 40.3572, 24.3813, 0.644541)
+light_range = 120.0
+light_radius = 80.0
+
+[node name="Torch6" parent="Torches" instance=ExtResource("6_s2tgh")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 40.3572, 24.3813, -10.7565)
+light_range = 120.0
+light_radius = 80.0
+
+[node name="Torch7" parent="Torches" instance=ExtResource("6_s2tgh")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 21.6784, 35.7843)
+light_range = 80.0
+light_radius = 40.0
+
+[node name="Torch8" parent="Torches" instance=ExtResource("6_s2tgh")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 21.6784, -35.1308)
+light_range = 80.0
+light_radius = 40.0
+
+[node name="Torch9" parent="Torches" instance=ExtResource("6_s2tgh")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -21.2955, 21.6784, -35.1308)
+light_range = 80.0
+light_radius = 40.0
+
+[node name="Torch10" parent="Torches" instance=ExtResource("6_s2tgh")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 21.5189, 21.6784, -35.1308)
+light_range = 80.0
+light_radius = 40.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.43207, 0)
+light_color = Color(1, 0, 0, 1)
+light_energy = 100.0
+omni_range = 100.0
+
+[node name="bounds" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="bounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.9499, 14.7475, 2.63397)
+shape = SubResource("BoxShape3D_0k7m4")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="bounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.6769, 14.7475, 2.63397)
+shape = SubResource("BoxShape3D_0k7m4")
 
 [connection signal="body_entered" from="SegmentEntry" to="." method="_on_segment_entry_body_entered"]
 [connection signal="body_entered" from="DoorC/SegmentDoorC" to="." method="_on_segment_door_c_body_entered"]

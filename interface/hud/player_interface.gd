@@ -22,7 +22,7 @@ func _process(_delta):
 
 
 func _on_update_timeout():
-	#fps_text.text = "%d FPS" % Engine.get_frames_per_second()
+	fps_text.text = "%d FPS" % Engine.get_frames_per_second()
 	time_text.text = "%s" % Globals.time_string
 	
 	if is_instance_valid(segment_manager_ref):

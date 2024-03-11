@@ -10,6 +10,7 @@ extends "res://scenes/segments/segment.gd"
 @export var doorR:StaticBody3D
 
 var locked = false
+var door_chosen = false
 
 func _ready():
 	super()
@@ -46,7 +47,6 @@ func lock_arena():
 
 func unlock_arena():
 	if defeats_required == 0 and locked:
-		doorE.queue_free()
 		player_ref.arena_ref = null
 		locked = false
 		#%CL.show()
@@ -56,27 +56,33 @@ func unlock_arena():
 
 func _on_segment_door_r_body_entered(body):
 	#higher diff right
-	if body == player_ref and defeats_required == 0:
+	if body == player_ref and defeats_required == 0 and not door_chosen:
 		#segment_manager_ref.segment_rotation = segment_manager_ref.add_y_rotation(segment_manager_ref.segment_rotation,-90)
 		if segment_manager_ref.enable:
 			segment_manager_ref.new_chunk.emit(segment_manager_ref.segment_types.MISC,2,1+segment_manager_ref.depth_variance)
+		door_chosen = true
+		update_on_exit()
 		doorR.call_deferred("queue_free")
 
 
 func _on_segment_door_l_body_entered(body):
 	#lower diff left
-	if body == player_ref and defeats_required == 0:
+	if body == player_ref and defeats_required == 0 and not door_chosen:
 		#segment_manager_ref.segment_rotation = segment_manager_ref.add_y_rotation(segment_manager_ref.segment_rotation,90)
 		if segment_manager_ref.enable:
 			segment_manager_ref.new_chunk.emit(segment_manager_ref.segment_types.MISC,0,clampf(1-segment_manager_ref.depth_variance,0.1,1))
+		door_chosen = true
+		update_on_exit()
 		doorL.call_deferred("queue_free")
 
 
 func _on_segment_door_c_body_entered(body):
 	#same diff middle
-	if body == player_ref and defeats_required == 0:
+	if body == player_ref and defeats_required == 0 and not door_chosen:
 		if segment_manager_ref.enable:
 			segment_manager_ref.new_chunk.emit(segment_manager_ref.segment_types.MISC,1,1)
+		door_chosen = true
+		update_on_exit()
 		doorC.call_deferred("queue_free")
 
 

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://0pn4l6cr2l7w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_orwbs"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tic3i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dy53o"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.882353, 0.666667, 0.454902, 1)
+emission_energy_multiplier = 1.55
+
+[sub_resource type="BoxMesh" id="BoxMesh_o3rl3"]
+
+[node name="DefaultLightSmall" type="Node3D"]
+
+[node name="handle" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.533959, 0, 0, 0, 1, 0, 0, 0, 1, -0.760822, 0, 0)
+material_override = SubResource("StandardMaterial3D_orwbs")
+mesh = SubResource("BoxMesh_tic3i")
+
+[node name="light" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_dy53o")
+mesh = SubResource("BoxMesh_o3rl3")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.882353, 0.666667, 0.454902, 1)
+light_energy = 100.0
+omni_range = 10.0

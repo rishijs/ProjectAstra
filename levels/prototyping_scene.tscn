@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://cwkthj0jpi03d" path="res://scenes/segments/speed_tubes/vertical_speed_tube.tscn" id="12_gaolu"]
 [ext_resource type="PackedScene" uid="uid://j5bi0t7faf7i" path="res://scenes/segments/combat_arenas/combat_arena.tscn" id="13_vrl6p"]
 [ext_resource type="PackedScene" uid="uid://c5ochb08ujj85" path="res://scenes/segments/shops/reward_room.tscn" id="14_8ycdc"]
-[ext_resource type="PackedScene" uid="uid://dtgsthe6bseic" path="res://scenes/segments/origin/fellshift_start.tscn" id="16_ws3dr"]
+[ext_resource type="PackedScene" uid="uid://dtgsthe6bseic" path="res://scenes/segments/origin/astra_start.tscn" id="16_ws3dr"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_048s0"]
 ground_color = Color(1, 1, 1, 1)
@@ -33,8 +33,7 @@ shader = ExtResource("2_n7my2")
 shader_parameter/red_displacement = Vector2(5, 5)
 shader_parameter/green_displacement = Vector2(3, 3)
 shader_parameter/blue_displacement = Vector2(1, 1)
-shader_parameter/noise_speed = 0.1
-shader_parameter/noise_strength = 0.01
+shader_parameter/magnitude = 2.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wkn2x"]
 shader = ExtResource("1_elwp7")
@@ -83,9 +82,8 @@ environment = SubResource("Environment_umuij")
 transform = Transform3D(1, 0, 0, 0, -0.939693, 0.34202, 0, -0.34202, -0.939693, 0, 2.78388, 0)
 light_energy = 5.0
 
-[node name="PostProcess" type="CanvasLayer" parent="." node_paths=PackedStringArray("grain", "chromatic", "shading", "grid") groups=["PostProcess"]]
+[node name="PostProcess" type="CanvasLayer" parent="." node_paths=PackedStringArray("chromatic", "shading", "grid") groups=["PostProcess"]]
 script = ExtResource("1_cjw8j")
-grain = NodePath("dither")
 chromatic = NodePath("chromatic")
 shading = NodePath("shading")
 grid = NodePath("grid")

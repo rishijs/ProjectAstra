@@ -18,6 +18,9 @@ var movement_boost = 5
 var speed_penalty_base = 0.2
 var speed_penalty = 1
 var movement_ability = false
+var can_use_movement_ability = true
+
+var is_training = false
 
 var max_health = 100
 var health = 100
@@ -43,7 +46,7 @@ func _ready():
 	swap_weapons(active_weapon_index)
 
 func _input(event):
-	if Input.is_action_just_pressed("debug_swap"):
+	if Input.is_action_just_pressed("training_swap") and is_training:
 		active_weapon_index += 1
 		if active_weapon_index == weapons.size():
 			active_weapon_index = 0
@@ -92,7 +95,7 @@ func _physics_process(delta):
 		direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		
 	if direction:
-		if Input.is_action_pressed("movement_ability"):
+		if Input.is_action_pressed("movement_ability") and can_use_movement_ability:
 			movement_ability = true
 			speed = base_speed * movement_boost
 			velocity.x = direction.x * speed
@@ -144,13 +147,14 @@ func get_next_weapon():
 	defeats_till_chroma_swap = base_defeats_till_chroma_swap+num_swaps*objective_scaling
 			
 func _on_enemy_defeated():
-	if is_instance_valid(arena_ref):
-		if arena_ref.defeats_required > 0:
-			arena_ref.defeats_required -= 1
-	enemies_defeated += 1
-	defeats_till_chroma_swap = clampi(defeats_till_chroma_swap - 1,0,base_defeats_till_chroma_swap+num_swaps*objective_scaling)
-	if defeats_till_chroma_swap == 0:
-		get_next_weapon()
-		swap_weapons(active_weapon_index)
-	else:
-		aberrate_weapon()
+	if not is_training:
+		if is_instance_valid(arena_ref):
+			if arena_ref.defeats_required > 0:
+				arena_ref.defeats_required -= 1
+		enemies_defeated += 1
+		defeats_till_chroma_swap = clampi(defeats_till_chroma_swap - 1,0,base_defeats_till_chroma_swap+num_swaps*objective_scaling)
+		if defeats_till_chroma_swap == 0:
+			get_next_weapon()
+			swap_weapons(active_weapon_index)
+		else:
+			aberrate_weapon()

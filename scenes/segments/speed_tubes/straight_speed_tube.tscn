@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://vop33tckuf4s"]
+[gd_scene load_steps=22 format=3 uid="uid://vop33tckuf4s"]
 
 [ext_resource type="Script" path="res://scenes/segments/speed_tubes/speed_tube.gd" id="1_fqrc5"]
 [ext_resource type="Texture2D" uid="uid://bqpa1yc6yu5by" path="res://art/game/segment/straight/straight_tube_straight_base.png" id="2_25csi"]
 [ext_resource type="Texture2D" uid="uid://buliplwgilc5l" path="res://art/game/segment/straight/straight_tube_straight_metal-straight_rough.png" id="3_k1mnu"]
+[ext_resource type="PackedScene" uid="uid://yiq35pq4u730" path="res://art/game/props_elements/lights/torch_light.tscn" id="4_ii5d1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rj3f5"]
 resource_name = "Material.004"
@@ -243,14 +244,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08157, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.118042, 6.30509, 48.882)
 shape = SubResource("BoxShape3D_ir1hn")
 
-[node name="U" type="CollisionShape3D" parent="SegmentEntryS"]
+[node name="SegmentExitS" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08157, 0)
+
+[node name="U" type="CollisionShape3D" parent="SegmentExitS"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.278221, 7.53549, -47.5655)
 shape = SubResource("BoxShape3D_ir1hn")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.35557, 0)
-light_energy = 5.0
-omni_range = 50.0
 
 [node name="UpLoc" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50)
@@ -266,6 +265,24 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 50, 0,
 
 [node name="LifetimeS" type="Timer" parent="."]
 
+[node name="Torch" parent="." instance=ExtResource("4_ii5d1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9285, 9.39846, 32.1618)
+
+[node name="Torch2" parent="." instance=ExtResource("4_ii5d1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9285, 9.39846, 3.15424)
+
+[node name="Torch3" parent="." instance=ExtResource("4_ii5d1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9285, 9.39846, -30.4408)
+
+[node name="Torch4" parent="." instance=ExtResource("4_ii5d1")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.53067, 9.39846, 32.1618)
+
+[node name="Torch5" parent="." instance=ExtResource("4_ii5d1")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.53067, 9.39846, 3.15424)
+
+[node name="Torch6" parent="." instance=ExtResource("4_ii5d1")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.53067, 9.39846, -30.4408)
+
 [connection signal="body_entered" from="SegmentEntryS" to="." method="_on_segment_entry_s_body_entered"]
-[connection signal="body_entered" from="SegmentEntryS" to="." method="_on_segment_entry_body_entered"]
+[connection signal="body_entered" from="SegmentExitS" to="." method="_on_segment_exit_s_body_entered"]
 [connection signal="timeout" from="LifetimeS" to="." method="_on_lifetime_s_timeout"]

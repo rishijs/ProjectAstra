@@ -12,6 +12,9 @@ func _process(delta):
 func _on_segment_entry_cr_body_entered(body):
 	if body == player_ref:
 		update_on_entry()	
+func _on_segment_exit_cr_body_entered(body):
+	if body == player_ref:
+		update_on_exit()
 func _on_lifetime_cr_timeout():
 	on_timer_timeout()
 
@@ -19,6 +22,9 @@ func _on_lifetime_cr_timeout():
 func _on_segment_entry_s_body_entered(body):
 	if body == player_ref:
 		update_on_entry()
+func _on_segment_exit_s_body_entered(body):
+	if body == player_ref:
+		update_on_exit()
 func _on_lifetime_s_timeout():
 	on_timer_timeout()
 
@@ -26,6 +32,9 @@ func _on_lifetime_s_timeout():
 func _on_segment_entry_cl_body_entered(body):
 	if body == player_ref:
 		update_on_entry()
+func _on_segment_exit_cl_body_entered(body):
+	if body == player_ref:
+		update_on_exit()
 func _on_lifetime_cl_timeout():
 	on_timer_timeout()
 
@@ -34,8 +43,9 @@ func _on_segment_entry_v_body_entered(body):
 	if body == player_ref:
 		update_on_entry()
 		player_ref.gravity += 100
+func _on_segment_exit_v_body_entered(body):
+	if body == player_ref:
+		update_on_exit()
+		player_ref.gravity -= 100
 func _on_lifetime_v_timeout():
 	on_timer_timeout()
-func _on_segment_entry_v_body_exited(body):
-	if body == player_ref:
-		player_ref.gravity -= 100

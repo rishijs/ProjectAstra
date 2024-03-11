@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj6drnyjdlj4y"]
+
+[ext_resource type="Theme" uid="uid://bpeg6inp31l8g" path="res://themes/deftheme.tres" id="1_2ksf5"]
+
+[node name="TrainingTravel" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = -1
+anchor_right = 0.996
+anchor_bottom = 1.0
+offset_right = 7.67993
+color = Color(0.0745098, 0.0745098, 0.0745098, 1)
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.267
+anchor_top = 0.163
+anchor_right = 0.737
+anchor_bottom = 0.346
+offset_left = -0.640015
+offset_top = -0.0400085
+offset_right = -3.04004
+offset_bottom = 0.319977
+theme = ExtResource("1_2ksf5")
+theme_override_font_sizes/font_size = 50
+text = "TRAVEL WAYPOINT: TRAINING AREA
+
+LINKED: ASTRA ORIGIN"
+
+[node name="Label2" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.267
+anchor_top = 0.474
+anchor_right = 0.754
+anchor_bottom = 0.674
+offset_left = -0.640015
+offset_top = 8.07996
+offset_right = -35.6801
+offset_bottom = -9.92004
+theme = ExtResource("1_2ksf5")
+theme_override_font_sizes/font_size = 50
+text = "WALK TOWARDS SCREEN TO TELEPORT"

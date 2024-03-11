@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://00ho5uvvwmg0"]
+[gd_scene load_steps=22 format=3 uid="uid://00ho5uvvwmg0"]
 
 [ext_resource type="Script" path="res://scenes/segments/speed_tubes/speed_tube.gd" id="1_pagna"]
 [ext_resource type="Texture2D" uid="uid://oud4blvaepds" path="res://art/game/segment/curved_right/curved_tube_right_curved_right_base.png" id="2_68jsl"]
 [ext_resource type="Texture2D" uid="uid://b7cedj5pya2q1" path="res://art/game/segment/curved_right/curved_tube_right_curved_right_metal-curved_right_rough.png" id="3_ed86d"]
+[ext_resource type="PackedScene" uid="uid://yiq35pq4u730" path="res://art/game/props_elements/lights/torch_light.tscn" id="4_ur0se"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pw1y1"]
 resource_name = "Material"
@@ -203,11 +204,11 @@ albedo_color = Color(1, 0.054902, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_3u56r"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_tiukn"]
-size = Vector3(16.364, 12.2709, 1)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_xv4vf"]
 size = Vector3(15.0319, 12.5107, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bgevl"]
+size = Vector3(15.0671, 12.0754, 1)
 
 [node name="CurvedSpeedRightTube" type="Node3D" node_paths=PackedStringArray("connection_end", "timer_node", "up", "left", "down", "right")]
 script = ExtResource("1_pagna")
@@ -286,19 +287,28 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -40, 0
 [node name="SegmentEntry_CR" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00072, 0)
 
-[node name="E" type="CollisionShape3D" parent="SegmentEntry_CR"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 34.9092, 6.94707, -0.360403)
-shape = SubResource("BoxShape3D_tiukn")
-
 [node name="S" type="CollisionShape3D" parent="SegmentEntry_CR"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0668354, 7.00187, -39.025)
 shape = SubResource("BoxShape3D_xv4vf")
 
+[node name="SegmentExitCR" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00072, 0)
+
+[node name="E" type="CollisionShape3D" parent="SegmentExitCR"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -36.8875, 7.00011, -0.634575)
+shape = SubResource("BoxShape3D_bgevl")
+
 [node name="LifetimeCR" type="Timer" parent="."]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125089, 0)
-omni_range = 20.0
+[node name="Torch" parent="." instance=ExtResource("4_ur0se")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.56151, 9, 6.45008)
+
+[node name="Torch2" parent="." instance=ExtResource("4_ur0se")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.49871, 9, -22.8969)
+
+[node name="Torch3" parent="." instance=ExtResource("4_ur0se")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 20.7764, 9.01509, -8.08314)
 
 [connection signal="body_entered" from="SegmentEntry_CR" to="." method="_on_segment_entry_cr_body_entered"]
+[connection signal="body_entered" from="SegmentExitCR" to="." method="_on_segment_exit_cr_body_entered"]
 [connection signal="timeout" from="LifetimeCR" to="." method="_on_lifetime_cr_timeout"]
