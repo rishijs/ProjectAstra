@@ -1,6 +1,8 @@
 extends CharacterBody3D
 
 @onready var player_ref = get_tree().get_first_node_in_group("Player")
+@export var health_sprite:Sprite3D
+
 var death_particles = preload("res://art/vfx/death_particles.tscn")
 
 var threat_detected = false
@@ -22,6 +24,7 @@ func _process(_delta):
 func on_hit(incoming_damage):
 	health -= incoming_damage
 	health = clampf(health,0,max_health)
+	health_sprite.show()
 	if health == 0 and not pending_die:
 		pending_die = true
 		die()

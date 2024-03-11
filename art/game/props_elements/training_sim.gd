@@ -1,12 +1,13 @@
 extends Node3D
 
-enum enemy_type{DEFAULT,STILL}
+enum enemy_type{DEFAULT,STILL,CRYSTAL}
 @export var enemy:enemy_type
 @export var marker:Marker3D
 
 var enemies = {
 	default_enemy = preload("res://scenes/enemies/default/default_enemy.tscn"),
 	still_enemy = preload("res://scenes/enemies/still/still_enemy.tscn"),
+	crystal_enemy = preload("res://scenes/enemies/crystal_man/crystal_enemy.tscn"),
 }
 var empty = true
 

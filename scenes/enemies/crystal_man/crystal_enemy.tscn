@@ -1,23 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://du1lmvvodexmf"]
+[gd_scene load_steps=9 format=3 uid="uid://du1lmvvodexmf"]
 
 [ext_resource type="Script" path="res://scenes/enemies/crystal_man/crystal_enemy.gd" id="1_s61cp"]
-[ext_resource type="Shader" path="res://art/shaders/spatial/outline.gdshader" id="2_q5juf"]
+[ext_resource type="SpriteFrames" uid="uid://dosfl47bno0tq" path="res://scenes/enemies/crystal_man/crystal_man.tres" id="2_dlaqm"]
 [ext_resource type="PackedScene" uid="uid://c3jmdc5fokq36" path="res://scenes/enemies/healthbar.tscn" id="3_6s3w3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tjxhr"]
-size = Vector3(1, 1.24782, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f2211"]
-albedo_color = Color(1, 0.113725, 0.231373, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_or3s5"]
-render_priority = 0
-shader = ExtResource("2_q5juf")
-shader_parameter/solid = true
-shader_parameter/strength = 1.0
-shader_parameter/color = Color(0, 0, 0, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ja81l"]
+size = Vector3(1, 1.76964, 0.585083)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_o2pfw"]
 viewport_path = NodePath("HealthSprite/Healthbar")
@@ -29,24 +17,29 @@ size = Vector3(32.3009, 1, 32.8627)
 size = Vector3(79.8625, 1, 80.4659)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bb8pq"]
-size = Vector3(1.19049, 0.725098, 1.21486)
+size = Vector3(0.487686, 0.466431, 0.534184)
 
-[node name="CrystalEnemy" type="CharacterBody3D" groups=["Enemy"]]
+[node name="CrystalEnemy" type="CharacterBody3D" node_paths=PackedStringArray("crystal_sprite", "health_sprite") groups=["Enemy"]]
 collision_layer = 13
 collision_mask = 10
 script = ExtResource("1_s61cp")
+crystal_sprite = NodePath("crystalman")
+health_sprite = NodePath("HealthSprite")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.181174, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0797356, 0.0244751)
 shape = SubResource("BoxShape3D_tjxhr")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_f2211")
-material_overlay = SubResource("ShaderMaterial_or3s5")
-mesh = SubResource("CapsuleMesh_ja81l")
+[node name="crystalman" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+billboard = 1
+sprite_frames = ExtResource("2_dlaqm")
+animation = &"idle"
+frame_progress = 0.993092
 
 [node name="HealthSprite" type="Sprite3D" parent="."]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1.72328, 0)
+visible = false
 billboard = 1
 texture = SubResource("ViewportTexture_o2pfw")
 
@@ -78,7 +71,7 @@ collision_layer = 12
 collision_mask = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Headshot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00462914, 0.802005, -0.00340462)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0207733, 1.21752, 0.0556754)
 shape = SubResource("BoxShape3D_bb8pq")
 
 [connection signal="body_entered" from="Detection" to="." method="_on_detection_body_entered"]

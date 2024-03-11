@@ -4,7 +4,6 @@ extends CharacterBody3D
 
 @export_category("refs")
 @export var camera_first_person:Camera3D
-@export var camera_third_person:Camera3D
 @export var weapons:Array[Node3D]
 @export var weapon_socket:Marker3D
 

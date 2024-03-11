@@ -7,35 +7,32 @@
 [ext_resource type="PackedScene" uid="uid://c8o1d0oyq22xi" path="res://scenes/weapons/chrono/white_weapon.tscn" id="6_4e8q5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wtlei"]
+radius = 0.793701
+height = 3.23406
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera_first_person", "camera_third_person", "weapons", "weapon_socket") groups=["Player"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera_first_person", "weapons", "weapon_socket") groups=["Player"]]
 collision_layer = 19
 collision_mask = 5
 floor_max_angle = 1.54811
 script = ExtResource("1_w2nvs")
 camera_first_person = NodePath("FirstPerson")
-camera_third_person = NodePath("MuzzleCam")
 weapons = [NodePath("WeaponSocket/Red_weapon"), NodePath("WeaponSocket/BlueWeapon"), NodePath("WeaponSocket/GreenWeapon"), NodePath("WeaponSocket/WhiteWeapon")]
 weapon_socket = NodePath("WeaponSocket")
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63679, 0)
+shape = SubResource("CapsuleShape3D_wtlei")
+
 [node name="FirstPerson" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.722767, -0.349107)
+transform = Transform3D(0.999999, -0.00139626, 0, 0.00139626, 0.999999, 0, 0, 0, 1, 0, 2.93441, -0.349)
 current = true
 
 [node name="SpringArm3D" type="SpringArm3D" parent="FirstPerson"]
 
-[node name="MuzzleCam" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.922208, 0.386695, 0, -0.386695, 0.922208, 0, 0, 0)
-visible = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_wtlei")
-
 [node name="WeaponSocket" type="Marker3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.322376, 0.451655, -0.431199)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.322, 2.58805, -0.431)
 
 [node name="Red_weapon" parent="WeaponSocket" instance=ExtResource("3_np643")]
-visible = false
 current_weapon = true
 
 [node name="BlueWeapon" parent="WeaponSocket" instance=ExtResource("5_a8ke1")]

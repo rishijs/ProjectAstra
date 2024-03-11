@@ -1,6 +1,6 @@
 extends Node3D
 
-enum enemy_type{DEFAULT,STILL,WATCHER}
+enum enemy_type{DEFAULT,STILL,CRYSTAL}
 @export_category("spawn criteria")
 @export var active = true
 @export var spawn_points : Array[Marker3D]
@@ -13,7 +13,7 @@ var spawned = false
 var enemies = {
 	default_enemy = preload("res://scenes/enemies/default/default_enemy.tscn"),
 	still_enemy = preload("res://scenes/enemies/still/still_enemy.tscn"),
-	watcher = preload("res://scenes/enemies/watcher/watcher.tscn")
+	crystal_enemy = preload("res://scenes/enemies/crystal_man/crystal_enemy.tscn")
 }
 
 func spawn_enemies():

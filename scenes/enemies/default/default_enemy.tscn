@@ -31,10 +31,11 @@ size = Vector3(79.8625, 1, 80.4659)
 [sub_resource type="BoxShape3D" id="BoxShape3D_bb8pq"]
 size = Vector3(1.19049, 0.725098, 1.21486)
 
-[node name="DefaultEnemy" type="CharacterBody3D" groups=["Enemy"]]
+[node name="DefaultEnemy" type="CharacterBody3D" node_paths=PackedStringArray("health_sprite") groups=["Enemy"]]
 collision_layer = 13
 collision_mask = 10
 script = ExtResource("1_6vpib")
+health_sprite = NodePath("HealthSprite")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.181174, 0)
@@ -47,6 +48,7 @@ mesh = SubResource("CapsuleMesh_ja81l")
 
 [node name="HealthSprite" type="Sprite3D" parent="."]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1.72328, 0)
+visible = false
 billboard = 1
 texture = SubResource("ViewportTexture_o2pfw")
 

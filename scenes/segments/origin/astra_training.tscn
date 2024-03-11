@@ -390,26 +390,34 @@ render_target_update_mode = 4
 
 [node name="TrainingSim" parent="." instance=ExtResource("6_r7trl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.516, 1.09509, 22.121)
+enemy = 2
 
 [node name="TrainingSim2" parent="." instance=ExtResource("6_r7trl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.1339, 1.09509, 22.121)
+enemy = 2
 
 [node name="TrainingSim3" parent="." instance=ExtResource("6_r7trl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91164, 1.09509, 22.121)
+enemy = 2
 
 [node name="TrainingSim4" parent="." instance=ExtResource("6_r7trl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.16948, 1.09509, 22.121)
+enemy = 2
 
 [node name="TrainingSim5" parent="." instance=ExtResource("6_r7trl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8675, 1.09509, 22.121)
+enemy = 2
 
 [node name="TrainingSim6" parent="." instance=ExtResource("6_r7trl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.2985, 1.09509, 22.121)
+enemy = 2
 
 [node name="TrainingSim7" parent="." instance=ExtResource("6_r7trl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.831, 1.09509, 22.121)
+enemy = 2
 
 [node name="TrainingSim8" parent="." instance=ExtResource("6_r7trl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.5773, 1.09509, 22.121)
+enemy = 2
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

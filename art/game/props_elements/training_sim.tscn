@@ -13,7 +13,7 @@ enemy = 1
 marker = NodePath("Marker3D")
 
 [node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4328, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.88662, 0)
 
 [node name="platform" type="MeshInstance3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, 0.6, 0, 0, 0, 3, 0, 0, 0)
