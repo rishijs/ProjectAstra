@@ -5,6 +5,7 @@ enum light_status{LOW,BASE,HIGH,FLICKER,OSC}
 
 @export var light:OmniLight3D
 @export var light_range:float = 40
+@export var light_fade_dist:float = 20
 @export var light_radius:float = 20
 @export var flickering:bool = false
 @export var oscillating:bool = true
@@ -23,6 +24,8 @@ var current_range = light_range
 
 func _ready():
 	light.distance_fade_begin = light_range
+	light.distance_fade_length = light_fade_dist
+	
 
 func lower_light():
 	pass

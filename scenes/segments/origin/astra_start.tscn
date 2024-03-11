@@ -342,21 +342,33 @@ skeleton = NodePath("")
 
 [node name="Torch" parent="Torch" instance=ExtResource("3_vycwm")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 38.4182, 9.96618, -6.55404)
+light_range = 10.0
+light_fade_dist = 10.0
 
 [node name="Torch2" parent="Torch" instance=ExtResource("3_vycwm")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 38.4182, 9.96618, -24.9096)
+light_range = 10.0
+light_fade_dist = 10.0
 
 [node name="Torch3" parent="Torch" instance=ExtResource("3_vycwm")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 38.4182, 9.96618, 18.874)
+light_range = 10.0
+light_fade_dist = 10.0
 
 [node name="Torch4" parent="Torch" instance=ExtResource("3_vycwm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.7217, 9.96618, -3.44382)
+light_range = 10.0
+light_fade_dist = 10.0
 
 [node name="Torch5" parent="Torch" instance=ExtResource("3_vycwm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.7217, 9.96618, -24.9096)
+light_range = 10.0
+light_fade_dist = 10.0
 
 [node name="Torch6" parent="Torch" instance=ExtResource("3_vycwm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.7217, 9.96618, 18.874)
+light_range = 10.0
+light_fade_dist = 10.0
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11123, 4.39587)
