@@ -6,14 +6,10 @@ extends Node
 
 
 @export var inactive_segment:bool = false
+@export var segment_start:Marker3D
 
 @export var spawn_arrangements:Array[Node3D]
-#changes based on depth after first arena
-var spawn_chance_change = 0
-#scaling depth flat
-@export var depth_spawn_scaling_flat = 0.2
-#scaling depth multiplied
-@export var depth_spawn_scaling_mult = 0.05
+
 #changes on prestige
 var num_waves_change = Globals.prestige - 1
 
@@ -21,8 +17,8 @@ var num_waves_change = Globals.prestige - 1
 @export var timer_node : Timer
 @export var time_multiplier : float
 
-var forced_arrangement : bool = false
-var specific_arrangement : int = 0
+#var forced_arrangement : bool = false
+#var specific_arrangement : int = 0
 
 @export_category("pivots")
 @export var up : Marker3D
@@ -56,17 +52,13 @@ func _ready():
 	pass
 
 func spawn_spawners():
-	spawn_chance_change += -segment_manager_ref.player_depth * depth_spawn_scaling_mult + depth_spawn_scaling_flat
 	for arrangement in spawn_arrangements:
 		for spawner in arrangement.get_children():
-			if spawner.chance_to_spawn != 1.0:
-				spawner.chance_to_spawn = clampf(spawner.chance_to_spawn+spawn_chance_change,0,1)
 			spawner.num_waves += num_waves_change
-			var chance = randf_range(0.01,1.0)
-			if chance > spawner.chance_to_spawn:
-				spawner.queue_free()
-			else:
+			if segment_manager_ref.arena_index >= spawner.spawn_at_arena_index:
 				spawner.activate()
+			else:
+				spawner.queue_free()
 
 """
 func choose_enemy_arrangement(forced, specific):
@@ -101,6 +93,7 @@ func update_on_exit():
 		
 func _process(_delta):
 	pass
+		
 
 func on_timer_timeout():
 	#timer no longer active

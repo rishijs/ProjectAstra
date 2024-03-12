@@ -9,15 +9,15 @@ func _ready():
 
 func _process(delta):
 	super(delta)
-	if weapon_state == States.CHARGING and charge_time > 0 and Input.is_action_pressed("primary_fire"):
+	if weapon_state == States.CHARGING and charge_time > 0 and (Input.is_action_pressed("primary_fire") or Input.is_action_pressed("ads_fire")):
 		charge_time = clampf(charge_time - delta,0,weapon_stats[Data.wattr.CHARGE_DURATION])
-	elif weapon_state == States.CHARGING and charge_time == 0 and Input.is_action_pressed("primary_fire"):
+	elif weapon_state == States.CHARGING and charge_time == 0 and (Input.is_action_pressed("primary_fire") or Input.is_action_pressed("ads_fire")):
 		shooting_pattern()
-	elif not Input.is_action_pressed("primary_fire"):
+	elif not (Input.is_action_pressed("primary_fire") or Input.is_action_pressed("ads_fire")):
 		weapon_state = States.READY
 		charge_time = 0
 
-func fire(ads = false):
+func fire():
 	if is_instance_valid(projectiles_ref) and is_instance_valid(muzzle):
 		if weapon_state == States.READY and initialized and magazine >= weapon_stats[Data.wattr.NUM_PROJECTILES]:
 			weapon_state = States.CHARGING

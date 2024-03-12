@@ -1,5 +1,6 @@
 extends "res://scenes/segments/segment.gd"
 
+@onready var game_manager_ref = get_tree().get_first_node_in_group("GameManager")
 @export var connection_end:Array[Marker3D]
 
 @export_category("doors")
@@ -7,6 +8,9 @@ extends "res://scenes/segments/segment.gd"
 @export var doorC:StaticBody3D
 @export var doorL:StaticBody3D
 @export var doorR:StaticBody3D
+
+@export var time_modifier_flat_gain = 30
+@export var time_modifier_multiplied_loss = 0.9
 
 var locked = false
 var door_chosen = false
@@ -40,25 +44,18 @@ func _on_segment_entry_body_entered(body):
 
 func init_arena():
 	doorE.hide()
-	if not first:
-		spawn_chance_change += -segment_manager_ref.player_depth * depth_spawn_scaling_mult + depth_spawn_scaling_flat
 	%EntryDoorCol.disabled = true
 
 func calculate_num_elims():
 	defeats_required = 0
 	for arrangement in spawn_arrangements:
 		for spawner in arrangement.get_children():
-			if spawner.chance_to_spawn != 1.0:
-				spawner.chance_to_spawn = clampf(spawner.chance_to_spawn+spawn_chance_change,0,1)
-			elif first:
-				spawner.chance_to_spawn = 0
 			spawner.num_waves += num_waves_change
 			spawner.activate()
-			var chance = randf_range(0.01,1.0)
-			if chance > spawner.chance_to_spawn:
-				spawner.queue_free()
-			else:
+			if segment_manager_ref.arena_index >= spawner.spawn_at_arene_index:
 				defeats_required += spawner.num_waves
+			else:
+				spawner.queue_free()
 
 func lock_arena():
 	locked = true
@@ -81,6 +78,8 @@ func _on_segment_door_r_body_entered(body):
 		if segment_manager_ref.enable:
 			segment_manager_ref.new_chunk.emit(segment_manager_ref.segment_types.MISC,2,1+segment_manager_ref.depth_variance)
 		door_chosen = true
+		player_ref.aberrate_weapon("successful")
+		game_manager_ref.player_time_seconds *= time_modifier_multiplied_loss
 		update_on_exit()
 		doorR.call_deferred("queue_free")
 
@@ -92,6 +91,8 @@ func _on_segment_door_l_body_entered(body):
 		if segment_manager_ref.enable:
 			segment_manager_ref.new_chunk.emit(segment_manager_ref.segment_types.MISC,0,clampf(1-segment_manager_ref.depth_variance,0.1,1))
 		door_chosen = true
+		player_ref.aberrate_weapon("unstable")
+		game_manager_ref.player_time_seconds += time_modifier_flat_gain
 		update_on_exit()
 		doorL.call_deferred("queue_free")
 
@@ -102,6 +103,7 @@ func _on_segment_door_c_body_entered(body):
 		if segment_manager_ref.enable:
 			segment_manager_ref.new_chunk.emit(segment_manager_ref.segment_types.MISC,1,1)
 		door_chosen = true
+		player_ref.aberrate_weapon("stable")
 		update_on_exit()
 		doorC.call_deferred("queue_free")
 

@@ -9,10 +9,36 @@ var segment_ref
 var rotation_at_checkpoint
 var depth_at_checkpoint
 
+var score = 0
+var player_time_seconds = 180
+var player_time_string = "00:00"
+
+var altered_weapon_flat_stats = []
+var altered_weapon_multiplied_stats = []
+
+
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Globals.in_game = true
+	
+	altered_weapon_flat_stats.resize(Data.wattr.keys().size())
+	altered_weapon_flat_stats.fill(0)
+	altered_weapon_multiplied_stats.resize(Data.wattr.keys().size())
+	altered_weapon_multiplied_stats.fill(0.0)
 
 
 func _process(_delta):
 	pass
+
+
+func _on_timer_timeout():
+	player_time_seconds -= 1
+	
+	if player_time_seconds == 0:
+		#game over
+		SceneLoader.load_scene("res://interface/menus/main_menu.tscn", true)
+		SceneLoader.change_scene_to_loading_screen()
+		
+	var mins = player_time_seconds / 60
+	var seconds = player_time_seconds % 60
+	player_time_string = Globals.convert_time_to_string(mins,seconds)

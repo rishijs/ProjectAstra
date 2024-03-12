@@ -139,7 +139,7 @@ offset_bottom = 0.159912
 color = Color(1, 1, 1, 0.196078)
 
 [node name="Player" parent="." instance=ExtResource("1_d3ahk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.258408, 1.72229, -8.23834)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.258408, 1.72229, -14.7157)
 
 [node name="Projectiles" parent="." instance=ExtResource("2_re3rw")]
 
@@ -168,10 +168,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.728271, -0.688587, -38.3571
 [node name="SpawnManager" parent="." instance=ExtResource("5_or2hb")]
 
 [node name="Interface" parent="." instance=ExtResource("7_dslur")]
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.806183, 0.111679, 0.0552635)
-light_energy = 20.0
-omni_range = 75.0
 
 [connection signal="weapon_swapped" from="PostProcess" to="PostProcess" method="_on_weapon_swapped"]

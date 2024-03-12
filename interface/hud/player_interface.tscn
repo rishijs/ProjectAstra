@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://interface/hud/player_interface.gd" id="1_uecec"]
 [ext_resource type="Theme" uid="uid://bpeg6inp31l8g" path="res://themes/deftheme.tres" id="2_5top5"]
 
-[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("fps_text", "time_text", "segment_time_text", "objective_text", "segment_id_text", "magazine_text", "reloading_text", "swaps_text", "player_healthbar", "arena_elims") groups=["Interface"]]
+[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("fps_text", "time_text", "segment_time_text", "objective_text", "segment_id_text", "magazine_text", "reloading_text", "swaps_text", "player_healthbar", "player_energy", "arena_elims") groups=["Interface"]]
 script = ExtResource("1_uecec")
 fps_text = NodePath("game_info/VBoxContainer/fps")
 time_text = NodePath("game_info/VBoxContainer/time")
@@ -14,6 +14,7 @@ magazine_text = NodePath("weapon_info/VBoxContainer/magazine")
 reloading_text = NodePath("weapon_info/VBoxContainer/reloading")
 swaps_text = NodePath("game_info/VBoxContainer/swaps")
 player_healthbar = NodePath("PlayerHealth")
+player_energy = NodePath("PlayerEnergy")
 arena_elims = NodePath("objective_info/VBoxContainer/arena_required_elims")
 
 [node name="game_info" type="MarginContainer" parent="."]
@@ -161,6 +162,19 @@ offset_top = 0.279995
 offset_right = 0.319946
 offset_bottom = 0.279991
 value = 50.27
+show_percentage = false
+
+[node name="PlayerEnergy" type="ProgressBar" parent="."]
+anchors_preset = -1
+anchor_left = 0.399
+anchor_top = 0.102
+anchor_right = 0.629
+anchor_bottom = 0.127
+offset_left = 0.919983
+offset_top = -0.160004
+offset_right = -0.680054
+offset_bottom = -0.160004
+value = 38.04
 show_percentage = false
 
 [connection signal="timeout" from="Update" to="." method="_on_update_timeout"]

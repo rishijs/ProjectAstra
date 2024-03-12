@@ -8,8 +8,8 @@ func _ready():
 func _process(delta):
 	super(delta)
 
-func fire(ads = false):
-	super(ads)
+func fire():
+	super()
 
 func shooting_pattern():
 	super()
@@ -21,7 +21,10 @@ func prepare_next_shot():
 	add_recoil(weapon_stats[Data.wattr.RECOIL_TIME],weapon_stats[Data.wattr.RECOIL_AMOUNT]/5)
 	if weapon_state != States.RELOADING:
 		weapon_state = States.PREPARING
-		await get_tree().create_timer(weapon_stats[Data.wattr.FIRE_RATE],false).timeout
+		if is_ads_fire:
+			await get_tree().create_timer(weapon_stats[Data.wattr.ADS_FIRE_RATE],false).timeout
+		else:
+			await get_tree().create_timer(weapon_stats[Data.wattr.FIRE_RATE],false).timeout
 		weapon_state = States.READY
 		if (Input.is_action_pressed("primary_fire") or Input.is_action_pressed("ads_fire")) and player_ref.active_weapon_index == Data.chromas.NATURA:
 			if magazine >= weapon_stats[Data.wattr.NUM_PROJECTILES]:

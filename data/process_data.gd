@@ -11,13 +11,17 @@ var csv_files:Dictionary = {
 var wcls= csv_files.keys()[0]
 var abcls = csv_files.keys()[1]
 
+var unstable_aberrations = []
+var stable_aberrations = []
+var successful_aberrations = []
+
 enum wattr{
 	CHROMA,ARCHETYPE,DAMAGE,MAGAZINE,NUM_PROJECTILES,RELOAD_SPEED,FIRE_RATE,CHARGE_DURATION,RECOIL_AMOUNT,
 	RECOIL_TIME,MAX_RECOIL,ACCURACY,MAX_SPREAD,JITTER,PROJECTILE_SPEED,HEADSHOT_MULTIPLIER,
-	CRITICAL_CHANCE,CRITICAL_DAMAGE,DAMAGE_ID
+	CRITICAL_CHANCE,CRITICAL_DAMAGE,DAMAGE_ID,ADS_FIRE_RATE,ADS_RECOIL_AMOUNT,ADS_ACCURACY,ADS_MAX_SPREAD,ADS_CRITICAL_CHANCE
 }
 enum abattr{
-	FLAT_BONUS,MULTIPLIED_BONUS,ID,DESCRIPTION
+	STABILITY,FLAT_EFFECT,MULTIPLIED_EFFECT,ID,DESCRIPTION
 }
 enum chromas{
 	IGNEOUS,ARC,NATURA,CHRONO,GREY
@@ -26,6 +30,7 @@ enum chromas{
 func _ready():
 	for type in csv_files.keys():
 		all_data[type] = csv_to_dict(csv_files[type])
+	split_into_aberration_types()
 	#print("default weapon fire rate: %f [test access]"%[get_weapon_attribute("default",weapon_attributes.FIRE_RATE)])
 
 #takes in a csv file path and returns a dictionary of values it reads
@@ -67,4 +72,15 @@ func get_attr(cls,item_name,attribute):
 			printerr("attribute not found: ",attribute_name)
 	else:
 		printerr("weapon not found: ",item_name)
+
+func split_into_aberration_types():
+	for i in range (all_data[abcls].keys().size()):
+		var aberration = all_data[abcls][i]
+		match aberration[abattr.STABILITY]:
+			"unstable":
+				unstable_aberrations.append(i)
+			"stable":
+				stable_aberrations.append(i)
+			"successful":
+				successful_aberrations.append(i)
 

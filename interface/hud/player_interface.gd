@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @onready var player_ref = get_tree().get_first_node_in_group("Player")
 @onready var segment_manager_ref = get_tree().get_first_node_in_group("SegmentManager")
+@onready var game_manager_ref = get_tree().get_first_node_in_group("GameManager")
 
 @export_category("refs")
 @export var fps_text:Label
@@ -13,11 +14,14 @@ extends CanvasLayer
 @export var reloading_text:Label
 @export var swaps_text:Label
 @export var player_healthbar:ProgressBar
+@export var player_energy:ProgressBar
 @export var arena_elims:Label
 
 func _ready():
 	player_healthbar.max_value = player_ref.max_health
 	player_healthbar.value = player_ref.health
+	player_energy.max_value = player_ref.max_movement_energy
+	player_energy.value = player_ref.movement_energy
 
 
 func _process(_delta):
@@ -26,7 +30,7 @@ func _process(_delta):
 
 func _on_update_timeout():
 	fps_text.text = "%d FPS" % Engine.get_frames_per_second()
-	time_text.text = "%s" % Globals.time_string
+	time_text.text = "%s" % game_manager_ref.player_time_string
 	
 	if is_instance_valid(segment_manager_ref):
 		"""
@@ -59,5 +63,6 @@ func _on_update_timeout():
 		arena_elims.hide()
 	
 	player_healthbar.value = player_ref.health
+	player_energy.value = player_ref.movement_energy
 	
-	swaps_text.text = "SCORE: %d" % player_ref.num_swaps
+	swaps_text.text = "SCORE: %d" % game_manager_ref.score

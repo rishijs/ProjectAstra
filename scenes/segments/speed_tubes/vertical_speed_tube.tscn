@@ -350,38 +350,32 @@ shape = SubResource("BoxShape3D_3mbn7")
 [node name="SpawnArrangement" type="Node3D" parent="."]
 
 [node name="Spawner" parent="SpawnArrangement" instance=ExtResource("5_sdtk7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80251, -6.2933, 3.69434)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6703, -6.2933, 3.69434)
 spawn_type = 1
-num_waves = 1
-spawn_rate = 5.0
-chance_to_spawn = 0.1
+spawn_rate = 1.0
+spawn_at_arena_index = 1
 
 [node name="Spawner2" parent="SpawnArrangement" instance=ExtResource("5_sdtk7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80251, -22.6683, 3.69434)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6703, -22.6683, 3.69434)
 spawn_type = 1
-num_waves = 1
-spawn_rate = 5.0
-chance_to_spawn = 0.1
+spawn_rate = 1.0
+spawn_at_arena_index = 2
 
 [node name="Spawner3" parent="SpawnArrangement" instance=ExtResource("5_sdtk7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80251, -48.5032, 3.69434)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6703, -48.5032, 3.69434)
 spawn_type = 1
-num_waves = 1
-spawn_rate = 5.0
-chance_to_spawn = 0.1
+spawn_rate = 3.0
+spawn_at_arena_index = 3
 
 [node name="Spawner4" parent="SpawnArrangement" instance=ExtResource("5_sdtk7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80251, -60.2829, 3.69434)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6703, -60.2829, 3.69434)
 spawn_type = 1
-num_waves = 1
-spawn_rate = 5.0
-chance_to_spawn = 0.1
+spawn_at_arena_index = 4
 
 [node name="Spawner5" parent="SpawnArrangement" instance=ExtResource("5_sdtk7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80251, -78.7967, 3.69434)
-num_waves = 1
-spawn_rate = 5.0
-chance_to_spawn = 0.1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6703, -78.7967, 3.69434)
+spawn_rate = 1.0
+spawn_at_arena_index = 5
 
 [connection signal="body_entered" from="SegmentEntryV" to="." method="_on_segment_entry_v_body_entered"]
 [connection signal="timeout" from="LifetimeV" to="." method="_on_lifetime_v_timeout"]

@@ -316,42 +316,45 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 20.776
 [node name="Spawner" parent="SpawnArrangement" instance=ExtResource("5_aqoq4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80251, 2.2, 3.69434)
 spawn_type = 1
-num_waves = 1
-spawn_rate = 5.0
-chance_to_spawn = 0.1
+spawn_rate = 1.0
+
+[node name="Spawner7" parent="SpawnArrangement" instance=ExtResource("5_aqoq4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.96827, 2.2, -1.74201)
+spawn_type = 1
+spawn_rate = 3.0
+spawn_at_arena_index = 5
 
 [node name="Spawner2" parent="SpawnArrangement" instance=ExtResource("5_aqoq4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80251, 2.2, -3.70914)
 spawn_type = 1
-num_waves = 1
-spawn_rate = 5.0
-chance_to_spawn = 0.1
+spawn_rate = 1.0
+spawn_at_arena_index = 1
 
 [node name="Spawner3" parent="SpawnArrangement" instance=ExtResource("5_aqoq4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.8258, 2.2, 0.0508604)
-num_waves = 1
-spawn_rate = 5.0
-chance_to_spawn = 0.1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6845, 2.2, 0.0508604)
+spawn_type = 1
+spawn_rate = 1.0
+spawn_at_arena_index = 3
+
+[node name="Spawner8" parent="SpawnArrangement" instance=ExtResource("5_aqoq4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.1493, 2.2, -0.0166731)
+spawn_rate = 1.0
+spawn_at_arena_index = 2
 
 [node name="Spawner4" parent="SpawnArrangement" instance=ExtResource("5_aqoq4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.18932, 2.2, -18.9714)
 spawn_type = 1
-num_waves = 1
-spawn_rate = 5.0
-chance_to_spawn = 0.1
+spawn_at_arena_index = 4
 
 [node name="Spawner5" parent="SpawnArrangement" instance=ExtResource("5_aqoq4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.72762, 2.2, -18.9714)
 spawn_type = 1
-num_waves = 1
-spawn_rate = 5.0
-chance_to_spawn = 0.1
+spawn_at_arena_index = 5
 
 [node name="Spawner6" parent="SpawnArrangement" instance=ExtResource("5_aqoq4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.238967, 2.2, -32.0528)
-num_waves = 1
-spawn_rate = 5.0
-chance_to_spawn = 0.1
+spawn_rate = 7.0
+spawn_at_arena_index = 2
 
 [connection signal="body_entered" from="SegmentEntry_CR" to="." method="_on_segment_entry_cr_body_entered"]
 [connection signal="body_entered" from="SegmentExitCR" to="." method="_on_segment_exit_cr_body_entered"]

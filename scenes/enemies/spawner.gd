@@ -7,9 +7,9 @@ enum crystal_types{PUNCHER,LASER}
 @export_category("spawn criteria")
 
 @export var spawn_type : crystal_types
-@export var num_waves = 0
-@export var spawn_rate = 10.0
-@export var chance_to_spawn = 1.0
+@export var num_waves = 1
+@export var spawn_rate = 5.0
+@export var spawn_at_arena_index = -1
 
 var spawned = false
 var enemies = {

@@ -23,28 +23,28 @@ var attack_speed
 func _ready():
 	super()
 	if training_man:
-		max_health = 200 * Globals.prestige
-		health = 200 * Globals.prestige
+		max_health = 200 * 20*Globals.prestige
+		health = 200 * 20*Globals.prestige
 		speed = 0
 
 	elif laser_man:
-		max_health = 100 * Globals.prestige
-		health = 100 * Globals.prestige
+		max_health = 100 * 10*Globals.prestige
+		health = 100 * 10*Globals.prestige
 		speed = 0
 		damage = 10
-		attack_speed = 5.0 / Globals.prestige
+		attack_speed = clampf(5.0 / Globals.prestige, 3.0, 5.0)
 
 	elif punch_man:
 		max_health = 150 * Globals.prestige
 		health = 150 * Globals.prestige
 		speed = 10 * Globals.prestige
 		damage = 10 
-		attack_speed = 2.0 / Globals.prestige
+		attack_speed = clampf(2.0 / Globals.prestige, 0.5, 2.0)
 
 	crystal_sprite.play("idle")
 
-func _physics_process(delta):
-	
+func _physics_process(_delta):
+		
 	if locking_on:
 		lock_on()
 		
@@ -87,8 +87,8 @@ func lock_on():
 	if locking_on:
 		var dist_to_player = laser_target.global_position.distance_to(player_ref.global_position)
 		
-		%LaserAttackWarningClose.mesh.height = dist_to_player*25.0
-		%LaserAttackWarning.mesh.height = dist_to_player*25.0
+		%LaserAttackWarningClose.mesh.height = dist_to_player*50.0
+		%LaserAttackWarning.mesh.height = dist_to_player*50.0
 		
 		laser_target.look_at(player_ref.global_position)
 		locked_position = player_ref.global_position
@@ -133,3 +133,21 @@ func _on_lock_on_timer_timeout():
 	locking_on = false
 	%LaserAttackWarning.hide()
 	%LaserAttackWarningClose.show()
+
+
+func _on_laser_detection_body_entered(body):
+	if body == player_ref and laser_man:
+		threat_detected = true
+
+func _on_laser_detection_body_exited(body):
+	if body == player_ref and laser_man:
+		threat_detected = false
+	
+	
+func _on_melee_detection_body_entered(body):
+	if body == player_ref and punch_man:
+		threat_detected = true
+
+func _on_range_body_exited(body):
+	if body == player_ref and punch_man:
+		threat_detected = false

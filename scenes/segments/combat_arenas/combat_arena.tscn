@@ -636,82 +636,92 @@ shape = SubResource("BoxShape3D_0k7m4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.323421, 2.3, 0.159834)
 num_waves = 3
 spawn_rate = 3.0
+spawn_at_arena_index = 0
 
 [node name="Spawner2" parent="Spawners" instance=ExtResource("6_bad62")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.5138, 2.3, 21.3412)
-num_waves = 1
-spawn_rate = 5.0
-chance_to_spawn = 0.5
+spawn_at_arena_index = 4
 
 [node name="Spawner3" parent="Spawners" instance=ExtResource("6_bad62")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.5138, 2.3, -1.84422)
-num_waves = 1
-spawn_rate = 6.0
-chance_to_spawn = 0.5
+spawn_at_arena_index = 5
 
 [node name="Spawner4" parent="Spawners" instance=ExtResource("6_bad62")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.5138, 2.3, -26.1101)
-num_waves = 1
-spawn_rate = 7.0
-chance_to_spawn = 0.5
+spawn_at_arena_index = 1
 
 [node name="Spawner5" parent="Spawners" instance=ExtResource("6_bad62")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.769, 2.3, -26.1101)
-num_waves = 1
-spawn_rate = 8.0
-chance_to_spawn = 0.5
+spawn_at_arena_index = 1
 
 [node name="Spawner6" parent="Spawners" instance=ExtResource("6_bad62")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.769, 2.3, 1.68705)
-num_waves = 1
-spawn_rate = 9.0
-chance_to_spawn = 0.5
+spawn_at_arena_index = 5
 
 [node name="Spawner7" parent="Spawners" instance=ExtResource("6_bad62")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.769, 2.3, 25.841)
-num_waves = 1
-chance_to_spawn = 0.5
+spawn_at_arena_index = 4
+
+[node name="Spawner16" parent="Spawners" instance=ExtResource("6_bad62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3881, 2.3, -10.7354)
+spawn_rate = 10.0
+spawn_at_arena_index = 3
+
+[node name="Spawner18" parent="Spawners" instance=ExtResource("6_bad62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.782202, 2.3, -16.4452)
+spawn_rate = 10.0
+spawn_at_arena_index = 3
+
+[node name="Spawner17" parent="Spawners" instance=ExtResource("6_bad62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.9774, 2.3, -11.1884)
+spawn_rate = 10.0
+spawn_at_arena_index = 3
 
 [node name="Spawner8" parent="Spawners" instance=ExtResource("6_bad62")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.9234, 23.0498, 25.841)
 spawn_type = 1
-num_waves = 1
-spawn_rate = 5.0
-chance_to_spawn = 0.5
+spawn_rate = 10.0
+spawn_at_arena_index = 3
 
 [node name="Spawner9" parent="Spawners" instance=ExtResource("6_bad62")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.9234, 23.0498, 5.0457)
 spawn_type = 1
-num_waves = 1
-spawn_rate = 6.0
-chance_to_spawn = 0.5
+spawn_rate = 15.0
+spawn_at_arena_index = 4
 
 [node name="Spawner10" parent="Spawners" instance=ExtResource("6_bad62")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.9234, 23.0498, -19.8536)
 spawn_type = 1
-num_waves = 1
-spawn_rate = 7.0
-chance_to_spawn = 0.5
+spawn_at_arena_index = 2
 
 [node name="Spawner11" parent="Spawners" instance=ExtResource("6_bad62")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.7761, 23.0498, 25.841)
 spawn_type = 1
-num_waves = 1
-spawn_rate = 8.0
-chance_to_spawn = 0.5
+spawn_rate = 10.0
+spawn_at_arena_index = 3
 
 [node name="Spawner12" parent="Spawners" instance=ExtResource("6_bad62")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.7761, 23.0498, 5.0457)
 spawn_type = 1
-num_waves = 1
-spawn_rate = 9.0
-chance_to_spawn = 0.5
+spawn_rate = 15.0
+spawn_at_arena_index = 4
 
 [node name="Spawner13" parent="Spawners" instance=ExtResource("6_bad62")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.7761, 23.0498, -19.8536)
 spawn_type = 1
-num_waves = 1
-chance_to_spawn = 0.5
+spawn_at_arena_index = 2
+
+[node name="Spawner14" parent="Spawners" instance=ExtResource("6_bad62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.7761, 23.0498, -3.36421)
+spawn_type = 1
+spawn_rate = 15.0
+spawn_at_arena_index = 5
+
+[node name="Spawner15" parent="Spawners" instance=ExtResource("6_bad62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.9234, 23.0498, -4.26345)
+spawn_type = 1
+spawn_rate = 15.0
+spawn_at_arena_index = 5
 
 [connection signal="body_entered" from="SegmentEntry" to="." method="_on_segment_entry_body_entered"]
 [connection signal="body_entered" from="DoorC/SegmentDoorC" to="." method="_on_segment_door_c_body_entered"]

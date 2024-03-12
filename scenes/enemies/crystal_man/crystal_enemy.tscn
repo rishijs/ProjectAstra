@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://du1lmvvodexmf"]
+[gd_scene load_steps=19 format=3 uid="uid://du1lmvvodexmf"]
 
 [ext_resource type="Script" path="res://scenes/enemies/crystal_man/crystal_enemy.gd" id="1_s61cp"]
 [ext_resource type="SpriteFrames" uid="uid://dosfl47bno0tq" path="res://scenes/enemies/crystal_man/crystal_man.tres" id="2_dlaqm"]
@@ -12,13 +12,16 @@ size = Vector3(1.87494, 3.11599, 0.998444)
 viewport_path = NodePath("HealthSprite/Healthbar")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1k71u"]
-size = Vector3(32.3009, 1, 32.8627)
+size = Vector3(32.3009, 8.74994, 32.8627)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eje7q"]
+size = Vector3(102.186, 56.0351, 107.063)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_l86tl"]
-size = Vector3(79.8625, 1, 80.4659)
+size = Vector3(79.8625, 30.6235, 80.4659)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bb8pq"]
-size = Vector3(0.741611, 0.689972, 0.869447)
+size = Vector3(0.842385, 1.18164, 0.869447)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1yf62"]
 size = Vector3(3.81356, 3.9315, 3.32932)
@@ -46,11 +49,15 @@ albedo_color = Color(0, 0, 0, 0.721569)
 emission_enabled = true
 emission = Color(0.988235, 0.988235, 0.988235, 1)
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_t2qvf"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d4mhx"]
 transparency = 1
 albedo_color = Color(0, 0, 0, 0.807843)
 emission_enabled = true
 emission = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_d8g28"]
 
 [node name="CrystalEnemy" type="CharacterBody3D" node_paths=PackedStringArray("crystal_sprite", "melee_target", "laser_target", "health_sprite") groups=["Enemy"]]
 collision_layer = 13
@@ -84,14 +91,23 @@ render_target_update_mode = 4
 [node name="Healthbar" parent="HealthSprite/Healthbar" node_paths=PackedStringArray("owner_ref") instance=ExtResource("3_6s3w3")]
 owner_ref = NodePath("../../..")
 
-[node name="Detection" type="Area3D" parent="."]
+[node name="MeleeDetection" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.46089, 0)
 collision_layer = 4
 collision_mask = 2
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Detection"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.236389, 0, -0.152451)
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="MeleeDetection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.236389, -1.50302, -0.152451)
 shape = SubResource("BoxShape3D_1k71u")
+
+[node name="LaserDetection" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.46089, 0)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="LaserDetection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.03513, -16.2892, -1.64811)
+shape = SubResource("BoxShape3D_eje7q")
 
 [node name="Range" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.46089, 0)
@@ -99,7 +115,7 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Range"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.116333, 0, -0.354919)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.116333, -12.3529, -0.354919)
 shape = SubResource("BoxShape3D_l86tl")
 
 [node name="Headshot" type="Area3D" parent="." groups=["HeadshotCol"]]
@@ -108,7 +124,7 @@ collision_layer = 12
 collision_mask = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Headshot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0530354, 2.05305, -0.0668941)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0590889, 2.10846, -0.0668941)
 shape = SubResource("BoxShape3D_bb8pq")
 
 [node name="MeleeRange" type="Area3D" parent="."]
@@ -140,7 +156,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -1.94918e-09, -1, 0, 0.0445921, -4.37114e-08, 0, 0, 0)
 visible = false
 material_override = SubResource("StandardMaterial3D_07ebj")
-mesh = SubResource("CylinderMesh_jpc0u")
+mesh = SubResource("CylinderMesh_t2qvf")
 skeleton = NodePath("../..")
 
 [node name="LaserAttackWarningClose" type="MeshInstance3D" parent="LaserTarget"]
@@ -148,7 +164,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -1.94918e-09, -1, 0, 0.0445921, -4.37114e-08, 0, 0, 0)
 visible = false
 material_override = SubResource("StandardMaterial3D_d4mhx")
-mesh = SubResource("CylinderMesh_jpc0u")
+mesh = SubResource("CylinderMesh_d8g28")
 skeleton = NodePath("../..")
 
 [node name="LockOnTimer" type="Timer" parent="."]
@@ -157,7 +173,9 @@ wait_time = 0.5
 one_shot = true
 
 [connection signal="animation_finished" from="crystalman" to="." method="_on_crystalman_animation_finished"]
-[connection signal="body_entered" from="Detection" to="." method="_on_detection_body_entered"]
+[connection signal="body_entered" from="MeleeDetection" to="." method="_on_melee_detection_body_entered"]
+[connection signal="body_entered" from="LaserDetection" to="." method="_on_laser_detection_body_entered"]
+[connection signal="body_exited" from="LaserDetection" to="." method="_on_laser_detection_body_exited"]
 [connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]
 [connection signal="body_entered" from="MeleeRange" to="." method="_on_melee_range_body_entered"]
 [connection signal="body_exited" from="MeleeRange" to="." method="_on_melee_range_body_exited"]

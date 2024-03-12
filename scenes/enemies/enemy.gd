@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 @onready var player_ref = get_tree().get_first_node_in_group("Player")
+@onready var segment_manager_ref = get_tree().get_first_node_in_group("SegmentManager")
 @export var health_sprite:Sprite3D
 
 var death_particles = preload("res://art/vfx/death_particles.tscn")
@@ -49,12 +50,3 @@ func _physics_process(_delta):
 
 func hit_player():
 	player_ref.hit.emit(damage)
-
-func _on_detection_body_entered(body):
-	if body == player_ref:
-		threat_detected = true
-
-
-func _on_range_body_exited(body):
-	if body == player_ref:
-		threat_detected = false

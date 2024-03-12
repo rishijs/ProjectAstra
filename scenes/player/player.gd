@@ -3,6 +3,7 @@ extends CharacterBody3D
 @onready var post_process = get_tree().get_first_node_in_group("PostProcess");
 @onready var game_manager_ref = get_tree().get_first_node_in_group("GameManager");
 @onready var segment_manager_ref = get_tree().get_first_node_in_group("SegmentManager");
+@onready var aberrations = Data.all_data[Data.abcls]
 
 @export_category("refs")
 @export var camera_first_person:Camera3D
@@ -22,6 +23,12 @@ var movement_boost = 0
 var min_movement_boost = 20
 var max_movement_boost = base_speed * 4
 var movement_ability_time = 0
+
+var max_movement_energy = 100
+var movement_energy = 100
+var movement_energy_consumption_rate = 0.1
+var movement_energy_regen_rate_base = 0.1
+var movement_energy_regen_rate_inertia = 0.05
 
 var base_sensitivity = Globals.player_preferences["mouse_sensitivity"]
 var strafe_sensitivity = base_sensitivity
@@ -43,10 +50,9 @@ var enemies_defeated = 0
 var arena_ref
 var active_weapon_index = 0
 
-var base_defeats_till_chroma_swap = 2
-var defeats_till_chroma_swap = 2
+var base_defeats_till_chroma_swap = 3
+var defeats_till_chroma_swap = 5
 var num_swaps = 0
-var objective_scaling = 1
 
 var aberration_close = false
 var aberration_warning = false
@@ -81,7 +87,7 @@ func _input(event):
 		weapons[active_weapon_index].fire()
 	
 	if Input.is_action_just_pressed("ads_fire"):
-		weapons[active_weapon_index].fire(true)
+		weapons[active_weapon_index].fire()
 	
 	
 	if Input.is_action_just_pressed("reload"):
@@ -101,16 +107,30 @@ func _input(event):
 		weapon_socket.rotation.z = camera_first_person.rotation.x
 
 func _process(delta):
+	
+	if movement_energy >= 0:
+		can_use_movement_ability = true
+	else:
+		can_use_movement_ability = false
+		movement_ability = false
+		
 	if movement_ability:
 		movement_ability_time += delta
 		movement_boost = clamp(min_movement_boost + pow(movement_ability_time,3),0,max_movement_boost)
 		strafe_penalty = clamp(1-movement_ability_time*0.2,max_strafe_penalty,1)
 		strafe_sensitivity = clamp(base_sensitivity-movement_ability_time*0.005,base_sensitivity/max_mouse_sense_reduction,base_sensitivity)
+		movement_energy += clampf(movement_energy+movement_energy_regen_rate_inertia*speed-movement_energy_consumption_rate,0,max_movement_energy)
 	else:
 		strafe_sensitivity = base_sensitivity
 		movement_ability_time = 0
 		movement_boost = 0
 		strafe_penalty = 1
+		movement_energy += clampf(movement_energy+movement_energy_regen_rate_base,0,max_movement_energy)
+	
+	if camera_first_person.rotation.x < -deg_to_rad(min_pitch):
+		camera_first_person.rotation.x = -deg_to_rad(min_pitch)
+	elif camera_first_person.rotation.x > deg_to_rad(max_pitch):
+		camera_first_person.rotation.x = deg_to_rad(max_pitch)
 				
 func _physics_process(delta):
 	if not is_on_floor():
@@ -158,10 +178,10 @@ func swap_weapons(weapon_index):
 func reset_at_checkpoint():
 	segment_manager_ref.reset_segments()
 	global_position = game_manager_ref.checkpoint_ref.global_position
-	
 	game_manager_ref.segment_ref.door.show()
-	game_manager_ref.segment_ref.doorLock.show()
-	game_manager_ref.segment_ref.doorLockCol.disabled = false
+	
+	#game_manager_ref.segment_ref.doorLock.show()
+	#game_manager_ref.segment_ref.doorLockCol.disabled = false
 
 func _on_hit(damage):
 	health = clampf(health-damage,0,max_health)
@@ -173,16 +193,38 @@ func _on_hit(damage):
 			SceneLoader.load_scene("res://interface/menus/main_menu.tscn", true)
 			SceneLoader.change_scene_to_loading_screen()
 
-func aberrate_weapon():
-	#random buffs or debuffs on objective/defeat progress
-	pass
+func aberrate_weapon(type = "none"):
+	#random buff or debuff on going through an arena gate
+	match type:
+		"unstable":
+			validate_aberration(Data.unstable_aberrations[randi_range(0,len(Data.unstable_aberrations))])
+		"stable":
+			validate_aberration(Data.unstable_aberrations[randi_range(0,len(Data.stable_aberrations))])
+		"successful":
+			validate_aberration(Data.unstable_aberrations[randi_range(0,len(Data.successful_aberrations))])
+		"none":
+			#no effect
+			pass
+
+func validate_aberration(index):
+	var aberration_name = aberrations.keys()[index]
+	var multiplied_effect = aberrations[aberrations.keys()[index]][Data.abattr.MULTIPLIED_EFFECT]
+	var flat_effect = aberrations[aberrations.keys()[index]][Data.abattr.FLAT_EFFECT]
+	var id = aberrations[aberrations.keys()[index]][Data.abattr.ID]
+	var description = aberrations[aberrations.keys()[index]][Data.abattr.DESCRIPTION]
+	game_manager_ref.altered_weapon_flat_stats[id] += flat_effect
+	game_manager_ref.altered_weapon_mutliplied_stats[id] += multiplied_effect
+	
+	print(aberration_name,description)
+	#probably print to screen what aberration was gained and a description of it
+	weapons[active_weapon_index].initialize_weapon()
 	
 func get_next_weapon():
 	active_weapon_index += 1
 	if active_weapon_index == weapons.size():
 		active_weapon_index = 0
 	num_swaps += 1
-	defeats_till_chroma_swap = base_defeats_till_chroma_swap+num_swaps*objective_scaling
+	defeats_till_chroma_swap = base_defeats_till_chroma_swap
 			
 func _on_enemy_defeated():
 	if not is_training:
@@ -190,9 +232,10 @@ func _on_enemy_defeated():
 			if arena_ref.defeats_required > 0:
 				arena_ref.defeats_required -= 1
 		enemies_defeated += 1
-		defeats_till_chroma_swap = clampi(defeats_till_chroma_swap - 1,0,base_defeats_till_chroma_swap+num_swaps*objective_scaling)
+		defeats_till_chroma_swap = clampi(defeats_till_chroma_swap - 1,0,base_defeats_till_chroma_swap)
 		if defeats_till_chroma_swap == 0:
 			get_next_weapon()
 			swap_weapons(active_weapon_index)
+			game_manager_ref.score += 1
 		else:
 			aberrate_weapon()

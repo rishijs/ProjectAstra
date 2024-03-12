@@ -14,12 +14,11 @@ func _process(delta):
 		cancel_reload = false
 
 
-func fire(ads = false):
+func fire():
 	if is_instance_valid(projectiles_ref) and is_instance_valid(muzzle) and can_fire:
 		if initialized and magazine >= weapon_stats[Data.wattr.NUM_PROJECTILES]:
 			shooting_pattern()
 			cancel_reload = true
-			
 
 func reload():
 	%Reload.wait_time = weapon_stats[Data.wattr.RELOAD_SPEED]
@@ -37,7 +36,10 @@ func prepare_next_shot():
 	add_recoil(weapon_stats[Data.wattr.RECOIL_TIME],weapon_stats[Data.wattr.RECOIL_AMOUNT])
 	weapon_state = States.PREPARING
 	can_fire = false
-	await get_tree().create_timer(weapon_stats[Data.wattr.FIRE_RATE],false).timeout
+	if is_ads_fire:
+		await get_tree().create_timer(weapon_stats[Data.wattr.ADS_FIRE_RATE],false).timeout
+	else:
+		await get_tree().create_timer(weapon_stats[Data.wattr.FIRE_RATE],false).timeout
 	can_fire = true
 	if weapon_state != States.RELOADING and weapon_state != States.CHARGING:
 		weapon_state = States.READY

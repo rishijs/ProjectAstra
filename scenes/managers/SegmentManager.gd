@@ -13,7 +13,6 @@ extends Node3D
 @export var max_curved_per_depth = 3
 @export var max_vertical_per_chunk = 2
 @export var possible_chroma_per_chunk = 1
-@export var initial_chunks = 2
 @export var max_chunks = 5
 @export var player_starting_depth = 10
 @export var depth_variance = 0.75
@@ -28,8 +27,10 @@ var segment_rotation = 0
 var reward_room_spawned = false
 var segments_this_chunk = 0
 var num_chunks = 0
+var initial_chunks = 2
 var player_depth = player_starting_depth
 var depth = player_starting_depth
+var arena_index = initial_chunks
 
 enum segment_types{PLANE,CURVED_TUBE,STRAIGHT_TUBE,VERTICAL_TUBE,CHROMA,ARENA,REWARD,MISC}
 enum curved_tube_variants{RIGHT,LEFT}
@@ -47,6 +48,7 @@ var segment_scenes = {
 	arena = preload("res://scenes/segments/combat_arenas/combat_arena.tscn"),
 	reward = preload("res://scenes/segments/shops/reward_room.tscn"),
 }
+var door_scene = preload("res://scenes/segments/spawned_door.tscn")
 
 signal new_chunk(chunk_type,at_index)
 
@@ -68,7 +70,18 @@ func destroy_past_segments():
 				player_segment_index = clampi(player_segment_index - 1,0,segments.size())
 				for i in range(segments.size()):
 					segments[i].id = i
+			
+				create_door(segments.filter(remove_chroma)[0])
 
+func remove_chroma(segment):
+	return segment.type != segment_types.CHROMA
+
+func create_door(segment):
+	if is_instance_valid(segment.segment_start):
+		var this_door = door_scene.instantiate()
+		segment.add_child(this_door)
+		this_door.global_position = segment.segment_start.global_position
+	
 func reset_segments():
 	for segment in segments:
 		if segment.type!= segment_types.CHROMA:
@@ -77,6 +90,7 @@ func reset_segments():
 	segments.clear()
 	segments.append(game_manager_ref.segment_ref)
 	game_manager_ref.segment_ref.id = 0
+	create_door(game_manager_ref.segment_ref)	
 	
 	num_chunks -= 1
 	segment_rotation = game_manager_ref.rotation_at_checkpoint
@@ -88,7 +102,7 @@ func reset_segments():
 	
 	new_chunk.emit(segment_types.ARENA,0,1.0,true)
 	
-func destroy_behind_segment(at_index):
+func destroy_behind_segment(_at_index):
 	#legacy method / overcomplicates too much
 	"""
 	if segments.size() > at_index:
@@ -248,9 +262,11 @@ func spawn_anomaly():
 	#not implemented
 	pass
 	
-func _on_new_chunk(chunk_type = segment_types.MISC, at_index = 0, reduced_verticals = 1.0, respawn = false):
+func _on_new_chunk(chunk_type = segment_types.MISC, at_index = 0, reduced_verticals = 1.0):
 	match chunk_type:
 		segment_types.ARENA:
 			spawn_new_segments(segment_types.ARENA,at_index,reduced_verticals)
+			arena_index += 1
 		segment_types.MISC:
 			spawn_new_segments(segment_types.ARENA,at_index,reduced_verticals)
+			arena_index += 1

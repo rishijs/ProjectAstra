@@ -8,8 +8,8 @@ func _ready():
 func _process(delta):
 	super(delta)
 
-func fire(ads = false):
-	super(ads)
+func fire():
+	super()
 
 func shooting_pattern():
 	super()
