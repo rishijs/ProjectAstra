@@ -17,9 +17,21 @@ var max_pitch = 50
 var speed = 20.0
 var base_speed = 20.0
 var jump_velocity = 4.5
-var movement_boost = 5
+
+var movement_boost = 0
+var min_movement_boost = 20
+var max_movement_boost = base_speed * 4
+var movement_ability_time = 0
+
+var base_sensitivity = Globals.player_preferences["mouse_sensitivity"]
+var strafe_sensitivity = base_sensitivity
+var strafe_penalty = 1.0
+var max_strafe_penalty = 0.1
+var max_mouse_sense_reduction = 2
+
 var speed_penalty_base = 0.2
 var speed_penalty = 1
+
 var movement_ability = false
 var can_use_movement_ability = true
 
@@ -59,6 +71,12 @@ func _input(event):
 			active_weapon_index = 0
 		swap_weapons(active_weapon_index)
 	
+	if Input.is_action_just_pressed("movement_ability") and can_use_movement_ability:
+		movement_ability = true
+	
+	if Input.is_action_just_released("movement_ability"):
+		movement_ability = false
+		
 	if Input.is_action_just_pressed("primary_fire"):
 		weapons[active_weapon_index].fire()
 	
@@ -70,7 +88,7 @@ func _input(event):
 	
 	#rotate based on mouse
 	if event is InputEventMouseMotion and is_instance_valid(camera_first_person):
-		var mouse_sensitivity = Globals.player_preferences["mouse_sensitivity"]
+		var mouse_sensitivity = strafe_sensitivity
 		if not is_on_floor():
 			mouse_sensitivity *= 0.9
 		rotate_y(-event.relative.x * mouse_sensitivity)
@@ -78,8 +96,17 @@ func _input(event):
 		camera_first_person.rotation.x = clampf(camera_first_person.rotation.x, -deg_to_rad(min_pitch), deg_to_rad(max_pitch))
 		weapon_socket.rotation.z = camera_first_person.rotation.x
 
-func _process(_delta):
-	pass
+func _process(delta):
+	if movement_ability:
+		movement_ability_time += delta
+		movement_boost = clamp(min_movement_boost + pow(movement_ability_time,3),0,max_movement_boost)
+		strafe_penalty = clamp(1-movement_ability_time*0.2,max_strafe_penalty,1)
+		strafe_sensitivity = clamp(base_sensitivity-movement_ability_time*0.005,base_sensitivity/max_mouse_sense_reduction,base_sensitivity)
+	else:
+		strafe_sensitivity = base_sensitivity
+		movement_ability_time = 0
+		movement_boost = 0
+		strafe_penalty = 1
 				
 func _physics_process(delta):
 	if not is_on_floor():
@@ -97,21 +124,15 @@ func _physics_process(delta):
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	var direction
 	if movement_ability:
-		direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		direction = (transform.basis * Vector3(input_dir.x*strafe_penalty, 0, input_dir.y)).normalized()
 	else:
 		direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		
 	if direction:
-		if Input.is_action_pressed("movement_ability") and can_use_movement_ability:
-			movement_ability = true
-			speed = base_speed * movement_boost
-			velocity.x = direction.x * speed
-			velocity.z = direction.z * speed
-			
-		else:
-			speed = base_speed
-			velocity.x = direction.x * speed
-			velocity.z = direction.z * speed
+		speed = base_speed + movement_boost
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
+
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
@@ -129,12 +150,6 @@ func swap_weapons(weapon_index):
 		weapons[weapon_index].current_weapon = true
 		weapons[weapon_index].refill()
 		post_process.weapon_swapped.emit(weapon_index)
-	
-	if num_swaps > 1:
-		pass
-		#var particles = chroma_particles.instantiate()
-		#get_tree().get_first_node_in_group("GameManager").add_child(particles)
-		#particles.global_position = weapon_socket.global_position
 
 func reset_at_checkpoint():
 	segment_manager_ref.reset_segments()
