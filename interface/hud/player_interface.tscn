@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://interface/hud/player_interface.gd" id="1_uecec"]
 [ext_resource type="Theme" uid="uid://bpeg6inp31l8g" path="res://themes/deftheme.tres" id="2_5top5"]
 
-[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("fps_text", "time_text", "segment_time_text", "objective_text", "segment_id_text", "magazine_text", "reloading_text", "swaps_text", "player_healthbar") groups=["Interface"]]
+[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("fps_text", "time_text", "segment_time_text", "objective_text", "segment_id_text", "magazine_text", "reloading_text", "swaps_text", "player_healthbar", "arena_elims") groups=["Interface"]]
 script = ExtResource("1_uecec")
 fps_text = NodePath("game_info/VBoxContainer/fps")
 time_text = NodePath("game_info/VBoxContainer/time")
@@ -14,6 +14,7 @@ magazine_text = NodePath("weapon_info/VBoxContainer/magazine")
 reloading_text = NodePath("weapon_info/VBoxContainer/reloading")
 swaps_text = NodePath("game_info/VBoxContainer/swaps")
 player_healthbar = NodePath("PlayerHealth")
+arena_elims = NodePath("objective_info/VBoxContainer/arena_required_elims")
 
 [node name="game_info" type="MarginContainer" parent="."]
 anchors_preset = -1
@@ -82,6 +83,13 @@ layout_mode = 2
 theme = ExtResource("2_5top5")
 theme_override_font_sizes/font_size = 30
 text = "ID: X"
+
+[node name="arena_required_elims" type="Label" parent="objective_info/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_5top5")
+theme_override_font_sizes/font_size = 30
+text = "ENTERED AN ARENA"
 
 [node name="weapon_info" type="MarginContainer" parent="."]
 anchors_preset = -1

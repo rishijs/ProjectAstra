@@ -9,16 +9,22 @@ func _ready():
 	gather_spawners()
 	
 func gather_spawners():
+	"""
+	legacy
 	for spawner in get_tree().get_nodes_in_group("Spawner"):
 		if spawner not in spawners:
 			spawners.append(spawner)
+	"""
 
 func activate_spawners():
+	"""
+	legacy
 	for spawner in spawners:
 		if spawner.active and not spawner.spawned:
 			spawner.spawn_enemies()
 			spawner.spawned = true
 			spawner.active = false
+	"""
 		
 func disable_spawners():
 	pass

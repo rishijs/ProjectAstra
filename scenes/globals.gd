@@ -4,6 +4,8 @@ var player_preferences = {
 	"mouse_sensitivity" = 0.005
 }
 
+var prestige = 1
+
 var in_game = false
 var is_paused = false
 

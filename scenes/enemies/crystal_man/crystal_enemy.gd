@@ -23,22 +23,24 @@ var attack_speed
 func _ready():
 	super()
 	if training_man:
-		max_health = 200
-		health = 200
+		max_health = 200 * Globals.prestige
+		health = 200 * Globals.prestige
 		speed = 0
+
 	elif laser_man:
-		max_health = 100
-		health = 100
+		max_health = 100 * Globals.prestige
+		health = 100 * Globals.prestige
 		speed = 0
-		damage = 2
-		attack_speed = 5
-	elif punch_man:
-		max_health = 150
-		health = 150
-		speed = 10
 		damage = 10
-		attack_speed = 2
-		
+		attack_speed = 5.0 / Globals.prestige
+
+	elif punch_man:
+		max_health = 150 * Globals.prestige
+		health = 150 * Globals.prestige
+		speed = 10 * Globals.prestige
+		damage = 10 
+		attack_speed = 2.0 / Globals.prestige
+
 	crystal_sprite.play("idle")
 
 func _physics_process(delta):

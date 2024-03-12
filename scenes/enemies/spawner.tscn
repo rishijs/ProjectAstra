@@ -1,6 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://b402k2bhdes07"]
+[gd_scene load_steps=4 format=3 uid="uid://b402k2bhdes07"]
 
 [ext_resource type="Script" path="res://scenes/enemies/spawner.gd" id="1_e0op7"]
 
-[node name="Spawner" type="Node3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ssmf"]
+albedo_color = Color(0.0862745, 0.0862745, 0.0862745, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d3e6t"]
+
+[node name="Spawner" type="Node3D" groups=["Spawner"]]
 script = ExtResource("1_e0op7")
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="spawn" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+
+[node name="platform" type="MeshInstance3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 0.6, 0, 0, 0, 3, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_3ssmf")
+mesh = SubResource("BoxMesh_d3e6t")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

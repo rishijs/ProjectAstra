@@ -13,6 +13,7 @@ extends CanvasLayer
 @export var reloading_text:Label
 @export var swaps_text:Label
 @export var player_healthbar:ProgressBar
+@export var arena_elims:Label
 
 func _ready():
 	player_healthbar.max_value = player_ref.max_health
@@ -50,6 +51,12 @@ func _on_update_timeout():
 		reloading_text.show()
 	else:
 		reloading_text.hide()
+	
+	if player_ref.arena_ref != null:
+		arena_elims.show()
+		arena_elims.text = "%d Required Elims" % player_ref.arena_ref.defeats_required
+	else:
+		arena_elims.hide()
 	
 	player_healthbar.value = player_ref.health
 	

@@ -10,7 +10,7 @@ extends Node3D
 @export var initial_straight_speed_tubes = 5
 @export var min_speed_tubes_per_chunk = 10
 @export var max_speed_tubes_per_chunk = 15
-@export var max_curved_per_chunk = 3
+@export var max_curved_per_depth = 3
 @export var max_vertical_per_chunk = 2
 @export var possible_chroma_per_chunk = 1
 @export var initial_chunks = 2
@@ -167,8 +167,10 @@ func create_segment(type:segment_types,end_index):
 	if curr_segment!=null:
 		curr_segment.type = type
 		curr_segment.id = segment_index+1
-		if num_chunks == 0 or type == segment_types.REWARD:
-			curr_segment.timer = segment_lifetime * 99
+		if num_chunks == 0 and type == segment_types.ARENA:
+			curr_segment.first = true
+		#if num_chunks == 0 or type == segment_types.REWARD:
+		#	curr_segment.timer = segment_lifetime * 99
 		else:
 			curr_segment.timer = segment_lifetime
 		add_child(curr_segment)
@@ -184,13 +186,16 @@ func get_segment_types(n,min_type = segment_types.CURVED_TUBE,max_type = segment
 		
 	var types = []
 	var max_verticals = max_vertical_per_chunk * reduced_verticals
+	var curved_this_depth = 0
 		
 	for i in range(n):
 		var type = randi_range(min_type,max_type)
-		if type == segment_types.CURVED_TUBE and types.count(segment_types.CURVED_TUBE) < max_curved_per_chunk:
+		if type == segment_types.CURVED_TUBE and curved_this_depth < max_curved_per_depth:
 			types.append(type)
+			curved_this_depth += 1
 		elif type == segment_types.VERTICAL_TUBE and types.count(segment_types.VERTICAL_TUBE) < max_verticals:
 			types.append(type)
+			curved_this_depth = 0
 		else:
 			if ignore_limits:
 				types.append(randi_range(min_type,max_type))

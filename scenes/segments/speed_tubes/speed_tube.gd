@@ -5,6 +5,7 @@ extends "res://scenes/segments/segment.gd"
 
 func _ready():
 	super()
+	spawn_spawners()
 
 func _process(delta):
 	super(delta)

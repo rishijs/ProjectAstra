@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://du1lmvvodexmf"]
+[gd_scene load_steps=16 format=3 uid="uid://du1lmvvodexmf"]
 
 [ext_resource type="Script" path="res://scenes/enemies/crystal_man/crystal_enemy.gd" id="1_s61cp"]
 [ext_resource type="SpriteFrames" uid="uid://dosfl47bno0tq" path="res://scenes/enemies/crystal_man/crystal_man.tres" id="2_dlaqm"]
@@ -23,11 +23,11 @@ size = Vector3(0.741611, 0.689972, 0.869447)
 [sub_resource type="BoxShape3D" id="BoxShape3D_1yf62"]
 size = Vector3(3.81356, 3.9315, 3.32932)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d4mhx"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qfxcq"]
 transparency = 1
-albedo_color = Color(0, 0, 0, 0.807843)
+albedo_color = Color(0, 0, 0, 0.168627)
 emission_enabled = true
-emission = Color(1, 0, 0, 1)
+emission = Color(1, 0.929412, 0.917647, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f6pg1"]
 render_priority = 0
@@ -37,12 +37,20 @@ shader_parameter/strength = 1.0
 shader_parameter/color = Color(1, 1, 1, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_jpc0u"]
+top_radius = 6.0
+bottom_radius = 6.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_07ebj"]
 transparency = 1
 albedo_color = Color(0, 0, 0, 0.721569)
 emission_enabled = true
 emission = Color(0.988235, 0.988235, 0.988235, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d4mhx"]
+transparency = 1
+albedo_color = Color(0, 0, 0, 0.807843)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
 
 [node name="CrystalEnemy" type="CharacterBody3D" node_paths=PackedStringArray("crystal_sprite", "melee_target", "laser_target", "health_sprite") groups=["Enemy"]]
 collision_layer = 13
@@ -115,12 +123,11 @@ unique_name_in_owner = true
 one_shot = true
 
 [node name="MeleeTarget" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1)
 visible = false
 
 [node name="MeleeAttackWarning" type="MeshInstance3D" parent="MeleeTarget"]
 transform = Transform3D(1, 0, 0, 0, 0.0445921, 0, 0, 0, 1, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_d4mhx")
+material_override = SubResource("StandardMaterial3D_qfxcq")
 material_overlay = SubResource("ShaderMaterial_f6pg1")
 mesh = SubResource("CylinderMesh_jpc0u")
 skeleton = NodePath("../..")

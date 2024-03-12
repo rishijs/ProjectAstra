@@ -14,6 +14,7 @@ var speed
 var damage
 
 var pending_die
+var death_called = false
 
 func _ready():
 	pass
@@ -30,13 +31,15 @@ func on_hit(incoming_damage):
 		die()
 	
 func die():
-	player_ref.enemy_defeated.emit()
-	var particles = death_particles.instantiate()
-	get_tree().get_first_node_in_group("GameManager").add_child(particles)
-	particles.global_position = global_position
-	if is_training:
-		trainer_ref.empty = true
-	call_deferred("queue_free")
+	if not death_called:
+		player_ref.enemy_defeated.emit()
+		death_called = true
+		var particles = death_particles.instantiate()
+		get_tree().get_first_node_in_group("GameManager").add_child(particles)
+		particles.global_position = global_position
+		if is_training:
+			trainer_ref.empty = true
+		call_deferred("queue_free")
 
 func _physics_process(_delta):
 	if threat_detected:

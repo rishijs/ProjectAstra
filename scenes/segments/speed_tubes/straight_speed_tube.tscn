@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://vop33tckuf4s"]
+[gd_scene load_steps=23 format=3 uid="uid://vop33tckuf4s"]
 
 [ext_resource type="Script" path="res://scenes/segments/speed_tubes/speed_tube.gd" id="1_fqrc5"]
 [ext_resource type="Texture2D" uid="uid://bqpa1yc6yu5by" path="res://art/game/segment/straight/straight_tube_straight_base.png" id="2_25csi"]
 [ext_resource type="Texture2D" uid="uid://buliplwgilc5l" path="res://art/game/segment/straight/straight_tube_straight_metal-straight_rough.png" id="3_k1mnu"]
 [ext_resource type="PackedScene" uid="uid://yiq35pq4u730" path="res://art/game/props_elements/lights/torch_light.tscn" id="4_ii5d1"]
+[ext_resource type="PackedScene" uid="uid://b402k2bhdes07" path="res://scenes/enemies/spawner.tscn" id="5_50ac5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rj3f5"]
 resource_name = "Material.004"
@@ -166,9 +167,10 @@ albedo_color = Color(1, 0.054902, 0, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ir1hn"]
 size = Vector3(16.364, 13.3671, 1.41699)
 
-[node name="StraightSpeedTube" type="Node3D" node_paths=PackedStringArray("connection_end", "timer_node", "up", "left", "down", "right")]
+[node name="StraightSpeedTube" type="Node3D" node_paths=PackedStringArray("connection_end", "spawn_arrangements", "timer_node", "up", "left", "down", "right")]
 script = ExtResource("1_fqrc5")
 connection_end = [NodePath("connection2")]
+spawn_arrangements = [NodePath("SpawnArrangement")]
 timer_node = NodePath("LifetimeS")
 time_multiplier = 1.0
 up = NodePath("UpLoc")
@@ -267,21 +269,63 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 50, 0,
 
 [node name="Torch" parent="." instance=ExtResource("4_ii5d1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9285, 9.39846, 32.1618)
+base_energy = 5
 
 [node name="Torch2" parent="." instance=ExtResource("4_ii5d1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9285, 9.39846, 3.15424)
+base_energy = 5
 
 [node name="Torch3" parent="." instance=ExtResource("4_ii5d1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9285, 9.39846, -30.4408)
+base_energy = 5
 
 [node name="Torch4" parent="." instance=ExtResource("4_ii5d1")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.53067, 9.39846, 32.1618)
+base_energy = 5
 
 [node name="Torch5" parent="." instance=ExtResource("4_ii5d1")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.53067, 9.39846, 3.15424)
+base_energy = 5
 
 [node name="Torch6" parent="." instance=ExtResource("4_ii5d1")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.53067, 9.39846, -30.4408)
+base_energy = 5
+
+[node name="SpawnArrangement" type="Node3D" parent="."]
+
+[node name="Spawner" parent="SpawnArrangement" instance=ExtResource("5_50ac5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.14499, 3.06095, -13.119)
+spawn_type = 1
+num_waves = 1
+spawn_rate = 5.0
+chance_to_spawn = 0.1
+
+[node name="Spawner2" parent="SpawnArrangement" instance=ExtResource("5_50ac5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.00684, 3.06095, -21.3556)
+spawn_type = 1
+num_waves = 1
+spawn_rate = 5.0
+chance_to_spawn = 0.1
+
+[node name="Spawner3" parent="SpawnArrangement" instance=ExtResource("5_50ac5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.00684, 3.06095, 18.596)
+spawn_type = 1
+num_waves = 1
+spawn_rate = 5.0
+chance_to_spawn = 0.1
+
+[node name="Spawner4" parent="SpawnArrangement" instance=ExtResource("5_50ac5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.21827, 3.06095, 27.5684)
+spawn_type = 1
+num_waves = 1
+spawn_rate = 5.0
+chance_to_spawn = 0.1
+
+[node name="Spawner5" parent="SpawnArrangement" instance=ExtResource("5_50ac5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.953521, 3.06095, 5.42919)
+num_waves = 1
+spawn_rate = 5.0
+chance_to_spawn = 0.1
 
 [connection signal="body_entered" from="SegmentEntryS" to="." method="_on_segment_entry_s_body_entered"]
 [connection signal="body_entered" from="SegmentExitS" to="." method="_on_segment_exit_s_body_entered"]

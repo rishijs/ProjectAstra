@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dyr3042awh81w" path="res://art/game/segment/arena/arena_room_arena_base.png" id="2_kyfnh"]
 [ext_resource type="Texture2D" uid="uid://d2kho1r5yjrgp" path="res://art/game/segment/arena/arena_room_arena_metal-arena_rough.png" id="3_ga6mf"]
 [ext_resource type="PackedScene" uid="uid://drwxdx7ko3l1e" path="res://art/game/props_elements/door.glb" id="3_tn8mj"]
-[ext_resource type="PackedScene" uid="uid://bem6hb2552we7" path="res://scenes/enemies/still/still_enemy.tscn" id="3_xq8a2"]
+[ext_resource type="PackedScene" uid="uid://b402k2bhdes07" path="res://scenes/enemies/spawner.tscn" id="6_bad62"]
 [ext_resource type="PackedScene" uid="uid://yiq35pq4u730" path="res://art/game/props_elements/lights/torch_light.tscn" id="6_s2tgh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0r6ga"]
@@ -377,13 +377,14 @@ size = Vector3(20.566, 17.4506, 2.43411)
 [sub_resource type="BoxShape3D" id="BoxShape3D_0k7m4"]
 size = Vector3(3.98804, 30.4951, 82.9574)
 
-[node name="CombatArena" type="Node3D" node_paths=PackedStringArray("connection_end", "doorE", "doorC", "doorL", "doorR", "timer_node", "up", "left", "down", "right")]
+[node name="CombatArena" type="Node3D" node_paths=PackedStringArray("connection_end", "doorE", "doorC", "doorL", "doorR", "spawn_arrangements", "timer_node", "up", "left", "down", "right")]
 script = ExtResource("1_rvjsu")
 connection_end = [NodePath("connectionl"), NodePath("connectionc"), NodePath("connectionr")]
 doorE = NodePath("DoorE")
 doorC = NodePath("DoorC")
 doorL = NodePath("DoorL")
 doorR = NodePath("DoorR")
+spawn_arrangements = [NodePath("Spawners")]
 timer_node = NodePath("Lifetime")
 time_multiplier = 2.0
 up = NodePath("UpLoc")
@@ -561,9 +562,6 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 21.038
 
 [node name="Lifetime" type="Timer" parent="."]
 
-[node name="StillEnemy" parent="." instance=ExtResource("3_xq8a2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.99684, 3.20382, -1.90119)
-
 [node name="Torches" type="Node3D" parent="."]
 
 [node name="Torch" parent="Torches" instance=ExtResource("6_s2tgh")]
@@ -631,6 +629,89 @@ shape = SubResource("BoxShape3D_0k7m4")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="bounds"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.6769, 14.7475, 2.63397)
 shape = SubResource("BoxShape3D_0k7m4")
+
+[node name="Spawners" type="Node3D" parent="."]
+
+[node name="Spawner" parent="Spawners" instance=ExtResource("6_bad62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.323421, 2.3, 0.159834)
+num_waves = 3
+spawn_rate = 3.0
+
+[node name="Spawner2" parent="Spawners" instance=ExtResource("6_bad62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.5138, 2.3, 21.3412)
+num_waves = 1
+spawn_rate = 5.0
+chance_to_spawn = 0.5
+
+[node name="Spawner3" parent="Spawners" instance=ExtResource("6_bad62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.5138, 2.3, -1.84422)
+num_waves = 1
+spawn_rate = 6.0
+chance_to_spawn = 0.5
+
+[node name="Spawner4" parent="Spawners" instance=ExtResource("6_bad62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.5138, 2.3, -26.1101)
+num_waves = 1
+spawn_rate = 7.0
+chance_to_spawn = 0.5
+
+[node name="Spawner5" parent="Spawners" instance=ExtResource("6_bad62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.769, 2.3, -26.1101)
+num_waves = 1
+spawn_rate = 8.0
+chance_to_spawn = 0.5
+
+[node name="Spawner6" parent="Spawners" instance=ExtResource("6_bad62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.769, 2.3, 1.68705)
+num_waves = 1
+spawn_rate = 9.0
+chance_to_spawn = 0.5
+
+[node name="Spawner7" parent="Spawners" instance=ExtResource("6_bad62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.769, 2.3, 25.841)
+num_waves = 1
+chance_to_spawn = 0.5
+
+[node name="Spawner8" parent="Spawners" instance=ExtResource("6_bad62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.9234, 23.0498, 25.841)
+spawn_type = 1
+num_waves = 1
+spawn_rate = 5.0
+chance_to_spawn = 0.5
+
+[node name="Spawner9" parent="Spawners" instance=ExtResource("6_bad62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.9234, 23.0498, 5.0457)
+spawn_type = 1
+num_waves = 1
+spawn_rate = 6.0
+chance_to_spawn = 0.5
+
+[node name="Spawner10" parent="Spawners" instance=ExtResource("6_bad62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.9234, 23.0498, -19.8536)
+spawn_type = 1
+num_waves = 1
+spawn_rate = 7.0
+chance_to_spawn = 0.5
+
+[node name="Spawner11" parent="Spawners" instance=ExtResource("6_bad62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.7761, 23.0498, 25.841)
+spawn_type = 1
+num_waves = 1
+spawn_rate = 8.0
+chance_to_spawn = 0.5
+
+[node name="Spawner12" parent="Spawners" instance=ExtResource("6_bad62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.7761, 23.0498, 5.0457)
+spawn_type = 1
+num_waves = 1
+spawn_rate = 9.0
+chance_to_spawn = 0.5
+
+[node name="Spawner13" parent="Spawners" instance=ExtResource("6_bad62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.7761, 23.0498, -19.8536)
+spawn_type = 1
+num_waves = 1
+chance_to_spawn = 0.5
 
 [connection signal="body_entered" from="SegmentEntry" to="." method="_on_segment_entry_body_entered"]
 [connection signal="body_entered" from="DoorC/SegmentDoorC" to="." method="_on_segment_door_c_body_entered"]

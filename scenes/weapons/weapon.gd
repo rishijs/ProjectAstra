@@ -80,8 +80,6 @@ func fire():
 	if is_instance_valid(projectiles_ref) and is_instance_valid(muzzle):
 		if weapon_state == States.READY and initialized and magazine >= weapon_stats[Data.wattr.NUM_PROJECTILES]:
 			shooting_pattern()
-	else:
-		printerr("references not set")
 
 func shooting_pattern():
 	magazine -= weapon_stats[Data.wattr.NUM_PROJECTILES]

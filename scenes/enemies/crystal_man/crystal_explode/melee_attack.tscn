@@ -5,7 +5,7 @@
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_lpb7r"]
 height = 0.145
-radius = 3.88576
+radius = 5.95055
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e5ayt"]
 transparency = 1
@@ -19,8 +19,8 @@ shader_parameter/strength = 1.0
 shader_parameter/color = Color(0.588235, 0, 0.301961, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ry7uq"]
-top_radius = 4.0
-bottom_radius = 4.0
+top_radius = 6.0
+bottom_radius = 6.0
 
 [node name="MeleeAttack" type="Area3D"]
 collision_layer = 4

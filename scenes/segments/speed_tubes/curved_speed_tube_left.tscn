@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://ddx36hw5s7tvi"]
+[gd_scene load_steps=23 format=3 uid="uid://ddx36hw5s7tvi"]
 
 [ext_resource type="Script" path="res://scenes/segments/speed_tubes/speed_tube.gd" id="1_c1m81"]
 [ext_resource type="Texture2D" uid="uid://d0l0vjj4sk1jb" path="res://art/game/segment/curved_left/curved_left_tube_curved_left_base.png" id="2_ifcmy"]
 [ext_resource type="Texture2D" uid="uid://n8jd1287dsnk" path="res://art/game/segment/curved_left/curved_left_tube_curved_left_metal-curved_left_rough.png" id="3_qnwjb"]
 [ext_resource type="PackedScene" uid="uid://yiq35pq4u730" path="res://art/game/props_elements/lights/torch_light.tscn" id="4_h1t11"]
+[ext_resource type="PackedScene" uid="uid://b402k2bhdes07" path="res://scenes/enemies/spawner.tscn" id="5_dolfh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_82yi1"]
 resource_name = "Material"
@@ -210,10 +211,11 @@ size = Vector3(15.0428, 12.4302, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_5hxpy"]
 size = Vector3(15.0671, 12.0754, 1)
 
-[node name="CurvedSpeedLeftTube" type="Node3D" node_paths=PackedStringArray("connection_end", "timer_node", "up", "left", "down", "right")]
+[node name="CurvedSpeedLeftTube" type="Node3D" node_paths=PackedStringArray("connection_end", "spawn_arrangements", "timer_node", "up", "left", "down", "right")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
 script = ExtResource("1_c1m81")
 connection_end = [NodePath("connection2")]
+spawn_arrangements = [NodePath("SpawnArrangement")]
 timer_node = NodePath("LifetimeCL")
 time_multiplier = 1.0
 up = NodePath("Right")
@@ -310,7 +312,49 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.59561, 9, -27.3134)
 [node name="Torch3" parent="." instance=ExtResource("4_h1t11")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.09306, 9.01509, -4.87279)
 
-[connection signal="body_entered" from="SegmentEntryCL" to="." method="_on_segment_entry_cl_body_entered"]
+[node name="SpawnArrangement" type="Node3D" parent="."]
+
+[node name="Spawner" parent="SpawnArrangement" instance=ExtResource("5_dolfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80251, 2.2, 3.69434)
+spawn_type = 1
+num_waves = 1
+spawn_rate = 5.0
+chance_to_spawn = 0.1
+
+[node name="Spawner2" parent="SpawnArrangement" instance=ExtResource("5_dolfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80251, 2.2, -3.70914)
+spawn_type = 1
+num_waves = 1
+spawn_rate = 5.0
+chance_to_spawn = 0.1
+
+[node name="Spawner3" parent="SpawnArrangement" instance=ExtResource("5_dolfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5733, 2.2, 0.0508614)
+num_waves = 1
+spawn_rate = 5.0
+chance_to_spawn = 0.1
+
+[node name="Spawner4" parent="SpawnArrangement" instance=ExtResource("5_dolfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.18932, 2.2, -18.9714)
+spawn_type = 1
+num_waves = 1
+spawn_rate = 5.0
+chance_to_spawn = 0.1
+
+[node name="Spawner5" parent="SpawnArrangement" instance=ExtResource("5_dolfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.72762, 2.2, -18.9714)
+spawn_type = 1
+num_waves = 1
+spawn_rate = 5.0
+chance_to_spawn = 0.1
+
+[node name="Spawner6" parent="SpawnArrangement" instance=ExtResource("5_dolfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.238967, 2.2, -32.0528)
+num_waves = 1
+spawn_rate = 5.0
+chance_to_spawn = 0.1
+
 [connection signal="body_entered" from="SegmentEntryCL" to="." method="_on_segment_entry_body_entered"]
+[connection signal="body_entered" from="SegmentEntryCL" to="." method="_on_segment_entry_cl_body_entered"]
 [connection signal="body_entered" from="SegmentExitCL" to="." method="_on_segment_exit_cl_body_entered"]
 [connection signal="timeout" from="LifetimeCL" to="." method="_on_lifetime_cl_timeout"]

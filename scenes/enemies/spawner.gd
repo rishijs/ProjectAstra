@@ -1,13 +1,15 @@
 extends Node3D
 
-enum enemy_type{DEFAULT,STILL,CRYSTAL}
+enum enemy_types{DEFAULT,STILL,CRYSTAL}
+enum crystal_types{PUNCHER,LASER}
+
+@onready var spawn_manager = get_tree().get_first_node_in_group("SpawnManager")
 @export_category("spawn criteria")
-@export var active = true
-@export var spawn_points : Array[Marker3D]
-@export var type : enemy_type = enemy_type.STILL
-@export var spawn_chance = 0.2
-@export var frequency_based = false
-@export var frequency = 10.0
+
+@export var spawn_type : crystal_types
+@export var num_waves = 0
+@export var spawn_rate = 10.0
+@export var chance_to_spawn = 1.0
 
 var spawned = false
 var enemies = {
@@ -15,11 +17,29 @@ var enemies = {
 	still_enemy = preload("res://scenes/enemies/still/still_enemy.tscn"),
 	crystal_enemy = preload("res://scenes/enemies/crystal_man/crystal_enemy.tscn")
 }
+var curr_enemy = null
 
-func spawn_enemies():
-	for spawn_point in spawn_points:
-		var rspawn = randf_range(0.01,1)
-		if rspawn <= spawn_chance and is_instance_valid(spawn_point):
-			var enemy = enemies[enemies.keys()[type]].instantiate()
-			add_child(enemy)
-			enemy.global_position = spawn_point.global_position
+func _ready():
+	%Timer.wait_time = spawn_rate
+
+func activate():
+	%Timer.start()
+	
+func spawn_enemy():
+	var enemy = enemies.crystal_enemy.instantiate()
+	match spawn_type:
+		crystal_types.PUNCHER:
+			enemy.punch_man = true
+		crystal_types.LASER:
+			enemy.laser_man = true
+	spawn_manager.add_child(enemy)
+	enemy.global_position = %spawn.global_position
+	curr_enemy = enemy
+
+
+func _on_timer_timeout():
+	if num_waves == 0:
+		%Timer.stop()
+	elif not is_instance_valid(curr_enemy) or curr_enemy == null:
+		spawn_enemy()
+		num_waves -= 1

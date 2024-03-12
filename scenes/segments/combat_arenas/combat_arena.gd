@@ -1,7 +1,6 @@
 extends "res://scenes/segments/segment.gd"
 
 @export var connection_end:Array[Marker3D]
-@export var defeats_required = 1
 
 @export_category("doors")
 @export var doorE:StaticBody3D
@@ -11,6 +10,8 @@ extends "res://scenes/segments/segment.gd"
 
 var locked = false
 var door_chosen = false
+var first = false
+var defeats_required
 
 func _ready():
 	super()
@@ -33,12 +34,31 @@ func _on_segment_entry_body_entered(body):
 	if body == player_ref and not inactive_segment:
 		update_on_entry()
 		timer_node.start()
+		calculate_num_elims()
 		if defeats_required > 0:
 			lock_arena()
 
 func init_arena():
 	doorE.hide()
+	if not first:
+		spawn_chance_change += -segment_manager_ref.player_depth * depth_spawn_scaling_mult + depth_spawn_scaling_flat
 	%EntryDoorCol.disabled = true
+
+func calculate_num_elims():
+	defeats_required = 0
+	for arrangement in spawn_arrangements:
+		for spawner in arrangement.get_children():
+			if spawner.chance_to_spawn != 1.0:
+				spawner.chance_to_spawn = clampf(spawner.chance_to_spawn+spawn_chance_change,0,1)
+			elif first:
+				spawner.chance_to_spawn = 0
+			spawner.num_waves += num_waves_change
+			spawner.activate()
+			var chance = randf_range(0.01,1.0)
+			if chance > spawner.chance_to_spawn:
+				spawner.queue_free()
+			else:
+				defeats_required += spawner.num_waves
 
 func lock_arena():
 	locked = true
