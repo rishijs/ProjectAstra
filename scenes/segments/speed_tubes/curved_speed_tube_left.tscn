@@ -354,7 +354,7 @@ num_waves = 1
 spawn_rate = 5.0
 chance_to_spawn = 0.1
 
-[connection signal="body_entered" from="SegmentEntryCL" to="." method="_on_segment_entry_body_entered"]
 [connection signal="body_entered" from="SegmentEntryCL" to="." method="_on_segment_entry_cl_body_entered"]
+[connection signal="body_entered" from="SegmentEntryCL" to="." method="_on_segment_entry_body_entered"]
 [connection signal="body_entered" from="SegmentExitCL" to="." method="_on_segment_exit_cl_body_entered"]
 [connection signal="timeout" from="LifetimeCL" to="." method="_on_lifetime_cl_timeout"]

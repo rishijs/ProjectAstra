@@ -8,8 +8,8 @@ func _ready():
 func _process(delta):
 	super(delta)
 
-func fire():
-	super()
+func fire(ads = false):
+	super(ads)
 
 func shooting_pattern():
 	super()
@@ -23,6 +23,6 @@ func prepare_next_shot():
 		weapon_state = States.PREPARING
 		await get_tree().create_timer(weapon_stats[Data.wattr.FIRE_RATE],false).timeout
 		weapon_state = States.READY
-		if Input.is_action_pressed("primary_fire") and player_ref.active_weapon_index == Data.chromas.IGNEOUS:
+		if (Input.is_action_pressed("primary_fire") or Input.is_action_pressed("ads_fire")) and player_ref.active_weapon_index == Data.chromas.IGNEOUS:
 			if magazine >= weapon_stats[Data.wattr.NUM_PROJECTILES]:
 				shooting_pattern()

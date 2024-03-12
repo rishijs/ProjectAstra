@@ -80,6 +80,10 @@ func _input(event):
 	if Input.is_action_just_pressed("primary_fire"):
 		weapons[active_weapon_index].fire()
 	
+	if Input.is_action_just_pressed("ads_fire"):
+		weapons[active_weapon_index].fire(true)
+	
+	
 	if Input.is_action_just_pressed("reload"):
 		if weapons[active_weapon_index].weapon_state != weapons[active_weapon_index].States.RELOADING:
 			weapons[active_weapon_index].reload()

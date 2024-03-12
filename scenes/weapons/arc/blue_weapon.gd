@@ -14,11 +14,12 @@ func _process(delta):
 		cancel_reload = false
 
 
-func fire():
+func fire(ads = false):
 	if is_instance_valid(projectiles_ref) and is_instance_valid(muzzle) and can_fire:
 		if initialized and magazine >= weapon_stats[Data.wattr.NUM_PROJECTILES]:
 			shooting_pattern()
 			cancel_reload = true
+			
 
 func reload():
 	%Reload.wait_time = weapon_stats[Data.wattr.RELOAD_SPEED]

@@ -20,6 +20,8 @@ var weapon_name
 var charge_time = 0
 var magazine
 
+var is_ads_fire
+
 enum States{READY, PREPARING, RELOADING, CHARGING, INACTIVE};
 var weapon_state= States.INACTIVE
 
@@ -38,7 +40,20 @@ func _process(delta):
 	
 	if magazine == 0 and weapon_state!=States.RELOADING:
 		reload()
-
+	
+	if is_ads_fire:
+		weapon_stats[Data.wattr.FIRE_RATE] = Data.get_attr(Data.wcls,weapon_name,Data.wattr.FIRE_RATE) * 2
+		weapon_stats[Data.wattr.DAMAGE] = Data.get_attr(Data.wcls,weapon_name,Data.wattr.DAMAGE) * 1.2
+		weapon_stats[Data.wattr.ACCURACY] = clamp(Data.get_attr(Data.wcls,weapon_name,Data.wattr.ACCURACY) + 30,0,100)
+		weapon_stats[Data.wattr.RECOIL_AMOUNT] = Data.get_attr(Data.wcls,weapon_name,Data.wattr.DAMAGE) * 1.5
+		weapon_stats[Data.wattr.MAX_SPREAD] = 1
+	else:
+		weapon_stats[Data.wattr.FIRE_RATE] = Data.get_attr(Data.wcls,weapon_name,Data.wattr.FIRE_RATE)
+		weapon_stats[Data.wattr.DAMAGE] = Data.get_attr(Data.wcls,weapon_name,Data.wattr.DAMAGE)
+		weapon_stats[Data.wattr.ACCURACY] = Data.get_attr(Data.wcls,weapon_name,Data.wattr.ACCURACY)
+		weapon_stats[Data.wattr.MAX_SPREAD] = Data.get_attr(Data.wcls,weapon_name,Data.wattr.MAX_SPREAD)
+		weapon_stats[Data.wattr.RECOIL_AMOUNT] = Data.get_attr(Data.wcls,weapon_name,Data.wattr.RECOIL_AMOUNT)
+		
 func weapon_load():
 	if weapon_state == States.INACTIVE:
 		await get_tree().create_timer(0.5,false).timeout
@@ -76,10 +91,12 @@ func add_recoil(time,angle):
 	rotate_z(-angle)
 	rotation = Vector3.ZERO
 		
-func fire():
+func fire(ads = false):
 	if is_instance_valid(projectiles_ref) and is_instance_valid(muzzle):
 		if weapon_state == States.READY and initialized and magazine >= weapon_stats[Data.wattr.NUM_PROJECTILES]:
 			shooting_pattern()
+			is_ads_fire = ads
+				
 
 func shooting_pattern():
 	magazine -= weapon_stats[Data.wattr.NUM_PROJECTILES]

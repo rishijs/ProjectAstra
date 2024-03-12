@@ -161,7 +161,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.03876, 0)
 
 [node name="SegmentManager" parent="." node_paths=PackedStringArray("start") instance=ExtResource("4_1gok0")]
 start = NodePath("Origin")
-max_chunks = 2
 
 [node name="Origin" type="Marker3D" parent="SegmentManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.728271, -0.688587, -38.3571)

@@ -17,7 +17,7 @@ func _process(delta):
 		weapon_state = States.READY
 		charge_time = 0
 
-func fire():
+func fire(ads = false):
 	if is_instance_valid(projectiles_ref) and is_instance_valid(muzzle):
 		if weapon_state == States.READY and initialized and magazine >= weapon_stats[Data.wattr.NUM_PROJECTILES]:
 			weapon_state = States.CHARGING

@@ -26,15 +26,15 @@ func _ready():
 	grid.material.set_shader_parameter("intensity",grid_min)
 
 func _input(_event):
-	if Input.is_action_pressed("primary_fire"):
+	if Input.is_action_pressed("primary_fire") or Input.is_action_just_pressed("ads_fire"):
 		primary_fire_pressed = true
 		grid.material.set_shader_parameter("intensity",grid_max)
 	
 	#if using chronos
-	if Input.is_action_just_pressed("primary_fire") and player_ref.active_weapon_index == 3:
+	if (Input.is_action_just_pressed("primary_fire") or Input.is_action_just_pressed("ads_fire")) and player_ref.active_weapon_index == 3:
 		trigger_chromatic()
 		
-	if Input.is_action_just_released("primary_fire"):
+	if Input.is_action_just_released("primary_fire") or Input.is_action_just_released("ads_fire"):
 		primary_fire_pressed = false
 		grid.material.set_shader_parameter("intensity",grid_min)
 		
