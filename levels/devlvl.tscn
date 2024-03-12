@@ -138,12 +138,12 @@ anchor_bottom = 0.998
 offset_bottom = 0.159912
 color = Color(1, 1, 1, 0.196078)
 
+[node name="GameManager" parent="." instance=ExtResource("2_xhhs8")]
+
 [node name="Player" parent="." instance=ExtResource("1_d3ahk")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.258408, 1.72229, -14.7157)
 
 [node name="Projectiles" parent="." instance=ExtResource("2_re3rw")]
-
-[node name="GameManager" parent="." instance=ExtResource("2_xhhs8")]
 
 [node name="AstraOrigin" parent="." node_paths=PackedStringArray("teleport_location") instance=ExtResource("4_cpxjg")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.500362, 0.804206, 0)

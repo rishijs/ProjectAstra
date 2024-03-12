@@ -75,8 +75,9 @@ func get_attr(cls,item_name,attribute):
 
 func split_into_aberration_types():
 	for i in range (all_data[abcls].keys().size()):
-		var aberration = all_data[abcls][i]
-		match aberration[abattr.STABILITY]:
+		var aberration = all_data[abcls][all_data[abcls].keys()[i]]
+		var this_stability = aberration[aberration.keys()[abattr.STABILITY]]
+		match this_stability:
 			"unstable":
 				unstable_aberrations.append(i)
 			"stable":

@@ -23,21 +23,21 @@ var attack_speed
 func _ready():
 	super()
 	if training_man:
-		max_health = 200 * 20*Globals.prestige
-		health = 200 * 20*Globals.prestige
+		max_health = 200 + 50*(Globals.prestige-1)
+		health = 200 + 50*(Globals.prestige-1)
 		speed = 0
 
 	elif laser_man:
-		max_health = 100 * 10*Globals.prestige
-		health = 100 * 10*Globals.prestige
+		max_health = 100 + 10*(Globals.prestige-1)
+		health = 100 + 10*(Globals.prestige-1)
 		speed = 0
 		damage = 10
 		attack_speed = clampf(5.0 / Globals.prestige, 3.0, 5.0)
 
 	elif punch_man:
-		max_health = 150 * Globals.prestige
-		health = 150 * Globals.prestige
-		speed = 10 * Globals.prestige
+		max_health = 150 + 20*(Globals.prestige-1)
+		health = 150 + 20*(Globals.prestige-1)
+		speed = 10 + 2*(Globals.prestige-1)
 		damage = 10 
 		attack_speed = clampf(2.0 / Globals.prestige, 0.5, 2.0)
 

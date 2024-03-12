@@ -24,7 +24,7 @@ func _ready():
 	altered_weapon_flat_stats.resize(Data.wattr.keys().size())
 	altered_weapon_flat_stats.fill(0)
 	altered_weapon_multiplied_stats.resize(Data.wattr.keys().size())
-	altered_weapon_multiplied_stats.fill(0.0)
+	altered_weapon_multiplied_stats.fill(1.0)
 
 
 func _process(_delta):

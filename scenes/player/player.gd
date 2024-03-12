@@ -53,6 +53,7 @@ var active_weapon_index = 0
 var base_defeats_till_chroma_swap = 3
 var defeats_till_chroma_swap = 5
 var num_swaps = 0
+var weapon_aberration_chance = 0.05
 
 var aberration_close = false
 var aberration_warning = false
@@ -238,4 +239,6 @@ func _on_enemy_defeated():
 			swap_weapons(active_weapon_index)
 			game_manager_ref.score += 1
 		else:
-			aberrate_weapon()
+			var chance = randf_range(0.01,1.0)
+			if chance <= weapon_aberration_chance:
+				aberrate_weapon("stable")

@@ -67,8 +67,9 @@ func initialize_weapon(weapon):
 	
 	for attr in range(len(Data.all_data[Data.wcls][weapon].keys())):
 		weapon_stats.append(Data.get_attr(Data.wcls,weapon,attr))
-		weapon_stats[attr] += game_manager_ref.altered_weapon_flat_stats
-		weapon_stats[attr] *= game_manager_ref.altered_weapon_multiplied_stats
+		if weapon_stats[attr] is int or weapon_stats[attr] is float:
+			weapon_stats[attr] += game_manager_ref.altered_weapon_flat_stats[attr]
+			weapon_stats[attr] *= game_manager_ref.altered_weapon_multiplied_stats[attr]
 		
 	magazine = weapon_stats[Data.wattr.MAGAZINE]
 	initialized = true
