@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://interface/hud/player_interface.gd" id="1_uecec"]
 [ext_resource type="Theme" uid="uid://bpeg6inp31l8g" path="res://themes/deftheme.tres" id="2_5top5"]
 
-[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("fps_text", "time_text", "segment_time_text", "objective_text", "segment_id_text", "magazine_text", "reloading_text", "swaps_text") groups=["Interface"]]
+[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("fps_text", "time_text", "segment_time_text", "objective_text", "segment_id_text", "magazine_text", "reloading_text", "swaps_text", "player_healthbar") groups=["Interface"]]
 script = ExtResource("1_uecec")
 fps_text = NodePath("game_info/VBoxContainer/fps")
 time_text = NodePath("game_info/VBoxContainer/time")
@@ -13,6 +13,7 @@ segment_id_text = NodePath("objective_info/VBoxContainer/segment_id")
 magazine_text = NodePath("weapon_info/VBoxContainer/magazine")
 reloading_text = NodePath("weapon_info/VBoxContainer/reloading")
 swaps_text = NodePath("game_info/VBoxContainer/swaps")
+player_healthbar = NodePath("PlayerHealth")
 
 [node name="game_info" type="MarginContainer" parent="."]
 anchors_preset = -1
@@ -64,6 +65,7 @@ offset_bottom = -8.52
 layout_mode = 2
 
 [node name="segment_time_left" type="Label" parent="objective_info/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("2_5top5")
 theme_override_font_sizes/font_size = 30
@@ -140,5 +142,17 @@ offset_right = 6.0
 offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PlayerHealth" type="ProgressBar" parent="."]
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.059
+anchor_right = 0.629
+anchor_bottom = 0.084
+offset_top = 0.279995
+offset_right = 0.319946
+offset_bottom = 0.279991
+value = 50.27
+show_percentage = false
 
 [connection signal="timeout" from="Update" to="." method="_on_update_timeout"]

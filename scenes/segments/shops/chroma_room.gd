@@ -1,7 +1,16 @@
 extends "res://scenes/segments/segment.gd"
 
+@onready var game_manager_ref = get_tree().get_first_node_in_group("GameManager")
+
 @export var connection_end:Array[Marker3D]
-@export var door:Area3D
+@export var door:Node3D
+@export var doorLock:Node3D
+@export var doorLockCol:CollisionShape3D
+@export var checkpoint_flag:MeshInstance3D
+
+var checkpoint_texture = preload("res://scenes/segments/shops/checkpoint_active.tres")
+var checkpoint_active = false
+
 
 func _ready():
 	super()
@@ -19,6 +28,12 @@ func update_on_entry():
 func _on_segment_entry_body_entered(body):
 	if body == player_ref:
 		update_on_entry()
+		if not checkpoint_active:
+			checkpoint_flag.material_override = checkpoint_texture
+			game_manager_ref.checkpoint_ref = checkpoint_flag
+			game_manager_ref.segment_ref = self
+			game_manager_ref.rotation_at_checkpoint = segment_manager_ref.segment_rotation
+			game_manager_ref.depth_at_checkpoint = segment_manager_ref.player_depth
 
 func _on_segment_exit_body_entered(body):
 	if body == player_ref:
@@ -27,9 +42,7 @@ func _on_segment_exit_body_entered(body):
 
 func _on_segment_door_body_entered(body):
 	if body == player_ref and not inactive_segment:
-		if segment_manager_ref.enable:
-			segment_manager_ref.new_chunk.emit()
-		door.queue_free()
+		door.hide()
 		
 
 

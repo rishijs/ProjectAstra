@@ -12,9 +12,11 @@ extends CanvasLayer
 @export var magazine_text:Label
 @export var reloading_text:Label
 @export var swaps_text:Label
+@export var player_healthbar:ProgressBar
 
 func _ready():
-	pass
+	player_healthbar.max_value = player_ref.max_health
+	player_healthbar.value = player_ref.health
 
 
 func _process(_delta):
@@ -26,6 +28,7 @@ func _on_update_timeout():
 	time_text.text = "%s" % Globals.time_string
 	
 	if is_instance_valid(segment_manager_ref):
+		"""
 		var segment_time_left = segment_manager_ref.segments[segment_manager_ref.player_segment_index].timer
 		if segment_manager_ref.player_segment_index == -1:
 			segment_time_text.hide()
@@ -34,6 +37,7 @@ func _on_update_timeout():
 		elif segment_time_left != null:
 			segment_time_text.show()
 			segment_time_text.text = "%d SECONDS TILL SEGMENT DISINTEGRATION" % segment_time_left
+		"""
 		segment_id_text.text = "ID: %d" % segment_manager_ref.player_segment_index
 	
 	objective_text.text = "%d ELIM(S) TILL CHROMA SWAP" % player_ref.defeats_till_chroma_swap
@@ -46,5 +50,7 @@ func _on_update_timeout():
 		reloading_text.show()
 	else:
 		reloading_text.hide()
+	
+	player_healthbar.value = player_ref.health
 	
 	swaps_text.text = "SCORE: %d" % player_ref.num_swaps

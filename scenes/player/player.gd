@@ -1,13 +1,17 @@
 extends CharacterBody3D
 
 @onready var post_process = get_tree().get_first_node_in_group("PostProcess");
+@onready var game_manager_ref = get_tree().get_first_node_in_group("GameManager");
+@onready var segment_manager_ref = get_tree().get_first_node_in_group("SegmentManager");
 
 @export_category("refs")
 @export var camera_first_person:Camera3D
 @export var weapons:Array[Node3D]
 @export var weapon_socket:Marker3D
 
-var min_pitch = 50
+#negative
+var min_pitch = 30
+#positive
 var max_pitch = 50
 
 var speed = 20.0
@@ -45,6 +49,10 @@ func _ready():
 	swap_weapons(active_weapon_index)
 
 func _input(event):
+	
+	if Input.is_action_just_pressed("debug_kill"):
+		hit.emit(max_health)
+		
 	if Input.is_action_just_pressed("training_swap") and is_training:
 		active_weapon_index += 1
 		if active_weapon_index == weapons.size():
@@ -128,11 +136,23 @@ func swap_weapons(weapon_index):
 		#get_tree().get_first_node_in_group("GameManager").add_child(particles)
 		#particles.global_position = weapon_socket.global_position
 
+func reset_at_checkpoint():
+	segment_manager_ref.reset_segments()
+	global_position = game_manager_ref.checkpoint_ref.global_position
+	
+	game_manager_ref.segment_ref.door.show()
+	game_manager_ref.segment_ref.doorLock.show()
+	game_manager_ref.segment_ref.doorLockCol.disabled = false
+
 func _on_hit(damage):
 	health = clampf(health-damage,0,max_health)
 	if health == 0:
-		SceneLoader.load_scene("res://interface/menus/main_menu.tscn", true)
-		SceneLoader.change_scene_to_loading_screen()
+		if game_manager_ref.checkpoint_ref != null:
+			reset_at_checkpoint()
+		else:
+			#game over
+			SceneLoader.load_scene("res://interface/menus/main_menu.tscn", true)
+			SceneLoader.change_scene_to_loading_screen()
 
 func aberrate_weapon():
 	#random buffs or debuffs on objective/defeat progress

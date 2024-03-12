@@ -26,10 +26,9 @@ func _ready():
 	pass
 
 func destruct():
-	await get_tree().create_timer(1,false).timeout
 	for spawner in spawners:
 		spawn_manager_ref.spawners.erase(spawner)
-	call_deferred("queue_free")
+	queue_free()
 
 func update_on_entry():
 	if not inactive_segment:
@@ -46,8 +45,9 @@ func _process(_delta):
 	pass
 
 func on_timer_timeout():
+	#timer no longer active
 	#if segment_manager_ref.segments[segment_manager_ref.player_segment_index].id == id:
 	timer -= 1
 	if timer == 0:
 		timer_node.paused = true
-		segment_manager_ref.destroy_behind_segment(id)
+		#segment_manager_ref.destroy_behind_segment(id)

@@ -1,5 +1,7 @@
 extends Node3D
 
+@onready var game_manager_ref = get_tree().get_first_node_in_group("GameManager")
+
 @export_category("refs")
 @export var start:Marker3D
 
@@ -10,11 +12,13 @@ extends Node3D
 @export var max_speed_tubes_per_chunk = 15
 @export var max_curved_per_chunk = 3
 @export var max_vertical_per_chunk = 2
+@export var possible_chroma_per_chunk = 1
 @export var initial_chunks = 2
 @export var max_chunks = 5
 @export var player_starting_depth = 10
 @export var depth_variance = 0.75
 @export var segment_lifetime = 20
+@export var segment_deletion_threshold = 5
 @export var ignore_limits = false
 
 @export var segments : Array[Node3D]
@@ -26,9 +30,8 @@ var segments_this_chunk = 0
 var num_chunks = 0
 var player_depth = player_starting_depth
 var depth = player_starting_depth
-var segment_deletion_threshold = 5
 
-enum segment_types{PLANE,CURVED_TUBE,STRAIGHT_TUBE,VERTICAL_TUBE,ARENA,CHROMA,REWARD,MISC}
+enum segment_types{PLANE,CURVED_TUBE,STRAIGHT_TUBE,VERTICAL_TUBE,CHROMA,ARENA,REWARD,MISC}
 enum curved_tube_variants{RIGHT,LEFT}
 enum seg_dir{UP,LEFT,DOWN,RIGHT}
 
@@ -40,8 +43,8 @@ var segment_scenes = {
 	},
 	straight_tube = preload("res://scenes/segments/speed_tubes/straight_speed_tube.tscn"),
 	vertical_tube = preload("res://scenes/segments/speed_tubes/vertical_speed_tube.tscn"),
-	arena = preload("res://scenes/segments/combat_arenas/combat_arena.tscn"),
 	chroma = preload("res://scenes/segments/shops/chroma_room.tscn"),
+	arena = preload("res://scenes/segments/combat_arenas/combat_arena.tscn"),
 	reward = preload("res://scenes/segments/shops/reward_room.tscn"),
 }
 
@@ -53,32 +56,55 @@ func _ready():
 			new_chunk.emit(segment_types.ARENA)
 
 func _process(_delta):
-	#no longer needed
-	#destroy_past_segments()
-	pass
+	destroy_past_segments()
 
 func destroy_past_segments():
 	for segment in segments:
 		if segment.id + segment_deletion_threshold < player_segment_index:
-			segments.erase(segment)
-			segment.destruct()
-			segment_index = clampi(segment_index - 1,0,segments.size())
-			player_segment_index = clampi(player_segment_index - 1,0,segments.size())
-			for i in range(segments.size()):
-				segments[i].id = i
+			if segment.type != segment_types.CHROMA:
+				segments.erase(segment)
+				segment.destruct()
+				segment_index = clampi(segment_index - 1,0,segments.size())
+				player_segment_index = clampi(player_segment_index - 1,0,segments.size())
+				for i in range(segments.size()):
+					segments[i].id = i
 
+func reset_segments():
+	for segment in segments:
+		if segment.type!= segment_types.CHROMA:
+			segment.destruct()
+			segments.erase(segment)
+	segments.clear()
+	segments.append(game_manager_ref.segment_ref)
+	game_manager_ref.segment_ref.id = 0
+	
+	num_chunks -= 1
+	segment_rotation = game_manager_ref.rotation_at_checkpoint
+	player_depth = game_manager_ref.depth_at_checkpoint
+	depth = game_manager_ref.depth_at_checkpoint
+	player_segment_index = 0
+	segment_index = 0		
+	segments_this_chunk = 0		
+	
+	new_chunk.emit(segment_types.ARENA,0,1.0,true)
+	
 func destroy_behind_segment(at_index):
+	#legacy method / overcomplicates too much
+	"""
 	if segments.size() > at_index:
 		for i in range(at_index,0,-1):
 			var segment_to_delete = segments[i]
-			segments.erase(segment_to_delete)
-			segment_to_delete.destruct()
-			segment_index = clampi(segment_index - 1,0,segments.size())
-			player_segment_index = clampi(player_segment_index - 1,0,segments.size())
-			for j in range(segments.size()):
-				segments[j].id = j
+			if segment_to_delete.type != segment_types.CHROMA:
+				segments.erase(segment_to_delete)
+				segment_to_delete.destruct()
+				segment_index = clampi(segment_index - 1,0,segments.size())
+				player_segment_index = clampi(player_segment_index - 1,0,segments.size())
+				for j in range(segments.size()):
+					segments[j].id = j
 	else:
 		printerr("Segment index not found: ",at_index)
+	"""
+	pass
 	
 func get_current_segment_end_position(index) -> Vector3:
 	if segment_index == -1:
@@ -150,7 +176,7 @@ func create_segment(type:segment_types,end_index):
 		segments.append(curr_segment)
 		segment_index += 1
 			
-func get_segment_types(n,min_type = segment_types.CURVED_TUBE,max_type = segment_types.VERTICAL_TUBE,reduced_verticals = 1.0):
+func get_segment_types(n,min_type = segment_types.CURVED_TUBE,max_type = segment_types.CHROMA,reduced_verticals = 1.0):
 	#even number of curved tubes cannot be together, odd is fine 
 	#index of curved tube is 1
 	if n == 0:
@@ -178,6 +204,10 @@ func get_segment_types(n,min_type = segment_types.CURVED_TUBE,max_type = segment
 			types[i+1] = segment_types.STRAIGHT_TUBE
 		if slice[1] == slice[2] and slice[0] == segment_types.CURVED_TUBE:
 			types[i+2] = segment_types.STRAIGHT_TUBE
+	
+	for i in range(possible_chroma_per_chunk):
+		var chroma_position = randi_range(0,n-1)
+		types[chroma_position] = segment_types.CHROMA
 	
 	return types
 
@@ -210,12 +240,12 @@ func spawn_new_segments(with_type:segment_types = segment_types.ARENA, with_inde
 
 func spawn_anomaly():
 	#powerful monster called the watcher as a virus
+	#not implemented
 	pass
 	
-func _on_new_chunk(chunk_type = segment_types.MISC, at_index = 0, reduced_verticals = 1.0):
-	spawn_anomaly()
+func _on_new_chunk(chunk_type = segment_types.MISC, at_index = 0, reduced_verticals = 1.0, respawn = false):
 	match chunk_type:
 		segment_types.ARENA:
 			spawn_new_segments(segment_types.ARENA,at_index,reduced_verticals)
 		segment_types.MISC:
-			spawn_new_segments(randi_range(segment_types.ARENA,segment_types.CHROMA),at_index,reduced_verticals)
+			spawn_new_segments(segment_types.ARENA,at_index,reduced_verticals)
