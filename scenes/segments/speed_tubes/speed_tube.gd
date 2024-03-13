@@ -9,6 +9,8 @@ func _ready():
 
 func _process(delta):
 	super(delta)
+	if id == 0 and segment_manager_ref.player_segment_index > 2:
+		%SpawnedDoor.enable_col()
 
 func _on_segment_entry_cr_body_entered(body):
 	if body == player_ref:

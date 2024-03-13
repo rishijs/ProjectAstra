@@ -1,8 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://vop33tckuf4s"]
+[gd_scene load_steps=24 format=3 uid="uid://vop33tckuf4s"]
 
 [ext_resource type="Script" path="res://scenes/segments/speed_tubes/speed_tube.gd" id="1_fqrc5"]
 [ext_resource type="Texture2D" uid="uid://bqpa1yc6yu5by" path="res://art/game/segment/straight/straight_tube_straight_base.png" id="2_25csi"]
 [ext_resource type="Texture2D" uid="uid://buliplwgilc5l" path="res://art/game/segment/straight/straight_tube_straight_metal-straight_rough.png" id="3_k1mnu"]
+[ext_resource type="PackedScene" uid="uid://ct8wgyh0pjy7h" path="res://scenes/segments/spawned_door.tscn" id="4_f7suc"]
 [ext_resource type="PackedScene" uid="uid://yiq35pq4u730" path="res://art/game/props_elements/lights/torch_light.tscn" id="4_ii5d1"]
 [ext_resource type="PackedScene" uid="uid://b402k2bhdes07" path="res://scenes/enemies/spawner.tscn" id="5_50ac5"]
 
@@ -230,6 +231,10 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 visible = false
 material_override = SubResource("StandardMaterial3D_asjek")
 mesh = SubResource("BoxMesh_psmur")
+
+[node name="SpawnedDoor" parent="connection1" instance=ExtResource("4_f7suc")]
+unique_name_in_owner = true
+visible = false
 
 [node name="connection2" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -48.692)

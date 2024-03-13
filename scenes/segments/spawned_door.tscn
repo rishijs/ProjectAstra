@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://ct8wgyh0pjy7h"]
+[gd_scene load_steps=17 format=3 uid="uid://ct8wgyh0pjy7h"]
 
 [ext_resource type="Texture2D" uid="uid://nfujcovtpoyr" path="res://art/game/props_elements/door_door_base.png" id="1_5tdpr"]
+[ext_resource type="Script" path="res://scenes/segments/spawned_door.gd" id="1_wu1qo"]
 [ext_resource type="Texture2D" uid="uid://j777ovus4qea" path="res://art/game/props_elements/door_door_metal-door_rough.png" id="2_vo7ei"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_83poj"]
@@ -154,9 +155,10 @@ shadow_mesh = SubResource("ArrayMesh_7c4yu")
 data = PackedVector3Array(-1, -6.4314, 1, -1, 8.1557, -1, -1, 8.1557, 1, -1, -6.4314, 1, -1, -6.4314, -1, -1, 8.1557, -1, -1, -6.4314, -1, -0.2678, 8.1557, -1, -1, 8.1557, -1, -1, -6.4314, -1, -0.2678, -6.4314, -1, -0.2678, 8.1557, -1, -0.2678, -6.4314, -1, -0.2678, 8.1557, 1, -0.2678, 8.1557, -1, -0.2678, -6.4314, -1, -0.2678, -6.4314, 1, -0.2678, 8.1557, 1, -0.2678, -6.4314, 1, -1, 8.1557, 1, -0.2678, 8.1557, 1, -0.2678, -6.4314, 1, -1, -6.4314, 1, -1, 8.1557, 1, -1, -6.4314, -1, -0.2678, -6.4314, 1, -0.2678, -6.4314, -1, -1, -6.4314, -1, -1, -6.4314, 1, -0.2678, -6.4314, 1, -0.2678, 8.1557, -1, -1, 8.1557, 1, -1, 8.1557, -1, -0.2678, 8.1557, -1, -0.2678, 8.1557, 1, -1, 8.1557, 1)
 
 [node name="SpawnedDoor" type="Node3D"]
+script = ExtResource("1_wu1qo")
 
 [node name="door" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 8.89487, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 8.89487, 0)
 
 [node name="Cube" type="MeshInstance3D" parent="door"]
 transform = Transform3D(1, 0, 0, 0, 8.72586, 0, 0, 0, 11, 0, 0, 0)
@@ -165,8 +167,10 @@ skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="door/Cube"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="door/Cube/StaticBody3D"]
+[node name="C1" type="CollisionShape3D" parent="door/Cube/StaticBody3D"]
+unique_name_in_owner = true
 shape = SubResource("ConcavePolygonShape3D_p18je")
+disabled = true
 
 [node name="Cube_001" type="MeshInstance3D" parent="door"]
 transform = Transform3D(1, 0, 0, 0, 8.74394, 0, 0, 0, 11, 0, 0, 0)
@@ -175,8 +179,10 @@ skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="door/Cube_001"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="door/Cube_001/StaticBody3D"]
+[node name="C2" type="CollisionShape3D" parent="door/Cube_001/StaticBody3D"]
+unique_name_in_owner = true
 shape = SubResource("ConcavePolygonShape3D_q88id")
+disabled = true
 
 [node name="Cube_002" type="MeshInstance3D" parent="door"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.67424, -0.543032, -2.44279)
@@ -185,8 +191,10 @@ skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="door/Cube_002"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="door/Cube_002/StaticBody3D"]
+[node name="C3" type="CollisionShape3D" parent="door/Cube_002/StaticBody3D"]
+unique_name_in_owner = true
 shape = SubResource("ConcavePolygonShape3D_yospw")
+disabled = true
 
 [node name="Cube_003" type="MeshInstance3D" parent="door"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.67424, -0.543032, 2.32816)
@@ -195,5 +203,7 @@ skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="door/Cube_003"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="door/Cube_003/StaticBody3D"]
+[node name="C4" type="CollisionShape3D" parent="door/Cube_003/StaticBody3D"]
+unique_name_in_owner = true
 shape = SubResource("ConcavePolygonShape3D_b0rnf")
+disabled = true
