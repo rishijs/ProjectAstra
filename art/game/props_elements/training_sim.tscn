@@ -10,6 +10,7 @@ albedo_color = Color(0.0862745, 0.0862745, 0.0862745, 1)
 [node name="TrainingSim" type="Node3D" node_paths=PackedStringArray("marker")]
 script = ExtResource("1_watlw")
 enemy = 2
+crystal_type = 2
 marker = NodePath("Marker3D")
 
 [node name="Marker3D" type="Marker3D" parent="."]

@@ -86,9 +86,13 @@ func launch_laser_attack():
 func lock_on():
 	if locking_on:
 		var dist_to_player = laser_target.global_position.distance_to(player_ref.global_position)
+		var midpoint = lerp(laser_target.global_position, player_ref.global_position, 0.5)
 		
-		%LaserAttackWarningClose.mesh.height = dist_to_player*50.0
-		%LaserAttackWarning.mesh.height = dist_to_player*50.0
+		%LaserAttackWarningClose.mesh.height = dist_to_player*25.0
+		%LaserAttackWarning.mesh.height = dist_to_player*25.0
+		%LaserAttackWarningClose.global_position = midpoint
+		%LaserAttackWarning.global_position = midpoint
+		
 		
 		laser_target.look_at(player_ref.global_position)
 		locked_position = player_ref.global_position
