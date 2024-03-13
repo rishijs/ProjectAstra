@@ -17,6 +17,16 @@ func shooting_pattern():
 		fire_once()
 		prepare_next_shot()
 
+func reload():
+	weapon_state = States.RELOADING
+	reloadS.pitch_scale = randf_range(0.8,1.2)
+	reloadS.play()
+	await get_tree().create_timer(weapon_stats[Data.wattr.RELOAD_SPEED],false).timeout
+	weapon_state = States.READY
+	magazine = weapon_stats[Data.wattr.MAGAZINE]
+	if (Input.is_action_pressed("primary_fire") or Input.is_action_pressed("ads_fire")) and player_ref.active_weapon_index == Data.chromas.IGNEOUS:
+		fire()
+	
 func prepare_next_shot():
 	add_recoil(weapon_stats[Data.wattr.RECOIL_TIME],weapon_stats[Data.wattr.RECOIL_AMOUNT]/10)
 	if weapon_state != States.RELOADING:
@@ -27,5 +37,5 @@ func prepare_next_shot():
 			await get_tree().create_timer(weapon_stats[Data.wattr.FIRE_RATE],false).timeout
 		weapon_state = States.READY
 		if (Input.is_action_pressed("primary_fire") or Input.is_action_pressed("ads_fire")) and player_ref.active_weapon_index == Data.chromas.IGNEOUS:
-			if magazine >= weapon_stats[Data.wattr.NUM_PROJECTILES]:
+			if magazine >= weapon_stats[Data.wattr.NUM_PROJECTILES] and weapon_state != States.RELOADING:
 				shooting_pattern()

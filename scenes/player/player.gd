@@ -112,10 +112,11 @@ func _input(event):
 		swap_weapons(active_weapon_index)
 	
 	if Input.is_action_just_pressed("reload"):
-		if weapons[active_weapon_index].weapon_state != weapons[active_weapon_index].States.RELOADING:
-			weapons[active_weapon_index].reload()
-			if active_weapon_index == Data.chromas.ARC:
-				weapons[active_weapon_index].cancel_reload = false
+		if not Input.is_action_pressed("primary_fire") and not Input.is_action_pressed("ads_fire"):
+			if weapons[active_weapon_index].weapon_state != weapons[active_weapon_index].States.RELOADING:
+				weapons[active_weapon_index].reload()
+				if active_weapon_index == Data.chromas.ARC:
+					weapons[active_weapon_index].cancel_reload = false
 	
 	#rotate based on mouse
 	if event is InputEventMouseMotion and is_instance_valid(camera_first_person):
