@@ -40,4 +40,5 @@ func _on_timer_timeout():
 	
 	if player_time_seconds <= 0:
 		#game over
-		SceneLoader.load_scene("res://interface/menus/main_menu.tscn", false)
+		SceneLoader.load_scene("res://interface/menus/main_menu.tscn", true)
+		SceneLoader.change_scene_to_loading_screen()

@@ -4,7 +4,7 @@ extends Node
 
 signal scene_loaded
 
-var _loading_screen : PackedScene
+var _loading_screen : PackedScene = preload("res://scenes/Initialization/LoadingScreen.tscn")
 var _scene_path : String
 var _loaded_resource : Resource
 var _background_loading : bool

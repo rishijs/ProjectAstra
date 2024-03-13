@@ -28,6 +28,7 @@ func on_hit(incoming_damage):
 		health -= incoming_damage
 		health = clampf(health,0,max_health)
 		health_sprite.show()
+		threat_detected = true
 		if health == 0 and not pending_die:
 			pending_die = true
 			die()

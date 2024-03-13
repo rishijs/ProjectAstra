@@ -12,4 +12,4 @@ func _load_next_scene():
 
 func _ready():
 	SceneLoader.set_loading_screen(_loading_screen)
-	call_deferred("_load_next_scene")
+	_load_next_scene()
