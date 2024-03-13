@@ -24,15 +24,17 @@ func _process(_delta):
 	pass
 
 func on_hit(incoming_damage):
-	health -= incoming_damage
-	health = clampf(health,0,max_health)
-	health_sprite.show()
-	if health == 0 and not pending_die:
-		pending_die = true
-		die()
+	if health > 0:
+		health -= incoming_damage
+		health = clampf(health,0,max_health)
+		health_sprite.show()
+		if health == 0 and not pending_die:
+			pending_die = true
+			die()
 	
 func die():
 	if not death_called:
+		print("hi")
 		player_ref.enemy_defeated.emit()
 		death_called = true
 		var particles = death_particles.instantiate()

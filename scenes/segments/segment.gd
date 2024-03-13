@@ -55,7 +55,7 @@ func spawn_spawners():
 	for arrangement in spawn_arrangements:
 		for spawner in arrangement.get_children():
 			spawner.num_waves += num_waves_change
-			if spawner.spawn_at_arena_index >= segment_manager_ref.arena_index:
+			if spawner.spawn_at_arena_index <= segment_manager_ref.arena_index:
 				spawner.activate()
 			else:
 				spawner.queue_free()

@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://ct3ob0tj0fjyj"]
+[gd_scene load_steps=5 format=3 uid="uid://ct3ob0tj0fjyj"]
 
 [ext_resource type="Script" path="res://interface/hud/player_interface.gd" id="1_uecec"]
 [ext_resource type="Theme" uid="uid://bpeg6inp31l8g" path="res://themes/deftheme.tres" id="2_5top5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3xg3y"]
+bg_color = Color(0.670588, 0.0470588, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eqbip"]
+bg_color = Color(0.101961, 0.6, 0.6, 1)
 
 [node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("fps_text", "time_text", "segment_time_text", "objective_text", "segment_id_text", "magazine_text", "reloading_text", "swaps_text", "player_healthbar", "player_energy", "arena_elims") groups=["Interface"]]
 script = ExtResource("1_uecec")
@@ -96,11 +102,11 @@ text = "ENTERED AN ARENA"
 anchors_preset = -1
 anchor_left = 0.037
 anchor_top = 0.778
-anchor_right = 0.237
+anchor_right = 0.191
 anchor_bottom = 0.978
 offset_left = 0.959999
-offset_top = -0.240051
-offset_right = -7.04004
+offset_top = -0.23999
+offset_right = 0.279968
 offset_bottom = -0.23999
 
 [node name="VBoxContainer" type="VBoxContainer" parent="weapon_info"]
@@ -154,26 +160,29 @@ grow_vertical = 2
 
 [node name="PlayerHealth" type="ProgressBar" parent="."]
 anchors_preset = -1
-anchor_left = 0.4
-anchor_top = 0.059
-anchor_right = 0.629
-anchor_bottom = 0.084
-offset_top = 0.279995
-offset_right = 0.319946
-offset_bottom = 0.279991
+anchor_left = 0.177
+anchor_top = 0.799
+anchor_right = 0.406
+anchor_bottom = 0.824
+offset_left = 0.160065
+offset_top = 0.0799561
+offset_right = 0.480042
+offset_bottom = 0.0799561
+theme_override_styles/fill = SubResource("StyleBoxFlat_3xg3y")
 value = 50.27
 show_percentage = false
 
 [node name="PlayerEnergy" type="ProgressBar" parent="."]
 anchors_preset = -1
-anchor_left = 0.399
-anchor_top = 0.102
-anchor_right = 0.629
-anchor_bottom = 0.127
-offset_left = 0.919983
-offset_top = -0.160004
-offset_right = -0.680054
-offset_bottom = -0.160004
+anchor_left = 0.177
+anchor_top = 0.842
+anchor_right = 0.406
+anchor_bottom = 0.867
+offset_left = -0.839996
+offset_top = -0.360046
+offset_right = -0.519958
+offset_bottom = -0.360046
+theme_override_styles/fill = SubResource("StyleBoxFlat_eqbip")
 value = 38.04
 show_percentage = false
 

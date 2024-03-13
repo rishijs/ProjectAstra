@@ -357,7 +357,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.238967, 2.2, -32.0528)
 spawn_rate = 1.0
 spawn_at_arena_index = 3
 
-[connection signal="body_entered" from="SegmentEntryCL" to="." method="_on_segment_entry_body_entered"]
 [connection signal="body_entered" from="SegmentEntryCL" to="." method="_on_segment_entry_cl_body_entered"]
+[connection signal="body_entered" from="SegmentEntryCL" to="." method="_on_segment_entry_body_entered"]
 [connection signal="body_entered" from="SegmentExitCL" to="." method="_on_segment_exit_cl_body_entered"]
 [connection signal="timeout" from="LifetimeCL" to="." method="_on_lifetime_cl_timeout"]

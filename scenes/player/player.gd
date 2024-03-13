@@ -26,9 +26,9 @@ var movement_ability_time = 0
 
 var max_movement_energy = 100
 var movement_energy = 100
-var movement_energy_consumption_rate = 0.1
-var movement_energy_regen_rate_base = 0.1
-var movement_energy_regen_rate_inertia = 0.05
+var movement_energy_consumption_rate = 0.85
+var movement_energy_regen_rate_base = 0.05
+var movement_energy_regen_rate_inertia = 0.01
 
 var base_sensitivity = Globals.player_preferences["mouse_sensitivity"]
 var strafe_sensitivity = base_sensitivity
@@ -109,7 +109,7 @@ func _input(event):
 
 func _process(delta):
 	
-	if movement_energy >= 0:
+	if movement_energy > 0:
 		can_use_movement_ability = true
 	else:
 		can_use_movement_ability = false
@@ -120,13 +120,13 @@ func _process(delta):
 		movement_boost = clamp(min_movement_boost + pow(movement_ability_time,3),0,max_movement_boost)
 		strafe_penalty = clamp(1-movement_ability_time*0.2,max_strafe_penalty,1)
 		strafe_sensitivity = clamp(base_sensitivity-movement_ability_time*0.005,base_sensitivity/max_mouse_sense_reduction,base_sensitivity)
-		movement_energy += clampf(movement_energy+movement_energy_regen_rate_inertia*speed-movement_energy_consumption_rate,0,max_movement_energy)
+		movement_energy = clampf(movement_energy+(movement_energy_regen_rate_inertia*speed)-movement_energy_consumption_rate,0,max_movement_energy)
 	else:
 		strafe_sensitivity = base_sensitivity
 		movement_ability_time = 0
 		movement_boost = 0
 		strafe_penalty = 1
-		movement_energy += clampf(movement_energy+movement_energy_regen_rate_base,0,max_movement_energy)
+		movement_energy = clampf(movement_energy+movement_energy_regen_rate_base,0,max_movement_energy)
 	
 	if camera_first_person.rotation.x < -deg_to_rad(min_pitch):
 		camera_first_person.rotation.x = -deg_to_rad(min_pitch)
@@ -209,12 +209,12 @@ func aberrate_weapon(type = "none"):
 
 func validate_aberration(index):
 	var aberration_name = aberrations.keys()[index]
-	var multiplied_effect = aberrations[aberrations.keys()[index]][Data.abattr.MULTIPLIED_EFFECT]
-	var flat_effect = aberrations[aberrations.keys()[index]][Data.abattr.FLAT_EFFECT]
-	var id = aberrations[aberrations.keys()[index]][Data.abattr.ID]
-	var description = aberrations[aberrations.keys()[index]][Data.abattr.DESCRIPTION]
+	var multiplied_effect = Data.get_attr(Data.abcls,aberration_name,Data.abattr.MULTIPLIED_EFFECT)
+	var flat_effect = Data.get_attr(Data.abcls,aberration_name,Data.abattr.FLAT_EFFECT)
+	var id = Data.get_attr(Data.abcls,aberration_name,Data.abattr.ID)
+	var description = Data.get_attr(Data.abcls,aberration_name,Data.abattr.DESCRIPTION)
 	game_manager_ref.altered_weapon_flat_stats[id] += flat_effect
-	game_manager_ref.altered_weapon_mutliplied_stats[id] += multiplied_effect
+	game_manager_ref.altered_weapon_multiplied_stats[id] += multiplied_effect
 	
 	print(aberration_name,description)
 	#probably print to screen what aberration was gained and a description of it
@@ -225,7 +225,6 @@ func get_next_weapon():
 	if active_weapon_index == weapons.size():
 		active_weapon_index = 0
 	num_swaps += 1
-	defeats_till_chroma_swap = base_defeats_till_chroma_swap
 			
 func _on_enemy_defeated():
 	if not is_training:
@@ -233,7 +232,7 @@ func _on_enemy_defeated():
 			if arena_ref.defeats_required > 0:
 				arena_ref.defeats_required -= 1
 		enemies_defeated += 1
-		defeats_till_chroma_swap = clampi(defeats_till_chroma_swap - 1,0,base_defeats_till_chroma_swap)
+		defeats_till_chroma_swap -= 1
 		if defeats_till_chroma_swap == 0:
 			get_next_weapon()
 			swap_weapons(active_weapon_index)

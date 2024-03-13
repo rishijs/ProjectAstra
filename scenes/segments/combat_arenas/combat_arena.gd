@@ -52,10 +52,11 @@ func calculate_num_elims():
 		for spawner in arrangement.get_children():
 			spawner.num_waves += num_waves_change
 			spawner.activate()
-			if spawner.spawn_at_arena_index >= segment_manager_ref.arena_index:
+			if spawner.spawn_at_arena_index <= segment_manager_ref.arena_index:
 				defeats_required += spawner.num_waves
 			else:
 				spawner.queue_free()
+		arrangement.show()
 
 func lock_arena():
 	locked = true

@@ -54,14 +54,15 @@ func _on_timer_timeout():
 		current_range = light_range+player_ref.speed
 		light.distance_fade_begin = current_range
 		light.omni_range = light_radius+10
+		
+		if player_ref.arena_ref != null:
+			light.light_color = colors[player_ref.active_weapon_index]
+		else:
+			light.light_color = color
 		#light.light_color = alt_color
 		#light.light_energy = low_energy
 	else:
 		light.distance_fade_begin = light_range
 		#light.light_energy = base_energy
 		light.omni_range = light_radius
-		
-		if player_ref.arena_ref != null:
-			light.light_color = colors[player_ref.active_weapon_index]
-		else:
-			light.light_color = color
+		light.light_color = color

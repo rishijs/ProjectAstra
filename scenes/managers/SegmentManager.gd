@@ -30,7 +30,7 @@ var num_chunks = 0
 var initial_chunks = 2
 var player_depth = player_starting_depth
 var depth = player_starting_depth
-var arena_index = initial_chunks
+var arena_index = -2
 
 enum segment_types{PLANE,CURVED_TUBE,STRAIGHT_TUBE,VERTICAL_TUBE,CHROMA,ARENA,REWARD,MISC}
 enum curved_tube_variants{RIGHT,LEFT}
