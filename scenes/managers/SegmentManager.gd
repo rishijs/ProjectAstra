@@ -75,9 +75,9 @@ func destroy_past_segments():
 				player_segment_index = clampi(player_segment_index - 1,0,segments.size())
 				for i in range(segments.size()):
 					segments[i].id = i
-			
-				create_door(segments[0])
 
+"""			
+unused
 func remove_chroma(segment):
 	return segment.type != segment_types.CHROMA
 
@@ -87,6 +87,7 @@ func create_door(segment):
 		segment.add_child(this_door)
 		this_door.global_position = segment.segment_start.global_position
 		this_door.global_rotation = segment.global_rotation
+"""
 	
 func reset_segments():
 	for segment in segments:
@@ -96,7 +97,6 @@ func reset_segments():
 	segments.clear()
 	segments.append(game_manager_ref.segment_ref)
 	game_manager_ref.segment_ref.id = 0
-	create_door(game_manager_ref.segment_ref)	
 	
 	num_chunks -= 1
 	segment_rotation = game_manager_ref.rotation_at_checkpoint
