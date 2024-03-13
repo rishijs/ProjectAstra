@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://c7p24v38kr0cx"]
+[gd_scene load_steps=44 format=3 uid="uid://c7p24v38kr0cx"]
 
 [ext_resource type="Script" path="res://scenes/segments/shops/chroma_room.gd" id="1_e411e"]
 [ext_resource type="Texture2D" uid="uid://b7x8n0pay2dpx" path="res://art/game/segment/chroma/chroma_room_chroma_base.png" id="2_xmu5w"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://nfujcovtpoyr" path="res://art/game/props_elements/door_door_base.png" id="5_oim5i"]
 [ext_resource type="Material" uid="uid://dem07hua8c0os" path="res://scenes/segments/shops/checkpoint_empty.tres" id="6_4oql1"]
 [ext_resource type="Texture2D" uid="uid://j777ovus4qea" path="res://art/game/props_elements/door_door_metal-door_rough.png" id="6_cmlgs"]
+[ext_resource type="AudioStream" uid="uid://dj3o26uhoducv" path="res://audio/sfx/alerts/checkpoint.wav" id="9_annck"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bdwet"]
 resource_name = "Material"
@@ -639,6 +640,11 @@ mesh = SubResource("BoxMesh_0exsx")
 transform = Transform3D(-0.637244, 1.54502, -5.06513e-08, 2.12506e-22, -8.74228e-08, -1.5, -0.775241, -1.27, 4.16351e-08, -6.45074, 7.53972, 4.87633)
 material_override = ExtResource("6_4oql1")
 mesh = SubResource("PrismMesh_2kncm")
+
+[node name="Checkpoint" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("9_annck")
+bus = &"SFX"
 
 [connection signal="body_entered" from="SegmentEntry" to="." method="_on_segment_entry_body_entered"]
 [connection signal="body_entered" from="SegmentExit" to="." method="_on_segment_exit_body_entered"]

@@ -7,6 +7,7 @@ enum light_status{LOW,BASE,HIGH,FLICKER,OSC}
 @export var light_range:float = 40
 @export var light_fade_dist:float = 20
 @export var light_radius:float = 20
+@export var audio_range:float = 80
 
 @export var flickering:bool = false
 @export var oscillating:bool = true
@@ -26,6 +27,8 @@ enum light_status{LOW,BASE,HIGH,FLICKER,OSC}
 var current_range = light_range
 
 func _ready():
+	%spatial.pitch_scale = randf_range(0.8,1.2)
+	%spatial.max_distance = audio_range
 	light.omni_range = light_radius
 	light.light_color = color
 	light.light_energy = base_energy
@@ -66,3 +69,14 @@ func _on_timer_timeout():
 		#light.light_energy = base_energy
 		light.omni_range = light_radius
 		light.light_color = color
+
+
+func _on_area_3d_body_entered(body):
+	if body == player_ref:
+		%spatial.stream_paused = false
+		%spatial.play()
+
+
+func _on_area_3d_body_exited(body):
+	if body == player_ref:
+		%spatial.stream_paused = true

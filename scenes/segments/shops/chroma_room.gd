@@ -34,6 +34,7 @@ func _on_segment_entry_body_entered(body):
 			game_manager_ref.segment_ref = self
 			game_manager_ref.rotation_at_checkpoint = segment_manager_ref.segment_rotation
 			game_manager_ref.depth_at_checkpoint = segment_manager_ref.player_depth
+			%Checkpoint.play()
 
 func _on_segment_exit_body_entered(body):
 	if body == player_ref:

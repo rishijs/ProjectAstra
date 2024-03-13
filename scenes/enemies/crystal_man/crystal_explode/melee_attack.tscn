@@ -1,7 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://boumy5sy6tyhu"]
+[gd_scene load_steps=12 format=3 uid="uid://boumy5sy6tyhu"]
 
 [ext_resource type="Script" path="res://scenes/enemies/crystal_man/crystal_explode/crystal_melee_attack.gd" id="1_rswo3"]
 [ext_resource type="Shader" path="res://art/shaders/spatial/outline.gdshader" id="2_fhqdw"]
+[ext_resource type="AudioStream" uid="uid://gky5ymg6s16l" path="res://audio/sfx/impact/crystal_punch_1.wav" id="3_gofd7"]
+[ext_resource type="AudioStream" uid="uid://52koxi74kj5c" path="res://audio/sfx/impact/crystal_punch_2.wav" id="4_307hl"]
+[ext_resource type="AudioStream" uid="uid://cwid2tm3edi1t" path="res://audio/sfx/impact/crystal_punch_3.wav" id="5_10ind"]
+[ext_resource type="AudioStream" uid="uid://def7hjr6lbpd5" path="res://audio/sfx/impact/crystal_punch_4.wav" id="6_5vr4c"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_lpb7r"]
 height = 0.145
@@ -22,6 +26,17 @@ shader_parameter/color = Color(0.588235, 0, 0.301961, 1)
 top_radius = 6.0
 bottom_radius = 6.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_f3x4k"]
+streams_count = 4
+stream_0/stream = ExtResource("3_gofd7")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("4_307hl")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("5_10ind")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("6_5vr4c")
+stream_3/weight = 1.0
+
 [node name="MeleeAttack" type="Area3D"]
 collision_layer = 4
 collision_mask = 2
@@ -40,6 +55,12 @@ mesh = SubResource("CylinderMesh_ry7uq")
 wait_time = 0.5
 one_shot = true
 autostart = true
+
+[node name="sound" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_f3x4k")
+volume_db = 15.0
+autoplay = true
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

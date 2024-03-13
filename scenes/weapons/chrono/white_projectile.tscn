@@ -1,6 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0f32l103vmht"]
+[gd_scene load_steps=9 format=3 uid="uid://d0f32l103vmht"]
 
 [ext_resource type="Script" path="res://scenes/weapons/chrono/white_projectile.gd" id="1_xk8hy"]
+[ext_resource type="AudioStream" uid="uid://bmc0oxoh3ihq1" path="res://audio/sfx/impact/impact_1.wav" id="2_ki2ol"]
+[ext_resource type="AudioStream" uid="uid://c1qivdekodqtl" path="res://audio/sfx/impact/impact_2.wav" id="3_u64i3"]
+[ext_resource type="AudioStream" uid="uid://5p2bj8p37uc8" path="res://audio/sfx/impact/impact_3.wav" id="4_ghkg4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ng8f2"]
 albedo_color = Color(0, 0, 0, 1)
@@ -13,10 +16,20 @@ emission_energy_multiplier = 5.0
 [sub_resource type="BoxShape3D" id="BoxShape3D_l2ixp"]
 size = Vector3(1, 1, 11.6679)
 
-[node name="ChronoProjectile" type="Area3D"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qva75"]
+streams_count = 3
+stream_0/stream = ExtResource("2_ki2ol")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("3_u64i3")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("4_ghkg4")
+stream_2/weight = 1.0
+
+[node name="ChronoProjectile" type="Area3D" node_paths=PackedStringArray("impactS")]
 collision_layer = 8
 collision_mask = 8
 script = ExtResource("1_xk8hy")
+impactS = NodePath("Impact")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.155454, 0, 0, 0, 0.0742649, 0, 0, 0, 4.62826, 0.0271619, 0, -0.0276783)
@@ -30,6 +43,10 @@ shape = SubResource("BoxShape3D_l2ixp")
 [node name="SelfDestruct" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
+
+[node name="Impact" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_qva75")
+volume_db = -10.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

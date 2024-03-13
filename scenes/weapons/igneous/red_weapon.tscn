@@ -1,10 +1,12 @@
-[gd_scene load_steps=27 format=3 uid="uid://cwewt4iay0fxe"]
+[gd_scene load_steps=29 format=3 uid="uid://cwewt4iay0fxe"]
 
 [ext_resource type="Script" path="res://scenes/weapons/igneous/red_weapon.gd" id="1_ivayt"]
 [ext_resource type="Shader" path="res://art/shaders/spatial/outline.gdshader" id="2_bb4gi"]
 [ext_resource type="Texture2D" uid="uid://bbsk0t38ptaav" path="res://art/game/weapons/igneous/igneous_weapon_revamp_igneous_lava_base.png" id="2_ysiql"]
 [ext_resource type="Texture2D" uid="uid://dvxvd22jy360a" path="res://art/game/weapons/igneous/igneous_weapon_revamp_igneous_lava_metal-igneous_lava_rough.png" id="3_m74ph"]
 [ext_resource type="Texture2D" uid="uid://b238ygnbwngy7" path="res://art/game/weapons/igneous/igneous_weapon_revamp_igneous_lava_nor.png" id="4_skpp4"]
+[ext_resource type="AudioStream" uid="uid://fo0glw6n15sq" path="res://audio/sfx/weapon/igneous_fire_1.wav" id="6_wd66y"]
+[ext_resource type="AudioStream" uid="uid://btmd1u6c1q2lr" path="res://audio/sfx/weapon/reload_weapon_1.wav" id="7_tj4cl"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4fefk"]
 noise_type = 3
@@ -298,9 +300,11 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_csxam")
 
-[node name="Red_weapon" type="Node3D"]
+[node name="Red_weapon" type="Node3D" node_paths=PackedStringArray("fireS", "reloadS")]
 script = ExtResource("1_ivayt")
 camera_shake_noise = SubResource("FastNoiseLite_4fefk")
+fireS = NodePath("FireS")
+reloadS = NodePath("ReloadS")
 
 [node name="igneous_weapon_revamp" type="Node3D" parent="."]
 transform = Transform3D(-8.74228e-10, 0, -0.02, 0, 0.02, 0, 0.02, 0, -8.74228e-10, 0.585636, -0.113746, -0.0504544)
@@ -368,3 +372,13 @@ light_color = Color(1, 0.0745098, 0.0117647, 1)
 light_energy = 10.0
 light_cull_mask = 4294966274
 omni_range = 0.7
+
+[node name="FireS" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_wd66y")
+volume_db = -15.0
+bus = &"SFX"
+
+[node name="ReloadS" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_tj4cl")
+volume_db = 5.0
+bus = &"SFX"

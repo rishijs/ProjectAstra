@@ -1,6 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://2u8wc4jvco2b"]
+[gd_scene load_steps=10 format=3 uid="uid://2u8wc4jvco2b"]
 
 [ext_resource type="Script" path="res://scenes/weapons/igneous/red_projectile.gd" id="1_qf76e"]
+[ext_resource type="AudioStream" uid="uid://bmc0oxoh3ihq1" path="res://audio/sfx/impact/impact_1.wav" id="2_w7in4"]
+[ext_resource type="AudioStream" uid="uid://c1qivdekodqtl" path="res://audio/sfx/impact/impact_2.wav" id="3_mq7au"]
+[ext_resource type="AudioStream" uid="uid://5p2bj8p37uc8" path="res://audio/sfx/impact/impact_3.wav" id="4_5vnmg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k0v0k"]
 albedo_color = Color(0.513726, 0, 0, 1)
@@ -14,10 +17,20 @@ emission_energy_multiplier = 5.0
 [sub_resource type="BoxShape3D" id="BoxShape3D_xa630"]
 size = Vector3(0.348633, 0.292908, 1.38715)
 
-[node name="RedProjectile" type="Area3D"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_llkr0"]
+streams_count = 3
+stream_0/stream = ExtResource("2_w7in4")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("3_mq7au")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("4_5vnmg")
+stream_2/weight = 1.0
+
+[node name="RedProjectile" type="Area3D" node_paths=PackedStringArray("impactS")]
 collision_layer = 8
 collision_mask = 8
 script = ExtResource("1_qf76e")
+impactS = NodePath("Impact")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-3.13839e-09, 0, 1.22022, 0, 0.0726718, 0, -0.0717979, 0, -5.33375e-08, 0, 0, 0)
@@ -32,6 +45,12 @@ shape = SubResource("BoxShape3D_xa630")
 [node name="SelfDestruct" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
+
+[node name="Impact" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_llkr0")
+volume_db = -10.0
+max_polyphony = 10
+bus = &"SFX"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

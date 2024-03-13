@@ -28,6 +28,7 @@ func reload():
 func shooting_pattern():
 	super()
 	if is_instance_valid(target_loc):
+		await get_tree().create_timer(0.25,false).timeout
 		for i in range(weapon_stats[Data.wattr.NUM_PROJECTILES]):
 			fire_once()
 		prepare_next_shot()

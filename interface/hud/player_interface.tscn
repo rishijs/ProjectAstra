@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://ct3ob0tj0fjyj"]
+[gd_scene load_steps=6 format=3 uid="uid://ct3ob0tj0fjyj"]
 
 [ext_resource type="Script" path="res://interface/hud/player_interface.gd" id="1_uecec"]
 [ext_resource type="Theme" uid="uid://bpeg6inp31l8g" path="res://themes/deftheme.tres" id="2_5top5"]
+[ext_resource type="AudioStream" uid="uid://ju1cjr8246ph" path="res://audio/sfx/alerts/info.wav" id="3_2pm6f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3xg3y"]
 bg_color = Color(0.670588, 0.0470588, 0, 1)
@@ -225,6 +226,15 @@ layout_mode = 2
 theme = ExtResource("2_5top5")
 theme_override_font_sizes/font_size = 15
 text = "DESC"
+
+[node name="Info" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_2pm6f")
+bus = &"SFX"
+
+[node name="Alert" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"SFX"
 
 [connection signal="aberration" from="." to="." method="_on_aberration"]
 [connection signal="timeout" from="Update" to="." method="_on_update_timeout"]

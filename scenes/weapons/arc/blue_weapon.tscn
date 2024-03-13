@@ -1,8 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://dkd4j8sp1pr6h"]
+[gd_scene load_steps=27 format=3 uid="uid://dkd4j8sp1pr6h"]
 
 [ext_resource type="Script" path="res://scenes/weapons/arc/blue_weapon.gd" id="1_radbx"]
 [ext_resource type="Shader" path="res://art/shaders/spatial/outline.gdshader" id="2_kmevy"]
 [ext_resource type="Texture2D" uid="uid://dpb4ieje7icgr" path="res://art/game/weapons/arc/normal/arc_weapon_normal_arc_texture_blue_base.png" id="6_fvulo"]
+[ext_resource type="AudioStream" uid="uid://btgd1oo6um6a3" path="res://audio/sfx/weapon/arc_fire_1.wav" id="6_vwx63"]
+[ext_resource type="AudioStream" uid="uid://btmd1u6c1q2lr" path="res://audio/sfx/weapon/reload_weapon_1.wav" id="7_1os5c"]
 [ext_resource type="Texture2D" uid="uid://bw3aqubkgecji" path="res://art/game/weapons/arc/normal/arc_weapon_normal_arc_texture_blue_metal.png-arc_texture_blue_rough.png" id="7_5mwa7"]
 [ext_resource type="Texture2D" uid="uid://ds5cl0c3wh34v" path="res://art/game/weapons/arc/normal/arc_weapon_normal_arc_texture_blue_nor.png" id="8_pdxmp"]
 
@@ -296,9 +298,11 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_oakca")
 
-[node name="BlueWeapon" type="Node3D"]
+[node name="BlueWeapon" type="Node3D" node_paths=PackedStringArray("fireS", "reloadS")]
 script = ExtResource("1_radbx")
 camera_shake_noise = SubResource("FastNoiseLite_uxtsa")
+fireS = NodePath("FireS")
+reloadS = NodePath("ReloadS")
 
 [node name="arc_weapon_normal" type="Node3D" parent="."]
 transform = Transform3D(-0.07, 0, -1.50996e-08, 0, 0.07, 0, 1.05697e-08, 0, -0.1, 0.26586, 0, 0.0226634)
@@ -371,5 +375,13 @@ light_color = Color(0, 0, 1, 1)
 light_energy = 10.0
 light_cull_mask = 4294966274
 omni_range = 0.75
+
+[node name="FireS" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_vwx63")
+bus = &"SFX"
+
+[node name="ReloadS" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_1os5c")
+bus = &"SFX"
 
 [connection signal="timeout" from="Reload" to="." method="_on_reload_timeout"]

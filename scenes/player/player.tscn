@@ -1,17 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://dmekjtv82mx01"]
+[gd_scene load_steps=10 format=3 uid="uid://dmekjtv82mx01"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_w2nvs"]
 [ext_resource type="PackedScene" uid="uid://cwewt4iay0fxe" path="res://scenes/weapons/igneous/red_weapon.tscn" id="3_np643"]
 [ext_resource type="PackedScene" uid="uid://dx0devx4y12pb" path="res://scenes/weapons/natura/green_weapon.tscn" id="4_txoey"]
 [ext_resource type="PackedScene" uid="uid://dkd4j8sp1pr6h" path="res://scenes/weapons/arc/blue_weapon.tscn" id="5_a8ke1"]
 [ext_resource type="PackedScene" uid="uid://c8o1d0oyq22xi" path="res://scenes/weapons/chrono/white_weapon.tscn" id="6_4e8q5"]
+[ext_resource type="AudioStream" uid="uid://clr6oi1600mh1" path="res://audio/sfx/movement_activation.wav" id="6_v64qa"]
+[ext_resource type="AudioStream" uid="uid://di02mc4uj8wo7" path="res://audio/sfx/alerts/chroma_swap.wav" id="7_hxr7q"]
+[ext_resource type="AudioStream" uid="uid://c178xcbyucw1l" path="res://audio/music/ProjectAstraAmbientTheme.ogg" id="8_fu8h5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wtlei"]
 radius = 0.793701
 height = 3.23406
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera_first_person", "weapons", "weapon_socket") groups=["Player"]]
-collision_layer = 19
+collision_layer = 83
 collision_mask = 5
 floor_max_angle = 1.54811
 script = ExtResource("1_w2nvs")
@@ -43,6 +46,24 @@ visible = false
 
 [node name="WhiteWeapon" parent="WeaponSocket" instance=ExtResource("6_4e8q5")]
 visible = false
+
+[node name="SprintActivated" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_v64qa")
+volume_db = -15.0
+bus = &"SFX"
+
+[node name="ChromaSwap" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("7_hxr7q")
+bus = &"SFX"
+
+[node name="Ambience" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("8_fu8h5")
+volume_db = -20.0
+autoplay = true
+bus = &"Music"
 
 [connection signal="enemy_defeated" from="." to="." method="_on_enemy_defeated"]
 [connection signal="hit" from="." to="." method="_on_hit"]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://du1lmvvodexmf"]
+[gd_scene load_steps=20 format=3 uid="uid://du1lmvvodexmf"]
 
 [ext_resource type="Script" path="res://scenes/enemies/crystal_man/crystal_enemy.gd" id="1_s61cp"]
 [ext_resource type="SpriteFrames" uid="uid://dosfl47bno0tq" path="res://scenes/enemies/crystal_man/crystal_man.tres" id="2_dlaqm"]
 [ext_resource type="PackedScene" uid="uid://c3jmdc5fokq36" path="res://scenes/enemies/healthbar.tscn" id="3_6s3w3"]
 [ext_resource type="Shader" path="res://art/shaders/spatial/outline.gdshader" id="4_fjov1"]
+[ext_resource type="AudioStream" uid="uid://dfkr538ihsekk" path="res://audio/sfx/alerts/laser_warning.wav" id="5_qptci"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tjxhr"]
 size = Vector3(1.87494, 3.11599, 0.998444)
@@ -171,6 +172,10 @@ skeleton = NodePath("../..")
 unique_name_in_owner = true
 wait_time = 0.5
 one_shot = true
+
+[node name="LaserLockon" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_qptci")
 
 [connection signal="animation_finished" from="crystalman" to="." method="_on_crystalman_animation_finished"]
 [connection signal="body_entered" from="MeleeDetection" to="." method="_on_melee_detection_body_entered"]

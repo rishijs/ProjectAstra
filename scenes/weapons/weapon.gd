@@ -8,6 +8,11 @@ extends Node3D
 @export var current_weapon = false
 @export var camera_shake_noise : FastNoiseLite
 
+@export_category("sound_players")
+@export var fireS:AudioStreamPlayer
+@export var reloadS:AudioStreamPlayer
+@export var chargeS:AudioStreamPlayer
+
 var offset : Vector3
 var camera_shake_amp = 0.0
 var camera_shake_time_left = 0.0
@@ -107,12 +112,16 @@ func fire():
 
 func shooting_pattern():
 	magazine -= weapon_stats[Data.wattr.NUM_PROJECTILES]
+	fireS.pitch_scale = randf_range(0.8,1.2)
+	fireS.play()
 
 func refill():
 	magazine = weapon_stats[Data.wattr.MAGAZINE]
 	
 func reload():
 	weapon_state = States.RELOADING
+	reloadS.pitch_scale = randf_range(0.8,1.2)
+	reloadS.play()
 	await get_tree().create_timer(weapon_stats[Data.wattr.RELOAD_SPEED],false).timeout
 	weapon_state = States.READY
 	magazine = weapon_stats[Data.wattr.MAGAZINE]

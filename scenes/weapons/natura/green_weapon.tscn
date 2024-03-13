@@ -1,9 +1,11 @@
-[gd_scene load_steps=27 format=3 uid="uid://dx0devx4y12pb"]
+[gd_scene load_steps=29 format=3 uid="uid://dx0devx4y12pb"]
 
 [ext_resource type="Script" path="res://scenes/weapons/natura/green_weapon.gd" id="1_cwpc8"]
 [ext_resource type="Texture2D" uid="uid://bqgm32rydmqh7" path="res://art/game/weapons/natura/green/normal/natura_weapon_normal_natura_weapon_green_base.png" id="2_do6ar"]
 [ext_resource type="Texture2D" uid="uid://cxdq3j7vye7bs" path="res://art/game/weapons/natura/green/normal/natura_weapon_normal_natura_weapon_green_metal-natura_weapon_green_rough.png" id="3_l3tlp"]
 [ext_resource type="Texture2D" uid="uid://cmmbbbnbv2mci" path="res://art/game/weapons/natura/green/normal/natura_weapon_normal_natura_weapon_green_nor.png" id="4_yk76k"]
+[ext_resource type="AudioStream" uid="uid://bawnitmdrkn7m" path="res://audio/sfx/weapon/natura_fire_1.wav" id="5_2s040"]
+[ext_resource type="AudioStream" uid="uid://btmd1u6c1q2lr" path="res://audio/sfx/weapon/reload_weapon_1.wav" id="6_36g54"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_suk1p"]
 noise_type = 3
@@ -352,9 +354,11 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_iq4ig")
 
-[node name="GreenWeapon" type="Node3D"]
+[node name="GreenWeapon" type="Node3D" node_paths=PackedStringArray("fireS", "reloadS")]
 script = ExtResource("1_cwpc8")
 camera_shake_noise = SubResource("FastNoiseLite_suk1p")
+fireS = NodePath("FireS")
+reloadS = NodePath("ReloadS")
 
 [node name="natura_weapon_normal" type="Node3D" parent="."]
 transform = Transform3D(-8.74228e-10, 0, 0.018, 0, 0.02, 0, -0.02, 0, -7.86805e-10, -0.0619853, -0.125, 0)
@@ -434,3 +438,11 @@ light_color = Color(0, 0.458824, 0, 1)
 light_energy = 10.0
 light_cull_mask = 4294966274
 omni_range = 0.75
+
+[node name="FireS" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_2s040")
+bus = &"SFX"
+
+[node name="ReloadS" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_36g54")
+bus = &"SFX"

@@ -77,6 +77,8 @@ func _on_aberration(ab_name, ab_desc):
 	aberration_container.show()
 	aberration_name.text = ab_name
 	aberration_description.text = ab_desc
+	%Info.pitch_scale = randf_range(0.8,1.2)
+	%Info.play()
 	await get_tree().create_timer(5.0,false).timeout
 	aberration_container.hide()
 	

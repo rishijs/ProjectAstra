@@ -2,6 +2,8 @@ extends Area3D
 
 @onready var player_ref = get_tree().get_first_node_in_group("Player")
 @onready var projectiles_ref = get_tree().get_first_node_in_group("Projectiles")
+
+@export var impactS:AudioStreamPlayer3D
 var damage_number = preload("res://interface/damage_numbers/damage_number_3d.tscn")
 
 var velocity = Vector3.ZERO
@@ -64,6 +66,8 @@ func damage_enemy(enemy,headshot,hit_loc):
 		else:
 			hit.emit(damage)
 			create_damage_number(damage,is_crit,false,hit_loc)
+		impactS.play()
+		await impactS.finished
 		sdestruct()
 	
 func sdestruct():

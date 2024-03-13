@@ -67,6 +67,8 @@ signal enemy_defeated
 
 func _ready():
 	swap_weapons(active_weapon_index)
+		
+	%Ambience.play()
 
 func _input(event):
 	
@@ -81,12 +83,14 @@ func _input(event):
 	
 	if Input.is_action_just_pressed("movement_ability") and can_use_movement_ability:
 		movement_ability = true
+		%SprintActivated.play()
 	
 	if Input.is_action_just_released("movement_ability"):
 		movement_ability = false
 		
 	if Input.is_action_just_pressed("primary_fire"):
 		weapons[active_weapon_index].fire()
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	if Input.is_action_just_pressed("ads_fire"):
 		weapons[active_weapon_index].fire()
@@ -194,6 +198,9 @@ func swap_weapons(weapon_index):
 		weapons[weapon_index].current_weapon = true
 		weapons[weapon_index].refill()
 		post_process.weapon_swapped.emit(weapon_index)
+	
+	if num_swaps > 1:
+		%ChromaSwap.play()
 
 func reset_at_checkpoint():
 	global_position = game_manager_ref.checkpoint_ref.global_position

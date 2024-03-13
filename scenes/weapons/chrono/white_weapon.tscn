@@ -1,9 +1,12 @@
-[gd_scene load_steps=27 format=3 uid="uid://c8o1d0oyq22xi"]
+[gd_scene load_steps=30 format=3 uid="uid://c8o1d0oyq22xi"]
 
 [ext_resource type="Script" path="res://scenes/weapons/chrono/white_weapon.gd" id="1_nrb5t"]
 [ext_resource type="Texture2D" uid="uid://dcun2jpiqj7tp" path="res://art/game/weapons/chronos/white/normal/chronos_white_normal_chronos_weapon_white_base.png" id="3_qnr55"]
 [ext_resource type="Texture2D" uid="uid://bvdoxgor4rs1d" path="res://art/game/weapons/chronos/white/normal/chronos_white_normal_chronos_weapon_white_metal-chronos_weapon_white_rough.png" id="4_k520r"]
+[ext_resource type="AudioStream" uid="uid://1d83fot0a81p" path="res://audio/sfx/weapon/chronos_fire_1.wav" id="5_7wwqv"]
 [ext_resource type="Texture2D" uid="uid://dphdveqxp1gdi" path="res://art/game/weapons/chronos/white/normal/chronos_white_normal_chronos_weapon_white_nor.png" id="5_hws8k"]
+[ext_resource type="AudioStream" uid="uid://dbcjxg1kax47j" path="res://audio/sfx/weapon/chronos_charging.wav" id="6_30jne"]
+[ext_resource type="AudioStream" uid="uid://btmd1u6c1q2lr" path="res://audio/sfx/weapon/reload_weapon_1.wav" id="7_xt0cv"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_3gyij"]
 noise_type = 3
@@ -348,10 +351,13 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_0pde5")
 
-[node name="WhiteWeapon" type="Node3D" node_paths=PackedStringArray("muzzles")]
+[node name="WhiteWeapon" type="Node3D" node_paths=PackedStringArray("muzzles", "fireS", "reloadS", "chargeS")]
 script = ExtResource("1_nrb5t")
 muzzles = [NodePath("muzzle"), NodePath("muzzleL"), NodePath("muzzleR")]
 camera_shake_noise = SubResource("FastNoiseLite_3gyij")
+fireS = NodePath("FireS")
+reloadS = NodePath("ReloadS")
+chargeS = NodePath("ChargingS")
 
 [node name="chronos_white_normal" type="Node3D" parent="."]
 transform = Transform3D(-2.18557e-09, 0, 0.05, 0, 0.05, 0, -0.05, 0, -2.18557e-09, 0.211253, 0, 0)
@@ -437,3 +443,16 @@ layers = 2
 light_energy = 10.0
 light_cull_mask = 4294966274
 omni_range = 0.75
+
+[node name="FireS" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_7wwqv")
+pitch_scale = 0.66
+bus = &"SFX"
+
+[node name="ChargingS" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_30jne")
+bus = &"SFX"
+
+[node name="ReloadS" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_xt0cv")
+bus = &"SFX"

@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dekl5g3qvodsa"]
+[gd_scene load_steps=10 format=3 uid="uid://dekl5g3qvodsa"]
 
 [ext_resource type="Script" path="res://scenes/enemies/crystal_man/laser_eyes/crystal_laser_attack.gd" id="1_ljo4k"]
 [ext_resource type="Shader" path="res://art/shaders/spatial/outline.gdshader" id="2_ucyly"]
+[ext_resource type="AudioStream" uid="uid://iyxad5e65m04" path="res://audio/sfx/impact/crystal_laser_1.wav" id="3_b31s3"]
+[ext_resource type="AudioStream" uid="uid://ceolwyuigqcou" path="res://audio/sfx/impact/crystal_laser_2.wav" id="4_hn2cy"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xb1e2"]
 radius = 5.0
@@ -21,6 +23,13 @@ shader_parameter/color = Color(0.588235, 0, 0.301961, 1)
 radius = 5.0
 height = 10.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_j0edi"]
+streams_count = 2
+stream_0/stream = ExtResource("3_b31s3")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("4_hn2cy")
+stream_1/weight = 1.0
+
 [node name="LaserAttack" type="Area3D"]
 collision_layer = 4
 collision_mask = 2
@@ -39,6 +48,11 @@ one_shot = true
 autostart = true
 
 [node name="Target" type="Marker3D" parent="."]
+
+[node name="sound" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_j0edi")
+autoplay = true
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

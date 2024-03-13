@@ -135,6 +135,8 @@ func _on_crystalman_animation_finished():
 
 func _on_lock_on_timer_timeout():
 	locking_on = false
+	%LaserLockon.pitch_scale = randf_range(0.8,1.2)
+	%LaserLockon.play()
 	%LaserAttackWarning.hide()
 	%LaserAttackWarningClose.show()
 

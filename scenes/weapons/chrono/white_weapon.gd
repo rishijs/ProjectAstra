@@ -11,6 +11,9 @@ func _process(delta):
 	super(delta)
 	if weapon_state == States.CHARGING and charge_time > 0 and (Input.is_action_pressed("primary_fire") or Input.is_action_pressed("ads_fire")):
 		charge_time = clampf(charge_time - delta,0,weapon_stats[Data.wattr.CHARGE_DURATION])
+		if chargeS.playing == false:
+			chargeS.pitch_scale = randf_range(0.8,1.2)
+			chargeS.play()
 	elif weapon_state == States.CHARGING and charge_time == 0 and (Input.is_action_pressed("primary_fire") or Input.is_action_pressed("ads_fire")):
 		shooting_pattern()
 	elif not (Input.is_action_pressed("primary_fire") or Input.is_action_pressed("ads_fire")):
