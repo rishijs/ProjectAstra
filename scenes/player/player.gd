@@ -196,12 +196,12 @@ func swap_weapons(weapon_index):
 		post_process.weapon_swapped.emit(weapon_index)
 
 func reset_at_checkpoint():
-	segment_manager_ref.reset_segments()
 	global_position = game_manager_ref.checkpoint_ref.global_position
 	game_manager_ref.segment_ref.door.show()
+	segment_manager_ref.reset_segments()
 	
-	#game_manager_ref.segment_ref.doorLock.show()
-	#game_manager_ref.segment_ref.doorLockCol.disabled = false
+	game_manager_ref.segment_ref.doorLock.show()
+	game_manager_ref.segment_ref.doorLockCol.disabled = false
 
 func _on_hit(damage):
 	health = clampf(health-damage,0,max_health)
