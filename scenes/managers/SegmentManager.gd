@@ -108,7 +108,8 @@ func reset_segments():
 	player_depth = game_manager_ref.depth_at_checkpoint
 	depth = game_manager_ref.depth_at_checkpoint
 	player_segment_index = 0
-	segment_index = 0		
+	segment_index = 0
+	segments_this_chunk = 0	
 	
 	new_chunk.emit(segment_types.ARENA)
 	
