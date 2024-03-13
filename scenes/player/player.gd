@@ -91,6 +91,21 @@ func _input(event):
 	if Input.is_action_just_pressed("ads_fire"):
 		weapons[active_weapon_index].fire()
 	
+	if Input.is_action_just_pressed("swap_red") and is_training:
+		active_weapon_index = 0
+		swap_weapons(active_weapon_index)
+	
+	if Input.is_action_just_pressed("swap_blue") and is_training:
+		active_weapon_index = 1
+		swap_weapons(active_weapon_index)
+	
+	if Input.is_action_just_pressed("swap_green") and is_training:
+		active_weapon_index = 2
+		swap_weapons(active_weapon_index)
+	
+	if Input.is_action_just_pressed("swap_white") and is_training:
+		active_weapon_index = 3
+		swap_weapons(active_weapon_index)
 	
 	if Input.is_action_just_pressed("reload"):
 		if weapons[active_weapon_index].weapon_state != weapons[active_weapon_index].States.RELOADING:

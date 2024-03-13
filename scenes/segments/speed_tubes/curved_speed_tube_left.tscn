@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ddx36hw5s7tvi"]
+[gd_scene load_steps=25 format=3 uid="uid://ddx36hw5s7tvi"]
 
 [ext_resource type="Script" path="res://scenes/segments/speed_tubes/speed_tube.gd" id="1_c1m81"]
 [ext_resource type="Texture2D" uid="uid://d0l0vjj4sk1jb" path="res://art/game/segment/curved_left/curved_left_tube_curved_left_base.png" id="2_ifcmy"]
@@ -211,6 +211,11 @@ size = Vector3(15.0428, 12.4302, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_5hxpy"]
 size = Vector3(15.0671, 12.0754, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pa04r"]
+albedo_color = Color(1, 0.054902, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_neevp"]
+
 [node name="CurvedSpeedLeftTube" type="Node3D" node_paths=PackedStringArray("connection_end", "spawn_arrangements", "timer_node", "up", "left", "down", "right")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
 script = ExtResource("1_c1m81")
@@ -356,6 +361,15 @@ spawn_at_arena_index = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.238967, 2.2, -32.0528)
 spawn_rate = 1.0
 spawn_at_arena_index = 3
+
+[node name="connection1" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.338978, 0.188998, -36.4517)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="connection1"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_pa04r")
+mesh = SubResource("BoxMesh_neevp")
 
 [connection signal="body_entered" from="SegmentEntryCL" to="." method="_on_segment_entry_cl_body_entered"]
 [connection signal="body_entered" from="SegmentEntryCL" to="." method="_on_segment_entry_body_entered"]

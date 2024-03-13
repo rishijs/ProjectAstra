@@ -56,6 +56,11 @@ func _ready():
 	if enable:
 		for i in range(initial_chunks):
 			new_chunk.emit(segment_types.ARENA)
+			
+	min_speed_tubes_per_chunk += (Globals.prestige - 1) * 2
+	max_speed_tubes_per_chunk += (Globals.prestige - 1) * 2
+	max_curved_per_depth += (Globals.prestige - 1)
+	max_vertical_per_chunk += (Globals.prestige - 1)
 
 func _process(_delta):
 	destroy_past_segments()
@@ -71,7 +76,7 @@ func destroy_past_segments():
 				for i in range(segments.size()):
 					segments[i].id = i
 			
-				create_door(segments.filter(remove_chroma)[0])
+				create_door(segments[0])
 
 func remove_chroma(segment):
 	return segment.type != segment_types.CHROMA
@@ -81,6 +86,7 @@ func create_door(segment):
 		var this_door = door_scene.instantiate()
 		segment.add_child(this_door)
 		this_door.global_position = segment.segment_start.global_position
+		this_door.global_rotation = segment.global_rotation
 	
 func reset_segments():
 	for segment in segments:

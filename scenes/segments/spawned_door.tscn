@@ -156,7 +156,7 @@ data = PackedVector3Array(-1, -6.4314, 1, -1, 8.1557, -1, -1, 8.1557, 1, -1, -6.
 [node name="SpawnedDoor" type="Node3D"]
 
 [node name="door" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.89487, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 8.89487, 0)
 
 [node name="Cube" type="MeshInstance3D" parent="door"]
 transform = Transform3D(1, 0, 0, 0, 8.72586, 0, 0, 0, 11, 0, 0, 0)

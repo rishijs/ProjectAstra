@@ -167,9 +167,10 @@ albedo_color = Color(1, 0.054902, 0, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ir1hn"]
 size = Vector3(16.364, 13.3671, 1.41699)
 
-[node name="StraightSpeedTube" type="Node3D" node_paths=PackedStringArray("connection_end", "spawn_arrangements", "timer_node", "up", "left", "down", "right")]
+[node name="StraightSpeedTube" type="Node3D" node_paths=PackedStringArray("connection_end", "segment_start", "spawn_arrangements", "timer_node", "up", "left", "down", "right")]
 script = ExtResource("1_fqrc5")
 connection_end = [NodePath("connection2")]
+segment_start = NodePath("connection1")
 spawn_arrangements = [NodePath("SpawnArrangement")]
 timer_node = NodePath("LifetimeS")
 time_multiplier = 1.0

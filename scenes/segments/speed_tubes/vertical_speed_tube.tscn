@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cwkthj0jpi03d"]
+[gd_scene load_steps=28 format=3 uid="uid://cwkthj0jpi03d"]
 
 [ext_resource type="Script" path="res://scenes/segments/speed_tubes/speed_tube.gd" id="1_i2uee"]
 [ext_resource type="Texture2D" uid="uid://b5wbdwqlue478" path="res://art/game/segment/vertical/vertical_tube_vertical_side_walls_base.png" id="2_q308n"]
@@ -224,9 +224,15 @@ size = Vector3(15.853, 11.9144, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_3mbn7"]
 size = Vector3(4.21037, 3.28253, 3.71109)
 
-[node name="VerticalSpeedTube" type="Node3D" node_paths=PackedStringArray("connection_end", "spawn_arrangements", "timer_node", "up", "left", "down", "right")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a3bk4"]
+albedo_color = Color(1, 0.054902, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gtp8h"]
+
+[node name="VerticalSpeedTube" type="Node3D" node_paths=PackedStringArray("connection_end", "segment_start", "spawn_arrangements", "timer_node", "up", "left", "down", "right")]
 script = ExtResource("1_i2uee")
 connection_end = [NodePath("connection2")]
+segment_start = NodePath("connection1")
 spawn_arrangements = [NodePath("SpawnArrangement")]
 timer_node = NodePath("LifetimeV")
 time_multiplier = 1.0
@@ -380,6 +386,15 @@ spawn_at_arena_index = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6703, -78.7967, 3.69434)
 spawn_rate = 1.0
 spawn_at_arena_index = 5
+
+[node name="connection1" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.338978, 0.188998, 8.20783)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="connection1"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_a3bk4")
+mesh = SubResource("BoxMesh_gtp8h")
 
 [connection signal="body_entered" from="SegmentEntryV" to="." method="_on_segment_entry_v_body_entered"]
 [connection signal="timeout" from="LifetimeV" to="." method="_on_lifetime_v_timeout"]
