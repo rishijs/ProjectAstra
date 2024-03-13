@@ -93,7 +93,8 @@ func update_on_exit():
 		segment_manager_ref.player_segment_index = id+1
 		
 func _process(_delta):
-	pass
+	if self not in segment_manager_ref.segments:
+		destruct()
 		
 
 func on_timer_timeout():
