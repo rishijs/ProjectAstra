@@ -371,7 +371,7 @@ visible = false
 material_override = SubResource("StandardMaterial3D_pa04r")
 mesh = SubResource("BoxMesh_neevp")
 
-[connection signal="body_entered" from="SegmentEntryCL" to="." method="_on_segment_entry_cl_body_entered"]
 [connection signal="body_entered" from="SegmentEntryCL" to="." method="_on_segment_entry_body_entered"]
+[connection signal="body_entered" from="SegmentEntryCL" to="." method="_on_segment_entry_cl_body_entered"]
 [connection signal="body_entered" from="SegmentExitCL" to="." method="_on_segment_exit_cl_body_entered"]
 [connection signal="timeout" from="LifetimeCL" to="." method="_on_lifetime_cl_timeout"]

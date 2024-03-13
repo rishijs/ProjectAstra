@@ -52,7 +52,7 @@ var arena_ref
 var active_weapon_index = 0
 
 var base_defeats_till_chroma_swap = 3
-var defeats_till_chroma_swap = 5
+var defeats_till_chroma_swap = 3
 var num_swaps = 0
 var weapon_aberration_chance = 0.05
 

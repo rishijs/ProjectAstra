@@ -10,7 +10,7 @@ var rotation_at_checkpoint
 var depth_at_checkpoint
 
 var score = 0
-var player_time_seconds = 180
+var player_time_seconds = 300
 var player_time_string = "00:00"
 
 var altered_weapon_flat_stats = []
@@ -32,13 +32,13 @@ func _process(_delta):
 
 
 func _on_timer_timeout():
-	player_time_seconds -= 1
+	if not player_ref.is_training:
+		player_time_seconds -= 1
+		var mins = int(player_time_seconds) / 60
+		var seconds = int(player_time_seconds) % 60
+		player_time_string = Globals.convert_time_to_string(mins,seconds)
 	
-	if player_time_seconds == 0:
+	if player_time_seconds <= 0:
 		#game over
 		SceneLoader.load_scene("res://interface/menus/main_menu.tscn", true)
 		SceneLoader.change_scene_to_loading_screen()
-		
-	var mins = int(player_time_seconds) / 60
-	var seconds = int(player_time_seconds) % 60
-	player_time_string = Globals.convert_time_to_string(mins,seconds)

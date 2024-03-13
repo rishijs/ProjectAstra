@@ -146,7 +146,7 @@ offset_right = 8.0
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0.737255)
 
 [node name="reticle2" type="ColorRect" parent="."]
 anchors_preset = 8
@@ -160,6 +160,7 @@ offset_right = 6.0
 offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(1, 1, 1, 0.509804)
 
 [node name="PlayerHealth" type="ProgressBar" parent="."]
 anchors_preset = -1

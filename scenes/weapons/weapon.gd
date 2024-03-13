@@ -70,6 +70,8 @@ func initialize_weapon(weapon = weapon_name):
 		if weapon_stats[attr] is int or weapon_stats[attr] is float:
 			weapon_stats[attr] += game_manager_ref.altered_weapon_flat_stats[attr]
 			weapon_stats[attr] *= game_manager_ref.altered_weapon_multiplied_stats[attr]
+			if attr == Data.wattr.RECOIL_AMOUNT:
+				weapon_stats[attr] = clamp(weapon_stats[attr],0.01,1.5)
 		
 	magazine = weapon_stats[Data.wattr.MAGAZINE]
 	initialized = true
