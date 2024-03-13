@@ -35,7 +35,7 @@ func _process(delta):
 
 
 func _on_segment_entry_body_entered(body):
-	if body == player_ref and not inactive_segment:
+	if body == player_ref and not inactive_segment and not locked:
 		update_on_entry()
 		timer_node.start()
 		calculate_num_elims()
@@ -47,16 +47,17 @@ func init_arena():
 	set_deferred("%EntryDoorCol.disabled",true)
 
 func calculate_num_elims():
-	defeats_required = 0
-	for arrangement in spawn_arrangements:
-		for spawner in arrangement.get_children():
-			spawner.num_waves += num_waves_change
-			spawner.activate()
-			if spawner.spawn_at_arena_index <= segment_manager_ref.arena_index:
-				defeats_required += spawner.num_waves
-			else:
-				spawner.queue_free()
-		arrangement.show()
+	if not locked:
+		defeats_required = 0
+		for arrangement in spawn_arrangements:
+			for spawner in arrangement.get_children():
+				spawner.num_waves += num_waves_change
+				spawner.activate()
+				if spawner.spawn_at_arena_index <= segment_manager_ref.arena_index:
+					defeats_required += spawner.num_waves
+				else:
+					spawner.queue_free()
+			arrangement.show()
 
 func lock_arena():
 	locked = true
@@ -67,14 +68,11 @@ func unlock_arena():
 	if defeats_required == 0 and locked:
 		player_ref.arena_ref = null
 		locked = false
-		#%CL.show()
-		#%LL.show()
-		#%RL.show()
 
 
 func _on_segment_door_r_body_entered(body):
 	#higher diff right
-	if body == player_ref and defeats_required == 0 and not door_chosen:
+	if body == player_ref and defeats_required == 0 and not door_chosen and not locked:
 		#segment_manager_ref.segment_rotation = segment_manager_ref.add_y_rotation(segment_manager_ref.segment_rotation,-90)
 		if segment_manager_ref.enable:
 			segment_manager_ref.new_chunk.emit(segment_manager_ref.segment_types.MISC,2,1+segment_manager_ref.depth_variance)
@@ -87,7 +85,7 @@ func _on_segment_door_r_body_entered(body):
 
 func _on_segment_door_l_body_entered(body):
 	#lower diff left
-	if body == player_ref and defeats_required == 0 and not door_chosen:
+	if body == player_ref and defeats_required == 0 and not door_chosen and not locked:
 		#segment_manager_ref.segment_rotation = segment_manager_ref.add_y_rotation(segment_manager_ref.segment_rotation,90)
 		if segment_manager_ref.enable:
 			segment_manager_ref.new_chunk.emit(segment_manager_ref.segment_types.MISC,0,clampf(1-segment_manager_ref.depth_variance,0.1,1))
@@ -100,7 +98,7 @@ func _on_segment_door_l_body_entered(body):
 
 func _on_segment_door_c_body_entered(body):
 	#same diff middle
-	if body == player_ref and defeats_required == 0 and not door_chosen:
+	if body == player_ref and defeats_required == 0 and not door_chosen and not locked:
 		if segment_manager_ref.enable:
 			segment_manager_ref.new_chunk.emit(segment_manager_ref.segment_types.MISC,1,1)
 		door_chosen = true

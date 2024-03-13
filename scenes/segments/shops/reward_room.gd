@@ -27,11 +27,9 @@ func _on_victory_body_entered(body):
 		#should have a menu on completion here
 		if Globals.prestige < 7:
 			Globals.prestige += 1
-			SceneLoader.load_scene("res://levels/devlvl.tscn", true)
-			SceneLoader.change_scene_to_loading_screen()
+			SceneLoader.load_scene("res://levels/devlvl.tscn", false)
 		else:
-			SceneLoader.load_scene("res://interface/menus/main_menu.tscn", true)
-			SceneLoader.change_scene_to_loading_screen()
+			SceneLoader.load_scene("res://interface/menus/main_menu.tscn", false)
 
 
 func _on_lifetime_timeout():

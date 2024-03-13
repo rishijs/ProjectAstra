@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://j5bi0t7faf7i"]
+[gd_scene load_steps=31 format=3 uid="uid://j5bi0t7faf7i"]
 
 [ext_resource type="Script" path="res://scenes/segments/combat_arenas/combat_arena.gd" id="1_rvjsu"]
 [ext_resource type="Texture2D" uid="uid://dyr3042awh81w" path="res://art/game/segment/arena/arena_room_arena_base.png" id="2_kyfnh"]
@@ -362,9 +362,6 @@ data = PackedVector3Array(-0.7245, -1, 1.9946, 1, 0.9999, 1.9946, 1, -1, 1.9946,
 [sub_resource type="BoxShape3D" id="BoxShape3D_wl1ib"]
 size = Vector3(19.4296, 15.9329, 3.86438)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_3x5mg"]
-size = Vector3(20.0002, 15.6271, 3.86438)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_db3jd"]
 size = Vector3(20.566, 17.4506, 2.43411)
 
@@ -470,18 +467,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38713, 70.7915)
 [node name="D" type="CollisionShape3D" parent="SegmentEntry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.460312, 9.56637, -38.5375)
 shape = SubResource("BoxShape3D_wl1ib")
-
-[node name="U" type="CollisionShape3D" parent="SegmentEntry"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.449347, 8.7101, -103.954)
-shape = SubResource("BoxShape3D_wl1ib")
-
-[node name="L" type="CollisionShape3D" parent="SegmentEntry"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.9137, 8.96583, -104.031)
-shape = SubResource("BoxShape3D_wl1ib")
-
-[node name="R" type="CollisionShape3D" parent="SegmentEntry"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.1786, 9.06418, -103.843)
-shape = SubResource("BoxShape3D_3x5mg")
 
 [node name="UpLoc" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -41)

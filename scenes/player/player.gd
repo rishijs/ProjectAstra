@@ -208,10 +208,10 @@ func _on_hit(damage):
 	if health == 0:
 		if game_manager_ref.checkpoint_ref != null:
 			reset_at_checkpoint()
+			health = max_health
 		else:
 			#game over
-			SceneLoader.load_scene("res://interface/menus/main_menu.tscn", true)
-			SceneLoader.change_scene_to_loading_screen()
+			SceneLoader.load_scene("res://interface/menus/main_menu.tscn", false)
 
 func aberrate_weapon(type = "none"):
 	#random buff or debuff on going through an arena gate
