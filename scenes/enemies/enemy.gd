@@ -34,7 +34,6 @@ func on_hit(incoming_damage):
 	
 func die():
 	if not death_called:
-		print("hi")
 		player_ref.enemy_defeated.emit()
 		death_called = true
 		var particles = death_particles.instantiate()
@@ -42,7 +41,7 @@ func die():
 		particles.global_position = global_position
 		if is_training:
 			trainer_ref.empty = true
-		call_deferred("queue_free")
+		queue_free()
 
 func _physics_process(_delta):
 	if threat_detected:

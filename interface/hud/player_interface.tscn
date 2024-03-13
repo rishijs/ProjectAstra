@@ -9,7 +9,7 @@ bg_color = Color(0.670588, 0.0470588, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eqbip"]
 bg_color = Color(0.101961, 0.6, 0.6, 1)
 
-[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("fps_text", "time_text", "segment_time_text", "objective_text", "segment_id_text", "magazine_text", "reloading_text", "swaps_text", "player_healthbar", "player_energy", "arena_elims") groups=["Interface"]]
+[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("fps_text", "time_text", "segment_time_text", "objective_text", "segment_id_text", "magazine_text", "reloading_text", "swaps_text", "player_healthbar", "player_energy", "arena_elims", "aberration_container", "aberration_name", "aberration_description") groups=["Interface"]]
 script = ExtResource("1_uecec")
 fps_text = NodePath("game_info/VBoxContainer/fps")
 time_text = NodePath("game_info/VBoxContainer/time")
@@ -22,17 +22,20 @@ swaps_text = NodePath("game_info/VBoxContainer/swaps")
 player_healthbar = NodePath("PlayerHealth")
 player_energy = NodePath("PlayerEnergy")
 arena_elims = NodePath("objective_info/VBoxContainer/arena_required_elims")
+aberration_container = NodePath("Aberration")
+aberration_name = NodePath("Aberration/MarginContainer/Labels/AberrationName")
+aberration_description = NodePath("Aberration/MarginContainer/Labels/AberrationDescription")
 
 [node name="game_info" type="MarginContainer" parent="."]
 anchors_preset = -1
 anchor_left = 0.867
 anchor_top = 0.022
 anchor_right = 0.983
-anchor_bottom = 0.104
-offset_left = -0.640137
+anchor_bottom = 0.138
+offset_left = -0.640259
 offset_top = 0.239998
 offset_right = 0.639893
-offset_bottom = -0.32
+offset_bottom = -37.04
 
 [node name="VBoxContainer" type="VBoxContainer" parent="game_info"]
 layout_mode = 2
@@ -62,12 +65,12 @@ horizontal_alignment = 2
 anchors_preset = -1
 anchor_left = 0.037
 anchor_top = 0.022
-anchor_right = 0.154
-anchor_bottom = 0.119
+anchor_right = 0.262
+anchor_bottom = 0.111
 offset_left = 0.959999
 offset_top = 8.24
-offset_right = 0.319977
-offset_bottom = -8.52
+offset_right = -207.04
+offset_bottom = 0.119987
 
 [node name="VBoxContainer" type="VBoxContainer" parent="objective_info"]
 layout_mode = 2
@@ -161,13 +164,13 @@ grow_vertical = 2
 [node name="PlayerHealth" type="ProgressBar" parent="."]
 anchors_preset = -1
 anchor_left = 0.177
-anchor_top = 0.799
+anchor_top = 0.781
 anchor_right = 0.406
-anchor_bottom = 0.824
+anchor_bottom = 0.806
 offset_left = 0.160065
-offset_top = 0.0799561
+offset_top = 0.519958
 offset_right = 0.480042
-offset_bottom = 0.0799561
+offset_bottom = 0.519958
 theme_override_styles/fill = SubResource("StyleBoxFlat_3xg3y")
 value = 50.27
 show_percentage = false
@@ -175,15 +178,52 @@ show_percentage = false
 [node name="PlayerEnergy" type="ProgressBar" parent="."]
 anchors_preset = -1
 anchor_left = 0.177
-anchor_top = 0.842
+anchor_top = 0.824
 anchor_right = 0.406
-anchor_bottom = 0.867
+anchor_bottom = 0.849
 offset_left = -0.839996
-offset_top = -0.360046
+offset_top = 0.0799561
 offset_right = -0.519958
-offset_bottom = -0.360046
+offset_bottom = 0.0799561
 theme_override_styles/fill = SubResource("StyleBoxFlat_eqbip")
 value = 38.04
 show_percentage = false
 
+[node name="Aberration" type="PanelContainer" parent="."]
+visible = false
+anchors_preset = -1
+anchor_left = 0.178
+anchor_top = 0.872
+anchor_right = 0.406
+anchor_bottom = 0.951
+offset_left = 0.23999
+offset_top = 0.239929
+offset_right = -0.52002
+offset_bottom = -0.0800781
+
+[node name="MarginContainer" type="MarginContainer" parent="Aberration"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 5
+
+[node name="Labels" type="VBoxContainer" parent="Aberration/MarginContainer"]
+layout_mode = 2
+
+[node name="AberrationName" type="Label" parent="Aberration/MarginContainer/Labels"]
+layout_mode = 2
+theme = ExtResource("2_5top5")
+theme_override_colors/font_color = Color(1, 0.815686, 0.25098, 1)
+theme_override_font_sizes/font_size = 30
+text = "NAME"
+uppercase = true
+
+[node name="AberrationDescription" type="Label" parent="Aberration/MarginContainer/Labels"]
+layout_mode = 2
+theme = ExtResource("2_5top5")
+theme_override_font_sizes/font_size = 15
+text = "DESC"
+
+[connection signal="aberration" from="." to="." method="_on_aberration"]
 [connection signal="timeout" from="Update" to="." method="_on_update_timeout"]

@@ -61,7 +61,7 @@ func weapon_load():
 func weapon_inactive():
 	weapon_state= States.INACTIVE
 
-func initialize_weapon(weapon):
+func initialize_weapon(weapon = weapon_name):
 	#weapon stats for mutability
 	weapon_name = weapon
 	

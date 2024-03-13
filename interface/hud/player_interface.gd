@@ -16,6 +16,11 @@ extends CanvasLayer
 @export var player_healthbar:ProgressBar
 @export var player_energy:ProgressBar
 @export var arena_elims:Label
+@export var aberration_container:PanelContainer
+@export var aberration_name:Label
+@export var aberration_description:Label
+
+signal aberration(ab_name,ab_desc)
 
 func _ready():
 	player_healthbar.max_value = player_ref.max_health
@@ -66,3 +71,12 @@ func _on_update_timeout():
 	player_energy.value = player_ref.movement_energy
 	
 	swaps_text.text = "SCORE: %d" % game_manager_ref.score
+
+
+func _on_aberration(ab_name, ab_desc):
+	aberration_container.show()
+	aberration_name.text = ab_name
+	aberration_description.text = ab_desc
+	await get_tree().create_timer(5.0,false).timeout
+	aberration_container.hide()
+	

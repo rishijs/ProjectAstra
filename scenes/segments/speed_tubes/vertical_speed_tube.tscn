@@ -222,7 +222,7 @@ albedo_color = Color(1, 0.054902, 0, 1)
 size = Vector3(15.853, 11.9144, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3mbn7"]
-size = Vector3(20.2557, 1.9657, 1.83429)
+size = Vector3(4.21037, 3.28253, 3.71109)
 
 [node name="VerticalSpeedTube" type="Node3D" node_paths=PackedStringArray("connection_end", "spawn_arrangements", "timer_node", "up", "left", "down", "right")]
 script = ExtResource("1_i2uee")
@@ -344,7 +344,11 @@ base_energy = 5
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.081192, 0.482849, 8.48875)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.10386, 1.14127, 9.42715)
+shape = SubResource("BoxShape3D_3mbn7")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.09784, 1.14127, 9.42715)
 shape = SubResource("BoxShape3D_3mbn7")
 
 [node name="SpawnArrangement" type="Node3D" parent="."]

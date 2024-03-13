@@ -39,6 +39,6 @@ func _on_timer_timeout():
 		SceneLoader.load_scene("res://interface/menus/main_menu.tscn", true)
 		SceneLoader.change_scene_to_loading_screen()
 		
-	var mins = player_time_seconds / 60
-	var seconds = player_time_seconds % 60
+	var mins = int(player_time_seconds) / 60
+	var seconds = int(player_time_seconds) % 60
 	player_time_string = Globals.convert_time_to_string(mins,seconds)

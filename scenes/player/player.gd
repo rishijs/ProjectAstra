@@ -3,6 +3,7 @@ extends CharacterBody3D
 @onready var post_process = get_tree().get_first_node_in_group("PostProcess");
 @onready var game_manager_ref = get_tree().get_first_node_in_group("GameManager");
 @onready var segment_manager_ref = get_tree().get_first_node_in_group("SegmentManager");
+@onready var inerface_ref = get_tree().get_first_node_in_group("Interface")
 @onready var aberrations = Data.all_data[Data.abcls]
 
 @export_category("refs")
@@ -26,8 +27,8 @@ var movement_ability_time = 0
 
 var max_movement_energy = 100
 var movement_energy = 100
-var movement_energy_consumption_rate = 0.85
-var movement_energy_regen_rate_base = 0.05
+var movement_energy_consumption_rate = 0.75
+var movement_energy_regen_rate_base = 0.1
 var movement_energy_regen_rate_inertia = 0.01
 
 var base_sensitivity = Globals.player_preferences["mouse_sensitivity"]
@@ -198,11 +199,11 @@ func aberrate_weapon(type = "none"):
 	#random buff or debuff on going through an arena gate
 	match type:
 		"unstable":
-			validate_aberration(Data.unstable_aberrations[randi_range(0,len(Data.unstable_aberrations))])
+			validate_aberration(Data.unstable_aberrations[randi_range(0,len(Data.unstable_aberrations)-1)])
 		"stable":
-			validate_aberration(Data.unstable_aberrations[randi_range(0,len(Data.stable_aberrations))])
+			validate_aberration(Data.stable_aberrations[randi_range(0,len(Data.stable_aberrations)-1)])
 		"successful":
-			validate_aberration(Data.unstable_aberrations[randi_range(0,len(Data.successful_aberrations))])
+			validate_aberration(Data.successful_aberrations[randi_range(0,len(Data.successful_aberrations)-1)])
 		"none":
 			#no effect
 			pass
@@ -216,9 +217,9 @@ func validate_aberration(index):
 	game_manager_ref.altered_weapon_flat_stats[id] += flat_effect
 	game_manager_ref.altered_weapon_multiplied_stats[id] += multiplied_effect
 	
-	print(aberration_name,description)
 	#probably print to screen what aberration was gained and a description of it
 	weapons[active_weapon_index].initialize_weapon()
+	inerface_ref.aberration.emit(aberration_name,description)
 	
 func get_next_weapon():
 	active_weapon_index += 1
@@ -237,6 +238,7 @@ func _on_enemy_defeated():
 			get_next_weapon()
 			swap_weapons(active_weapon_index)
 			game_manager_ref.score += 1
+			defeats_till_chroma_swap = base_defeats_till_chroma_swap
 		else:
 			var chance = randf_range(0.01,1.0)
 			if chance <= weapon_aberration_chance:

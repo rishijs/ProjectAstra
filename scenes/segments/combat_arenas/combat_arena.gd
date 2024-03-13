@@ -44,7 +44,7 @@ func _on_segment_entry_body_entered(body):
 
 func init_arena():
 	doorE.hide()
-	%EntryDoorCol.disabled = true
+	set_deferred("%EntryDoorCol.disabled",true)
 
 func calculate_num_elims():
 	defeats_required = 0
