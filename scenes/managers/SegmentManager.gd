@@ -90,24 +90,27 @@ func create_door(segment):
 """
 	
 func reset_segments():
+	
 	for segment in segments:
 		if segment.type!= segment_types.CHROMA:
 			segment.destruct()
 			segments.erase(segment)
+	
 	segments.clear()
+	
 	segments.append(game_manager_ref.segment_ref)
 	game_manager_ref.segment_ref.id = 0
 	
+	
 	arena_index -= 1
 	num_chunks -= 1
-	segment_rotation = game_manager_ref.rotation_at_checkpoint
+	segment_rotation = game_manager_ref.segment_ref.segment_rotation_at_pos
 	player_depth = game_manager_ref.depth_at_checkpoint
 	depth = game_manager_ref.depth_at_checkpoint
 	player_segment_index = 0
 	segment_index = 0		
-	segments_this_chunk = 0		
 	
-	new_chunk.emit(segment_types.ARENA,0,1.0,true)
+	new_chunk.emit(segment_types.ARENA)
 	
 func destroy_behind_segment(_at_index):
 	#legacy method / overcomplicates too much
@@ -188,6 +191,7 @@ func create_segment(type:segment_types,end_index):
 	if curr_segment!=null:
 		curr_segment.type = type
 		curr_segment.id = segment_index+1
+		curr_segment.segment_rotation_at_pos = segment_rotation
 		if num_chunks == 0 and type == segment_types.ARENA:
 			curr_segment.first = true
 		#if num_chunks == 0 or type == segment_types.REWARD:

@@ -46,6 +46,7 @@ var id:int
 var type:int
 var depth:int
 var timer:float
+var segment_rotation_at_pos:int
 
 func _ready():
 	#choose_enemy_arrangement(forced_arrangement,specific_arrangement)
@@ -78,7 +79,7 @@ func choose_enemy_arrangement(forced, specific):
 """
 
 func destruct():
-	queue_free()
+	call_deferred("queue_free")
 
 func update_on_entry():
 	if not inactive_segment:
