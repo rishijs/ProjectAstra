@@ -27,9 +27,9 @@ var movement_ability_time = 0
 
 var max_movement_energy = 100
 var movement_energy = 100
-var movement_energy_consumption_rate = 0.75
+var movement_energy_consumption_rate = 0.5
 var movement_energy_regen_rate_base = 0.1
-var movement_energy_regen_rate_inertia = 0.01
+var movement_energy_regen_rate_inertia = 0.0075
 
 var base_sensitivity = Globals.player_preferences["mouse_sensitivity"]
 var strafe_sensitivity = base_sensitivity
@@ -122,6 +122,9 @@ func _input(event):
 		camera_first_person.rotate_x(-event.relative.y * mouse_sensitivity)
 		camera_first_person.rotation.x = clampf(camera_first_person.rotation.x, -deg_to_rad(min_pitch), deg_to_rad(max_pitch))
 		weapon_socket.rotation.z = camera_first_person.rotation.x
+		
+		if is_on_floor():
+			rotation.z = 0
 
 func _process(delta):
 	
@@ -136,7 +139,7 @@ func _process(delta):
 		movement_boost = clamp(min_movement_boost + pow(movement_ability_time,3),0,max_movement_boost)
 		strafe_penalty = clamp(1-movement_ability_time*0.2,max_strafe_penalty,1)
 		strafe_sensitivity = clamp(base_sensitivity-movement_ability_time*0.005,base_sensitivity/max_mouse_sense_reduction,base_sensitivity)
-		movement_energy = clampf(movement_energy+(movement_energy_regen_rate_inertia*speed)-movement_energy_consumption_rate,0,max_movement_energy)
+		movement_energy = clampf((movement_energy+(movement_energy_regen_rate_inertia*speed*delta*100)-(movement_energy_consumption_rate*delta*100)),0,max_movement_energy)
 	else:
 		strafe_sensitivity = base_sensitivity
 		movement_ability_time = 0
@@ -171,8 +174,8 @@ func _physics_process(delta):
 		
 	if direction:
 		speed = base_speed + movement_boost
-		velocity.x = direction.x * speed
-		velocity.z = direction.z * speed
+		velocity.x = direction.x * speed * delta * 100
+		velocity.z = direction.z * speed * delta * 100
 
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)

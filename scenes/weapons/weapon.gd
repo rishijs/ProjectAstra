@@ -52,6 +52,8 @@ func _process(delta):
 	
 	if magazine == 0 and weapon_state!=States.RELOADING:
 		reload()
+	else:
+		magazine = clampi(magazine,0,weapon_stats[Data.wattr.MAGAZINE])
 		
 func weapon_load():
 	if weapon_state == States.INACTIVE:

@@ -98,6 +98,7 @@ func reset_segments():
 	segments.append(game_manager_ref.segment_ref)
 	game_manager_ref.segment_ref.id = 0
 	
+	arena_index -= 1
 	num_chunks -= 1
 	segment_rotation = game_manager_ref.rotation_at_checkpoint
 	player_depth = game_manager_ref.depth_at_checkpoint
