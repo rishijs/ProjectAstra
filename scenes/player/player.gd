@@ -264,13 +264,14 @@ func _on_enemy_defeated():
 			if arena_ref.defeats_required > 0:
 				arena_ref.defeats_required -= 1
 		enemies_defeated += 1
+		game_manager_ref.score += 50
 		game_manager_ref.player_time_seconds += 3
 		interface_ref.time_change.emit(3)
 		defeats_till_chroma_swap -= 1
 		if defeats_till_chroma_swap == 0:
 			get_next_weapon()
 			swap_weapons(active_weapon_index)
-			game_manager_ref.score += 1
+			game_manager_ref.score += 500
 			defeats_till_chroma_swap = base_defeats_till_chroma_swap
 		else:
 			var chance = randf_range(0.01,1.0)

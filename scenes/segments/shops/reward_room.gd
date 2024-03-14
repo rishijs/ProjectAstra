@@ -22,6 +22,7 @@ func _on_segment_entry_body_entered(body):
 		player_ref.movement_ability = false
 		player_ref.can_use_movement_ability = false
 		player_ref.gravity += 200
+		player_ref.game_manager_ref.score += player_ref.game_manager_ref.player_time_seconds * 25
 
 
 func _on_victory_body_entered(body):

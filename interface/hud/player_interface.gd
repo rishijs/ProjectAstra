@@ -116,10 +116,11 @@ func _on_aberration(ab_name, ab_desc, ab_type):
 
 
 func _on_time_change(amount):
-	time_change_text.text = "%d SECONDS"%amount
 	if amount < 0:
+		time_change_text.text = "-%d SECONDS"%amount
 		time_change_text.modulate = Color.RED
 	else:
+		time_change_text.text = "+%d SECONDS"%amount
 		time_change_text.modulate = Color.GREEN
 	%Info.pitch_scale = randf_range(0.8,1.2)
 	%Info.volume_db = -10
