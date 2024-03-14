@@ -28,7 +28,7 @@ border_width_right = 2
 border_width_bottom = 4
 border_color = Color(0.372549, 0.764706, 0, 1)
 
-[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("fps_text", "time_text", "objective_text", "magazine_text", "reloading_text", "score_text", "player_healthbar", "player_energy", "arena_elims", "aberration_container", "aberration_name", "aberration_description", "simulation_progress", "time_change_text") groups=["Interface"]]
+[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("fps_text", "time_text", "objective_text", "magazine_text", "reloading_text", "score_text", "player_healthbar", "player_energy", "arena_elims", "aberration_container", "aberration_name", "aberration_description", "simulation_progress", "time_change_text", "swap_text") groups=["Interface"]]
 script = ExtResource("1_uecec")
 fps_text = NodePath("score_info/MarginContainer/VBoxContainer/fps")
 time_text = NodePath("timer/MarginContainer/VBoxContainer/time")
@@ -44,6 +44,7 @@ aberration_name = NodePath("Aberration/MarginContainer/Labels/AberrationName")
 aberration_description = NodePath("Aberration/MarginContainer/Labels/AberrationDescription")
 simulation_progress = NodePath("SimulationProgress")
 time_change_text = NodePath("timer/MarginContainer/VBoxContainer/time_change")
+swap_text = NodePath("swap")
 
 [node name="score_info" type="PanelContainer" parent="."]
 anchors_preset = -1
@@ -206,13 +207,13 @@ color = Color(1, 1, 1, 0.509804)
 [node name="PlayerHealth" type="ProgressBar" parent="."]
 anchors_preset = -1
 anchor_left = 0.177
-anchor_top = 0.781
-anchor_right = 0.406
-anchor_bottom = 0.806
-offset_left = 0.160065
-offset_top = 0.519958
-offset_right = 0.480042
-offset_bottom = 0.519958
+anchor_top = 0.806
+anchor_right = 0.317
+anchor_bottom = 0.829
+offset_left = 3.16
+offset_top = -0.47998
+offset_right = 2.35999
+offset_bottom = -0.320068
 theme_override_styles/fill = SubResource("StyleBoxFlat_3xg3y")
 value = 50.27
 show_percentage = false
@@ -221,15 +222,15 @@ show_percentage = false
 modulate = Color(0, 0.470588, 1, 1)
 anchors_preset = -1
 anchor_left = 0.177
-anchor_top = 0.824
-anchor_right = 0.406
-anchor_bottom = 0.849
-offset_left = -0.839996
-offset_top = 0.0799561
-offset_right = -0.519958
-offset_bottom = 0.0799561
+anchor_top = 0.846
+anchor_right = 0.318
+anchor_bottom = 0.871
+offset_left = 2.16
+offset_top = 0.320007
+offset_right = 0.439941
+offset_bottom = 0.319946
 theme_override_styles/fill = SubResource("StyleBoxFlat_eqbip")
-value = 38.04
+value = 45.0
 show_percentage = false
 
 [node name="Aberration" type="PanelContainer" parent="."]
@@ -304,14 +305,31 @@ vertical_alignment = 1
 
 [node name="EnergyThreshold" type="ColorRect" parent="."]
 anchors_preset = -1
-anchor_left = 0.275
-anchor_top = 0.824
-anchor_right = 0.279
-anchor_bottom = 0.849
-offset_top = 0.0799561
-offset_right = 0.319946
-offset_bottom = 2.07996
+anchor_left = 0.242
+anchor_top = 0.844
+anchor_right = 0.246
+anchor_bottom = 0.872
+offset_left = -0.640015
+offset_top = 0.47998
+offset_right = -0.320007
+offset_bottom = -0.760071
 color = Color(0, 0, 0, 1)
+
+[node name="swap" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.179
+anchor_top = 0.889
+anchor_right = 0.318
+anchor_bottom = 0.926
+offset_left = -1.68002
+offset_top = -0.120056
+offset_right = -2.56006
+offset_bottom = -0.0800781
+theme = ExtResource("2_5top5")
+theme_override_font_sizes/font_size = 30
+text = "X -> BLUE"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="aberration" from="." to="." method="_on_aberration"]
 [connection signal="time_change" from="." to="." method="_on_time_change"]

@@ -23,6 +23,7 @@ var moving = false
 @export var aberration_description:Label
 @export var simulation_progress:ProgressBar
 @export var time_change_text:Label
+@export var swap_text:Label
 
 signal aberration(ab_name,ab_desc,ab_type)
 signal time_change(amount)
@@ -89,6 +90,16 @@ func _on_update_timeout():
 	simulation_progress.value = clampi(segment_manager_ref.arena_index,0, segment_manager_ref.max_chunks)
 	
 	score_text.text = "SCORE: %d" % game_manager_ref.score
+	
+	match player_ref.active_weapon_index:
+		0:
+			swap_text.text = "%d -> ARC" % player_ref.defeats_till_chroma_swap
+		1:
+			swap_text.text = "%d -> NATURA" % player_ref.defeats_till_chroma_swap
+		2:
+			swap_text.text = "%d -> CHRONOS" % player_ref.defeats_till_chroma_swap
+		3:
+			swap_text.text = "%d -> IGNEOUS" % player_ref.defeats_till_chroma_swap
 
 func move_arena_text():
 	moving = true
