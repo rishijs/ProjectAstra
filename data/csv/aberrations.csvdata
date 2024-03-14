@@ -10,7 +10,6 @@ bull's eye,successful,0,1.1,12,heavily increases accuracy
 where are those,unstable,0,2,13,doubles the spread of bullets
 vaporizer,successful,20,0,3,massively increases damage output
 no more reload?,successful,0,0.25,6,makes reload speed negligible
-hole in the magazine,unstable,0,0.75,4,reduces magazine size
 holy damage,successful,0,5,18,massively increase critical damage
 ok I guess,stable,0,0.9,20,slightly increases secondary fire rate
 does this even do anything,stable,0,0.8,8,slightly decreases charge duration
@@ -27,4 +26,3 @@ weak bullets,unstable,0,0.7,3,reduced weapon damage
 super slow firing,unstable,0,1.5,7,reduced weapon fire rate
 lower reload speed,stable,0,0.9,6,slightly reduced reload speed
 error 404: mod not found,stable,0,0,3,does nothing lol
-mega drum,successful,30,0,4,increases magazine size
