@@ -8,7 +8,10 @@ func _on_main_menu_pressed():
 
 
 func _on_prestige_pressed():
-	get_tree().change_scene_to_file("res://levels/gamelvl.tscn")
+	if Globals.prestige < 4:
+		get_tree().change_scene_to_file("res://levels/gamelvl.tscn")
+	else:
+		%thanks.show()
 
 
 func _on_visibility_changed():

@@ -2,7 +2,7 @@ extends CanvasLayer
 
 
 func _ready():
-	pass
+	%AnimatedSprite2D.play("laser")
 
 
 func _process(_delta):
@@ -15,3 +15,7 @@ func _on_play_pressed():
 
 func _on_settings_pressed():
 	%Settings.show()
+
+
+func _on_animated_sprite_2d_animation_finished():
+	%AnimatedSprite2D.play("laser")

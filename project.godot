@@ -13,7 +13,7 @@ config_version=5
 config/name="Project Astra"
 run/main_scene="res://scenes/Initialization/InitApp.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://scenes/enemies/crystal_man/crystal_explode/crystal_explode_still.png"
 
 [autoload]
 

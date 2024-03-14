@@ -258,7 +258,7 @@ func validate_aberration(index,learned = false):
 	var id = Data.get_attr(Data.abcls,aberration_name,Data.abattr.ID)
 	var description = Data.get_attr(Data.abcls,aberration_name,Data.abattr.DESCRIPTION)
 	game_manager_ref.altered_weapon_flat_stats[id] += flat_effect
-	game_manager_ref.altered_weapon_multiplied_stats[id] += multiplied_effect
+	game_manager_ref.altered_weapon_multiplied_stats[id] *= multiplied_effect
 
 	weapons[active_weapon_index].initialize_weapon()
 	if learned:

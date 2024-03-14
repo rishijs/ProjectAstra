@@ -6,3 +6,11 @@
 script = ExtResource("1_mo468")
 _loading_screen = "res://scenes/Initialization/LoadingScreen.tscn"
 _next_scene = "res://scenes/Initialization/Opening.tscn"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.992
+offset_right = -1.0
+offset_bottom = -0.360107
+color = Color(0, 0, 0, 1)

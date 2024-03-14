@@ -55,6 +55,7 @@ theme = ExtResource("3_vt6my")
 text = "SETTINGS"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(1241, 673)
 sprite_frames = ExtResource("4_ok22y")
 animation = &"laser"
@@ -71,3 +72,4 @@ bus = &"Music"
 
 [connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

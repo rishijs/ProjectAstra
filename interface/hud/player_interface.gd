@@ -120,7 +120,7 @@ func move_arena_text():
 	
 func _on_aberration(ab_name, ab_desc, ab_type):
 	aberration_container.show()
-	aberration_name.text = ab_name + "Type: " + ab_type
+	aberration_name.text = ab_name + " | Type: " + ab_type
 	aberration_description.text = ab_desc
 	if ab_type == "unstable":
 		aberration_name.modulate = Color.LIGHT_CORAL

@@ -307,12 +307,7 @@ spawn_at_arena_index = 3
 [node name="Spawner6" parent="SpawnArrangement" instance=ExtResource("5_50ac5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.14499, 3.06095, -35.4044)
 spawn_rate = 1.0
-spawn_at_arena_index = 5
-
-[node name="Spawner2" parent="SpawnArrangement" instance=ExtResource("5_50ac5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.00684, 3.06095, -21.3556)
-spawn_type = 1
-spawn_at_arena_index = 4
+spawn_at_arena_index = 3
 
 [node name="Spawner3" parent="SpawnArrangement" instance=ExtResource("5_50ac5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.00684, 3.06095, 18.596)
@@ -322,11 +317,6 @@ spawn_at_arena_index = 2
 [node name="Spawner7" parent="SpawnArrangement" instance=ExtResource("5_50ac5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.00684, 3.06095, 36.2735)
 spawn_rate = 1.0
-spawn_at_arena_index = 5
-
-[node name="Spawner4" parent="SpawnArrangement" instance=ExtResource("5_50ac5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.21827, 3.06095, 27.5684)
-spawn_type = 1
 spawn_at_arena_index = 4
 
 [node name="Spawner5" parent="SpawnArrangement" instance=ExtResource("5_50ac5")]
