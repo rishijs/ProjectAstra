@@ -15,6 +15,7 @@ extends "res://scenes/segments/segment.gd"
 var locked = false
 var door_chosen = false
 var first = false
+var can_choose_door = false
 var defeats_required
 
 func _ready():
@@ -63,16 +64,29 @@ func lock_arena():
 	locked = true
 	doorE.show()
 	player_ref.arena_ref = self
+	
+	if segment_manager_ref.arena_index == 0 and Globals.prestige == 1:
+		player_ref.interface_ref.show_guide.emit(5)
+	
+	if segment_manager_ref.arena_index == 2 and Globals.prestige == 1:
+		player_ref.interface_ref.show_guide.emit(4)
 
 func unlock_arena():
 	if defeats_required == 0 and locked:
 		player_ref.arena_ref = null
 		locked = false
+		if segment_manager_ref.arena_index == 0 and Globals.prestige == 1:
+			player_ref.interface_ref.show_guide.emit(2)
+		%LD.show()
+		%CD.show()
+		%RD.show()
+		await get_tree().create_timer(2.0,false).timeout
+		can_choose_door = true
 
 
 func _on_segment_door_r_body_entered(body):
 	#higher diff right
-	if body == player_ref and defeats_required == 0 and not door_chosen and not locked:
+	if body == player_ref and defeats_required == 0 and not door_chosen and not locked and can_choose_door:
 		#segment_manager_ref.segment_rotation = segment_manager_ref.add_y_rotation(segment_manager_ref.segment_rotation,-90)
 		if segment_manager_ref.enable:
 			segment_manager_ref.new_chunk.emit(segment_manager_ref.segment_types.MISC,2,1+segment_manager_ref.depth_variance)
@@ -86,7 +100,7 @@ func _on_segment_door_r_body_entered(body):
 
 func _on_segment_door_l_body_entered(body):
 	#lower diff left
-	if body == player_ref and defeats_required == 0 and not door_chosen and not locked:
+	if body == player_ref and defeats_required == 0 and not door_chosen and not locked and can_choose_door:
 		#segment_manager_ref.segment_rotation = segment_manager_ref.add_y_rotation(segment_manager_ref.segment_rotation,90)
 		if segment_manager_ref.enable:
 			segment_manager_ref.new_chunk.emit(segment_manager_ref.segment_types.MISC,0,clampf(1-segment_manager_ref.depth_variance,0.1,1))
@@ -100,7 +114,7 @@ func _on_segment_door_l_body_entered(body):
 
 func _on_segment_door_c_body_entered(body):
 	#same diff middle
-	if body == player_ref and defeats_required == 0 and not door_chosen and not locked:
+	if body == player_ref and defeats_required == 0 and not door_chosen and not locked and can_choose_door:
 		if segment_manager_ref.enable:
 			segment_manager_ref.new_chunk.emit(segment_manager_ref.segment_types.MISC,1,1)
 		door_chosen = true

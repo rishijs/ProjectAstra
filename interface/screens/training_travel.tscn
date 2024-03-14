@@ -41,10 +41,10 @@ offset_right = -8.0
 offset_bottom = -8.04001
 theme = ExtResource("1_2ksf5")
 theme_override_font_sizes/font_size = 40
-text = "ĀSTRA (aa-struh)
-SENTIENT WEAPON PROJECT
+text = "ĀSTRA SENTIENT WEAPON PROJECT
 
-HELP US TRAIN ĀSTRA 
+ELIMINATE TARGETS 
+-> TRAIN ASTRA
 
 "
 
@@ -88,7 +88,7 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme = ExtResource("1_2ksf5")
 theme_override_font_sizes/font_size = 40
-text = "SHIFT -> INERTIAL BOOST     WASD -> MOVE     MOUSE MOTION -> CAMERA"
+text = "SHIFT -> INERTIAL BOOST (HIGH SPEEDS RECHARGE BOOST)"
 horizontal_alignment = 1
 uppercase = true
 
@@ -97,15 +97,16 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme = ExtResource("1_2ksf5")
 theme_override_font_sizes/font_size = 40
-text = "LEFT MOUSE -> PRIMARY FIRE       RIGHT MOUSE -> ADS FIRE (++RANGE)"
+text = "LMB -> PRIMARY FIRE       RMB -> SECONDARY FIRE (++RANGE)"
 horizontal_alignment = 1
 uppercase = true
 
 [node name="Label6" type="Label" parent="Instructions"]
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 theme = ExtResource("1_2ksf5")
 theme_override_font_sizes/font_size = 50
 text = "GOOD LUCK, HAVE FUN, DON'T DIE!"
 horizontal_alignment = 1
+vertical_alignment = 1
 uppercase = true

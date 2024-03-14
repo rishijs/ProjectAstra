@@ -24,7 +24,19 @@ var moving = false
 @export var simulation_progress:ProgressBar
 @export var time_change_text:Label
 @export var swap_text:Label
+@export var guide:PanelContainer
 
+var guide_info = {
+	"try using boost -> SHIFT" : "It charges itself with speed [hold it for longer]",
+	"unstable weapon glitch" : "Every 3 elimations, the weapon changes form",
+	"choose a door" : "Each path has their own benefits and drawbacks",
+	"weapon altered" : "As the weapon learns or elimates, it gains buffs/debuffs",
+	"enemy laser" : "Try using secondary fire [RMB] to take them down",
+	"enemy melee" : "Don't get too close",
+	"checkpoint" : "You will spawn here if this checkpoint is not destroyed"
+}
+
+signal show_guide(index)
 signal aberration(ab_name,ab_desc,ab_type)
 signal time_change(amount)
 
@@ -139,3 +151,11 @@ func _on_time_change(amount):
 	time_change_text.show()
 	await get_tree().create_timer(2.0,false).timeout
 	time_change_text.hide()
+
+
+func _on_show_guide(index):
+	%GuideTitle.text = guide_info.keys()[index]
+	%GuideDesc.text = guide_info[guide_info.keys()[index]]
+	guide.show()
+	await get_tree().create_timer(3.0,false).timeout
+	guide.hide()

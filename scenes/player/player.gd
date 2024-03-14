@@ -59,6 +59,10 @@ var weapon_aberration_chance = 0.05
 var aberration_close = false
 var aberration_warning = false
 
+var sprint_guide = false
+var altered_guide = false
+var checkpoint_guide = false
+
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var chroma_particles = preload("res://art/vfx/chromatic_particles.tscn")
 
@@ -72,6 +76,12 @@ func _ready():
 
 func _input(event):
 	
+	if Input.is_action_just_pressed("pause"):
+		get_tree().get_first_node_in_group("PauseMenu").show()
+		get_tree().get_first_node_in_group("Interface").hide()
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		
+		
 	if Input.is_action_just_pressed("debug_kill"):
 		hit.emit(max_health)
 		
@@ -159,6 +169,10 @@ func _process(delta):
 		camera_first_person.rotation.x = deg_to_rad(max_pitch)
 	
 	camera_first_person.rotation.y = 0
+	
+	if segment_manager_ref.player_segment_index >= 1 and not sprint_guide and Globals.prestige == 1:
+		sprint_guide = true
+		interface_ref.show_guide.emit(0)
 				
 func _physics_process(delta):
 	if not is_on_floor():
@@ -222,7 +236,7 @@ func _on_hit(damage):
 			health = max_health
 		else:
 			#game over
-			get_tree().change_scene_to_file("res://interface/menus/main_menu.tscn")
+			get_tree().get_first_node_in_group("Failure").show()
 
 func aberrate_weapon(type = "none"):
 	#random buff or debuff on going through an arena gate
@@ -252,6 +266,10 @@ func validate_aberration(index,learned = false):
 	else:
 		interface_ref.aberration.emit(aberration_name,description,Data.get_attr(Data.abcls,aberration_name,Data.abattr.STABILITY))
 	
+	if not altered_guide and Globals.prestige == 1:
+		altered_guide = true
+		interface_ref.show_guide.emit(3)
+		
 func get_next_weapon():
 	active_weapon_index += 1
 	if active_weapon_index == weapons.size():
@@ -269,6 +287,8 @@ func _on_enemy_defeated():
 		interface_ref.time_change.emit(3)
 		defeats_till_chroma_swap -= 1
 		if defeats_till_chroma_swap == 0:
+			if num_swaps == 0 and Globals.prestige == 1:
+				interface_ref.show_guide.emit(1)
 			get_next_weapon()
 			swap_weapons(active_weapon_index)
 			game_manager_ref.score += 500

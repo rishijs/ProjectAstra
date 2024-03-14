@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://j5bi0t7faf7i"]
+[gd_scene load_steps=32 format=3 uid="uid://j5bi0t7faf7i"]
 
 [ext_resource type="Script" path="res://scenes/segments/combat_arenas/combat_arena.gd" id="1_rvjsu"]
 [ext_resource type="Texture2D" uid="uid://dyr3042awh81w" path="res://art/game/segment/arena/arena_room_arena_base.png" id="2_kyfnh"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://drwxdx7ko3l1e" path="res://art/game/props_elements/door.glb" id="3_tn8mj"]
 [ext_resource type="PackedScene" uid="uid://b402k2bhdes07" path="res://scenes/enemies/spawner.tscn" id="6_bad62"]
 [ext_resource type="PackedScene" uid="uid://yiq35pq4u730" path="res://art/game/props_elements/lights/torch_light.tscn" id="6_s2tgh"]
+[ext_resource type="FontFile" uid="uid://dex6qd5t25rm3" path="res://themes/fonts/Kode_Mono/KodeMono-VariableFont_wght.ttf" id="7_ntmm8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0r6ga"]
 resource_name = "Material"
@@ -709,6 +710,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.9234, 23.0498, -4.26345)
 spawn_type = 1
 spawn_rate = 15.0
 spawn_at_arena_index = 5
+
+[node name="LD" type="Label3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.618, 9.87073, -30.493)
+visible = false
+text = "+ 30 SECONDS
++ UNSTABLE WEAPON ABERRATION"
+font = ExtResource("7_ntmm8")
+font_size = 200
+
+[node name="CD" type="Label3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.109791, 9.87073, -30.493)
+visible = false
+text = "+ STABLE WEAPON ABERRATION"
+font = ExtResource("7_ntmm8")
+font_size = 200
+
+[node name="RD" type="Label3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.2933, 9.87073, -30.493)
+visible = false
+text = "- 10% SECONDS
++ SUCCESSFUL WEAPON ABERRATION"
+font = ExtResource("7_ntmm8")
+font_size = 200
 
 [connection signal="body_entered" from="SegmentEntry" to="." method="_on_segment_entry_body_entered"]
 [connection signal="body_entered" from="DoorC/SegmentDoorC" to="." method="_on_segment_door_c_body_entered"]

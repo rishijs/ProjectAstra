@@ -28,11 +28,7 @@ func _on_segment_entry_body_entered(body):
 func _on_victory_body_entered(body):
 	if body == player_ref:
 		#should have a menu on completion here
-		if Globals.prestige <= 3:
-			Globals.prestige += 1
-			get_tree().reload_current_scene()
-		else:
-			get_tree().change_scene_to_file("res://interface/menus/main_menu.tscn")
+		get_tree().get_first_node_in_group("Success").show()
 
 
 func _on_lifetime_timeout():

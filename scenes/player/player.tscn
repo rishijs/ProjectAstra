@@ -62,7 +62,7 @@ bus = &"SFX"
 [node name="Ambience" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("8_fu8h5")
-volume_db = -25.0
+volume_db = -30.0
 autoplay = true
 bus = &"Music"
 

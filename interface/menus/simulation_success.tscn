@@ -1,3 +1,98 @@
-[gd_scene format=3 uid="uid://w408cs5b3d5w"]
+[gd_scene load_steps=3 format=3 uid="uid://w408cs5b3d5w"]
+
+[ext_resource type="Script" path="res://interface/menus/simulation_success.gd" id="1_0ltes"]
+[ext_resource type="Theme" uid="uid://bpeg6inp31l8g" path="res://themes/deftheme.tres" id="1_oa43b"]
 
 [node name="SimulationSuccess" type="CanvasLayer"]
+script = ExtResource("1_0ltes")
+
+[node name="background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 20.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_oa43b")
+color = Color(0.909804, 0.741176, 0.145098, 1)
+
+[node name="Title" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.137
+anchor_top = 0.079
+anchor_right = 0.887
+anchor_bottom = 0.197
+offset_left = -0.0400085
+offset_top = -0.320007
+offset_right = -0.0400391
+offset_bottom = 0.23999
+theme = ExtResource("1_oa43b")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "ASTRA SIMULATION SUCCESS"
+
+[node name="Info" type="VBoxContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.321
+anchor_top = 0.365
+anchor_right = 0.665
+anchor_bottom = 0.906
+offset_left = -0.320007
+offset_top = -0.200012
+offset_right = -0.800049
+offset_bottom = -148.48
+
+[node name="Prestige" type="Label" parent="Info"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_oa43b")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "PRESTIGE: X"
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="Info"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme = ExtResource("1_oa43b")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "SCORE: X"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Info"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="MainMenu" type="Button" parent="Info/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_oa43b")
+theme_override_font_sizes/font_size = 50
+text = "MAIN MENU"
+
+[node name="Prestige" type="Button" parent="Info/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_oa43b")
+theme_override_font_sizes/font_size = 50
+text = "PRESTIGE"
+
+[node name="info" type="Label" parent="Info"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme = ExtResource("1_oa43b")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 35
+text = "CONGRATS! PRESTIGE TO PLAY AGAIN WITH HIGHER DIFFICULTY MAX:3"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[connection signal="pressed" from="Info/HBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="Info/HBoxContainer/Prestige" to="." method="_on_prestige_pressed"]

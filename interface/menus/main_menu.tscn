@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://di3vy3rawef35"]
+[gd_scene load_steps=7 format=3 uid="uid://di3vy3rawef35"]
 
 [ext_resource type="Script" path="res://interface/menus/main_menu.gd" id="1_rx518"]
 [ext_resource type="Theme" uid="uid://w4e54hwttyej" path="res://themes/prototheme.tres" id="2_7txc0"]
 [ext_resource type="Theme" uid="uid://bpeg6inp31l8g" path="res://themes/deftheme.tres" id="3_vt6my"]
+[ext_resource type="SpriteFrames" uid="uid://dosfl47bno0tq" path="res://scenes/enemies/crystal_man/crystal_man.tres" id="4_ok22y"]
+[ext_resource type="PackedScene" uid="uid://bh6jqsdoafdsk" path="res://interface/menus/settings.tscn" id="5_cvmr7"]
+[ext_resource type="AudioStream" uid="uid://c178xcbyucw1l" path="res://audio/music/ProjectAstraAmbientTheme.ogg" id="6_ek03b"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_rx518")
@@ -29,15 +32,42 @@ theme_override_font_sizes/font_size = 150
 text = "PROJECT ASTRA"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = -1
-anchor_left = 0.4
-anchor_top = 0.622
-anchor_right = 0.6
-anchor_bottom = 0.711
-offset_top = 0.159973
-offset_bottom = 0.0799866
+anchor_left = 0.215
+anchor_top = 0.536
+anchor_right = 0.399
+anchor_bottom = 0.725
+offset_left = -0.800018
+offset_top = 0.119995
+offset_right = 0.919983
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
 theme = ExtResource("3_vt6my")
 text = "PLAY"
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="Settings" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme = ExtResource("3_vt6my")
+text = "SETTINGS"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1241, 673)
+sprite_frames = ExtResource("4_ok22y")
+animation = &"laser"
+
+[node name="Settings" parent="." instance=ExtResource("5_cvmr7")]
+unique_name_in_owner = true
+visible = false
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ek03b")
+volume_db = -20.0
+autoplay = true
+bus = &"Music"
+
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]

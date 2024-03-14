@@ -1,3 +1,120 @@
-[gd_scene format=3 uid="uid://bh6jqsdoafdsk"]
+[gd_scene load_steps=3 format=3 uid="uid://bh6jqsdoafdsk"]
+
+[ext_resource type="Theme" uid="uid://bpeg6inp31l8g" path="res://themes/deftheme.tres" id="1_0t34v"]
+[ext_resource type="Script" path="res://interface/menus/settings.gd" id="1_p40rd"]
 
 [node name="Settings" type="CanvasLayer"]
+script = ExtResource("1_p40rd")
+
+[node name="background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 20.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0t34v")
+color = Color(0.0627451, 0.14902, 0.0627451, 1)
+
+[node name="Title" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.137
+anchor_top = 0.079
+anchor_right = 0.874
+anchor_bottom = 0.197
+offset_left = -0.0400085
+offset_top = -0.320007
+offset_right = 0.919922
+offset_bottom = 0.23999
+theme = ExtResource("1_0t34v")
+theme_override_font_sizes/font_size = 100
+text = "SETTINGS"
+horizontal_alignment = 1
+
+[node name="Info" type="VBoxContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.321
+anchor_top = 0.365
+anchor_right = 0.665
+anchor_bottom = 0.769
+offset_left = -0.320007
+offset_top = -0.200012
+offset_right = -0.800049
+offset_bottom = -0.520081
+
+[node name="settings" type="HBoxContainer" parent="Info"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Info/settings"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="Info/settings/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("1_0t34v")
+theme_override_font_sizes/font_size = 30
+text = "MOUSE SENSITIVITY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title2" type="Label" parent="Info/settings/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("1_0t34v")
+theme_override_font_sizes/font_size = 30
+text = "SFX VOLUME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title3" type="Label" parent="Info/settings/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("1_0t34v")
+theme_override_font_sizes/font_size = 30
+text = "MUSIC VOLUME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Info/settings"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Sens" type="HSlider" parent="Info/settings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+min_value = 0.001
+max_value = 0.01
+step = 0.001
+value = 0.005
+
+[node name="AudioVol" type="HSlider" parent="Info/settings/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="MusicVol" type="HSlider" parent="Info/settings/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="Back" type="Button" parent="Info"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_0t34v")
+theme_override_font_sizes/font_size = 50
+text = "BACK"
+
+[connection signal="value_changed" from="Info/settings/VBoxContainer/Sens" to="." method="_on_sens_value_changed"]
+[connection signal="value_changed" from="Info/settings/VBoxContainer/AudioVol" to="." method="_on_audio_vol_value_changed"]
+[connection signal="value_changed" from="Info/settings/VBoxContainer/MusicVol" to="." method="_on_music_vol_value_changed"]
+[connection signal="pressed" from="Info/Back" to="." method="_on_back_pressed"]

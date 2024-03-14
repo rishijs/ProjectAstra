@@ -16,6 +16,9 @@ func _input(_event):
 	if Input.is_action_just_pressed("pause") and in_game:
 		if get_tree().paused:
 			get_tree().paused = false
+			get_tree().get_first_node_in_group("PauseMenu").hide()
+			get_tree().get_first_node_in_group("Interface").show()
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		else:
 			get_tree().paused = true
 

@@ -28,7 +28,7 @@ border_width_right = 2
 border_width_bottom = 4
 border_color = Color(0.372549, 0.764706, 0, 1)
 
-[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("fps_text", "time_text", "objective_text", "magazine_text", "reloading_text", "score_text", "player_healthbar", "player_energy", "arena_elims", "aberration_container", "aberration_name", "aberration_description", "simulation_progress", "time_change_text", "swap_text") groups=["Interface"]]
+[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("fps_text", "time_text", "objective_text", "magazine_text", "reloading_text", "score_text", "player_healthbar", "player_energy", "arena_elims", "aberration_container", "aberration_name", "aberration_description", "simulation_progress", "time_change_text", "swap_text", "guide") groups=["Interface"]]
 script = ExtResource("1_uecec")
 fps_text = NodePath("score_info/MarginContainer/VBoxContainer/fps")
 time_text = NodePath("timer/MarginContainer/VBoxContainer/time")
@@ -45,23 +45,24 @@ aberration_description = NodePath("Aberration/MarginContainer/Labels/AberrationD
 simulation_progress = NodePath("SimulationProgress")
 time_change_text = NodePath("timer/MarginContainer/VBoxContainer/time_change")
 swap_text = NodePath("swap")
+guide = NodePath("Guide")
 
 [node name="score_info" type="PanelContainer" parent="."]
 anchors_preset = -1
-anchor_left = 0.879
-anchor_top = 0.015
-anchor_right = 0.996
+anchor_left = 0.85
+anchor_top = 0.022
+anchor_right = 0.992
 anchor_bottom = 0.119
-offset_left = 0.319824
-offset_top = -0.200001
-offset_right = -8.32007
-offset_bottom = -4.52
+offset_left = -8.0
+offset_top = -7.76
+offset_right = 0.359863
+offset_bottom = 5.48
 
 [node name="MarginContainer" type="MarginContainer" parent="score_info"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
+theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="score_info/MarginContainer"]
@@ -69,16 +70,18 @@ layout_mode = 2
 
 [node name="fps" type="Label" parent="score_info/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 6
 theme = ExtResource("2_5top5")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 35
 text = "X FPS"
 horizontal_alignment = 2
 
 [node name="score" type="Label" parent="score_info/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 6
 theme = ExtResource("2_5top5")
-theme_override_font_sizes/font_size = 40
-text = "SCORE: XX"
+theme_override_font_sizes/font_size = 35
+text = "SCORE: X"
 horizontal_alignment = 2
 
 [node name="timer" type="PanelContainer" parent="."]
@@ -293,9 +296,11 @@ value = 39.37
 show_percentage = false
 
 [node name="Label" type="Label" parent="SimulationProgress"]
-layout_mode = 0
-offset_right = 384.0
-offset_bottom = 41.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.125
+offset_bottom = -4.0
 theme = ExtResource("2_5top5")
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_font_sizes/font_size = 20
@@ -317,20 +322,58 @@ color = Color(0, 0, 0, 1)
 
 [node name="swap" type="Label" parent="."]
 anchors_preset = -1
-anchor_left = 0.179
-anchor_top = 0.889
-anchor_right = 0.318
-anchor_bottom = 0.926
-offset_left = -1.68002
-offset_top = -0.120056
-offset_right = -2.56006
-offset_bottom = -0.0800781
+anchor_left = 0.042
+anchor_top = 0.756
+anchor_right = 0.183
+anchor_bottom = 0.8
+offset_left = 7.35999
+offset_top = 7.51996
+offset_right = 2.63998
 theme = ExtResource("2_5top5")
 theme_override_font_sizes/font_size = 30
 text = "X -> BLUE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Guide" type="PanelContainer" parent="."]
+visible = false
+anchors_preset = -1
+anchor_left = 0.267
+anchor_top = 0.274
+anchor_right = 0.733
+anchor_bottom = 0.385
+offset_left = -0.640015
+offset_top = 0.0799866
+offset_right = 0.639893
+offset_bottom = -67.8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Guide"]
+layout_mode = 2
+
+[node name="GuideTitle" type="Label" parent="Guide/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+theme = ExtResource("2_5top5")
+theme_override_font_sizes/font_size = 40
+text = "GUIDE TEXT"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="GuideDesc" type="Label" parent="Guide/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme = ExtResource("2_5top5")
+theme_override_font_sizes/font_size = 30
+text = "GUIDE TEXT"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [connection signal="aberration" from="." to="." method="_on_aberration"]
+[connection signal="show_guide" from="." to="." method="_on_show_guide"]
 [connection signal="time_change" from="." to="." method="_on_time_change"]
 [connection signal="timeout" from="Update" to="." method="_on_update_timeout"]

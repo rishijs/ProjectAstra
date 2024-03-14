@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cn5jp2mjs8gn8"]
+[gd_scene load_steps=25 format=3 uid="uid://bkbjhana4ksp2"]
 
 [ext_resource type="Script" path="res://levels/PostProcess.gd" id="1_2un3y"]
 [ext_resource type="Shader" path="res://art/shaders/canvas/sharpen.gdshader" id="2_veo4l"]
@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cfud5pl460nck" path="res://scenes/managers/spawn_manager.tscn" id="13_78esb"]
 [ext_resource type="PackedScene" uid="uid://ct3ob0tj0fjyj" path="res://interface/hud/player_interface.tscn" id="14_b3r52"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tb0xn"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_aw0kw"]
 sky_top_color = Color(0, 0.00392157, 0, 1)
 sky_horizon_color = Color(0.0588235, 0.0627451, 0.0666667, 1)
 sky_curve = 0.178381
@@ -26,9 +26,9 @@ sun_angle_max = 83.33
 sun_curve = 0.454715
 
 [sub_resource type="Sky" id="Sky_mro0p"]
-sky_material = SubResource("ProceduralSkyMaterial_tb0xn")
+sky_material = SubResource("ProceduralSkyMaterial_aw0kw")
 
-[sub_resource type="Environment" id="Environment_oct65"]
+[sub_resource type="Environment" id="Environment_e85w1"]
 background_mode = 2
 sky = SubResource("Sky_mro0p")
 reflected_light_source = 1
@@ -39,23 +39,23 @@ fog_enabled = true
 fog_light_color = Color(0.0431373, 0.0509804, 0.0666667, 1)
 fog_light_energy = 2.35
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_b3aqu"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mrq0q"]
 shader = ExtResource("2_veo4l")
 shader_parameter/sharpness = 2.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_k5sgb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8imnl"]
 shader = ExtResource("3_62kvy")
 shader_parameter/spread = 2.0
 shader_parameter/colors = 6.0
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_gc8gg"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3j3kn"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_m20u0"]
 seamless = true
 seamless_blend_skirt = 0.676
-noise = SubResource("FastNoiseLite_gc8gg")
+noise = SubResource("FastNoiseLite_3j3kn")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ofxow"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mqnc8"]
 shader = ExtResource("4_qffch")
 shader_parameter/grid_size = 100
 shader_parameter/grid_thickness = 5
@@ -67,21 +67,21 @@ shader_parameter/radial_dist = 0.6
 shader_parameter/intensity = 0.5
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_m20u0")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_edw7h"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s7lmh"]
 shader = ExtResource("5_pbb2t")
 shader_parameter/red_displacement = Vector2(5, 5)
 shader_parameter/green_displacement = Vector2(3, 3)
 shader_parameter/blue_displacement = Vector2(1, 1)
 shader_parameter/magnitude = 2.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_38m4e"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_65gng"]
 shader = ExtResource("6_0ubs5")
 shader_parameter/type = 0
 
-[node name="Devscene" type="Node3D"]
+[node name="Game" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_oct65")
+environment = SubResource("Environment_e85w1")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.939693, 0.34202, 0, -0.34202, -0.939693, 0, 2.78388, 0)
@@ -96,32 +96,35 @@ grid = NodePath("grid")
 sharpen = NodePath("sharpen")
 
 [node name="sharpen" type="ColorRect" parent="PostProcess"]
-material = SubResource("ShaderMaterial_b3aqu")
+material = SubResource("ShaderMaterial_mrq0q")
 anchors_preset = -1
 anchor_right = 0.998
 anchor_bottom = 0.999
 offset_right = 0.839966
 offset_bottom = 0.0799561
+metadata/_edit_use_anchors_ = true
 
 [node name="dither" type="ColorRect" parent="PostProcess"]
-material = SubResource("ShaderMaterial_k5sgb")
+material = SubResource("ShaderMaterial_8imnl")
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.996
 offset_right = 2.0
 offset_bottom = 0.319946
+metadata/_edit_use_anchors_ = true
 
 [node name="grid" type="ColorRect" parent="PostProcess"]
-material = SubResource("ShaderMaterial_ofxow")
+material = SubResource("ShaderMaterial_mqnc8")
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.004
 offset_right = 2.0
 offset_bottom = -0.320068
+metadata/_edit_use_anchors_ = true
 
 [node name="chromatic" type="ColorRect" parent="PostProcess"]
 visible = false
-material = SubResource("ShaderMaterial_edw7h")
+material = SubResource("ShaderMaterial_s7lmh")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -131,48 +134,60 @@ grow_vertical = 2
 
 [node name="shading" type="ColorRect" parent="PostProcess"]
 visible = false
-material = SubResource("ShaderMaterial_38m4e")
+material = SubResource("ShaderMaterial_65gng")
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.998
 offset_bottom = 0.159912
 color = Color(1, 1, 1, 0.196078)
 
-[node name="Player" parent="." instance=ExtResource("7_jol4x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.258408, 1.72229, -8.23834)
+[node name="GameManager" parent="." instance=ExtResource("9_ao585")]
+
+[node name="Player" parent="." node_paths=PackedStringArray("camera_first_person", "weapons", "weapon_socket") instance=ExtResource("7_jol4x")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.258408, 1.72229, -14.7157)
+camera_first_person = NodePath("")
+weapons = [NodePath(""), NodePath(""), NodePath(""), NodePath("")]
+weapon_socket = NodePath("")
 
 [node name="Projectiles" parent="." instance=ExtResource("8_6y6co")]
 
-[node name="GameManager" parent="." instance=ExtResource("9_ao585")]
-
 [node name="AstraOrigin" parent="." node_paths=PackedStringArray("teleport_location") instance=ExtResource("10_0bknh")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.500362, 0.804206, 0)
-teleport_location = NodePath("../AstraTraining/training_waypoint")
+teleport_location = NodePath("")
 
 [node name="origin_waypoint" type="Marker3D" parent="AstraOrigin"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.08468, 0)
 
 [node name="AstraTraining" parent="." node_paths=PackedStringArray("teleport_location") instance=ExtResource("11_8n56k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.836884, 1.03147, 83.4568)
-teleport_location = NodePath("../AstraOrigin/origin_waypoint")
+teleport_location = NodePath("")
 
 [node name="training_waypoint" type="Marker3D" parent="AstraTraining"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.03876, 0)
 
 [node name="SegmentManager" parent="." node_paths=PackedStringArray("start") instance=ExtResource("12_8uwfk")]
 start = NodePath("Origin")
-max_chunks = 2
 
 [node name="Origin" type="Marker3D" parent="SegmentManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.728271, -0.688587, -38.3571)
 
 [node name="SpawnManager" parent="." instance=ExtResource("13_78esb")]
 
-[node name="Interface" parent="." instance=ExtResource("14_b3r52")]
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.806183, 0.111679, 0.0552635)
-light_energy = 20.0
-omni_range = 75.0
+[node name="Interface" parent="." node_paths=PackedStringArray("fps_text", "time_text", "objective_text", "magazine_text", "reloading_text", "score_text", "player_healthbar", "player_energy", "arena_elims", "aberration_container", "aberration_name", "aberration_description", "simulation_progress", "time_change_text", "swap_text") instance=ExtResource("14_b3r52")]
+fps_text = NodePath("")
+time_text = NodePath("")
+objective_text = NodePath("")
+magazine_text = NodePath("")
+reloading_text = NodePath("")
+score_text = NodePath("")
+player_healthbar = NodePath("")
+player_energy = NodePath("")
+arena_elims = NodePath("")
+aberration_container = NodePath("")
+aberration_name = NodePath("")
+aberration_description = NodePath("")
+simulation_progress = NodePath("")
+time_change_text = NodePath("")
+swap_text = NodePath("")
 
 [connection signal="weapon_swapped" from="PostProcess" to="PostProcess" method="_on_weapon_swapped"]

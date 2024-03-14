@@ -1,19 +1,22 @@
-[gd_scene load_steps=25 format=3 uid="uid://bfpdqsiywdxk2"]
+[gd_scene load_steps=28 format=3 uid="uid://dumphougdm13p"]
 
-[ext_resource type="PackedScene" uid="uid://dmekjtv82mx01" path="res://scenes/player/player.tscn" id="1_d3ahk"]
-[ext_resource type="Script" path="res://levels/PostProcess.gd" id="1_diojx"]
-[ext_resource type="Shader" path="res://art/shaders/canvas/chromatic.gdshader" id="2_1wv2q"]
-[ext_resource type="PackedScene" uid="uid://famrshdxx5m3" path="res://scenes/managers/projectiles.tscn" id="2_re3rw"]
-[ext_resource type="PackedScene" uid="uid://b2o2aff6fhv6p" path="res://scenes/managers/game_manager.tscn" id="2_xhhs8"]
-[ext_resource type="Shader" path="res://art/shaders/canvas/dither.gdshader" id="3_iupuw"]
-[ext_resource type="PackedScene" uid="uid://d10vtkts7c47q" path="res://scenes/managers/segment_manager.tscn" id="4_1gok0"]
-[ext_resource type="PackedScene" uid="uid://dtgsthe6bseic" path="res://scenes/segments/origin/astra_start.tscn" id="4_cpxjg"]
-[ext_resource type="Shader" path="res://art/shaders/canvas/wireframe_canvas.gdshader" id="4_sjs08"]
-[ext_resource type="PackedScene" uid="uid://cfud5pl460nck" path="res://scenes/managers/spawn_manager.tscn" id="5_or2hb"]
-[ext_resource type="Shader" path="res://art/shaders/canvas/shading.gdshader" id="5_sxx62"]
-[ext_resource type="Shader" path="res://art/shaders/canvas/sharpen.gdshader" id="6_opkhw"]
-[ext_resource type="PackedScene" uid="uid://ct3ob0tj0fjyj" path="res://interface/hud/player_interface.tscn" id="7_dslur"]
-[ext_resource type="PackedScene" uid="uid://dqt0dax6x6rkb" path="res://scenes/segments/origin/astra_training.tscn" id="13_hp8eq"]
+[ext_resource type="Script" path="res://levels/PostProcess.gd" id="1_vlkm8"]
+[ext_resource type="Shader" path="res://art/shaders/canvas/sharpen.gdshader" id="2_jsnw3"]
+[ext_resource type="Shader" path="res://art/shaders/canvas/dither.gdshader" id="3_lle1n"]
+[ext_resource type="Shader" path="res://art/shaders/canvas/wireframe_canvas.gdshader" id="4_ye2yn"]
+[ext_resource type="Shader" path="res://art/shaders/canvas/chromatic.gdshader" id="5_am06y"]
+[ext_resource type="Shader" path="res://art/shaders/canvas/shading.gdshader" id="6_i3y70"]
+[ext_resource type="PackedScene" uid="uid://b2o2aff6fhv6p" path="res://scenes/managers/game_manager.tscn" id="7_2xvwk"]
+[ext_resource type="PackedScene" uid="uid://dmekjtv82mx01" path="res://scenes/player/player.tscn" id="8_tx4r0"]
+[ext_resource type="PackedScene" uid="uid://famrshdxx5m3" path="res://scenes/managers/projectiles.tscn" id="9_6x5j3"]
+[ext_resource type="PackedScene" uid="uid://dtgsthe6bseic" path="res://scenes/segments/origin/astra_start.tscn" id="10_puago"]
+[ext_resource type="PackedScene" uid="uid://dqt0dax6x6rkb" path="res://scenes/segments/origin/astra_training.tscn" id="11_a5tfw"]
+[ext_resource type="PackedScene" uid="uid://d10vtkts7c47q" path="res://scenes/managers/segment_manager.tscn" id="12_mrp30"]
+[ext_resource type="PackedScene" uid="uid://cfud5pl460nck" path="res://scenes/managers/spawn_manager.tscn" id="13_vgc1v"]
+[ext_resource type="PackedScene" uid="uid://ct3ob0tj0fjyj" path="res://interface/hud/player_interface.tscn" id="14_8hbdh"]
+[ext_resource type="PackedScene" uid="uid://bylkoiajqt37l" path="res://interface/menus/pause_menu.tscn" id="14_l7ho5"]
+[ext_resource type="PackedScene" uid="uid://w408cs5b3d5w" path="res://interface/menus/simulation_success.tscn" id="14_waysl"]
+[ext_resource type="PackedScene" uid="uid://txorqc6s5hyc" path="res://interface/menus/simulation_failure.tscn" id="15_f7nkg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tb0xn"]
 sky_top_color = Color(0, 0.00392157, 0, 1)
@@ -40,11 +43,11 @@ fog_light_color = Color(0.0431373, 0.0509804, 0.0666667, 1)
 fog_light_energy = 2.35
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b3aqu"]
-shader = ExtResource("6_opkhw")
+shader = ExtResource("2_jsnw3")
 shader_parameter/sharpness = 2.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k5sgb"]
-shader = ExtResource("3_iupuw")
+shader = ExtResource("3_lle1n")
 shader_parameter/spread = 2.0
 shader_parameter/colors = 6.0
 
@@ -56,7 +59,7 @@ seamless_blend_skirt = 0.676
 noise = SubResource("FastNoiseLite_gc8gg")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ofxow"]
-shader = ExtResource("4_sjs08")
+shader = ExtResource("4_ye2yn")
 shader_parameter/grid_size = 100
 shader_parameter/grid_thickness = 5
 shader_parameter/speed = 100.0
@@ -68,17 +71,17 @@ shader_parameter/intensity = 0.5
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_hcu1f")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_edw7h"]
-shader = ExtResource("2_1wv2q")
+shader = ExtResource("5_am06y")
 shader_parameter/red_displacement = Vector2(5, 5)
 shader_parameter/green_displacement = Vector2(3, 3)
 shader_parameter/blue_displacement = Vector2(1, 1)
 shader_parameter/magnitude = 2.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_38m4e"]
-shader = ExtResource("5_sxx62")
+shader = ExtResource("6_i3y70")
 shader_parameter/type = 0
 
-[node name="Devscene" type="Node3D"]
+[node name="Game" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_oct65")
@@ -88,7 +91,7 @@ transform = Transform3D(1, 0, 0, 0, -0.939693, 0.34202, 0, -0.34202, -0.939693, 
 sky_mode = 2
 
 [node name="PostProcess" type="CanvasLayer" parent="." node_paths=PackedStringArray("dither", "chromatic", "shading", "grid", "sharpen") groups=["PostProcess"]]
-script = ExtResource("1_diojx")
+script = ExtResource("1_vlkm8")
 dither = NodePath("dither")
 chromatic = NodePath("chromatic")
 shading = NodePath("shading")
@@ -102,7 +105,6 @@ anchor_right = 0.998
 anchor_bottom = 0.999
 offset_right = 0.839966
 offset_bottom = 0.0799561
-metadata/_edit_use_anchors_ = true
 
 [node name="dither" type="ColorRect" parent="PostProcess"]
 material = SubResource("ShaderMaterial_k5sgb")
@@ -111,7 +113,6 @@ anchor_right = 1.0
 anchor_bottom = 0.996
 offset_right = 2.0
 offset_bottom = 0.319946
-metadata/_edit_use_anchors_ = true
 
 [node name="grid" type="ColorRect" parent="PostProcess"]
 material = SubResource("ShaderMaterial_ofxow")
@@ -120,7 +121,6 @@ anchor_right = 1.0
 anchor_bottom = 1.004
 offset_right = 2.0
 offset_bottom = -0.320068
-metadata/_edit_use_anchors_ = true
 
 [node name="chromatic" type="ColorRect" parent="PostProcess"]
 visible = false
@@ -141,35 +141,48 @@ anchor_bottom = 0.998
 offset_bottom = 0.159912
 color = Color(1, 1, 1, 0.196078)
 
-[node name="GameManager" parent="." instance=ExtResource("2_xhhs8")]
+[node name="GameManager" parent="." instance=ExtResource("7_2xvwk")]
 
-[node name="Player" parent="." instance=ExtResource("1_d3ahk")]
+[node name="Player" parent="." instance=ExtResource("8_tx4r0")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.258408, 1.72229, -14.7157)
 
-[node name="Projectiles" parent="." instance=ExtResource("2_re3rw")]
+[node name="Projectiles" parent="." instance=ExtResource("9_6x5j3")]
 
-[node name="AstraOrigin" parent="." node_paths=PackedStringArray("teleport_location") instance=ExtResource("4_cpxjg")]
+[node name="AstraOrigin" parent="." node_paths=PackedStringArray("teleport_location") instance=ExtResource("10_puago")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.500362, 0.804206, 0)
 teleport_location = NodePath("../AstraTraining/training_waypoint")
 
 [node name="origin_waypoint" type="Marker3D" parent="AstraOrigin"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.08468, 0)
 
-[node name="AstraTraining" parent="." node_paths=PackedStringArray("teleport_location") instance=ExtResource("13_hp8eq")]
+[node name="AstraTraining" parent="." node_paths=PackedStringArray("teleport_location") instance=ExtResource("11_a5tfw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.836884, 1.03147, 83.4568)
 teleport_location = NodePath("../AstraOrigin/origin_waypoint")
 
 [node name="training_waypoint" type="Marker3D" parent="AstraTraining"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.03876, 0)
 
-[node name="SegmentManager" parent="." node_paths=PackedStringArray("start") instance=ExtResource("4_1gok0")]
+[node name="SegmentManager" parent="." node_paths=PackedStringArray("start") instance=ExtResource("12_mrp30")]
 start = NodePath("Origin")
 
 [node name="Origin" type="Marker3D" parent="SegmentManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.728271, -0.688587, -38.3571)
 
-[node name="SpawnManager" parent="." instance=ExtResource("5_or2hb")]
+[node name="SpawnManager" parent="." instance=ExtResource("13_vgc1v")]
 
-[node name="Interface" parent="." instance=ExtResource("7_dslur")]
+[node name="SimulationSuccess" parent="." groups=["Success"] instance=ExtResource("14_waysl")]
+visible = false
+
+[node name="SimulationFailure" parent="." groups=["Failure"] instance=ExtResource("15_f7nkg")]
+visible = false
+
+[node name="pause_menu" parent="." groups=["PauseMenu"] instance=ExtResource("14_l7ho5")]
+unique_name_in_owner = true
+visible = false
+
+[node name="Interface" parent="." instance=ExtResource("14_8hbdh")]
+unique_name_in_owner = true
 
 [connection signal="weapon_swapped" from="PostProcess" to="PostProcess" method="_on_weapon_swapped"]
+[connection signal="visibility_changed" from="SimulationSuccess" to="SimulationSuccess" method="_on_visibility_changed"]
+[connection signal="visibility_changed" from="SimulationFailure" to="SimulationFailure" method="_on_visibility_changed"]

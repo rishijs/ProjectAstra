@@ -28,6 +28,9 @@ func update_on_entry():
 func _on_segment_entry_body_entered(body):
 	if body == player_ref:
 		update_on_entry()
+		if player_ref.checkpoint_guide != true and Globals.prestige == 1:
+			player_ref.checkpoint_guide = true
+			player_ref.interface_ref.show_guide.emit(6)
 		if game_manager_ref.segment_ref != self:
 			%Checkpoint.play()
 		if not checkpoint_active:

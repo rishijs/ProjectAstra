@@ -9,6 +9,9 @@ func _process(_delta):
 	pass
 
 
-func _on_button_pressed():
-	SceneLoader.load_scene("res://levels/devlvl.tscn", true)
-	SceneLoader.change_scene_to_loading_screen()
+func _on_play_pressed():
+	get_tree().change_scene_to_file("res://interface/menus/introduction.tscn")
+
+
+func _on_settings_pressed():
+	%Settings.show()
