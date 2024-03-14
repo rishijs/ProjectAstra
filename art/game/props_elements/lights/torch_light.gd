@@ -73,10 +73,9 @@ func _on_timer_timeout():
 
 func _on_area_3d_body_entered(body):
 	if body == player_ref:
-		%spatial.stream_paused = false
 		%spatial.play()
 
 
 func _on_area_3d_body_exited(body):
 	if body == player_ref:
-		%spatial.stream_paused = true
+		%spatial.stop()

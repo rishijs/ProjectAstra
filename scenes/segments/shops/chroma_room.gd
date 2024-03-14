@@ -28,13 +28,14 @@ func update_on_entry():
 func _on_segment_entry_body_entered(body):
 	if body == player_ref:
 		update_on_entry()
+		if game_manager_ref.segment_ref != self:
+			%Checkpoint.play()
 		if not checkpoint_active:
 			checkpoint_flag.material_override = checkpoint_texture
 			game_manager_ref.checkpoint_ref = checkpoint_flag
 			game_manager_ref.segment_ref = self
 			game_manager_ref.rotation_at_checkpoint = segment_manager_ref.segment_rotation
 			game_manager_ref.depth_at_checkpoint = segment_manager_ref.player_depth
-			%Checkpoint.play()
 
 func _on_segment_exit_body_entered(body):
 	if body == player_ref:

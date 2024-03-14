@@ -50,5 +50,6 @@ func _on_segment_exit_v_body_entered(body):
 	if body == player_ref:
 		update_on_exit()
 		player_ref.gravity -= 200
+		player_ref.weapons[player_ref.active_weapon_index].add_recoil(0.1,0.1)
 func _on_lifetime_v_timeout():
 	on_timer_timeout()

@@ -641,7 +641,7 @@ transform = Transform3D(-0.637244, 1.54502, -5.06513e-08, 2.12506e-22, -8.74228e
 material_override = ExtResource("6_4oql1")
 mesh = SubResource("PrismMesh_2kncm")
 
-[node name="Checkpoint" type="AudioStreamPlayer3D" parent="."]
+[node name="Checkpoint" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("9_annck")
 bus = &"SFX"

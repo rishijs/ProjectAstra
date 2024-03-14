@@ -3,7 +3,7 @@ extends CharacterBody3D
 @onready var post_process = get_tree().get_first_node_in_group("PostProcess");
 @onready var game_manager_ref = get_tree().get_first_node_in_group("GameManager");
 @onready var segment_manager_ref = get_tree().get_first_node_in_group("SegmentManager");
-@onready var inerface_ref = get_tree().get_first_node_in_group("Interface")
+@onready var interface_ref = get_tree().get_first_node_in_group("Interface")
 @onready var aberrations = Data.all_data[Data.abcls]
 
 @export_category("refs")
@@ -12,9 +12,9 @@ extends CharacterBody3D
 @export var weapon_socket:Marker3D
 
 #negative
-var min_pitch = 30
+var min_pitch = 25
 #positive
-var max_pitch = 50
+var max_pitch = 55
 
 var speed = 20.0
 var base_speed = 20.0
@@ -125,7 +125,8 @@ func _input(event):
 			mouse_sensitivity *= 0.9
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		camera_first_person.rotate_x(-event.relative.y * mouse_sensitivity)
-		camera_first_person.rotation.x = clampf(camera_first_person.rotation.x, -deg_to_rad(min_pitch), deg_to_rad(max_pitch))
+		if is_on_floor:
+			camera_first_person.rotation.x = clampf(camera_first_person.rotation.x, -deg_to_rad(min_pitch), deg_to_rad(max_pitch))
 		weapon_socket.rotation.z = camera_first_person.rotation.x
 		
 		if is_on_floor():
@@ -156,6 +157,8 @@ func _process(delta):
 		camera_first_person.rotation.x = -deg_to_rad(min_pitch)
 	elif camera_first_person.rotation.x > deg_to_rad(max_pitch):
 		camera_first_person.rotation.x = deg_to_rad(max_pitch)
+	
+	camera_first_person.rotation.y = 0
 				
 func _physics_process(delta):
 	if not is_on_floor():
@@ -234,7 +237,7 @@ func aberrate_weapon(type = "none"):
 			#no effect
 			pass
 
-func validate_aberration(index):
+func validate_aberration(index,learned = false):
 	var aberration_name = aberrations.keys()[index]
 	var multiplied_effect = Data.get_attr(Data.abcls,aberration_name,Data.abattr.MULTIPLIED_EFFECT)
 	var flat_effect = Data.get_attr(Data.abcls,aberration_name,Data.abattr.FLAT_EFFECT)
@@ -242,10 +245,12 @@ func validate_aberration(index):
 	var description = Data.get_attr(Data.abcls,aberration_name,Data.abattr.DESCRIPTION)
 	game_manager_ref.altered_weapon_flat_stats[id] += flat_effect
 	game_manager_ref.altered_weapon_multiplied_stats[id] += multiplied_effect
-	
-	#probably print to screen what aberration was gained and a description of it
+
 	weapons[active_weapon_index].initialize_weapon()
-	inerface_ref.aberration.emit(aberration_name,description)
+	if learned:
+		interface_ref.aberration.emit(aberration_name,description,"learned")
+	else:
+		interface_ref.aberration.emit(aberration_name,description,Data.get_attr(Data.abcls,aberration_name,Data.abattr.STABILITY))
 	
 func get_next_weapon():
 	active_weapon_index += 1
@@ -259,6 +264,8 @@ func _on_enemy_defeated():
 			if arena_ref.defeats_required > 0:
 				arena_ref.defeats_required -= 1
 		enemies_defeated += 1
+		game_manager_ref.player_time_seconds += 3
+		interface_ref.time_change.emit(3)
 		defeats_till_chroma_swap -= 1
 		if defeats_till_chroma_swap == 0:
 			get_next_weapon()

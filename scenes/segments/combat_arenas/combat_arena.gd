@@ -78,6 +78,7 @@ func _on_segment_door_r_body_entered(body):
 			segment_manager_ref.new_chunk.emit(segment_manager_ref.segment_types.MISC,2,1+segment_manager_ref.depth_variance)
 		door_chosen = true
 		player_ref.aberrate_weapon("successful")
+		player_ref.interface_ref.time_change.emit(game_manager_ref.player_time_seconds*time_modifier_multiplied_loss)
 		game_manager_ref.player_time_seconds *= time_modifier_multiplied_loss
 		update_on_exit()
 		doorR.call_deferred("queue_free")
@@ -92,6 +93,7 @@ func _on_segment_door_l_body_entered(body):
 		door_chosen = true
 		player_ref.aberrate_weapon("unstable")
 		game_manager_ref.player_time_seconds += time_modifier_flat_gain
+		player_ref.interface_ref.time_change.emit(time_modifier_flat_gain)
 		update_on_exit()
 		doorL.call_deferred("queue_free")
 

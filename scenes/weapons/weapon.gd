@@ -8,6 +8,9 @@ extends Node3D
 @export var current_weapon = false
 @export var camera_shake_noise : FastNoiseLite
 
+@export var min_fire_pitch = 0.8
+@export var max_fire_pitch = 1.2
+
 @export_category("sound_players")
 @export var fireS:AudioStreamPlayer
 @export var reloadS:AudioStreamPlayer
@@ -112,7 +115,7 @@ func fire():
 
 func shooting_pattern():
 	magazine -= weapon_stats[Data.wattr.NUM_PROJECTILES]
-	fireS.pitch_scale = randf_range(0.8,1.2)
+	fireS.pitch_scale = randf_range(min_fire_pitch,max_fire_pitch)
 	fireS.play()
 
 func refill():

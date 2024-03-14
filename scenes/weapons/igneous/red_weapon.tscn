@@ -303,6 +303,8 @@ shadow_mesh = SubResource("ArrayMesh_csxam")
 [node name="Red_weapon" type="Node3D" node_paths=PackedStringArray("fireS", "reloadS")]
 script = ExtResource("1_ivayt")
 camera_shake_noise = SubResource("FastNoiseLite_4fefk")
+min_fire_pitch = 1.2
+max_fire_pitch = 1.6
 fireS = NodePath("FireS")
 reloadS = NodePath("ReloadS")
 
@@ -376,6 +378,7 @@ omni_range = 0.7
 [node name="FireS" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_wd66y")
 volume_db = -15.0
+pitch_scale = 1.47
 bus = &"SFX"
 
 [node name="ReloadS" type="AudioStreamPlayer" parent="."]

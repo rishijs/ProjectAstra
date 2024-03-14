@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ct3ob0tj0fjyj"]
+[gd_scene load_steps=6 format=3 uid="uid://ct3ob0tj0fjyj"]
 
 [ext_resource type="Script" path="res://interface/hud/player_interface.gd" id="1_uecec"]
 [ext_resource type="Theme" uid="uid://bpeg6inp31l8g" path="res://themes/deftheme.tres" id="2_5top5"]
@@ -20,41 +20,25 @@ border_width_right = 2
 border_width_bottom = 4
 border_color = Color(0.360784, 0.8, 0.8, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tjkat"]
-bg_color = Color(0, 0.596078, 0.117647, 1)
-border_width_left = 2
-border_width_top = 4
-border_width_right = 2
-border_width_bottom = 4
-border_color = Color(0.372549, 0.764706, 0, 1)
-
-[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("fps_text", "time_text", "objective_text", "magazine_text", "reloading_text", "score_text", "player_healthbar", "player_energy", "arena_elims", "aberration_container", "aberration_name", "aberration_description", "simulation_progress", "time_change_text") groups=["Interface"]]
+[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("fps_text", "objective_text", "magazine_text", "reloading_text", "swaps_text", "player_healthbar", "player_energy", "arena_elims", "aberration_container", "aberration_name", "aberration_description") groups=["Interface"]]
 script = ExtResource("1_uecec")
 fps_text = NodePath("score_info/MarginContainer/VBoxContainer/fps")
-time_text = NodePath("timer/MarginContainer/VBoxContainer/time")
 objective_text = NodePath("objective_info/MarginContainer/arena_required_elims")
 magazine_text = NodePath("weapon_info/VBoxContainer/magazine")
 reloading_text = NodePath("weapon_info/VBoxContainer/reloading")
-score_text = NodePath("score_info/MarginContainer/VBoxContainer/score")
+swaps_text = NodePath("score_info/MarginContainer/VBoxContainer/swaps")
 player_healthbar = NodePath("PlayerHealth")
 player_energy = NodePath("PlayerEnergy")
 arena_elims = NodePath("objective_info/MarginContainer/arena_required_elims")
 aberration_container = NodePath("Aberration")
 aberration_name = NodePath("Aberration/MarginContainer/Labels/AberrationName")
 aberration_description = NodePath("Aberration/MarginContainer/Labels/AberrationDescription")
-simulation_progress = NodePath("SimulationProgress")
-time_change_text = NodePath("timer/MarginContainer/VBoxContainer/time_change")
 
 [node name="score_info" type="PanelContainer" parent="."]
-anchors_preset = -1
-anchor_left = 0.879
-anchor_top = 0.015
-anchor_right = 0.996
-anchor_bottom = 0.119
-offset_left = 0.319824
-offset_top = -0.200001
-offset_right = -8.32007
-offset_bottom = -4.52
+offset_left = 1688.0
+offset_top = 16.0
+offset_right = 1904.0
+offset_bottom = 124.0
 
 [node name="MarginContainer" type="MarginContainer" parent="score_info"]
 layout_mode = 2
@@ -73,7 +57,7 @@ theme_override_font_sizes/font_size = 40
 text = "X FPS"
 horizontal_alignment = 2
 
-[node name="score" type="Label" parent="score_info/MarginContainer/VBoxContainer"]
+[node name="swaps" type="Label" parent="score_info/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_5top5")
 theme_override_font_sizes/font_size = 40
@@ -104,27 +88,16 @@ theme_override_font_sizes/font_size = 50
 text = "00:00"
 horizontal_alignment = 1
 
-[node name="time_change" type="Label" parent="timer/MarginContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_5top5")
-theme_override_colors/font_color = Color(1, 0.839216, 0, 1)
-theme_override_font_sizes/font_size = 20
-text = "+X SECONDS"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="objective_info" type="PanelContainer" parent="."]
-unique_name_in_owner = true
 anchors_preset = -1
 anchor_left = 0.371
 anchor_top = 0.17
 anchor_right = 0.629
 anchor_bottom = 0.244
 offset_left = -0.320068
-offset_top = 6.39999
+offset_top = 8.39999
 offset_right = 0.319946
-offset_bottom = 0.47998
+offset_bottom = -7.52002
 grow_horizontal = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="objective_info"]
@@ -137,10 +110,8 @@ theme_override_constants/margin_bottom = 5
 [node name="arena_required_elims" type="Label" parent="objective_info/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("2_5top5")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 50
 text = "ENTERED AN ARENA"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="weapon_info" type="MarginContainer" parent="."]
 anchors_preset = -1
@@ -218,7 +189,6 @@ value = 50.27
 show_percentage = false
 
 [node name="PlayerEnergy" type="ProgressBar" parent="."]
-modulate = Color(0, 0.470588, 1, 1)
 anchors_preset = -1
 anchor_left = 0.177
 anchor_top = 0.824
@@ -277,42 +247,5 @@ bus = &"SFX"
 unique_name_in_owner = true
 bus = &"SFX"
 
-[node name="SimulationProgress" type="ProgressBar" parent="."]
-anchors_preset = -1
-anchor_left = 0.142
-anchor_top = 0.03
-anchor_right = 0.342
-anchor_bottom = 0.067
-offset_left = -0.640015
-offset_top = -0.400002
-offset_right = -0.640015
-offset_bottom = -0.360001
-theme_override_styles/fill = SubResource("StyleBoxFlat_tjkat")
-value = 39.37
-show_percentage = false
-
-[node name="Label" type="Label" parent="SimulationProgress"]
-layout_mode = 0
-offset_right = 384.0
-offset_bottom = 41.0
-theme = ExtResource("2_5top5")
-theme_override_colors/font_color = Color(1, 1, 0, 1)
-theme_override_font_sizes/font_size = 20
-text = "SIMULATION PROGRESS"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="EnergyThreshold" type="ColorRect" parent="."]
-anchors_preset = -1
-anchor_left = 0.275
-anchor_top = 0.824
-anchor_right = 0.279
-anchor_bottom = 0.849
-offset_top = 0.0799561
-offset_right = 0.319946
-offset_bottom = 2.07996
-color = Color(0, 0, 0, 1)
-
 [connection signal="aberration" from="." to="." method="_on_aberration"]
-[connection signal="time_change" from="." to="." method="_on_time_change"]
 [connection signal="timeout" from="Update" to="." method="_on_update_timeout"]
