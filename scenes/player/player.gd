@@ -219,7 +219,7 @@ func _on_hit(damage):
 			health = max_health
 		else:
 			#game over
-			SceneLoader.load_scene("res://interface/menus/main_menu.tscn", false)
+			get_tree().change_scene_to_file("res://interface/menus/main_menu.tscn")
 
 func aberrate_weapon(type = "none"):
 	#random buff or debuff on going through an arena gate

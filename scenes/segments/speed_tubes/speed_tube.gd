@@ -45,10 +45,10 @@ func _on_lifetime_cl_timeout():
 func _on_segment_entry_v_body_entered(body):
 	if body == player_ref:
 		update_on_entry()
-		player_ref.gravity += 100
+		player_ref.gravity += 200
 func _on_segment_exit_v_body_entered(body):
 	if body == player_ref:
 		update_on_exit()
-		player_ref.gravity -= 100
+		player_ref.gravity -= 200
 func _on_lifetime_v_timeout():
 	on_timer_timeout()

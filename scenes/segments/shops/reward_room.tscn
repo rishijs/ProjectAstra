@@ -490,7 +490,7 @@ shadow_mesh = SubResource("ArrayMesh_m06pk")
 data = PackedVector3Array(-1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, 1, -1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, 1, 1, 1, -1, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cy1xi"]
-size = Vector3(21.2995, 20.1339, 2.39868)
+size = Vector3(21.2995, 21.2143, 2.39868)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mok4n"]
 size = Vector3(68.9852, 15.0538, 29.4712)
@@ -653,7 +653,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05017, 0, -79.883)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 39.442)
 
 [node name="D" type="CollisionShape3D" parent="SegmentEntry"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.496754, 5.18033, 45.0141)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.496754, 5.72052, 45.0141)
 shape = SubResource("BoxShape3D_cy1xi")
 
 [node name="Victory" type="Area3D" parent="."]
