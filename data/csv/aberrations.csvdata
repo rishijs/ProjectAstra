@@ -1,15 +1,11 @@
 aberration,stability,flat effect,multiplied effect,id,description
 damage amp,stable,0,1.1,3,increases weapon damage
 accuracy reduction,unstable,0,0.9,12,reduces weapon accuracy
-speedy shots,successful,30,0,15,increases projectile speed
-recoil madness,unstable,0,1.5,9,multiplies the weapon's recoil
 onslaught,successful,0,0.5,7,massively increases attack speed
 valiant strikes,stable,0,1.5,18,increases critical damage
-lazy bullets,unstable,0,0.5,15,drastically reduces projectile speed
 bull's eye,successful,0,1.1,12,heavily increases accuracy
 where are those,unstable,0,2,13,doubles the spread of bullets
 vaporizer,successful,20,0,3,massively increases damage output
-no more reload?,successful,0,0.25,6,makes reload speed negligible
 holy damage,successful,0,5,18,massively increase critical damage
 ok I guess,stable,0,0.9,20,slightly increases secondary fire rate
 does this even do anything,stable,0,0.8,8,slightly decreases charge duration
@@ -19,10 +15,7 @@ everything is not critical,unstable,0,0.2,17,drastically reduces crit chance
 more secondary fire stats?,stable,0,1.3,24,more critical strikes in secondary fire
 why no more head,unstable,0,0.5,16,reduces headshot multiplier
 secondary fire stonks,successful,0,0.5,20,heavily reduces secondary fire rate
-recoil reduction,stable,0,0.8,9,slight recoil reduction
-"don't mind me, just reloading",unstable,1,1.1,6,heavily increased reload speed
 some more fire,stable,0,0.9,7,slightly reduced fire rate
 weak bullets,unstable,0,0.7,3,reduced weapon damage
 super slow firing,unstable,0,1.5,7,reduced weapon fire rate
-lower reload speed,stable,0,0.9,6,slightly reduced reload speed
 error 404: mod not found,stable,0,0,3,does nothing lol

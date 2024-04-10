@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://dfkr538ihsekk" path="res://audio/sfx/alerts/laser_warning.wav" id="5_qptci"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tjxhr"]
-size = Vector3(1.87494, 3.11599, 0.998444)
+size = Vector3(1.87494, 3.11599, 1.76328)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_o2pfw"]
 viewport_path = NodePath("HealthSprite/Healthbar")
@@ -22,7 +22,7 @@ size = Vector3(102.186, 56.0351, 107.063)
 size = Vector3(79.8625, 30.6235, 80.4659)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bb8pq"]
-size = Vector3(0.842385, 1.18164, 0.869447)
+size = Vector3(1.10879, 1.38879, 1.10066)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1yf62"]
 size = Vector3(3.81356, 3.9315, 3.32932)
@@ -70,7 +70,7 @@ laser_target = NodePath("LaserTarget")
 health_sprite = NodePath("HealthSprite")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0933533, 1.52196, -0.00511169)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0933533, 1.52196, 0.0718422)
 shape = SubResource("BoxShape3D_tjxhr")
 
 [node name="crystalman" type="AnimatedSprite3D" parent="."]
@@ -125,7 +125,7 @@ collision_layer = 12
 collision_mask = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Headshot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0590889, 2.10846, -0.0668941)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0540105, 2.21204, -0.0644144)
 shape = SubResource("BoxShape3D_bb8pq")
 
 [node name="MeleeRange" type="Area3D" parent="."]

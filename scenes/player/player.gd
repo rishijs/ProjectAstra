@@ -12,9 +12,9 @@ extends CharacterBody3D
 @export var weapon_socket:Marker3D
 
 #negative
-var min_pitch = 25
+var min_pitch = 90
 #positive
-var max_pitch = 55
+var max_pitch = 90
 
 var speed = 20.0
 var base_speed = 20.0
@@ -30,6 +30,7 @@ var movement_energy = 100
 var movement_energy_consumption_rate = 0.5
 var movement_energy_regen_rate_base = 0.1
 var movement_energy_regen_rate_inertia = 0.0075
+var invincible = false
 
 var base_sensitivity = Globals.player_preferences["mouse_sensitivity"]
 var strafe_sensitivity = base_sensitivity
@@ -229,14 +230,15 @@ func reset_at_checkpoint():
 	game_manager_ref.segment_ref.doorLockCol.disabled = false
 
 func _on_hit(damage):
-	health = clampf(health-damage,0,max_health)
-	if health == 0:
-		if game_manager_ref.checkpoint_ref != null:
-			reset_at_checkpoint()
-			health = max_health
-		else:
-			#game over
-			get_tree().get_first_node_in_group("Failure").show()
+	if not invincible:
+		health = clampf(health-damage,0,max_health)
+		if health == 0:
+			if game_manager_ref.checkpoint_ref != null:
+				reset_at_checkpoint()
+				health = max_health
+			else:
+				#game over
+				get_tree().get_first_node_in_group("Failure").show()
 
 func aberrate_weapon(type = "none"):
 	#random buff or debuff on going through an arena gate

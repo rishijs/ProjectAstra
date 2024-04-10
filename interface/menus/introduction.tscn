@@ -47,9 +47,9 @@ custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 theme = ExtResource("1_qsmxs")
 theme_override_font_sizes/font_size = 50
-text = "ĀSTRA (aastruh) is derived from a supernatural weapon called the Brahmāstra: one of the most powerful weapons ever to exist"
+text = "ĀSTRA (aastruh) is derived from a supernatural weapon from Hindu Mythology called the Brahmāstra: one of the most powerful weapons ever to exist"
 horizontal_alignment = 1
-vertical_alignment = 2
+vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="Label4" type="Label" parent="VBoxContainer"]

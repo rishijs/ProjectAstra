@@ -28,6 +28,7 @@ func _on_segment_entry_body_entered(body):
 func _on_victory_body_entered(body):
 	if body == player_ref:
 		#should have a menu on completion here
+		player_ref.invincible = true
 		get_tree().get_first_node_in_group("Success").show()
 
 

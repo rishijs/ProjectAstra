@@ -11,57 +11,55 @@ anchor_bottom = 1.0
 offset_right = 7.67993
 color = Color(0.0745098, 0.0745098, 0.0745098, 1)
 
-[node name="Label" type="Label" parent="."]
-anchors_preset = -1
-anchor_left = 0.504
-anchor_top = 0.104
-anchor_right = 0.9
-anchor_bottom = 0.305
-offset_left = 0.320007
-offset_top = 7.68
-offset_right = -0.00012207
-offset_bottom = 7.60001
-theme = ExtResource("1_2ksf5")
-theme_override_font_sizes/font_size = 40
-text = "TRAVEL WAYPOINT: TRAINING AREA
-
-LINKED: ASTRA ORIGIN
-
-"
-
-[node name="Label3" type="Label" parent="."]
-anchors_preset = -1
-anchor_left = 0.096
-anchor_top = 0.104
-anchor_right = 0.5
-anchor_bottom = 0.363
-offset_left = 7.67999
-offset_top = -0.32
-offset_right = -8.0
-offset_bottom = -8.04001
-theme = ExtResource("1_2ksf5")
-theme_override_font_sizes/font_size = 40
-text = "ĀSTRA SENTIENT WEAPON PROJECT
-
-ELIMINATE TARGETS 
--> TRAIN ASTRA
-
-"
-
 [node name="Label2" type="Label" parent="."]
 anchors_preset = -1
-anchor_left = 0.087
-anchor_top = 0.415
+anchor_left = 0.086
+anchor_top = 0.215
 anchor_right = 0.933
-anchor_bottom = 0.467
-offset_left = 0.959991
-offset_top = -0.200012
-offset_right = 0.639893
-offset_bottom = 7.63998
+anchor_bottom = 0.274
+offset_left = -0.120026
+offset_top = -0.199997
+offset_right = -2.36011
+offset_bottom = 0.0800171
 theme = ExtResource("1_2ksf5")
 theme_override_font_sizes/font_size = 50
 text = "WALK TOWARDS SCREEN TO TELEPORT TO TRAINING AREA"
 horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="."]
+custom_minimum_size = Vector2(0, 100)
+anchors_preset = -1
+anchor_left = 0.085
+anchor_top = 0.32
+anchor_right = 0.932
+anchor_bottom = 0.413
+offset_left = -0.199997
+offset_top = 0.399994
+offset_right = -3.44006
+offset_bottom = -0.039978
+theme = ExtResource("1_2ksf5")
+theme_override_font_sizes/font_size = 40
+text = "PRESS [1-4] -> WEAPON SWAP IN TRAINING"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Label6" type="Label" parent="."]
+custom_minimum_size = Vector2(0, 120)
+anchors_preset = -1
+anchor_left = 0.093
+anchor_top = 0.741
+anchor_right = 0.939
+anchor_bottom = 0.852
+offset_left = 0.440002
+offset_top = -0.28009
+offset_right = -0.880127
+offset_bottom = -0.160034
+theme = ExtResource("1_2ksf5")
+theme_override_font_sizes/font_size = 50
+text = "GOOD LUCK, HAVE FUN, DON'T DIE!"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
 
 [node name="Instructions" type="VBoxContainer" parent="."]
 anchors_preset = -1
@@ -73,40 +71,3 @@ offset_left = 8.95999
 offset_top = 15.72
 offset_right = 0.959961
 offset_bottom = -8.04004
-
-[node name="Label3" type="Label" parent="Instructions"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-theme = ExtResource("1_2ksf5")
-theme_override_font_sizes/font_size = 40
-text = "PRESS Q,1,2,3,4  -> WEAPON SWAP IN TRAINING"
-horizontal_alignment = 1
-uppercase = true
-
-[node name="Label4" type="Label" parent="Instructions"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-theme = ExtResource("1_2ksf5")
-theme_override_font_sizes/font_size = 40
-text = "SHIFT -> INERTIAL BOOST (HIGH SPEEDS RECHARGE BOOST)"
-horizontal_alignment = 1
-uppercase = true
-
-[node name="Label5" type="Label" parent="Instructions"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-theme = ExtResource("1_2ksf5")
-theme_override_font_sizes/font_size = 40
-text = "LMB -> PRIMARY FIRE       RMB -> SECONDARY FIRE (++RANGE)"
-horizontal_alignment = 1
-uppercase = true
-
-[node name="Label6" type="Label" parent="Instructions"]
-custom_minimum_size = Vector2(0, 120)
-layout_mode = 2
-theme = ExtResource("1_2ksf5")
-theme_override_font_sizes/font_size = 50
-text = "GOOD LUCK, HAVE FUN, DON'T DIE!"
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
